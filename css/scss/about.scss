@@ -1,0 +1,130 @@
+@import 'common';
+
+main{
+	height:350px;
+	padding-top:150px;
+	color:white;
+	font-size:1.2em;
+	.tit{
+		@include text-shadow(#000, 0, 15);
+		margin:0 auto;
+	}
+	background:url('../img/about_intro_mobile.jpg') center center;
+}
+.container{text-align:center;}
+.tit-sub,
+.tit {
+	margin-left:auto;margin-right:auto;
+}
+.why-tit{height:35%;font-size:1.8em}
+.why-cont{height:50%; padding-top:20px;}
+.about-why-wrap{
+	margin:0;	padding:0;list-style:none;
+	
+}
+.about-why-item{
+	margin:0;	padding:0;list-style:none;
+	width:100%;
+	height:180px;
+	padding:15px 0;
+	background:white;
+	border:solid 1px #ddd;
+	&:last-child{margin-right:0;}
+
+}
+.why-icon {width:30px; height:30px; margin:0 auto;}
+
+.team {width:100%; padding:50px 0; 	}
+
+.about_img {width:100%;}
+.about_img img {width:50%;}
+.about_text {width:100%;}
+.about_text .text_list {width:100%; margin-top:50px;}
+.about_text .text_list span{font-size:1.3em; display:block;padding:12px 0;}
+
+
+.captain-wrap {width:100%; margin:0 auto; margin-bottom:50px;
+	.captain {width:100%;
+		img {width:25%;}
+		}
+	.member-name{ 
+		span {font-size:1.3em;}
+		.tit {font-weight:bold; font-size:1.5em;}
+		}
+}
+.member-wrap{width:100%;
+	.member-img img {width:20%;}
+	.member-name span.tit {font-weight:bold; font-size:1.3em;}
+}
+
+.both {clear:both;}
+
+
+@media all and (min-width:640px){
+	.why-tit {padding-top:20px; height:50%; font-size:2em;}
+	.about-why-item{
+		width:50%;margin-right:0;vertical-align:top;
+		display:block; float:left;
+		padding:20px;
+		height:300px;
+	}
+	.about-why-wrap{height:300px;}
+	main{
+		padding-top:350px;
+		height:700px;
+		font-size:1.1em;
+		background:url('../img/about_intro_landscape.jpg') center center;
+	}
+	.team {width:70%; padding:10px; margin:65px auto;
+	.text {font-size:1.2em; }
+	}
+	.about_sec {width:100%;}
+	.about_img {width:100%;
+		img {width:25%;}
+	}
+	.about_text {width:100%;
+		.text_list {width:100%; margin-top:15px;
+			span{font-size:1.4em; display:block; padding:20px 0;}
+			}
+		}
+
+		
+	.captain-wrap .captain img {width:30%;}
+	.member-wrap .member-img img {width:25%;}
+
+}
+@media all and (min-width:900px){	
+	main{
+		background:url('../img/about_intro_tablet.jpg') center center;
+	}
+
+
+
+.about_text .text_list span{font-size:1.7em;}
+
+.captain-wrap .captain img {width:15%;}
+
+.member-wrap{width:900px; margin:0 auto;
+	.member-img {width:200px; float:left;
+		img {width:70%;}
+	}
+	.member-name{width:700px; float:left; height:170px; line-height:170px; text-align:left;
+		.member-name span.tit {font-size:1.1em;}
+	}
+}
+
+
+}
+@media all and (min-width:1200px){
+	.about-why-item{
+		display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;
+		width:260px;margin-right:2%;vertical-align:top;
+		float:none;
+	}
+	main{
+		font-size:1.3em;
+		background:url('../img/about_intro_wide.jpg') center center;
+	}
+}
+@media all and (min-width:1450px){
+}

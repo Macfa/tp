@@ -1,0 +1,278 @@
+@import 'common';
+@import '_list';
+
+h1 {
+	font-size:2em;
+	letter-spacing:-0.05em;
+}
+h2 {
+	font-size:1.5em;
+	margin-top:5px;
+	letter-spacing:-0.05em;
+}
+h3 {
+	font-size:1.1em;
+	text-align:center;
+	letter-spacing:-.02em;
+}
+ul, li {
+	list-style:none;
+	display:inline-block;
+	font-size:1em;
+}
+menu, ol, ul {
+    padding: 0 0 0 0px;
+}
+body {
+	background:white;
+}
+
+
+
+.tit {
+	font-size:5em;
+	font-weight:bold;
+	margin:0px 0 0px 0;
+}
+
+.sub{
+	margin:0 auto;
+}
+
+.txt {
+	margin:0 auto;
+}
+.txt-plus {
+	font-size:.8em;
+	color:white;
+}
+.btn-filled-primary{
+	margin:0;
+}
+
+.bn-simple {
+	text-align:center;
+	text-decoration:none;
+	color:black;
+}
+
+
+
+main{
+	text-align:center;
+}
+
+.intro {
+	text-align:center;
+	background:url('../img/bey-showme-intro-mobile.jpg') no-repeat top center;
+	height:775px;
+}
+.intro .tit {
+	font-size:6em;
+}
+.intro .sub {
+	padding-top:50px;
+}
+.txt-left {
+}
+.hover-txt {
+	color:#dadada;
+}
+.spec {
+	padding-top:30px;
+}
+
+.spec li {
+	padding:78px 5px 0 5px;
+}
+.spec .spec-li{
+	margin-right:25px;
+}
+
+.spec .touch {
+	background:url('../img/bey-touch-s.png') no-repeat top center;
+}
+.spec .memory {
+	background:url('../img/bey-gb-s.png') no-repeat top center;
+}
+.spec .hd {
+	background:url('../img/bey-hd-s.png') no-repeat top center;
+}
+.spec .ram {
+	background:url('../img/bey-ram-s.png') no-repeat top center;
+}
+
+.consert {
+	background:url('../img/bey-showme-gradient-mobile.jpg') top left;
+	height:1000px;
+	margin-bottom:70px;
+}
+
+.consert .sub {
+	color:white;
+	text-align:center;
+	padding-top:50px;
+	font-size:1.8em;
+}
+
+.consert .txt {
+	color:white;
+	text-align:center;
+	padding-top:30px;
+}
+.consert .txt-plus{
+	padding-bottom:30px;
+}
+
+.consert .poster-zone {
+	padding-bottom:610px;
+	line-height:1.35em;
+	background:url('../img/bey-showme-poster-mobile.png') no-repeat bottom center;
+}
+.consert a {
+	text-align:center;
+	color:white;
+}
+.hover-txt:hover{
+	text-decoration:underline;
+}
+
+
+.end {
+	background:url('../img/bey-end-mobile.jpg') no-repeat center 210px;
+	height:700px;
+	text-align:center;
+}
+.end .tit {
+	color:#24cbc1;
+	font-size:7.5em;
+}
+
+
+
+
+
+
+
+
+@media all and (min-width:640px){
+	.intro {
+	background:url('../img/bey-showme-intro-landscape.jpg') no-repeat top center;
+	height:970px;
+}
+.intro .sub {
+	padding-top:80px;
+}
+.consert {
+	background:url('../img/bey-showme-gradient-mobile.jpg') top left;
+	height:1000px;
+	margin-bottom:300px;
+}
+.consert .poster-zone {
+	padding-bottom:900px;
+	background:url('../img/bey-showme-poster-landscape.png') no-repeat bottom center;
+}
+
+
+.end {
+	background:url('../img/bey-end-landscape.jpg') no-repeat center 220px;
+	height:930px;
+}
+
+
+
+
+}
+@media all and (min-width:900px){
+	.intro {
+	background:url('../img/bey-showme-intro-tablet.jpg') no-repeat top center;
+	height:1050px;
+}
+.intro .sub {
+	padding-top:100px;
+}
+.consert {
+	background:url('../img/bey-showme-gradient-wide.jpg') top left;
+	height:1500px;
+	margin-bottom:0px;
+}
+.consert .poster-zone {
+	padding-bottom:1100px;
+	background:url('../img/bey-showme-poster-tablet.png') no-repeat bottom center;
+}
+.end {
+	background:url('../img/bey-end-tablet.jpg') no-repeat center 230px;
+	height:970px;
+}
+
+
+
+}
+@media all and (min-width:1200px){
+.intro {
+	background:url('../img/bey-showme-intro-pc.jpg') no-repeat top center;
+	height:962px;
+}
+.txt-center{
+	position:relative;
+	right:43%;
+	top:20%;
+	padding-left:150px;
+}
+.consert {
+	background:url('../img/bey-showme-gradient-wide.jpg') top left;
+	height:1500px;
+}
+.spec li {
+	margin-top:280px;
+	padding:130px 30px 0 30px;
+}
+.spec .spec-li{
+	margin-right:30px;
+}
+
+.spec .touch {
+	background:url('../img/bey-touch-b.png') no-repeat top center;
+}
+.spec .memory {
+	background:url('../img/bey-gb-b.png') no-repeat top center;
+}
+.spec .hd {
+	background:url('../img/bey-hd-b.png') no-repeat top center;
+}
+.spec .ram {
+	background:url('../img/bey-ram-b.png') no-repeat top center;
+}
+
+.end .sub {
+	padding-top:0px;
+}
+
+
+
+}
+@media all and (min-width:1450px){
+.intro {
+	background:url('../img/bey-showme-intro-wide.jpg') no-repeat top center;
+	height:990px;
+}
+.txt-center{
+	position:relative;
+	right:33%;
+	top:22%;
+	padding-left:150px;
+}
+.spec li {
+	margin-top:300px;
+	padding:130px 30px 0 30px;
+}
+.consert {
+	background:url('../img/bey-showme-gradient-wide.jpg') top left;
+	height:1500px;
+}
+.end .sub {
+	padding-top:0px;
+}
+
+}
+	
