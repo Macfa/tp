@@ -96,14 +96,20 @@ try{
 	if (isNullVal($_POST['paEmail']) === true || isEmail($_POST['paEmail']) === false)
 		throw new Exception('이메일을 00000@주소 형식으로 입력해주세요', 3);
 
-/*	$startTime= '2016-10-27 13:00:00';
-	$jetBlackApply = DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'jetBlack', $startTime);
-	if ($jetBlackApply > '100')
-		throw new Exception('제트블랙 색상 이벤트가 마감되었습니다', 3);
-*/
-	
+	$startTime= '2016-10-27 19:00:00';
+	if($_POST['paColorType'] === 'jetBlack') {
+		$jetBlackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'jetBlack', $startTime);
+		if ($jetBlackApply >= 20)
+			throw new Exception('제트블랙 색상 이벤트가 마감되었습니다', 3);
+	}
 
-	
+	if($_POST['paColorType'] === 'black') {
+		$blackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'black', $startTime);
+		if ($blackApply >= 20)
+			throw new Exception('매트블랙 색상 이벤트가 마감되었습니다', 3);
+	}
+
+
 } catch (Exception $e) {	
 		if ($e->getCode() === 1)
 			$errorURL = $cfg['login_url'];
