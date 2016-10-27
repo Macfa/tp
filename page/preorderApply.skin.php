@@ -65,12 +65,12 @@
 			<fieldset class="inp-group">
 					<i class="ico-color-small"></i> 색상 <br/>
 					<label class="inp-chk">
-						<input type="radio" name="paColorType" value="jetBlack"/>
+						<input type="radio" name="paColorType" value="jetBlack"/ <?php echo $isDisableJetBlack ?>>
 						<div class="inp-chk-box"></div>
 						제트블랙
 					</label>
 					<label class="inp-chk">
-						<input type="radio" name="paColorType" value="black"/>
+						<input type="radio" name="paColorType" value="black"/ <?php echo $isDisableBlack ?>>
 						<div class="inp-chk-box"></div>
 						블랙
 					</label>
