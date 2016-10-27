@@ -42,10 +42,7 @@
 				</div>
 			</a>
 		</li-->
-		<!--<li class="slide-item banner-galaxynote7">
-			<a href="/page/note7.php"></a>
-		</li>
-		<li class="slide-item banner-iphone6">
+		<!--<li class="slide-item banner-iphone6">
 			<a href="/device/iphone6">
 				<div class="wrap banner-iphone6-wrap">					
 					<div class="vert-wrap">
