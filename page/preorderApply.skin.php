@@ -188,10 +188,7 @@
 					<div class="inp-chk-box"></div>
 					KT olleh
 				</label>
-<<<<<<< f89b684ffb9cab467e7d32086948ec9ab554167d
 			</fieldset>			
-=======
-			</fieldset>		
 			
 			<fieldset class="inp-group" data-default="<?echo $editMember['paEtc2']?>">
 				<i class="ico-carrier-small"></i> 에그도 같이 신청<br/>
@@ -201,8 +198,6 @@
 					신청하고 사은품 업그레이드 하겠습니다.
 				</label>
 			</fieldset>	
-
->>>>>>> 동기화
 			<div class="inp-tit"><i class="ico-plan-small"></i> 요금제선택 : <?echo $plan[$editMember['paPlan']]?></div>
 			<br/>
 			<select class="js-planselect inp-select" style="height:60px;border:solid 1px rgba(0,0,0,0.15)"  name="paPlan" data-default=<?echo $editMember['paPlan']?>>
