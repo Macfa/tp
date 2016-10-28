@@ -124,12 +124,12 @@ foreach($arrPlan as $plan){
 }
 */
 
-$startTime= '2016-10-20 19:00:00';
+$startTime= '2016-10-28 10:00:00';
 $jetBlackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'jetBlack', $startTime);
-if ($jetBlackApply >= 5) $isDisableJetBlack = 'disabled';
+if ($jetBlackApply >= 20) $isDisableJetBlack = 'disabled';
 
 $blackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'black', $startTime);
-if ($blackApply >= 5) $isDisableBlack = 'disabled';
+if ($blackApply >= 20) $isDisableBlack = 'disabled';
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 

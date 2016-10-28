@@ -22,13 +22,7 @@ $cfg['charset'] = "utf-8";
 
 $cfg['current_url'] = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 // 개발환경인지 아닌지 확인
-$cfg['subURL'] = "tplanit.co.kr";
-
-if (preg_match("/ehgu09.tplanit.co.kr/", $_SERVER["HTTP_HOST"])) {
-	$cfg['subURL'] = 'ehgu09.'.$cfg['subURL'];
-	$rootPrefix = '-dev';
-}
-
+$cfg['subURL'] = $_SERVER["HTTP_HOST"];
 $cfg['url'] = "http://".$cfg['subURL'];
 $cfg['full_url'] = $cfg['url'].$_SERVER['PHP_SELF'];
 $cfg['ip'] = $_SERVER['REMOTE_ADDR'];
@@ -77,7 +71,7 @@ define("PATH_JS", $cfg['js_path']);
 define("PATH_JS_LIB", $cfg['js_path']."/lib");
 define("PATH_CSS", $cfg['css_path']);
 define("PATH", $cfg['path']);
-
+define("URL", $cfg['url']);
 
 
 
