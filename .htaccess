@@ -1,0 +1,45 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^(www\.tplanit\.co\.kr)(:80)? [NC]
+RewriteRule ^(.*) http://tplanit.co.kr/$1 [R=301,L]
+RewriteRule ^(sk|kt|lguplus)\/?(all|samsung|apple|lg|etc)?$ ./product/devices.php?carrier=$1&manuf=$2
+RewriteRule ^(samsung|apple|lg|etc)\/?(all|sk|kt|lguplus)?$ ./product/devices.php?manuf=$1&carrier=$2
+RewriteRule ^(pocketfi|watch|kids)$ ./product/devices.php?device=$1
+RewriteRule ^device\/(.*)$ ./product/detail.php?id=$1
+RewriteRule ^gift\/(.*)$ ./product/giftDetail.php?id=$1
+
+RewriteRule ^preorder$ http://tplanit.co.kr/page/preOrderNote7.php
+
+RewriteRule ^apply\/(.*)$ ./product/apply.php?id=$1
+
+RewriteRule ^gifts$ ./product/gifts.php
+RewriteRule ^gifts\/(.*)$ ./product/gifts.php?category=$1
+RewriteRule ^gifts\/([^?]*)\?(.*)$ ./product/gifts.php?category=$1&$2
+
+RewriteRule ^cart$ ./user/cart.php
+
+RewriteRule ^order$ ./product/order.php
+RewriteRule ^orderAction$ ./product/orderAction.php
+
+RewriteRule ^seo\/naver-syndication\.xml$ ./seo/naver-syndication\.php
+
+RewriteRule ^(.*\.(css|js)).*$ ./lib/min/index.php?f=$1 [L]
+RewriteCond %{HTTP_HOST} ^(mo\.startgd\.com)(:80)? [NC]
+RewriteRule ^(.*) http://tplanit.co.kr/$1 [R=301,L]
+</IfModule>
+
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml image/jpeg image/png
+</ifmodule>
+
+<Files ~ "^\.(htaccess|htpasswd)$">
+  deny from all
+</Files>
+<FilesMatch ".*\.(skin|inc)\.php$">
+    Order allow,deny 
+    deny from all 
+</FilesMatch>
+Options -Indexes
+order deny,allow
+

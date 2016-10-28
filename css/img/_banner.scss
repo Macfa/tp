@@ -1,0 +1,349 @@
+@import '_bxslider';
+
+$bannerHeight:400px;
+main {
+	height:$bannerHeight;
+	background:white;
+	a{text-decoration:none;color:inherit;}
+	ul{height:100%;padding:0;margin:0;}
+	li{padding:0;margin:0;height:100%;text-align:center;list-style:none;}
+	& > a, 
+	.bxslider > li > a{display:block;width:100%;height:100%;text-decoration:none;color:inherit;}
+	.yellow-slide{background:$mainYellow;}
+	.rasiel-slide{background:url('img/rasiel_bg.jpg') center center;background-size:cover}
+}
+
+.banner-tit{font-size:1.8em;text-align:center;}
+.banner-sub{font-size:1.2em;}
+.slide-item{
+	background:white;
+	.wrap{height:100%;}
+}
+.main-slider{
+	display:none;
+}
+
+
+.banner-left-sec{
+	width:50%;
+	height:100%;
+	float:left;
+}
+.banner-right-sec{
+	width:50%;
+	height:100%;
+	float:right;
+}
+.banner-note7-issue{
+	background:#ececec url('../img/banner-note7-issue-mobile.jpg') no-repeat center center;
+}
+.banner-preordernote7-qna{
+	background:black url('../img/banner-preorder-note7-mobile.jpg') no-repeat center center;
+}
+.banner-preorder-iphone7{
+	background:black url('../img/iphone7-nomal-mobile.jpg') no-repeat center center;
+}
+
+.banner-iphone-se-device{
+	float:initial;
+	width:100%;
+	height:200px;
+	background:url('../img/main_iphone_se_mobile.jpg') no-repeat center bottom;
+}
+.banner-iphone-se-logo{
+	width:170px;
+	height:38px;
+	float:initial;
+	margin:0 auto;
+	margin-bottom:20px;
+	background:url('../img/iphone_se_logo_mobile.png') no-repeat center center;
+}
+.banner-iphone-se-cont{
+	position:relative;
+	width:100%;
+	margin-top:85px;
+	z-index:99;
+	white-space:nowrap;
+}
+.banner-iphone-se-gift{
+	
+}
+.banner-jeju{
+	background:url('../img/main-jeju-event-mobile.jpg') no-repeat right center;
+	.banner-tit{margin-bottom:40px;}
+	.banner-sub{
+		@include text-shadow(#000, 0, 10);
+		color:white;
+	}
+}
+.banner-family{
+	background:url('../img/main-family-event-mobile.jpg') no-repeat center center;
+	.banner-tit{@include text-shadow(white, 0, 10);color:$mainBlack}
+	.banner-sub{@include text-shadow(black, 0, 10);color:white;margin-top:40px;}
+	p {color:white;@include text-shadow(black, 0, 10);}
+}
+
+.banner-membership{
+	background:url('../img/banner-member-mobile.jpg') no-repeat center center;
+}
+.banner-membership-wrap{
+	color:white;
+}
+.banner-galaxynote7{
+	background:white url('../img/banner-note7-mobile.jpg') no-repeat center center;
+}
+.banner-v20{
+	background:white url('../img/v20-mobile.jpg') no-repeat center center;
+}
+.banner-galaxynote7-wrap{
+	color:white;
+}
+.banner-jeju-wrap,
+.banner-family-wrap{padding-top:50px;}
+
+.banner-iphone6{
+	background:url('../img/banner-iphone6-mobile.jpg') no-repeat center center;
+}
+
+.banner-iphone6-wrap {
+	padding-top:10px;
+}
+.banner-tit.iphone6 {
+	font-family:Gungsuh;
+	font-size:5.7em;
+	margin-top:15px;
+}
+
+.banner-note7-media{
+	background:url('../img/banner-note7-media-mobile.jpg') no-repeat center center;
+	
+}
+.banner-pointmall{
+	background:url('../img/pointmall_main_mobile.jpg') no-repeat center center;
+	
+}
+
+.banner-note7-noitem{
+	background:#ececec url('../img/note7-noitem-mobile.png') no-repeat center center;
+}
+.note7-noitem-btn{margin-top:110px;}
+
+.banner-bey{
+	background:url('../img/bey-mobile.jpg') no-repeat center center;	
+}
+
+.layer-banner-wrap{
+	@extend .overlay;
+	display:none;
+	padding:5%;
+	&.active{display:block;}
+}
+.layer-banner{
+	position:relative;
+	width:95%;
+	height:300px;
+	top:50%;
+	margin:0 auto;
+	background:white;
+	padding:10px;
+	margin-top:-150px;
+}
+.layer-banner-btn{
+	position:absolute;
+	width:100%;
+	bottom:0;
+	right:0;
+}
+
+
+@media all and (min-width:640px){
+	$bannerHeight:600px;
+	main {height:$bannerHeight;}
+	main .btn {font-size:17px}
+	.banner-v20{
+		background:white url('../img/v20-landscape.jpg') no-repeat center center;
+	}
+	.banner-iphone-se-device{
+		position:absolute;
+		width:50%;
+		height:100%;
+		background:url('../img/main_iphone_se.jpg') no-repeat 65% center;
+	}
+	.banner-preorder-iphone7{
+		background:black url('../img/iphone7-nomal-landscape.jpg') no-repeat center center;
+	}
+
+	.banner-iphone-se-logo{
+		width:270px;
+		height:60px;
+		background:url('../img/iphone_se_logo.png') no-repeat center center;
+	}
+	.banner-iphone-se-cont{
+		padding-top:150px;
+		padding-left:35%;
+		margin-top:0;
+	}
+.banner-tit{font-size:1.8em;text-align:center;}
+.banner-sub{font-size:1.2em;}
+	.banner-jeju{
+		.banner-tit{margin-bottom:80px;}
+		background:url('../img/main-jeju-event-landscape.jpg') no-repeat center center;
+	}
+	.banner-family{
+		.banner-tit{margin-bottom:80px;}
+		background:url('../img/main-family-event-landscape.jpg') no-repeat center center;
+	}
+	.banner-family-wrap{padding-top:80px;}
+	.banner-jeju-wrap{padding-top:100px;}
+	.banner-membership{
+		background:url('../img/banner-member-landscape.jpg') no-repeat center center;
+	}
+	.banner-galaxynote7{
+	background:white url('../img/banner-note7-landscape.jpg') no-repeat center center;
+	}
+	.banner-iphone6{
+	background:url('../img/banner-iphone6-landscape.jpg') no-repeat center center;
+	}
+
+
+	.iphone6-wrap {
+		height:115px;
+		img {
+			display:block;
+			height:100%;
+		}
+	}
+	.banner-iphone6-wrap {
+	padding-top:55px;
+	}
+
+	.banner-note7-media{
+	background:url('../img/banner-note7-media-landscape.jpg') no-repeat center center;
+	}
+	.banner-pointmall{
+	background:url('../img/pointmall_main_landscape.jpg') no-repeat center center;
+	}
+	.banner-preordernote7-qna{
+	background:black url('../img/banner-preorder-note7-landscape.jpg') no-repeat center center;
+	}
+.banner-note7-issue{
+	background:#ececec url('../img/banner-note7-issue-landscape.jpg') no-repeat center center;
+}
+.banner-note7-noitem{
+	background:#ececec url('../img/note7-noitem-tablet.png') no-repeat center center;
+}
+.note7-noitem-btn{margin-top:270px;}
+
+.banner-bey{
+	background:url('../img/bey-showme-landscape.jpg') no-repeat center center;	
+}
+ 
+}
+
+
+ 
+@media all and (min-width:900px){
+	.banner-v20{
+		background:white url('../img/v20-tablet.jpg') no-repeat center center;
+	}
+	.banner-preorder-iphone7{
+		background:black url('../img/iphone7-nomal-tablet.jpg') no-repeat center center;
+	}
+
+	.banner-tit{font-size:2em;}
+	.banner-sub{font-size:1.5em;}
+	.banner-jeju{
+		background:url('../img/main-jeju-event-tablet.jpg') no-repeat center center;
+	}
+	.banner-family{
+		background:url('../img/main-family-event-tablet.jpg') no-repeat center center;
+	}
+	.banner-membership{
+		background:url('../img/banner-member-tablet.jpg') no-repeat center center;
+	}
+	.banner-iphone6{
+	background:url('../img/banner-iphone6-tablet.jpg') no-repeat center center;
+	}
+	
+	.banner-iphone6-wrap {
+	padding-top:90px;
+
+	}
+	.banner-tit.iphone6 {
+	font-size:6.7em;
+	}
+	.banner-note7-media{
+	background:url('../img/banner-note7-media-tablet.jpg') no-repeat center center;
+	}
+	.banner-pointmall{
+	background:url('../img/pointmall_main_tablet.jpg') no-repeat center center;
+	}
+	.banner-bey{
+	background:url('../img/bey-showme-tablet.jpg') no-repeat center center;	
+	}
+
+
+}
+
+@media all and (min-width:1200px){
+	.banner-preorder-iphone7{
+		background:black url('../img/iphone7-nomal-pc.jpg') no-repeat center center;
+	}
+
+	.banner-v20{
+		background:white url('../img/v20-pc.jpg') no-repeat center center;
+	}
+	.banner-jeju{
+		background:url('../img/main-jeju-event-pc.jpg') no-repeat center center;
+	}
+	.banner-family{
+		background:url('../img/main-family-event-pc.jpg') no-repeat center center;
+	}
+	.banner-membership{
+		background:url('../img/banner-member-pc.jpg') no-repeat center center;
+	}
+	.banner-iphone6{
+	background:url('../img/banner-iphone6-pc.jpg') no-repeat center center;
+	}
+	.banner-note7-media{
+	background:url('../img/banner-note7-media-pc.jpg') no-repeat center center;
+	}		
+	.banner-pointmall{
+	background:url('../img/pointmall_main_pc.jpg') no-repeat center center;
+	}
+	.banner-bey{
+	background:url('../img/bey-showme-pc.jpg') no-repeat center center;	
+	}
+
+}
+
+@media all and (min-width:1450px){
+	.banner-preorder-iphone7{
+		background:black url('../img/iphone7-nomal-wide.jpg') no-repeat center center;
+	}
+
+	.banner-v20{
+		background:white url('../img/v20-wide.jpg') no-repeat center center;
+	}
+	.banner-jeju{
+		background:url('../img/main-jeju-event-wide.jpg') no-repeat center center;
+	}
+	.banner-family{
+		background:url('../img/main-family-event-wide.jpg') no-repeat center center;
+	}
+	.banner-membership{
+		background:url('../img/banner-member-wide.jpg') no-repeat center center;
+	}
+	.banner-iphone6{
+	background:url('../img/banner-iphone6-wide.jpg') no-repeat center center;
+	}
+	.banner-note7-media{
+	background:url('../img/banner-note7-media-wide.jpg') no-repeat center center;
+	}
+	.banner-pointmall{
+	background:url('../img/pointmall_main_wide.jpg') no-repeat center center;
+	}
+	.banner-bey{
+	background:url('../img/bey-showme-wide.jpg') no-repeat center center;	
+	}
+}

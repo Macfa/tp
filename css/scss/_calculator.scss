@@ -1,0 +1,239 @@
+.calc-result-table{
+	margin:0;
+	padding:0;
+	border:0;
+	position:absolute;
+	bottom:0;
+	width:100%;
+	color:rgba(0,0,0,0.5);
+	text-align:right;
+	font-size:1em;
+	th,td{
+		padding:2.5px 2.5px;
+		&:last-child{padding-right:10px;}
+		&:first-child{padding-left:10px;text-align:left}
+	}
+	th{font-weight:normal}
+}
+.calc-value-row{
+	height:25px;
+	vertical-align: middle;
+	font-size:1.3em
+}
+.calc-value-label{font-size:.8em;}
+.calc-result-row{
+	height:45px;
+}
+.calc-wrap{
+	width:100%;
+	height:auto;
+	background:white;
+	border:solid 1px rgba(0,0,0,.1);
+	margin-bottom:15px;
+}
+.calc-result-device-price{
+	color:getPrimaryColor(8);
+	border-bottom:solid 1px rgba(0,0,0,.05);
+	@include opacity(0.9);
+}
+.calc-vat,
+.calc-select-plan,
+.calc-support-discount{
+	display:none;
+	&.active{display:table-row;}
+}
+.calc-row{
+	position:relative;
+	height:60px;
+	word-spacing: -0.26em;
+	white-space:nowrap;
+	line-height:initial;
+	border-bottom:solid 1px rgba(0,0,0,0.1);
+	&-1{
+		@extend .calc-row;
+		.calc-btn{width:100%;}
+	}
+	&-2{
+		@extend .calc-row;
+		.calc-btn{width:50%;}
+	}
+	&-3{
+		@extend .calc-row;
+		.calc-btn{width:calc(100%/3);}
+	}
+	&-lock-1{
+		@include inlineBlock;
+		@extend .calc-row;
+		width:100%;
+		word-spacing:0;
+	}
+	&-lock-2{
+		@include inlineBlock;
+		@extend .calc-row;
+		width:50%;
+		word-spacing:0;
+	}
+	&-lock-3{
+		@include inlineBlock;
+		@extend .calc-row;
+		width:calc(100%/3);
+		word-spacing:0;
+	}
+	&-lock-4{
+		@include inlineBlock;
+		@extend .calc-row;
+		width:calc(100%/4);
+		word-spacing:0;
+	}
+	&:last-child{
+		border-bottom:0;
+	}
+}
+
+.calc-row-label{
+	position:absolute;
+	z-index:9;
+	top:0px;
+	left:5px;
+	font-size:.95em;
+	word-spacing:0;
+	color:rgba(0,0,0,0.7);
+	.calc-row.active &{
+		color:rgba(0,0,0,0.5);
+	}
+}
+
+.calc-btn{
+	@include inlineBlock;
+	position:relative;
+	width:100%;
+	height:100%;
+	border-right:solid 1px rgba(0,0,0,0.1);
+	word-spacing:0;
+	cursor:hand;
+	cursor:pointer;
+	&:last-child{
+		border-right:0;
+	}
+	input{
+		display:block;
+		position:absolute;
+		z-index:-1;
+		visibility:hidden;
+	}
+}
+
+.calc-label{
+	position:absolute;
+	top:-1;
+	left:-1;
+	width:100%;
+	height:100%;
+	line-height:65px;
+	font-size:1.2em;
+	border:solid 1px rgba(255,255,255,0);
+	text-align:center;
+	box-sizing:initial;
+	transition:background .2s, border .2s, color .2s;
+	input:checked + &{
+		background:getPrimaryColor(2);
+		border:solid 1px getPrimaryColor(4);
+		color:getPrimaryColor(9);
+		font-weight:bold;
+	}
+	i{vertical-align: sub;}
+}
+
+.calc-result-wrap{
+	position:relative;
+	background:getPrimaryColor(1);
+	border-bottom:solid 1px rgba(0,0,0,0.1);
+	@include animate-fadeIn-to-out();
+}
+.calc-result-etc{
+	padding:5px 10px;
+}
+.calc-result-value-wrap{
+	width:100%;
+	position:absolute;
+	bottom:0;
+	padding:3px 10px;
+	text-align:right;
+}
+.calc-result-price{
+	font-size:3em;
+	vertical-align:middle;
+	color:getPrimaryColor(8);
+	padding:5px 10px;
+}
+.calc-result-label{
+	line-height:40px;
+	font-size:1.5em;
+	vertical-align:middle;
+	color:getPrimaryColor(8);
+	padding:5px 10px;
+}
+.calc-pad-wrap{
+	height:auto;
+	word-spacing: -0.26em;
+	white-space:nowrap;
+	line-height:0.26em;
+}
+
+.cart-total-tit{
+	font-size:1.1em;
+	color:#888;
+}
+
+.cart-total{
+	white-space: nowrap;
+	width:300px;
+	margin:0 auto;
+	font-size:2.5em;
+	text-align:right;
+	color:#888;
+	margin-bottom:40px;
+}
+
+@media all and (min-width:400px){
+	.calc-row{height:70px;}
+	.calc-label{line-height:70px;}
+}
+
+@media all and (min-width:640px){
+	.calc-row{height:85px;}
+	.calc-row-label{
+		top:0px;
+		left:5px;
+	}
+	.calc-result-wrap{
+		width:45%;
+		height:55px;
+		border-left:solid 1px #eee;
+		border-bottom:0;
+		float:right;
+	}
+	.calc-value-row{height:40px;}
+	.calc-label{
+		line-height:85px;
+		font-size:1em;
+	}
+	.calc-pad-wrap{
+		width:55%;
+		height:auto;
+		float:left;
+	}
+	.calc-value-label{font-size:.7em;}
+	.calc-result-value-wrap{padding:5px 10px;	}
+	.calc-result-price{	font-size:2.85em;	}
+	.calc-result-label{	font-size:1.2em;}
+}
+
+@media all and (min-width:900px){
+}
+
+@media all and (min-width:1200px){
+}
+
+@media all and (min-width:1450px){
+}

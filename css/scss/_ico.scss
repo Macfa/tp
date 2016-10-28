@@ -1,0 +1,67 @@
+.ico-common {
+	background-image:url('../img/ico-common.png');
+	background-repeat:no-repeat;
+}
+.ico-small {
+	@extend .ico-common;
+	@include inlineBlock;
+	width:30px;
+	height:30px;
+	vertical-align:middle;
+}
+
+.ico-person-small{
+	@extend .ico-small;
+	background-position:0 -50px;
+}
+.ico-talk-small{
+	@extend .ico-small;
+	background-position:-30px -50px;
+}
+.ico-truck-small{
+	@extend .ico-small;
+	background-position:-60px -50px;
+}
+.ico-bike-small{
+	@extend .ico-small;
+	background-position:-90px -50px;
+}
+.ico-caution-small{
+	@extend .ico-small;
+	margin-top:-5px;
+	background-position:-120px -50px;
+}
+.ico-email-small{
+	@extend .ico-small;
+	background-position:-150px -50px;
+}
+.ico-tel-small{
+	@extend .ico-small;
+	background-position:-180px -50px;
+}
+.ico-calendar-small{
+	@extend .ico-small;
+	background-position:-210px -50px;
+}
+.ico-carrier-small{
+	@extend .ico-small;
+	background-position:-240px -50px;
+}
+.ico-gift-small{
+	@extend .ico-small;
+	background-position:-270px -50px;
+}
+.ico-color-small{
+	@extend .ico-small;
+	background-position:-300px -50px;
+}
+.ico-plan-small, 
+.ico-coins-small{
+	@extend .ico-small;
+	background-position:-330px -50px;
+}
+.ico-apply-type-small,
+.ico-change-device-small{
+	@extend .ico-small;
+	background-position:-360px -50px;
+}

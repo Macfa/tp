@@ -1,0 +1,195 @@
+@charset "UTF-8";
+
+@mixin keyframe($property) {
+	@-moz-keyframes #{$property} { @content; }
+	@-webkit-keyframes #{$property} { @content; }
+	@-o-keyframes #{$property} { @content; }
+	@-ms-keyframes #{$property} { @content; }
+	@-khtml-keyframes #{$property} { @content; }
+	@keyframes #{$property} { @content; }
+}
+
+
+@mixin whenLteIE8 (){
+	html.lte-ie8 &{
+		@content;
+	}
+}
+
+@mixin shadow-level($level:2){
+	@if $level == 2{
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); 
+	} @else if $level == 3 {
+		box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12); 
+	} @else if $level == 4 {
+		box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); 
+	} @else if $level == 6 {
+		box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2); 
+	} @else if $level == 8 {
+		box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2); 
+	} @else if $level == 16 {
+		box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); 
+	} @else if $level == 24 {
+		box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2); 
+	} @else if $level == 7 {
+		box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.14), 0 7px 20px 0 rgba(0, 0, 0, 0.12), 0 15px 35px -1px rgba(0, 0, 0, 0.2); 
+	}
+
+}
+
+@mixin inline-block-parent(){
+	word-spacing: -0.26em;
+	white-space:nowrap;
+}
+
+
+
+@mixin text-shadow($color:#111, $distance:3, $blur:5){ 
+	text-shadow:$color #{$distance}px #{$distance}px #{$blur}px;
+}
+@mixin shadow($color:#111, $strength:1px, $spread:15){ 
+	box-shadow:$strength $strength #{$spread}px $color;
+}
+@mixin bg-cover($url:''){
+	background-size:cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=$url, sizingMethod='scale');
+}
+@mixin blur($property){
+	filter: blur($property);
+	-webkit-filter: blur($property);
+	-moz-filter: blur($property);
+	-ms-filter: blur($property);
+	-o-filter: blur($property);
+}
+@mixin opacity($opacity:0.5) {
+	$opacityIE: $opacity * 100;
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=$opacityIE);
+	filter: alpha(opacity=$opacityIE); /* IE 5-7 */
+	-moz-opacity: $opacity; /* Netscape */
+	-khtml-opacity: $opacity; /* Safari 1.x */
+
+	/* Good browsers */
+	opacity: $opacity;
+}
+@mixin lazyload{
+	.loadImage &{
+		@content;
+	}
+}
+
+@mixin listInit(){
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+@mixin bgRgba($color, $alpha:1) {
+	background:rgba($color, $alpha);
+	html.lte-ie8 &{
+		background:transparent;
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str(rgba($color,$alpha))},endColorstr=#{ie-hex-str(rgba($color,$alpha))}); 
+		zoom: 1;
+	}
+}
+
+@mixin responsiveLandscape{
+	@media all and (min-width:640px){
+		@content;
+	}
+}
+
+@mixin responsiveTablet{
+	@media all and (min-width:900px){
+		@content;
+	}
+}
+
+@mixin responsivePC{
+	@media all and (min-width:1200px){
+		@content;
+	}
+}
+
+@mixin responsiveWide{
+	@media all and (min-width:1450px){
+		@content;
+	}
+}
+
+@mixin nthChildSelector($start, $end){
+	@for $i from $start through $end {
+		&:nth-child(#{$i}){
+			@content;
+		}
+	}
+}
+
+
+@mixin widthPerChild($start,$end){
+	@for $i from $start through $end {
+	  &:first-child:nth-last-child(#{$i}),
+	  &:first-child:nth-last-child(#{$i}) ~ & {
+		width: calc(100% / #{$i}) } 
+	} 
+}
+
+@mixin inlineBlock{
+	display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;word-spacing:0;
+}
+@mixin btn-base(){
+	display:inline-block;
+	margin:0 auto;
+	border-radius:5px;
+	text-decoration:none;
+	cursor:pointer;
+}
+
+
+@mixin btn($type:''){
+	@include btn-base();
+	padding:12px 20px;
+	font-size:1.1em;
+	margin-top:20px;
+	color:#5a3b12;
+	@include shadow-level(2);
+	transition:box-shadow .3s;
+	@content;
+	&-block{
+		@include btn-base();
+		@content;
+		width:100%;
+		margin-top:20px;
+		border-radius:0;
+	}
+	&-inline{
+		@include btn-base();
+		@content;
+		border-radius:0;
+	}
+	&-link {
+		@include btn-base();
+		@content;
+		display:inline-block;
+		margin:10px auto;
+		text-align:center;
+	}
+	&:hover{
+		@include shadow-level(6);
+	}
+}
+
+@function getPrimaryColor($step : 6) {
+	$color : map-get((
+		1	:	#FFF8E1	,
+		2	:	#FFECB3	,
+		3	:	#FFE082	,
+		4	:	#FFD54F	,
+		5	:	#FFCA28	,
+		6	:	#FFC107	,
+		7	:	#FFB300	,
+		8	:	#FFA000	,
+		9	:	#FF8F00	,
+		10:	#FF6F00	
+	), $step);
+	@return $color;
+}

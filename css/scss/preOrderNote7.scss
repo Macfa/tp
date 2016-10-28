@@ -1,0 +1,262 @@
+@import 'common';
+@import '_list';
+@import '_calculator';
+
+.count-top {position:relative; top:175px; padding:0; text-align:center;}
+.count-box {margin:auto;width:160px; height:48px; background-color:rgba(white,0.7);border-radius:5px}
+.count-much { font-size:3.2em;margin:0;}
+
+.preorder-wrap{margin:0 auto;text-align:center;}
+.preorder-main{height:280px;background:white url('../img/preorder-process-main-mobile.jpg') no-repeat center center;margin-bottom:50px;}
+.preorder-ico{
+	@extend .ico-common;
+	display:block;
+}
+.banner-base{height:200px;*{padding-top:5%} margin-bottom:50px;}
+.banner-top {@extend .banner-base; background:white url('../img/note7-1-mobile.jpg') no-repeat center center}
+.banner-change-device {@extend .banner-base; background:black url('../img/note7-change.jpg') no-repeat center center;height:300px !important;color:white;}
+.banner-cs {@extend .banner-base;background:white url('../img/note7-cs-mobile.jpg') no-repeat center center;height:300px !important}
+.banner-gift {@extend .banner-base;background:white url('../img/note7-present.jpg') no-repeat center center;color:white;}
+.banner-repair {@extend .banner-base;background:white url('../img/note7-repair.jpg') no-repeat center center }
+.preorder-tit-inside{
+	@extend .tit;
+	margin-bottom:25px;
+}
+.preorder-tit-present {
+	font-size:2em;
+	padding:20px;
+}
+.preorder-primary-ico{
+	@extend .preorder-ico;
+	width:50px;
+	height:50px;
+	margin-bottom:5px;
+}
+.preorder-sub-ico{
+	@extend .preorder-ico;
+	position:absolute;
+	width:30px;
+	height:30px;
+	margin-top:-15px;
+	top:50%;
+	left:0px;
+}
+.preorder-select-carrier{
+	padding:30px 0;
+}
+.preorder-process-item,
+.preorder-process{
+	display:block;
+	list-style:none;
+}
+.preorder-qna, 
+.preorder-process{
+	margin:0;
+	padding: 0;
+	border-top:solid 1px rgba(0,0,0,0.05);
+}
+
+.preorder-process{
+	display:none;
+	opacity:0;
+	text-align:center;
+	&.active{
+		display:block;
+		html.ie & {display:block;}
+		@include anmation(fadeIn, .5s);
+	}
+}
+
+.material-list{
+	display:block;
+	list-style:none;
+	text-align:left;
+	margin:0;
+	padding: 0;
+	border-top:solid 1px rgba(0,0,0,0.05);
+}
+
+.preorder-process-item{
+	padding:20px 10px;
+	margin:0;
+	border-bottom:solid 1px rgba(0,0,0,0.05);
+	transition:background .15s;
+	&:last-child{padding-bottom:30px;}
+	&:hover {
+		background:rgba(254,189,50,0.05);
+		.process-item-tit{	color:getPrimaryColor(7);	}
+	}
+}
+
+.process-content-item,
+.process-content{
+	display:block;
+	position:relative;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.process-content{padding-top:10px;}
+.process-content-item{padding-left:40px;margin-bottom:10px}
+
+.process-item-tit{
+	position:relative;
+	display:block;
+	padding:0;
+	margin:0;
+	font-size:1.5em;
+	transition:color .15s;
+}
+
+.process-item-subtit{
+	position:relative;
+	display:block;
+	padding:0;
+	margin:0;
+	padding-left:20px;
+	font-size:1.2em;
+	transition:color .15s;
+}
+
+.preorder-divide {
+	height:200px;
+	background:url('../img/preorder-bg-mobile.jpg') no-repeat center center;
+	margin-bottom:20px;
+}
+
+.ico-process-tplanit{
+	@extend .preorder-primary-ico;
+	background-position:0 0;
+}
+.ico-process-carrier{
+	@extend .preorder-primary-ico;
+	background-position:-50px 0;
+}
+.ico-process-doc{
+	@extend .preorder-primary-ico;
+	background-position:-100px 0;
+}
+.ico-process-idcard{
+	@extend .preorder-primary-ico;
+	background-position:-150px 0;
+}
+.ico-process-send{
+	@extend .preorder-primary-ico;
+	background-position:-200px 0;
+}
+.ico-process-note7send{
+	@extend .preorder-primary-ico;
+	background-position:-250px 0;
+}
+.ico-process-device-check{
+	@extend .preorder-primary-ico;
+	background-position:-300px 0;
+}
+.ico-process-note7-done{
+	@extend .preorder-primary-ico;
+	background-position:-350px 0;
+}
+.ico-process-gift-send{
+	@extend .preorder-primary-ico;
+	background-position:-400px 0;
+}
+.ico-process-samsung-sms{
+	@extend .preorder-primary-ico;
+	background-position:-450px 0;
+}
+.ico-process-apply{
+	@extend .preorder-primary-ico;
+	background-position:-500px 0;
+}
+.ico-process-sms{
+	@extend .preorder-sub-ico;
+	background-position:-30px -50px;
+}
+.ico-process-person{
+	@extend .preorder-sub-ico;
+	background-position:0 -50px;
+}
+.ico-process-truck{
+	@extend .preorder-sub-ico;
+	background-position:-60px -50px;
+}
+.ico-process-bike{
+	@extend .preorder-sub-ico;
+	background-position:-90px -50px;
+}
+.ico-process-caution{
+	@extend .preorder-sub-ico;
+	background-position:-120px -50px;
+}
+.ico-question{
+	@extend .preorder-primary-ico;
+	background-position:-550px 0;
+}
+
+.preorder-process-comment{
+	padding:0 7px;
+	padding-left:50px;
+}
+
+@media all and (min-width:400px){
+}
+	
+@media all and (min-width:640px){
+	.banner-base{height:400px;}
+	.preorder-primary-ico{
+		position:absolute;
+		margin-bottom:0;
+		left:10px;
+	}
+	.preorder-wrap{
+		width:700px;
+	}
+
+	.process-content,
+	.process-item-tit{	padding-left:70px;}
+
+	.preorder-process{text-align:left;}
+
+	.preorder-main{height:470px;background:white url('../img/preorder-process-main-landscape.jpg') no-repeat center center}
+	.preorder-divide {
+		height:300px;
+		background:url('../img/preorder-bg-landscape.jpg') no-repeat center center;
+	}
+		.count-top { top:320px; }
+	.count-box {margin:auto;width:180px; height:60px;}
+
+	.banner-top {background:white url('../img/note7-1-landscape.jpg') no-repeat center center}
+	.banner-cs {background:white url('../img/note7-cs-landscape.jpg') no-repeat center center}
+
+}
+
+@media all and (min-width:900px){
+	.preorder-divide {
+		background:url('../img/preorder-bg-tablet.jpg') no-repeat center center;
+		margin-bottom:50px;
+	}
+
+	.banner-top {background:white url('../img/note7-1-tablet.jpg') no-repeat center center}
+
+	.process-item-tit{	font-size:1.9em;}
+	.count-top { top:320px; }
+	.count-box {margin:auto;width:180px; height:60px;}
+}
+
+@media all and (min-width:1200px){
+	.preorder-divide {
+		background:url('../img/preorder-bg-pc.jpg') no-repeat center center;
+	}
+	.banner-top {background:white url('../img/note7-1-pc.jpg') no-repeat center center}
+	.banner-cs {background:white url('../img/note7-cs-pc.jpg') no-repeat center center}
+		.count-top { top:320px; }
+		.count-box {margin:auto;width:180px; height:60px;}
+}
+
+@media all and (min-width:1450px){
+	.preorder-divide {
+		background:url('../img/preorder-bg-wide.jpg') no-repeat center center;
+	}
+		.count-top { top:320px; }
+		.count-box {margin:auto;width:180px; height:60px;}
+}

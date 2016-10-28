@@ -1,0 +1,134 @@
+@import 'common';
+@import '_list';
+@import '_row';
+.contact-pc-wrap {display:none;}
+.contact-ico {
+	background:url('../img/ico-contact-btn.png') no-repeat center center;
+	position:absolute;
+	width:20px;
+	height:19px;
+	left:20px;
+	top:50%;
+	margin-top:-10px;
+	}
+.contact-ico-consult{
+	@extend .contact-ico;
+}
+.contact-ico-tel{
+	@extend .contact-ico;
+}
+.contact-ico-kakao{
+	@extend .contact-ico;
+}
+
+.contact-mobile-wrap {position:fixed; bottom:25px; right:5px;}
+.contact-mobile-inner {
+	width:60px;
+	height:60px;
+	position:relative;
+}
+.contact-mobile-btn {
+	display:block;
+	width:140px;
+	height:60px;
+	position:absolute;
+	bottom:0px; opacity:0;
+}
+.contact-consult-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:195px; opacity:1; transition:bottom .03s;}
+}
+.contact-tel-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:130px; opacity:1; transition:bottom .05s;}
+}
+.contact-kakao-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:65px; opacity:1; transition:bottom .07s;}
+}
+
+.mobile-contact-tit {
+	width:80px;
+	height:60px;
+	float:left;
+	line-height:60px;
+	text-align:center;
+	font-size:1em;
+	text-decoration:none;
+	color:$mainBlack;
+	text-shadow:1px 1px 30px #797979;
+}
+
+.mobile-ico {
+	width:60px;
+	height:60px;
+	display:block;
+	position:relative;
+	border-radius:50%;
+	float:left;
+	@include shadow(#aaa);
+}
+.mobile-ico-kakao{
+	@extend .mobile-ico;
+}
+.mobile-ico-consult{
+	@extend .mobile-ico;
+}
+.mobile-ico-tel{
+	@extend .mobile-ico;
+}
+.mobile-ico {
+	background: $mainYellow;
+	color:$mainBlack;
+	border:0;
+	&.active  {background:white; color:$mainYellow;}
+}
+.mobile-ico-kakao {
+	background:$kakaoColor;
+}
+.mobile-ico-consult,.mobile-ico-tel{
+	background:$mainBlack;
+}
+
+.contact-mobile-ico {
+	background: url('../img/ico-contact-btn.png') no-repeat center center;
+	position:absolute;
+	width:20px;
+	height:19px;
+	left:20px;
+	top:50%;
+	margin-top:-10px;
+}
+
+.contact-mobile-ico-kakao {
+	@extend .contact-mobile-ico;
+	background-position:0 0;
+}
+.contact-mobile-ico-consult {
+	@extend .contact-mobile-ico;
+	background-position:-60px 0;
+}
+.contact-mobile-ico-tel {
+	@extend .contact-mobile-ico;
+	background-position:-40px 0;
+}
+
+
+.btn-contact{
+	display:none;
+}
+.btn-contact-kakao{
+	@extend .btn-contact;	
+}
+.btn-contact-tel{
+	@extend .btn-contact;
+}
+.btn-contact-ico-kakao{
+	@extend .btn-contact-ico;
+}
+.btn-contact-ico-tel{
+	@extend .btn-contact-ico;
+}
+.btn-contact-ico-consult{
+	@extend .btn-contact-ico;
+}

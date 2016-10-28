@@ -1,0 +1,95 @@
+@import '_parsley';
+@import 'common';
+@import '_row';
+
+.login-wrap{width:98%;}
+.login{padding-top:0;}
+.col-tit{width:30%}
+.col-cont-wrap{width:70%;}
+.login-btn-ico {
+	width:65px;
+	background:url('../img/login_platform.jpg') no-repeat;
+	&-fb{
+		@extend .login-btn-ico; 
+		@extend .col-tit;
+		background-position:0 center;
+		border-right:solid 1px darken($facebookColor, 5);
+	}
+	&-naver{
+		@extend .login-btn-ico; 
+		@extend .col-tit;
+		background-position:-65px center;
+		border-right:solid 1px darken($naverColor, 5);
+	}
+	&-kakao{
+		@extend .login-btn-ico; 
+		@extend .col-tit;
+		background-position:-130px center;
+		border-right:solid 1px darken($kakaoColor, 5);
+	}
+}
+.btn-sub{line-height:53px;}
+.login-btn-cont{
+	position:absolute;
+	width:100%;
+	padding-left:65px;
+	line-height:65px;
+	top:0;left:0;
+	font-size:1.1em;
+	text-align:center;
+	font-weight:bold;
+}
+.login-btn-kakao,
+.login-btn-naver,
+.login-btn-fb{
+	position:relative;
+	width:100%;
+	height:65px;
+	display:block;
+	padding:0;
+	margin-bottom:15px;
+	text-align:left;
+	text-decoration:none;
+}
+
+.agree-btn{
+	display:block;
+	position:absolute;
+	right:0;
+	top:0;
+	width:65px;
+	height:65px;
+	text-align:center;
+	text-decoration:none;
+	line-height:65px;
+	color:$mainBlack;
+}
+.login-btn-fb{
+	background:$facebookColor;
+	border:solid 1px darken($facebookColor, 5);
+	color:white;
+}
+.login-btn-naver{
+	background:$naverColor;
+	border:solid 1px darken($naverColor, 5);
+	color:white;
+}
+.login-btn-kakao{
+	background:$kakaoColor;
+	border:solid 1px darken($kakaoColor, 5);
+	color:$kakaoBrownColor;
+}
+
+@include responsiveLandscape{//640	
+	
+}
+
+@include responsiveTablet{//900	
+	.login-wrap{width:640px;}
+}
+
+@include responsivePC{//1200
+}
+
+@include responsiveWide{//1450
+}

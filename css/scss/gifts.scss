@@ -1,0 +1,10 @@
+@import 'common';
+@import '_banner';
+@import '_list';
+@import '_giftDetail';
+
+.gifts-wrap{
+	@extend .wrap;
+	padding-top:50px;
+	text-align:center;
+}

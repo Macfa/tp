@@ -1,0 +1,223 @@
+@mixin whenIcoDeviceActive(){
+	.nav-device-item:hover &,
+	.nav-device-item.active & {
+		@content;
+	}
+}
+
+$navHeight : 50px;
+$navDeviceHeight : 90px;
+.nav-device-wrap, 
+.nav-sub-wrap{
+	position:relative;
+	width:100%;
+	transition:top .7s;
+	.wrap{height:100%;}
+}
+.nav-sub-wrap{
+	line-height:$navHeight;
+	height:$navHeight;
+	top:$navHeight * -1;
+	z-index:999999;
+	background:lighten($mainBlack, 10);
+	@include shadow-level(4);
+	&.active{top:0}
+	&.active.scrolling{
+		line-height:$navHeight;
+		height:$navHeight ;
+		top:0;
+		.gnb-tit{
+			font-size:.9em;
+		}
+	}
+}
+
+.nav-device, 
+.nav-sub{
+	height:100%;
+	margin:0;padding:0;list-style:none;
+	text-align:center;
+}
+.nav-device{padding-top:3px;}
+.snb-tit-wrap{
+	@extend .inline-block;
+}
+.snb-tit{
+	display:block;
+	width:100%;
+	height:100%;
+	padding:0 10px;
+	text-align:center;
+	line-height:inherit;
+	text-decoration:none;
+	color:white;
+	cursor:pointer;
+	transition:background 0.2s, border-right 0.2s;
+	&.active, &:hover{
+		background:$mainYellow;color:$mainBlack;
+	}
+}
+
+.nav-device-wrap{
+	z-index:99999;
+	height:-(-$navDeviceHeight+10);
+	top:$navHeight * -2;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	white-space:nowrap;
+	@include bgRgba(white, 0.9);
+	border-bottom:solid 1px #f5f5f5;
+	color:$mainBlack;
+	transition:top .5s;
+	&.active{top:0;}
+	&.active.scrolling{top:-40px;}
+	html.pc &.has-horizontal-scroll:hover{overflow-x:auto;height:$navDeviceHeight+20px}
+	html.mobile &{overflow-x:auto;}
+	.nav-sub-wrap + &{
+		transition:top .7s;
+	}
+}
+.nav-device-item-wrap{
+	display:block;
+	width:100%;
+	height:100%;
+	padding:0;
+		text-decoration:none;
+	color:inherit;
+	overflow:hidden;
+}
+.nav-device-item {
+	@extend .inline-block;
+	width:21%;
+	height:100%;
+	text-align:center;
+	font-size:.8em;
+	vertical-align:bottom;
+	cursor:pointer;
+	transition:background .2s;
+	&:hover,&.active{color:$mainYellow}
+}
+.nav-device-ico{
+	display:block;
+	width:25px;
+	height:50px;
+	margin:0 auto;
+	margin-bottom:5px;
+	background:url('../img/nav_device_iphone.png') no-repeat;
+}
+.nav-white-gradient{
+    position: absolute;
+    top: 0;
+    right: 0;
+	width:130px;
+	height:100%;
+	background:url('../img/nav-device-white-gradient.png') left top;
+}
+
+.ico-device{
+	display:block;
+	margin:0 auto;
+	margin-bottom:5px;
+	vertical-align:bottom;
+	background:url('../img/ico-device.png') no-repeat;
+}
+.ico-device-note{
+	@extend .ico-device;
+	margin-top:8px;
+	width:22px;height:42px;background-position:0 0;
+	@include whenIcoDeviceActive{background-position:0 -50px;}
+}
+.ico-device-galaxy{
+	@extend .ico-device;
+	margin-top:11px;
+	width:20px;height:39px;background-position:-30px 0;
+	@include whenIcoDeviceActive{background-position:-30px -50px;}
+}
+.ico-device-gear{
+	@extend .ico-device;
+	margin-top:22px;
+	width:18px;height:28px;background-position:-60px 0;
+	@include whenIcoDeviceActive{background-position:-60px -50px;}
+}
+.ico-device-gears{
+	@extend .ico-device;
+	margin-top:22px;
+	width:18px;height:28px;background-position:-225px 0;
+	@include whenIcoDeviceActive{background-position:-225px -50px;}
+}
+.ico-device-gearclass{
+	@extend .ico-device;
+	margin-top:22px;
+	width:18px;height:28px;background-position:-203px 0;
+	@include whenIcoDeviceActive{background-position:-203px -50px;}
+}
+.ico-device-iphone-plus{
+	@extend .ico-device;
+	margin-top:8px;
+	width:20px;height:42px;background-position:-80px 0;
+	@include whenIcoDeviceActive{background-position:-80px -50px;}
+}
+.ico-device-iphone{
+	@extend .ico-device;
+	margin-top:14px;
+	width:17px;height:36px;background-position:-110px 0;
+	@include whenIcoDeviceActive{background-position:-110px -50px;}
+}
+.ico-device-iphonese{
+	@extend .ico-device;
+	margin-top:17px;
+	width:17px;height:33px;background-position:-130px 0;
+	@include whenIcoDeviceActive{background-position:-130px -50px;}
+}
+.ico-device-lg{
+	@extend .ico-device;
+	margin-top:12px;
+	margin-bottom:7px;
+	width:19px;height:38px;background-position:-150px 0;
+	@include whenIcoDeviceActive{background-position:-150px -50px;}
+}
+.ico-device-portable-wifi{
+	@extend .ico-device;
+	margin-top:17px;
+	width:28px;height:33px;background-position:-274px 0;
+	@include whenIcoDeviceActive{background-position:-274px -50px;}
+}
+
+.ico-device-portable-wifim{
+	@extend .ico-device;
+	margin-top:17px;
+	width:26px;height:33px;background-position:-170px 0;
+	@include whenIcoDeviceActive{background-position:-170px -50px;}
+}
+.ico-device-portable-wifiy{
+	@extend .ico-device;
+	margin-top:17px;
+	width:28px;height:33px;background-position:-244px 0;
+	@include whenIcoDeviceActive{background-position:-244px -50px;}
+}
+
+
+
+@include responsiveLandscape{//640	
+	.snb-tit{padding:0 20px;}
+	.nav-device-item {width:90px;}
+}
+
+@include responsiveTablet{//900	
+	$navHeight : 60px;
+	$navDeviceHeight : 95px;
+	.nav-sub-wrap {
+		line-height:$navHeight;
+		height:$navHeight;
+	}
+	/*.nav-sub{	height:$navHeight;}*/
+	.nav-device-wrap{
+		height:$navDeviceHeight;
+		padding-top:3px;
+		top:$navHeight * -2;
+	}
+	.nav-device-item {
+		width:100px;
+		font-size:.85em;
+	}
+}

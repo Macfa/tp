@@ -1,0 +1,260 @@
+<?
+
+// 파일명.inc.php 는 다른 파일에 종속(include)되는 파일로 단독적으로 활용될수 없습니다.
+// 파일명.skin.php 는 다른 파일의 html 부분을 담당하는 파일로 단독적으로 활용될수 없습니다.
+
+require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
+
+$add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/detail.css" type="text/css">';
+$js_file = '<script type="text/javascript" src="'.PATH_JS.'/'.$includePrefix.'detail.js"></script><!--[if lt IE 9]><script type="text/javascript" src="'.PATH_JS_LIB.'/excanvas.js"></script><![endif]-->';
+$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
+
+$showDetailHead = true;
+if($isAdmin == true) 
+	$onlyAdminSQL='';
+else 
+	$onlyAdminSQL='dvDisplay = 1 and ';
+
+$device = DB::queryFirstRow("SELECT *,COUNT(*) as cnt FROM tmDevice WHERE ".$onlyAdminSQL."dvId = %s", $_GET['id']);
+if($device['cnt'] == 0 && !$isAdmin) {
+	alert('존재하지 않거나 판매하지 않는 기종입니다.');
+}
+
+if ($device['dvRefer'] > 0) {
+	$detailImg = $device['dvDetailThumb'];
+	$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvKey = %i", $device['dvRefer']);
+	$device['dvDetailThumb'] = $detailImg;
+}
+
+$deviceInfo = new deviceInfo();
+$deviceInfo->setCarrier('sk')->setMonth(24);
+
+$childDevice = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $device['dvKey']);
+//32g 64g 가 나눠져있는 기종이 있을때
+if ($childDevice == true) {
+	$selectedCapacity = $childDevice[0]['dvTit'];
+	$childDevice[0]['isChecked'] = 'checked';
+	$defaultVal = $childDevice[0];
+} else {
+	$defaultVal = $device;
+	$selectedCapacity = '';
+}
+
+$arrSelectPlan = DB::query("SELECT spPlan FROM tmSupport WHERE dvKey = %i0 and spCarrier = 'sk' GROUP BY spPlan", $defaultVal['dvKey']);
+list($defaultPlanKey) = array_keys($arrSelectPlan);
+$defaultPlanId = $arrSelectPlan[$defaultPlanKey]['spPlan'];
+if ($defaultPlanId == 9) $defaultPlanId = 10;
+
+$devicePlanGraph = DB::query("SELECT spSupport,spDate,spAddSupport FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = 'sk' ORDER BY spDate DESC LIMIT 5", $defaultVal['dvKey'], $defaultPlanId);
+$capacityCnt = count($childDevice);
+
+switch($device['dvCate']) {
+	case 'watch':
+	case 'pocketfi':
+	case 'kids':
+		$isNotSupportSelPlanDc = true;
+		$supportCount = 1;
+		$supportRowActive = 'active';
+		$defDiscountType = 'support';
+		$defaultVal['dvDeviceInstallation'] = $defaultVal['dvRetailPrice'] - $devicePlanGraph[0]['spSupport'] - $devicePlanGraph[0]['spAddSupport'];
+		break;
+	default:
+		$isNotSupportSelPlanDc = false;
+		$supportCount = 2;
+		$supportRowActive = '';
+		$defaultVal['dvDeviceInstallation'] = $defaultVal['dvRetailPrice'];
+		$detailSuffix = 'phone';
+		break;
+}
+
+switch($device['dvId']) {
+	case 'joon2':
+		$detailSuffix = 'kids';
+		break;
+	/*
+	case 'gears':
+	case 'gears2':
+	case 'gears2bandclassic':
+	*/
+	
+	case 'tgw500s':
+	case 'gears2':
+	case 'gears2bandclassic':
+		$detailSuffix = 'pocketfi';
+		break;
+	case 'tpocketfim':
+		$detailSuffix = 'pocketfim';
+		break;
+	case 'tpocketfi':
+	case 'tpocketfiy':
+		$detailSuffix = 'pocketfiy';
+		break;
+
+	case 'galaxys7':
+	case 'galaxys7edge':
+		$detailSuffix = 'galaxys7';
+		break;
+	case 'galaxywide':	
+		$detailSuffix = 'galaxywide';
+		break;
+	case 'gears':
+		$detailSuffix = 'gears';
+		break;
+	case 'iphone6':
+		$detailSuffix = 'iphone6';
+		break;
+	default:
+		$detailSuffix = 'subdevice1';
+		break;
+}
+
+switch($device['dvId']) {
+	case 'joon2':
+	case 'gears':
+	case 'gears2':
+	case 'gears2bandclassic':
+	case 'tgw500s':
+	case 'tpocketfiy':
+	case 'tpocketfi':
+		$detailNone = 'none';
+		break;
+}
+switch($device['dvId']) {
+	case 'galaxys7':
+		$detailSpecLink= 'http://www.samsung.com/sec/consumer/mobile-tablet/mobile-phone/galaxy-s/SM-G930SZIASKO';
+		break;
+
+	default:
+		$detailSpecLink= '#';
+		break;
+}
+
+$devicePlanGraph = array_reverse($devicePlanGraph);
+$cntDevicePlanGraph = count($devicePlanGraph);
+$devicePlanLastKey = $cntDevicePlanGraph-1;
+$isCurrentBigger = FALSE;
+$isGraphChanged = FALSE;
+if($cntDevicePlanGraph == 1){
+	$devicePlanGraph[] = $devicePlanGraph[0];
+	$graphStartValue = 'null';
+}else{
+	$isGraphChanged = TRUE;
+	foreach($devicePlanGraph as $val){
+		if($graphMinValue == false) {
+			$graphMinValue = $val['spSupport'];
+		}else if($val['spSupport'] < $graphMinValue) {
+			$graphMinValue = $val['spSupport'];
+		}
+
+		if($graphMaxValue == false) {
+			$graphMaxValue = $val['spSupport'];
+		}else if($val['spSupport'] > $graphMaxValue) {
+			$graphMaxValue = $val['spSupport'];
+		}
+	}
+	
+	$graphPrevVal = $devicePlanGraph[$cntDevicePlanGraph-2];
+	$graphCurrentVal = $devicePlanGraph[$cntDevicePlanGraph-1];
+
+	//바로전 값과 최근값이 같다면
+	if ($graphPrevVal == $graphCurrentVal)
+		$graphPrevVal = $devicePlanGraph[$cntDevicePlanGraph-3];
+
+	//가장 최근값의 값이 더클때
+	if($graphPrevVal < $graphCurrentVal){
+		$isCurrentBigger = TRUE;
+	}
+	if ($isCurrentBigger) {
+		$graphStartValue = ($graphMinValue-10000);
+		$graphEndValue = $graphMaxValue;
+		$graphStep = 2;
+	} else{
+		$graphStartValue = ($graphMinValue/2);
+		$graphEndValue  = $graphMaxValue*1.5;	
+		$graphStep = 10;
+	}
+
+	//그래프 단계간 값차이
+	$graphStepGap = floor(($graphEndValue-$graphStartValue) / $graphStep);	
+}
+
+$defaultVal['defaultPlanFee'] = $deviceInfo->setMode($device['dvCate'])->setPlan($defaultPlanId)->getPlanFee();
+$cntDevicePlanGraph = count($devicePlanGraph);
+$devicePlanGraph[$cntDevicePlanGraph-1]['spDate'] = $cfg['time_ymd'];
+$arrApplyType = $deviceInfo->getArrApplyType();
+$arrApplyTypeCnt = count($arrApplyType);
+$applyTypeDefaultKey = getFirstArrKey($arrApplyType);
+$applyTypeDefaultVal = $arrApplyType[$applyTypeDefaultKey];
+
+$planFirstVal = $deviceInfo->getFirstPlan();
+
+$isApplyBtnDisabled = 'disabled';
+if($arrApplyTypeCnt == 1){
+	$defaultVal['code'] = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %s0 and cdType = %i1 and spPlan = %i2", $defaultVal['dvKey'], str_replace('0','',$applyTypeDefaultKey), $planFirstVal);
+	$defaultVal['url'] =  $deviceInfo->getApplyURL($defaultVal['code'], $applyTypeDefaultKey);
+	$isApplyBtnDisabled = '';
+	$defaultVal['href'] = 'href="'.$defaultVal['url'].'"';
+}
+
+if ($device['dvId'] == 'iphonese'){
+	$isApplyBtnDisabled = '';
+	$defaultVal['href'] = 'href="https://docs.google.com/forms/d/1s_Nelfp3aixUkfoASPD5Hbc6uJsrT3joiWMkrvHnOUo/viewform"';
+	
+}
+
+$isShowDeviceNav = true;
+$deviceNavActive = 'active';
+$deviceNavItemActive[$_GET['id']] = 'active';
+$deviceNavSql = clearEscape(getSession('detailDeviceListSql'));
+$defaultDeviceNavSql = "SELECT d.* FROM tmDevice d LEFT JOIN tmSort o ON d.dvKey = o.soTargetKey WHERE d.dvDisplay=1 and d.dvParent = 0 and d.dvCate = '".$device['dvCate']."' GROUP BY d.dvKey ORDER BY o.soOrder is null ASC, o.soOrder ASC"; 
+if ($deviceNavSql) 
+	$deviceNavResult = DB::query($deviceNavSql);
+else
+	$deviceNavResult = DB::query($defaultDeviceNavSql);
+
+$isExistInDeviceNav = false;
+foreach($deviceNavResult as $val){
+	if ($device['dvTit'] == $val['dvTit']) {
+		$isExistInDeviceNav = true;
+		break;
+	}
+}
+
+if ($isExistInDeviceNav === false) {
+	unsetSession('detailDeviceListSql');
+	$deviceNavResult = DB::query($defaultDeviceNavSql);
+}
+
+//-----------------------------------------------------------------------------------------
+
+
+
+//-----------------------------------------------------------------------------------------
+
+if ($supportCount == 1 && $arrApplyTypeCnt == 1) {
+		$rewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
+		array(
+			'dvKey' => $defaultVal['dvKey'],
+			'rpPlan' => $defaultPlanId,
+			'rpCarrier' => 'sk',
+			'rpApplyType' => $applyTypeDefaultKey,
+			'rpDiscountType' => $defDiscountType
+		)
+	);
+	$defAvailablePoint = number_format($rewardPoint).'별';
+} else {
+	$defAvailablePoint = '선택사항을 모두 선택해주세요';
+}
+
+//---------------------------------------------------------------------------------------
+
+
+$cfg['subTitle'] = $device['dvTit'].' 상세 페이지';
+require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
+if($device['dvRefer'] > 0) print_r($device);
+require_once($includePrefix."detail.skin.php");	
+//echo $deviceInfo->setCarrier('sk')->setMonth(24)->calcInterest()->test()->getRepayment();
+//print_r($arrSelectPlan);
+//print_r($graphMinValue);
+require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
+?>
