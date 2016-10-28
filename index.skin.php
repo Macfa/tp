@@ -1,7 +1,7 @@
 <main role="main">
 	<ul class="main-slider bxslider">
 		<li class="slide-item banner-preorder-iphone7">
-			<a href="/page/preorderIphone7.php"></a>
+			<a href="/page/iphone7Event.php"></a>
 		</li>	
 		<li class="slide-item banner-v20">
 			<a href="/page/preorderV20.php"></a>
@@ -42,7 +42,10 @@
 				</div>
 			</a>
 		</li-->
-		<!--<li class="slide-item banner-iphone6">
+		<!--<li class="slide-item banner-galaxynote7">
+			<a href="/page/note7.php"></a>
+		</li>
+		<li class="slide-item banner-iphone6">
 			<a href="/device/iphone6">
 				<div class="wrap banner-iphone6-wrap">					
 					<div class="vert-wrap">
@@ -146,8 +149,7 @@
 <div class="layer-banner-wrap js-layerBanner">
 	<div class="layer-banner center">
 		<div class="tit-sub">갤럭시노트7 교환&환불 안내</div>
-		<br/>		<br/>
-
+		<div class="tit-sub txt-highlight">(2016.10.27 업데이트)</div>
 		갤럭시노트7 교환&환불 절차를 안내드립니다. 
 		<br/>
 		<i class="ico-caution-small"></i> <span class="txt-highlight">공지사항을 반드시 읽어주시길 바랍니다.</span>
@@ -160,7 +162,7 @@
 			</label>
 			<br/>
 			<button class="btn-filled-sub-dense js-layerBannerClose">닫기</button>
-			<a href="http://blog.naver.com/traumplanit/220839528694" class="btn-filled-sub-dense" target="_blank">공지사항</a>
+			<a href="<?php echo $cfg['url']?>/page/note7ExchangeRefundNotice.php" class="btn-filled-sub-dense" target="_blank">공지사항</a>
 			&nbsp;
 			<a href="http://tplanit.co.kr/page/exchangeRefundNote7.php" class="btn-filled-primary-dense">신청</a>
 			<br/><br/>
@@ -180,14 +182,14 @@ $(function(){
 		$('.main-slider').bxSlider($bxSliderOption);
 	});
 
-	<?php if(isNotExist(get_cookie('isLayerBannerHide2016-10-18'))) :?>
+	<?php if(isNotExist(get_cookie('isLayerBannerHide2016-10-27'))) :?>
 	$('.js-layerBanner').show();
 	<?php endif?>
 });
 
 $('.js-layerBannerClose').click(function(){
 	if($('[name=isHide]:checked').val() == 1) {
-		setCookie('isLayerBannerHide2016-10-18','yes',1);
+		setCookie('isLayerBannerHide2016-10-27','yes',1);
 	}
 	
 	$('.js-layerBanner').hide();
