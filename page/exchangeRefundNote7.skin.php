@@ -194,11 +194,12 @@
 				</fieldset>
 				<fieldset class="inp-group js-galaxys7Color js-colorWrap" style="display:none">
 					<i class="ico-color-small"></i> 색상 <br/> 
-					<label class="inp-chk">
+					<!--<label class="inp-chk">
 						<input type="radio" name="enColorType" value="black"/>
 						<div class="inp-chk-box"></div>
 						블랙
 					</label>
+					-->
 					<label class="inp-chk">
 						<input type="radio" name="enColorType" value="silver"/>
 						<div class="inp-chk-box"></div>
@@ -402,9 +403,9 @@ $('[name=enTargetDevice]').change(function(){
 	if($val == 'galaxys7' || $val == 'galaxys7edge')
 		$('.js-galaxys7Color').show().find('input').removeAttr('disabled');
 		
-	if($val == 'galaxys7' || $val == 'galaxynote5') {
+	if($val == 'galaxynote5') {
 		$('.js-capacity32, .js-capacity64').show().find('input').removeAttr('disabled');
-	}else if($val == 'galaxys7edge') {
+	}else if($val == 'galaxys7' || $val == 'galaxys7edge') {
 		$('.js-capacity32').show().find('input').removeAttr('disabled');
 	}else if($val == 'v20') {
 		$('.js-capacity64').show().find('input').removeAttr('disabled');

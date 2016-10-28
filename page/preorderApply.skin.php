@@ -65,12 +65,12 @@
 			<fieldset class="inp-group">
 					<i class="ico-color-small"></i> 색상 <br/>
 					<label class="inp-chk <?php echo $isDisableJetBlack ?>">
-						<input type="radio" name="paColorType" value="jetBlack"/ <?php echo $isDisableJetBlack ?>>
+						<input type="radio" name="paColorType" value="jetBlack" <?php echo $isDisableJetBlack ?>/>
 						<div class="inp-chk-box"></div>
 						제트블랙
 					</label>
 					<label class="inp-chk <?php echo $isDisableBlack ?>">
-						<input type="radio" name="paColorType" value="black"/ <?php echo $isDisableBlack ?>>
+						<input type="radio" name="paColorType" value="black" <?php echo $isDisableBlack ?>/>
 						<div class="inp-chk-box"></div>
 						블랙
 					</label>
@@ -188,31 +188,7 @@
 					<div class="inp-chk-box"></div>
 					KT olleh
 				</label>
-			</fieldset>
-			<fieldset class="inp-group js-giftWrap" data-default=<?echo $editMember['paGift']?>>
-				<i class="ico-gift-small"></i> 사은품 <span class="js-selectCount txt-highlight"></span>
-					(<?if(isExist($_GET['mbEmail']) === true && $isAdmin === TRUE) 
-							foreach($arreditGift as $val){
-								echo " ".$gift[$val]."  /";
-							}
-					?> )<br/> 
-				<label class="inp-chk">
-					<input type="checkbox" name="paGift[]" class="js-gift" value="tablet"/>
-					<div class="inp-chk-box"></div>
-					엠피지오 태블릿 레전드 GT
-				</label>
-				<label class="inp-chk">
-					<input type="checkbox" name="paGift[]" class="js-gift" value="externalHard"/>
-					<div class="inp-chk-box"></div>
-					LG 외장 SSD 128G
-				</label>
-				<label class="inp-chk">
-					<input type="checkbox" name="paGift[]" class="js-gift" value="skMirroring"/>
-					<div class="inp-chk-box"></div>
-					SK 미러링
-				</label>			
-			</fieldset>
-			
+			</fieldset>			
 			<div class="inp-tit"><i class="ico-plan-small"></i> 요금제선택 : <?echo $plan[$editMember['paPlan']]?></div>
 			<br/>
 			<select class="js-planselect inp-select" style="height:60px;border:solid 1px rgba(0,0,0,0.15)"  name="paPlan" data-default=<?echo $editMember['paPlan']?>>

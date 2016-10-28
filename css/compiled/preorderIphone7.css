@@ -694,8 +694,9 @@
 .inp-group {
   display: block;
   border: 0;
-  padding: 10px 0;
+  padding: 0;
   margin: 0;
+  margin-top: 20px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.1); }
 
 .inp-tit {
@@ -1192,10 +1193,6 @@ body {
   .section-no-padding {
     padding: 0 !important; }
 
-.wrap-dense {
-  margin: 0 auto;
-  text-align: center; }
-
 .simplehead-logo {
   color: inherit;
   text-decoration: none; }
@@ -1283,15 +1280,11 @@ img {
   border: 0;
   background: url("img/menu.png") no-repeat right 70%; }
 
-.tit, .tit-dense {
-  font-size: 2.3em;
+.tit {
+  font-size: 1.8em;
   margin-bottom: 50px;
   margin-top: 50px;
   font-weight: normal; }
-
-.tit-dense {
-  margin-bottom: 0;
-  margin-top: 0; }
 
 .section-tit {
   font-size: 2em; }
@@ -1303,7 +1296,7 @@ img {
   font-size: 1.5em; }
 
 .tit-sub {
-  font-size: 1.3em;
+  font-size: 1.7em;
   margin: 0;
   margin-bottom: 20px; }
 
@@ -1561,28 +1554,6 @@ nav {
   margin: 0;
   list-style: none; }
 
-.layer-banner-wrap {
-  display: none;
-  padding: 5%; }
-  .layer-banner-wrap.active {
-    display: block; }
-
-.layer-banner {
-  position: relative;
-  width: 95%;
-  height: 300px;
-  top: 50%;
-  margin: 0 auto;
-  background: white;
-  padding: 10px;
-  margin-top: -150px; }
-
-.layer-banner-btn {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  right: 0; }
-
 .txt-bold {
   font-weight: bold; }
 
@@ -1595,7 +1566,7 @@ footer {
   text-align: center;
   color: #aaa; }
 
-.overlay, .layer-banner-wrap, .layer-view-wrap, .gift-view-wrap {
+.overlay, .layer-view-wrap, .gift-view-wrap {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -1603,7 +1574,7 @@ footer {
   right: 0;
   z-index: 999999999;
   background: rgba(0, 0, 0, 0.8); }
-  html.lte-ie8 .overlay, html.lte-ie8 .layer-banner-wrap, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
+  html.lte-ie8 .overlay, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
     background: transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
     zoom: 1; }
@@ -1854,15 +1825,6 @@ footer {
     text-align: left;
     display: none; }
 
-  .wrap-dense {
-    width: 700px; }
-
-  .tit, .tit-dense {
-    font-size: 2em; }
-
-  .tit-sub {
-    font-size: 1.7em; }
-
   .btn-contact, .btn-contact-kakao, .btn-contact-tel {
     display: -moz-inline-stack;
     display: inline-block;
@@ -1914,8 +1876,7 @@ footer {
     bottom: 20px;
     right: 25px;
     z-index: 5;
-    display: block;
-    width: 433px; }
+    display: block; }
 
   .btn-contact, .btn-contact-kakao, .btn-contact-tel, .btn-contact-kakao {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -1999,7 +1960,7 @@ footer {
   .menuToggler {
     display: none; }
 
-  .tit, .tit-dense {
+  .tit {
     font-size: 3em; }
 
   .trio-section {
@@ -2023,10 +1984,7 @@ footer {
     display: none; }
 
   .section, .section-no-padding {
-    padding: 15px 25px; }
-
-  .layer-banner {
-    width: 500px; } }
+    padding: 15px 25px; } }
 @media all and (min-width: 900px) {
   .list-recomm-wrap {
     height: 480px; }
@@ -2101,10 +2059,7 @@ footer {
     margin: 0 auto; }
 
   .layer-view-wrap {
-    padding: 50px; }
-
-  .contact-pc-wrap {
-    width: 470px; } }
+    padding: 50px; } }
 @media all and (min-width: 1200px) {
   .gnb-tit-func-wrap.bookmark {
     display: -moz-inline-stack;
@@ -2140,10 +2095,7 @@ footer {
 
   .nav-mobile-wrap,
   .nav-mobile-btn-wrap {
-    display: none; }
-
-  .contact-pc-wrap {
-    width: 500px; } }
+    display: none; } }
 @media all and (min-width: 1450px) {
   .wrap {
     width: 1400px; }
@@ -2446,26 +2398,20 @@ footer {
   margin: 0;
   padding: 0;
   list-style: none; }
-  .list > li {
+  .list li {
     margin: 0;
     padding: 0;
     list-style: none;
-    padding: 10px 16px; }
-    .list > li i {
-      margin-right: 10px; }
-
-.list-inside {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-  .list-inside > li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    padding: 10px 0; }
-    .list-inside > li i {
-      margin-right: 5px;
-      margin-bottom: 5px; }
+    position: relative;
+    display: block;
+    color: tint(#2e333a, 10);
+    padding: 10px 0;
+    padding-left: 45px; }
+    .list li i {
+      position: absolute;
+      display: block;
+      top: 7px;
+      left: 5px; }
 
 .katalk-friend {
   width: 100%;
@@ -2617,358 +2563,630 @@ footer {
 
   .grid-item-wrap-big {
     height: 500px; } }
-main {
-  height: 600px;
-  color: white;
-  text-align: center;
-  background: black url("../img/preorder-iphone7-intro-mobile.jpg") no-repeat center center;
-  word-break: keep-all; }
-
-.preorder-wrap {
+* {
   margin: 0 auto;
-  text-align: center; }
+  padding: 0 auto; }
 
-.section-premium-gift {
-  position: relative;
-  padding-top: 50px;
-  height: 850px;
-  color: white;
-  background: black url("../img/preorder-iphone7-premiumgift-bg-mobile.jpg") no-repeat center center; }
-  .section-premium-gift .wrap {
-    height: 100%; }
+body {
+  background: white; }
 
-.gift-airpods-wrap {
-  position: absolute;
-  top: 35%;
-  left: -30px; }
-
-.gift-airpods {
-  position: absolute;
-  width: 220px;
-  height: 277px;
-  left: 0;
-  margin-top: -134px;
-  top: 50%;
-  background: url("../img/preorder-iphone7-airpods-mobile.png") no-repeat center center; }
-
-.gift-airpods-cont {
-  padding-left: 180px;
-  word-break: keep-all;
-  text-align: left; }
-
-.gift-applewatch-wrap {
-  position: absolute;
-  top: 59%;
-  right: 5px; }
-
-.gift-inner-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%; }
-
-.gift-applewatch {
-  position: absolute;
-  width: 166px;
-  height: 187px;
-  right: 0;
-  margin-top: -93px;
-  top: 50%;
-  background: url("../img/preorder-iphone7-applewatch-mobile.png") no-repeat center center; }
-
-.gift-applewatch-cont {
-  text-align: right;
-  padding-right: 170px;
-  word-break: keep-all; }
-
-.section-select-gift {
-  position: relative;
-  padding-top: 50px;
-  height: 1000px;
-  color: white;
-  background: #110d0a url("../img/preorder-iphone7-selectgift-bg-mobile.jpg") no-repeat center bottom; }
-
-.section-default-gift {
-  position: relative;
-  padding-top: 50px;
-  height: 350px;
-  background: #eee url("../img/preorder-iphone7-default-gift-bg-mobile.jpg") no-repeat center center; }
-
-.select-gift-list {
-  margin: 0;
-  padding: 0;
+ul, li {
   list-style: none;
-  margin-top: 50px;
-  padding: 0 20px;
-  text-align: center; }
-  .select-gift-list li {
-    position: relative;
-    display: block;
-    height: 230px; }
-
-.select-gift-cont {
-  word-break: keep-all;
-  padding-left: 170px;
-  padding-top: 50px; }
-  .select-gift-cont-ssd {
-    padding-right: 170px;
-    word-break: keep-all;
-    padding-top: 50px; }
-
-.gift-select, .gift-tablet, .gift-ssd, .gift-mirroring {
-  position: absolute;
   margin: 0 auto;
-  margin-bottom: 20px;
-  left: 0;
-  top: 0; }
+  padding: 0 auto; }
 
-.gift-tablet {
-  width: 163px;
-  height: 226px;
-  background: url("../img/preorder-iphone7-gift-tablet-mobile.png") no-repeat center center; }
+h1 {
+  font-size: 2.5em; }
 
-.gift-ssd {
-  width: 180px;
-  height: 220px;
-  right: 0;
-  left: auto;
-  background: url("../img/preorder-iphone7-gift-ssd-mobile.png") no-repeat center center; }
-
-.gift-mirroring {
-  width: 150px;
-  height: 220px;
-  background: url("../img/preorder-iphone7-gift-mirroring-mobile.png") no-repeat center center; }
-
-.section-gift {
-  background: #1a1a1a;
-  border-top: solid 1px black;
-  color: white;
-  padding-top: 50px;
-  padding-bottom: 50px; }
-
-.gift-divide {
-  width: 100px;
-  height: 1px;
-  background: #ffc033;
-  margin: 50px auto; }
-
-.section-outro {
-  height: 600px;
-  color: white;
-  background: #121212 url("../img/preorder-iphone7-outro-bg-mobile.jpg") no-repeat center center; }
-
-.ico-preorder-gift, .ico-gift-film, .ico-gift-case, .ico-gift-cable, .ico-gift-tablet, .ico-gift-ssd, .ico-gift-mirroring, .ico-gift-earphone {
-  display: -moz-inline-stack;
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  word-spacing: 0;
-  width: 50px;
-  height: 50px;
-  vertical-align: middle;
-  background-image: url("../img/preorder-iphone7-icon.png");
-  background-repeat: no-repeat; }
-
-.ico-gift-film {
-  background-position: 0 0; }
-
-.ico-gift-case {
-  background-position: -50px 0; }
-
-.ico-gift-cable {
-  background-position: -100px 0; }
-
-.ico-gift-tablet {
-  background-position: -150px 0; }
-
-.ico-gift-ssd {
-  background-position: -200px 0; }
-
-.ico-gift-mirroring {
-  background-position: -250px 0; }
-
-.ico-gift-earphone {
-  background-position: -300px 0; }
-
-.preorder-gift-list-small {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  margin-bottom: 15px;
-  margin-top: 15px;
-  text-align: center;
-  font-size: .9em; }
-  .preorder-gift-list-small li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: -moz-inline-stack;
-    display: inline-block;
-    zoom: 1;
-    *display: inline;
-    word-spacing: 0;
-    padding: 0 10px; }
-
-.preorder-gift-plus {
-  margin: 0 auto;
-  margin-bottom: 20px;
+h2 {
   font-size: 1.5em; }
 
-.inlinelist.applyKT li {
-  width: 100%; }
+h3 {
+  font-size: 1.2em;
+  font-weight: lighter; }
 
-@media all and (min-width: 400px) {
-  .gift-applewatch-wrap {
-    right: 20px; }
+.line {
+  background: #eee;
+  height: 1px;
+  width: 95%;
+  margin-top: 50px;
+  margin-bottom: 50px; }
 
-  .gift-airpods-wrap {
-    top: 37%;
-    left: 10px; }
+.tit {
+  font-size: 2.5em;
+  font-weight: lighter;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  line-height: -.3em;
+  letter-spacing: -0.08em; }
 
-  .gift-airpods {
-    background-image: url("../img/preorder-iphone7-airpods-landscape.png"); }
+.sub {
+  font-size: 1.5em;
+  font-weight: lighter;
+  letter-spacing: -0.08em;
+  margin: 5px;
+  padding-top: 17px; }
 
-  .gift-airpods-cont {
-    padding-left: 200px; }
+.sub-txt {
+  font-size: 1.8em;
+  font-weight: lighter;
+  letter-spacing: -0.08em;
+  margin-bottom: 20px; }
 
-  .gift-applewatch {
-    background-image: url("../img/preorder-iphone7-applewatch-landscape.png"); } }
+.sub-in {
+  font-size: 1.2em;
+  font-weight: lighter;
+  letter-spacing: -0.08em;
+  margin: 5px; }
+
+.link-txt {
+  text-decoration: none;
+  color: white;
+  line-height: 2em;
+  letter-spacing: -0.08em; }
+
+.sub-tit {
+  font-size: 2.2em; }
+
+header {
+  height: 60px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 50px;
+  z-index: 999;
+  color: white; }
+
+.header-logo {
+  display: inline-block;
+  font-size: 1.5em;
+  font-weight: lighter;
+  margin-top: 18px;
+  margin-left: 25px; }
+
+.btn-filled-primary {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 10px 20px; }
+
+main {
+  background: url("../img/iphone7-manyphone-landscape.jpg") no-repeat center center;
+  height: 1000px;
+  margin-top: -10px; }
+
+.intro-txt {
+  text-align: center;
+  color: white;
+  padding-top: 50px; }
+
+.counter-present {
+  padding: 35px; }
+
+.counter-list {
+  width: 97%;
+  background: white;
+  padding-left: 0;
+  margin: 0; }
+
+.airpods {
+  background: url("../img/iphone7-airpods-wide.jpg") no-repeat top center;
+  height: 500px;
+  padding: 15px;
+  padding-top: 300px;
+  text-align: center; }
+
+.frisbee {
+  background: url("../img/iphone7-giftcard-wide.jpg") no-repeat top center;
+  height: 500px;
+  padding: 15px;
+  padding-top: 300px;
+  text-align: center; }
+
+.basic-present {
+  padding: 35px; }
+
+.basic-list {
+  width: 97%;
+  background: white;
+  padding-left: 0;
+  margin: 0; }
+
+.basic-ul-in {
+  padding: 0; }
+
+.pin8 {
+  background: url("../img/iphone7-8pin-landscape.png") no-repeat top center;
+  margin-top: 50px;
+  height: 700px;
+  padding: 15px;
+  padding-top: 450px;
+  text-align: center; }
+
+.film {
+  background: url("../img/iphone7-film-landscape.png") no-repeat top center;
+  height: 550px;
+  padding: 15px;
+  padding-top: 300px;
+  text-align: center; }
+
+.case {
+  background: url("../img/iphone7-tpu-landsacpe.png") no-repeat top center;
+  height: 500px;
+  padding: 15px;
+  padding-top: 300px;
+  text-align: center; }
+
+.plus-present {
+  padding: 35px; }
+
+.plus-list {
+  width: 97%;
+  background: white;
+  padding-left: 0;
+  margin: 0; }
+
+.gt {
+  background: url("../img/iphone7-gt-tablet.png") no-repeat top center;
+  margin-top: 50px;
+  height: 700px;
+  padding: 15px;
+  padding-top: 450px;
+  text-align: center; }
+
+.lg {
+  background: url("../img/iphone7-lg-tablet.png") no-repeat top center;
+  height: 500px;
+  padding: 15px;
+  padding-top: 270px;
+  text-align: center; }
+
+.sk {
+  background: url("../img/iphone7-sk-tablet.png") no-repeat top center;
+  height: 470px;
+  padding: 15px;
+  padding-top: 300px;
+  text-align: center; }
+
+.briz {
+  background: url("../img/iphone7-brit-tablet.jpg") no-repeat top center;
+  height: 500px;
+  padding: 15px;
+  padding-top: 350px;
+  text-align: center; }
+
+.gift-box .sub {
+  font-size: 2.3em; }
+
+.gift-box .sub-in {
+  font-size: 1.5em; }
+
+.gift-box {
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  background: black;
+  color: white;
+  background: white url("../img/iphone7-pattern.jpg") top center; }
+
+.gift-in-a {
+  background: white url("../img/iphone7-set-a.jpg") no-repeat top center;
+  height: 850px;
+  padding: 15px;
+  text-align: center; }
+
+.gift-in-b {
+  background: white url("../img/iphone7-set-b.jpg") no-repeat top center;
+  height: 850px;
+  padding: 15px;
+  text-align: center; }
+
+.gift-in-c {
+  background: white url("../img/iphone7-set-c.jpg") no-repeat top center;
+  height: 650px;
+  padding: 15px;
+  text-align: center; }
+
+.gift-in-d {
+  background: white url("../img/iphone7-set-d.jpg") no-repeat top center;
+  margin-top: 50px;
+  height: 520px;
+  padding: 15px;
+  text-align: center; }
+
+.end {
+  background: black url("../img/iphone7-last-mobile.jpg") no-repeat center center;
+  height: 640px;
+  margin: 0;
+  color: white;
+  text-align: center; }
+
+.end h3 {
+  padding-top: 450px;
+  text-align: center; }
+
+.edge {
+  background: black url("../img/iphone7-edge-mobile.jpg") no-repeat center center;
+  height: 400px; }
+
 @media all and (min-width: 640px) {
   main {
-    background-image: url("../img/preorder-iphone7-intro-landscape.jpg"); }
+    background: url("../img/iphone7-manyphone-landscape.jpg") no-repeat center center; }
 
-  .section-premium-gift {
-    background-image: url("../img/preorder-iphone7-premiumgift-bg-landscape.jpg"); }
+  .end {
+    background: black url("../img/iphone7-last-landscape.jpg") no-repeat center center;
+    height: 800px; }
 
-  .section-select-gift {
-    height: 750px;
-    background-image: url("../img/preorder-iphone7-selectgift-bg-landscape.jpg"); }
-
-  .select-gift-cont-ssd,
-  .select-gift-cont {
-    padding: 0; }
-
-  .gift-applewatch-wrap {
-    top: 55%;
-    right: 42%; }
-
-  .gift-airpods-wrap {
-    top: 40%;
-    left: 42%; }
-
-  .select-gift-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin-top: 50px; }
-    .select-gift-list li {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: -moz-inline-stack;
-      display: inline-block;
-      zoom: 1;
-      *display: inline;
-      word-spacing: 0;
-      width: 33%;
-      vertical-align: top; }
-
-  .gift-select, .gift-tablet, .gift-ssd, .gift-mirroring {
-    position: relative;
-    left: auto;
-    top: auto; }
-
-  .preorder-wrap {
-    width: 700px; } }
+  .edge {
+    background: black url("../img/iphone7-edge-landscape.jpg") no-repeat center center;
+    height: 400px; } }
 @media all and (min-width: 900px) {
   main {
-    height: 800px;
-    background-image: url("../img/preorder-iphone7-intro-tablet.jpg"); }
+    background: url("../img/iphone7-manyphone-tablet.jpg") no-repeat center center; }
 
-  .section-premium-gift {
-    height: 1050px;
-    background-image: url("../img/preorder-iphone7-premiumgift-bg-tablet.jpg"); }
+  .edge {
+    background: black url("../img/iphone7-edge-tablet.jpg") no-repeat center center;
+    height: 400px; }
 
-  .section-select-gift {
-    height: 845px;
-    background-image: url("../img/preorder-iphone7-selectgift-bg-tablet.jpg");
-    background-color: #130f0b; }
+  header {
+    height: 65px;
+    top: 60px; }
 
-  .gift-tablet {
-    width: 250px;
-    height: 350px;
-    background-image: url("../img/preorder-iphone7-gift-tablet.png"); }
+  .end {
+    background: black url("../img/iphone7-last-tablet.jpg") no-repeat center center;
+    height: 800px; } }
+@media all and (min-width: 1200px) {
+  main {
+    background: url("../img/iphone7-manyphone-pc.jpg") no-repeat center center; }
 
-  .gift-ssd {
-    width: 280px;
-    height: 340px;
-    background-image: url("../img/preorder-iphone7-gift-ssd.png"); }
+  .edge {
+    background: black url("../img/iphone7-edge-pc.jpg") no-repeat center center;
+    height: 400px; }
 
-  .gift-mirroring {
-    width: 226px;
-    height: 336px;
-    background-image: url("../img/preorder-iphone7-gift-mirroring.png"); }
+  .counter-present {
+    margin-top: 50px;
+    margin-bottom: 50px; }
 
-  .gift-airpods-wrap {
-    position: absolute;
-    top: 40%;
-    left: 42%; }
+  .counter-txt {
+    width: 380px;
+    text-align: left;
+    margin-left: 00px;
+    padding-top: 80px;
+    display: inline-block; }
 
-  .gift-airpods-cont {
-    padding-left: 270px;
-    text-align: left; }
+  .counter-list {
+    width: 800px;
+    background: white;
+    padding-left: 0;
+    float: right;
+    margin: 0; }
 
-  .gift-applewatch-wrap {
-    position: absolute;
-    top: 57%;
-    right: 42%; }
-
-  .gift-inner-wrap {
-    position: relative;
-    width: 100%;
-    height: 100%; }
-
-  .gift-applewatch-cont {
-    padding-right: 300px;
+  .airpods {
+    background: url("../img/iphone7-airpods-wide.jpg") no-repeat bottom left;
+    height: 300px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 80px;
     text-align: right; }
 
-  .gift-airpods {
-    position: absolute;
-    width: 314px;
-    height: 400px;
-    left: 0;
-    margin-top: -200px;
-    top: 50%;
-    background: url("../img/preorder-iphone7-airpods.png") no-repeat center center; }
+  .frisbee {
+    background: url("../img/iphone7-giftcard-wide.jpg") no-repeat bottom left;
+    height: 300px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 80px;
+    text-align: right; }
 
-  .gift-applewatch {
-    position: absolute;
-    width: 256px;
-    height: 287px;
-    right: 0;
-    margin-top: -143px;
-    top: 50%;
-    background: url("../img/preorder-iphone7-applewatch.png") no-repeat center center; }
+  .basic-present {
+    margin-top: 100px; }
 
-  .section-outro {
+  .basic-txt {
+    width: 100%;
+    text-align: center;
+    padding-top: 80px;
+    display: inline-block; }
+
+  .basic-list {
+    width: 97%;
+    background: white;
+    padding-left: 0;
+    margin: 0; }
+
+  .basic-ul-in {
+    padding: 0; }
+
+  .pin8 {
+    background: url("../img/iphone7-8pin-wide.png") no-repeat center left;
+    height: 450px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 150px;
+    text-align: left;
+    width: 70%; }
+
+  .film {
+    background: url("../img/iphone7-film-wide.png") no-repeat center left 140px;
+    height: 450px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 130px;
+    text-align: left;
+    width: 70%; }
+
+  .case {
+    background: url("../img/iphone7-tpu-wide.png") no-repeat center left 140px;
+    height: 450px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 130px;
+    text-align: left;
+    width: 70%; }
+
+  .plus-present {
+    padding: 35px; }
+
+  .plus-txt {
+    width: 100%;
+    text-align: center;
+    padding-top: 80px;
+    display: inline-block; }
+
+  .plus-list {
+    width: 1200px;
+    background: white;
+    padding-left: 0;
+    float: right;
+    margin: 0; }
+
+  .gt {
+    background: url("../img/iphone7-gt-wide.png") no-repeat bottom left 150px;
     height: 600px;
-    background-image: url("../img/preorder-iphone7-outro-bg-tablet.jpg"); } }
-@media all and (min-width: 1200px) {
-  .gift-applewatch-wrap {
-    right: 44%; }
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 200px;
+    text-align: left; }
 
-  .gift-airpods-wrap {
-    left: 44%; }
+  .lg {
+    background: url("../img/iphone7-lg-wide.png") no-repeat bottom left 100px;
+    height: 400px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 200px;
+    text-align: left; }
 
-  main {
-    background-image: url("../img/preorder-iphone7-intro-pc.jpg"); } }
+  .sk {
+    background: url("../img/iphone7-sk-wide.png") no-repeat bottom left 200px;
+    height: 400px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 200px;
+    text-align: left; }
+
+  .briz {
+    background: url("../img/iphone7-brit-wide.jpg") no-repeat bottom left 100px;
+    height: 400px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 150px;
+    text-align: left; }
+
+  .gift-box {
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    background: black;
+    color: white;
+    background: white url("../img/iphone7-pattern.jpg") top center; }
+
+  .kt-number {
+    margin-top: 1860px; }
+
+  .gift-in-a {
+    background: white url("../img/iphone7-set-a-wide.jpg") no-repeat top center;
+    height: 600px;
+    padding: 15px;
+    text-align: center; }
+
+  .gift-in-b {
+    background: white url("../img/iphone7-set-b-wide.jpg") no-repeat top center;
+    height: 600px;
+    padding: 15px;
+    text-align: center; }
+
+  .gift-in-c {
+    background: white url("../img/iphone7-set-c-wide.jpg") no-repeat top center;
+    height: 600px;
+    padding: 0px;
+    text-align: center; }
+
+  .gift-in-d {
+    background: white url("../img/iphone7-set-d-wide.jpg") no-repeat top center;
+    margin-top: 0px;
+    height: 550px;
+    padding: 15px;
+    text-align: center; }
+
+  .end {
+    background: black url("../img/iphone7-last-pc.jpg") no-repeat center center;
+    height: 800px; }
+
+  .end h3 {
+    padding-top: 550px;
+    text-align: center; } }
 @media all and (min-width: 1450px) {
-  .gift-applewatch-wrap {
-    right: 45%; }
-
-  .gift-airpods-wrap {
-    left: 45%; }
-
   main {
-    background-image: url("../img/preorder-iphone7-intro-wide.jpg"); } }
+    background: black url("../img/iphone7-manyphone-wide.jpg") no-repeat center center; }
+
+  .edge {
+    background: #121212 url("../img/iphone7-edge-wide.jpg") no-repeat center center;
+    height: 400px; }
+
+  .counter-present {
+    margin-top: 50px;
+    margin-bottom: 100px; }
+
+  .counter-txt {
+    width: 380px;
+    text-align: left;
+    margin-left: 00px;
+    padding-top: 80px;
+    display: inline-block; }
+
+  .counter-list {
+    width: 1000px;
+    background: white;
+    padding-left: 0;
+    float: right;
+    margin: 0; }
+
+  .airpods {
+    background: url("../img/iphone7-airpods-wide.jpg") no-repeat bottom left;
+    height: 300px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 80px;
+    text-align: right; }
+
+  .frisbee {
+    background: url("../img/iphone7-giftcard-wide.jpg") no-repeat bottom left;
+    height: 300px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 80px;
+    text-align: right; }
+
+  .basic-present {
+    margin-top: 100px; }
+
+  .basic-txt {
+    width: 100%;
+    text-align: center;
+    padding-top: 80px;
+    display: inline-block; }
+
+  .basic-list {
+    width: 97%;
+    background: white;
+    padding-left: 0;
+    margin: 0; }
+
+  .basic-ul-in {
+    padding: 0; }
+
+  .pin8 {
+    background: url("../img/iphone7-8pin-wide.png") no-repeat center left;
+    height: 450px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 150px;
+    text-align: left;
+    width: 70%; }
+
+  .film {
+    background: url("../img/iphone7-film-wide.png") no-repeat center left 140px;
+    height: 450px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 130px;
+    text-align: left;
+    width: 70%; }
+
+  .case {
+    background: url("../img/iphone7-tpu-wide.png") no-repeat center left 140px;
+    height: 450px;
+    padding: 15px;
+    padding-left: 500px;
+    padding-top: 130px;
+    text-align: left;
+    width: 70%; }
+
+  .plus-present {
+    padding: 35px; }
+
+  .plus-txt {
+    width: 100%;
+    text-align: center;
+    padding-top: 80px;
+    display: inline-block; }
+
+  .plus-list {
+    width: 1200px;
+    background: white;
+    padding-left: 0;
+    float: right;
+    margin: 0; }
+
+  .gt {
+    background: url("../img/iphone7-gt-wide.png") no-repeat bottom left 0px;
+    height: 600px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 200px;
+    text-align: left; }
+
+  .lg {
+    background: url("../img/iphone7-lg-wide.png") no-repeat bottom left 0px;
+    height: 400px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 200px;
+    text-align: left; }
+
+  .sk {
+    background: url("../img/iphone7-sk-wide.png") no-repeat bottom left 50px;
+    height: 400px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 200px;
+    text-align: left; }
+
+  .briz {
+    background: url("../img/iphone7-brit-wide.jpg") no-repeat bottom left 0px;
+    height: 400px;
+    padding: 15px;
+    padding-left: 400px;
+    padding-top: 150px;
+    text-align: left; }
+
+  .gift-box {
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    background: black;
+    color: white;
+    background: white url("../img/iphone7-pattern.jpg") top center; }
+
+  .kt-number {
+    margin-top: 1860px; }
+
+  .gift-in-a {
+    background: white url("../img/iphone7-set-a-wide.jpg") no-repeat top center;
+    height: 600px;
+    padding: 15px;
+    text-align: center; }
+
+  .gift-in-b {
+    background: white url("../img/iphone7-set-b-wide.jpg") no-repeat top center;
+    height: 600px;
+    padding: 15px;
+    text-align: center; }
+
+  .gift-in-c {
+    background: white url("../img/iphone7-set-c-wide.jpg") no-repeat top center;
+    height: 600px;
+    padding: 0px;
+    text-align: center; }
+
+  .gift-in-d {
+    background: white url("../img/iphone7-set-d-wide.jpg") no-repeat top center;
+    margin-top: 0px;
+    height: 550px;
+    padding: 15px;
+    text-align: center; }
+
+  .end {
+    background: black url("../img/iphone7-last-wide.jpg") no-repeat center center;
+    height: 800px; } }
 
 /*# sourceMappingURL=preorderIphone7.css.map */

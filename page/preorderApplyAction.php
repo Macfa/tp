@@ -60,7 +60,7 @@ try{
 	*/
 	if(($_POST['paColorType'] === 'jetBlack' /*|| $_POST['pa2ndColor'] === 'jetBlack'*/) && $_POST['paDeviceRam'] === '32G')
 		throw new Exception('제트 블랙은 128GB와 256GB 모델만 선택할 수 있습니다', 3);
-
+	/*
 	$checkedCount = count($_POST['paGift']);
 	if(($_POST['paChangeCarrier'] === 'sk' && $_POST['paApplyType'] ==='06') && $checkedCount > '0') // sk로 기변
 		throw new Exception( '사은품 선택을 할수 없습니다', 3);
@@ -79,7 +79,7 @@ try{
 
 	if(($_POST['paChangeCarrier'] === 'sk' && $_POST['paApplyType'] ==='02' && $checkedCount == '0') || ($_POST['paChangeCarrier'] === 'kt' && $checkedCount == '0'))
 		throw new Exception('사은품을 선택해주세요 ', 3);
-
+	*/
 	if(isNullVal($_POST['paPlan']))		
 		throw new Exception('요금제를 선택해주세요 ', 3);
 
@@ -96,20 +96,27 @@ try{
 	if (isNullVal($_POST['paEmail']) === true || isEmail($_POST['paEmail']) === false)
 		throw new Exception('이메일을 00000@주소 형식으로 입력해주세요', 3);
 
-	$startTime= '2016-10-27 19:00:00';
-	if($_POST['paColorType'] === 'jetBlack') {
-		$jetBlackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'jetBlack', $startTime);
-		if ($jetBlackApply >= 20)
-			throw new Exception('제트블랙 색상 이벤트가 마감되었습니다', 3);
-	}
+/*	$startTime= '2016-10-27 13:00:00';
+	$jetBlackApply = DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'jetBlack', $startTime);
+	if ($jetBlackApply > '100')
+		throw new Exception('제트블랙 색상 이벤트가 마감되었습니다', 3);
+*/
+	$startTime= '2016-10-28 10:00:00';
+    if($_POST['paColorType'] === 'jetBlack') {
+        $jetBlackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'jetBlack', $startTime);
+        if ($jetBlackApply >= 20)
+            throw new Exception('제트블랙 색상 이벤트가 마감되었습니다', 3);
+    }
 
-	if($_POST['paColorType'] === 'black') {
-		$blackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'black', $startTime);
-		if ($blackApply >= 20)
-			throw new Exception('매트블랙 색상 이벤트가 마감되었습니다', 3);
-	}
+    if($_POST['paColorType'] === 'black') {
+        $blackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList WHERE paColorType = %s and paDatetime >= %s", 'black', $startTime);
+        if ($blackApply >= 20)
+            throw new Exception('매트블랙 색상 이벤트가 마감되었습니다', 3);
+    }
 
 
+
+	
 } catch (Exception $e) {	
 		if ($e->getCode() === 1)
 			$errorURL = $cfg['login_url'];
@@ -172,7 +179,7 @@ $arrApplyMember = array(
 	'paApplyType' => $_POST['paApplyType'],
 	'paColorType' => $_POST['paColorType'],
 	'paPlan' => $paPlan,
-	'paGift' => implode(',', $_POST['paGift']),
+	'paGift' => '태블릿PC(일반신청)',
 	'paBirth' => $date,
 	'paSexType' => $_POST['paSexType'],
 	'paPhone' => $_POST['paPhone'],

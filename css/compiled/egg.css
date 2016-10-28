@@ -694,8 +694,9 @@
 .inp-group {
   display: block;
   border: 0;
-  padding: 10px 0;
+  padding: 0;
   margin: 0;
+  margin-top: 20px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.1); }
 
 .inp-tit {
@@ -1203,10 +1204,6 @@ body {
   .section-no-padding {
     padding: 0 !important; }
 
-.wrap-dense {
-  margin: 0 auto;
-  text-align: center; }
-
 .simplehead-logo {
   color: inherit;
   text-decoration: none; }
@@ -1294,15 +1291,11 @@ img {
   border: 0;
   background: url("img/menu.png") no-repeat right 70%; }
 
-.tit, .tit-dense, .egg-tit {
-  font-size: 2.3em;
+.tit, .egg-tit {
+  font-size: 1.8em;
   margin-bottom: 50px;
   margin-top: 50px;
   font-weight: normal; }
-
-.tit-dense {
-  margin-bottom: 0;
-  margin-top: 0; }
 
 .section-tit {
   font-size: 2em; }
@@ -1314,7 +1307,7 @@ img {
   font-size: 1.5em; }
 
 .tit-sub {
-  font-size: 1.3em;
+  font-size: 1.7em;
   margin: 0;
   margin-bottom: 20px; }
 
@@ -1586,28 +1579,6 @@ nav {
   margin: 0;
   list-style: none; }
 
-.layer-banner-wrap {
-  display: none;
-  padding: 5%; }
-  .layer-banner-wrap.active {
-    display: block; }
-
-.layer-banner {
-  position: relative;
-  width: 95%;
-  height: 300px;
-  top: 50%;
-  margin: 0 auto;
-  background: white;
-  padding: 10px;
-  margin-top: -150px; }
-
-.layer-banner-btn {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  right: 0; }
-
 .txt-bold {
   font-weight: bold; }
 
@@ -1620,7 +1591,7 @@ footer {
   text-align: center;
   color: #aaa; }
 
-.overlay, .layer-banner-wrap, .layer-view-wrap, .gift-view-wrap {
+.overlay, .layer-view-wrap, .gift-view-wrap {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -1628,7 +1599,7 @@ footer {
   right: 0;
   z-index: 999999999;
   background: rgba(0, 0, 0, 0.8); }
-  html.lte-ie8 .overlay, html.lte-ie8 .layer-banner-wrap, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
+  html.lte-ie8 .overlay, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
     background: transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
     zoom: 1; }
@@ -1879,15 +1850,6 @@ footer {
     text-align: left;
     display: none; }
 
-  .wrap-dense {
-    width: 700px; }
-
-  .tit, .tit-dense, .egg-tit {
-    font-size: 2em; }
-
-  .tit-sub {
-    font-size: 1.7em; }
-
   .btn-contact, .btn-contact-kakao, .btn-contact-tel {
     display: -moz-inline-stack;
     display: inline-block;
@@ -1939,8 +1901,7 @@ footer {
     bottom: 20px;
     right: 25px;
     z-index: 5;
-    display: block;
-    width: 433px; }
+    display: block; }
 
   .btn-contact, .btn-contact-kakao, .btn-contact-tel, .btn-contact-kakao {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -2024,7 +1985,7 @@ footer {
   .menuToggler {
     display: none; }
 
-  .tit, .tit-dense, .egg-tit {
+  .tit, .egg-tit {
     font-size: 3em; }
 
   .trio-section {
@@ -2048,10 +2009,7 @@ footer {
     display: none; }
 
   .section, .section-no-padding {
-    padding: 15px 25px; }
-
-  .layer-banner {
-    width: 500px; } }
+    padding: 15px 25px; } }
 @media all and (min-width: 900px) {
   .list-recomm-wrap {
     height: 480px; }
@@ -2133,10 +2091,7 @@ footer {
     margin: 0 auto; }
 
   .layer-view-wrap {
-    padding: 50px; }
-
-  .contact-pc-wrap {
-    width: 470px; } }
+    padding: 50px; } }
 @media all and (min-width: 1200px) {
   .gnb-tit-func-wrap.bookmark {
     display: -moz-inline-stack;
@@ -2172,10 +2127,7 @@ footer {
 
   .nav-mobile-wrap,
   .nav-mobile-btn-wrap {
-    display: none; }
-
-  .contact-pc-wrap {
-    width: 500px; } }
+    display: none; } }
 @media all and (min-width: 1450px) {
   .wrap {
     width: 1400px; }
@@ -2877,8 +2829,9 @@ footer {
 .inp-group {
   display: block;
   border: 0;
-  padding: 10px 0;
+  padding: 0;
   margin: 0;
+  margin-top: 20px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.1); }
 
 .inp-tit {
@@ -3386,10 +3339,6 @@ body {
   .section-no-padding {
     padding: 0 !important; }
 
-.wrap-dense {
-  margin: 0 auto;
-  text-align: center; }
-
 .simplehead-logo {
   color: inherit;
   text-decoration: none; }
@@ -3477,15 +3426,11 @@ img {
   border: 0;
   background: url("img/menu.png") no-repeat right 70%; }
 
-.tit, .tit-dense, .egg-tit {
-  font-size: 2.3em;
+.tit, .egg-tit {
+  font-size: 1.8em;
   margin-bottom: 50px;
   margin-top: 50px;
   font-weight: normal; }
-
-.tit-dense {
-  margin-bottom: 0;
-  margin-top: 0; }
 
 .section-tit {
   font-size: 2em; }
@@ -3497,7 +3442,7 @@ img {
   font-size: 1.5em; }
 
 .tit-sub {
-  font-size: 1.3em;
+  font-size: 1.7em;
   margin: 0;
   margin-bottom: 20px; }
 
@@ -3769,28 +3714,6 @@ nav {
   margin: 0;
   list-style: none; }
 
-.layer-banner-wrap {
-  display: none;
-  padding: 5%; }
-  .layer-banner-wrap.active {
-    display: block; }
-
-.layer-banner {
-  position: relative;
-  width: 95%;
-  height: 300px;
-  top: 50%;
-  margin: 0 auto;
-  background: white;
-  padding: 10px;
-  margin-top: -150px; }
-
-.layer-banner-btn {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  right: 0; }
-
 .txt-bold {
   font-weight: bold; }
 
@@ -3803,7 +3726,7 @@ footer {
   text-align: center;
   color: #aaa; }
 
-.overlay, .layer-banner-wrap, .layer-view-wrap, .gift-view-wrap {
+.overlay, .layer-view-wrap, .gift-view-wrap {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -3811,7 +3734,7 @@ footer {
   right: 0;
   z-index: 999999999;
   background: rgba(0, 0, 0, 0.8); }
-  html.lte-ie8 .overlay, html.lte-ie8 .layer-banner-wrap, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
+  html.lte-ie8 .overlay, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
     background: transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
     zoom: 1; }
@@ -4062,15 +3985,6 @@ footer {
     text-align: left;
     display: none; }
 
-  .wrap-dense {
-    width: 700px; }
-
-  .tit, .tit-dense, .egg-tit {
-    font-size: 2em; }
-
-  .tit-sub {
-    font-size: 1.7em; }
-
   .btn-contact, .btn-contact-kakao, .btn-contact-tel {
     display: -moz-inline-stack;
     display: inline-block;
@@ -4122,8 +4036,7 @@ footer {
     bottom: 20px;
     right: 25px;
     z-index: 5;
-    display: block;
-    width: 433px; }
+    display: block; }
 
   .btn-contact, .btn-contact-kakao, .btn-contact-tel, .btn-contact-kakao {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -4207,7 +4120,7 @@ footer {
   .menuToggler {
     display: none; }
 
-  .tit, .tit-dense, .egg-tit {
+  .tit, .egg-tit {
     font-size: 3em; }
 
   .trio-section {
@@ -4231,10 +4144,7 @@ footer {
     display: none; }
 
   .section, .section-no-padding {
-    padding: 15px 25px; }
-
-  .layer-banner {
-    width: 500px; } }
+    padding: 15px 25px; } }
 @media all and (min-width: 900px) {
   .list-recomm-wrap {
     height: 480px; }
@@ -4316,10 +4226,7 @@ footer {
     margin: 0 auto; }
 
   .layer-view-wrap {
-    padding: 50px; }
-
-  .contact-pc-wrap {
-    width: 470px; } }
+    padding: 50px; } }
 @media all and (min-width: 1200px) {
   .gnb-tit-func-wrap.bookmark {
     display: -moz-inline-stack;
@@ -4355,10 +4262,7 @@ footer {
 
   .nav-mobile-wrap,
   .nav-mobile-btn-wrap {
-    display: none; }
-
-  .contact-pc-wrap {
-    width: 500px; } }
+    display: none; } }
 @media all and (min-width: 1450px) {
   .wrap {
     width: 1400px; }
@@ -4601,7 +4505,7 @@ main {
   background: black url("../img/banner-preorder-note7-mobile.jpg") no-repeat center center; }
 
 .banner-preorder-iphone7 {
-  background: black url("../img/iphone7-nomal-mobile.jpg") no-repeat center center; }
+  background: white url("../img/iphone7event-mobile.jpg") no-repeat center center; }
 
 .banner-iphone-se-device {
   float: initial;
@@ -4687,9 +4591,6 @@ main {
 .note7-noitem-btn {
   margin-top: 110px; }
 
-.banner-bey {
-  background: url("../img/bey-mobile.jpg") no-repeat center center; }
-
 @media all and (min-width: 640px) {
   main {
     height: 600px; }
@@ -4707,7 +4608,7 @@ main {
     background: url("../img/main_iphone_se.jpg") no-repeat 65% center; }
 
   .banner-preorder-iphone7 {
-    background: black url("../img/iphone7-nomal-landscape.jpg") no-repeat center center; }
+    background-image: url("../img/iphone7event-landscape.jpg"); }
 
   .banner-iphone-se-logo {
     width: 270px;
@@ -4767,7 +4668,7 @@ main {
     background: url("../img/pointmall_main_landscape.jpg") no-repeat center center; }
 
   .banner-preordernote7-qna {
-    background: black url("../img/banner-preorder-note7-landscape.jpg") no-repeat center center; }
+    background-image: url("../img/banner-preorder-note7-landscape.jpg") no-repeat center center; }
 
   .banner-note7-issue {
     background: #ececec url("../img/banner-note7-issue-landscape.jpg") no-repeat center center; }
@@ -4776,16 +4677,13 @@ main {
     background: #ececec url("../img/note7-noitem-tablet.png") no-repeat center center; }
 
   .note7-noitem-btn {
-    margin-top: 270px; }
-
-  .banner-bey {
-    background: url("../img/bey-showme-landscape.jpg") no-repeat center center; } }
+    margin-top: 270px; } }
 @media all and (min-width: 900px) {
   .banner-v20 {
     background: white url("../img/v20-tablet.jpg") no-repeat center center; }
 
   .banner-preorder-iphone7 {
-    background: black url("../img/iphone7-nomal-tablet.jpg") no-repeat center center; }
+    background-image: url("../img/iphone7event-tablet.jpg"); }
 
   .banner-tit {
     font-size: 2em; }
@@ -4815,14 +4713,8 @@ main {
     background: url("../img/banner-note7-media-tablet.jpg") no-repeat center center; }
 
   .banner-pointmall {
-    background: url("../img/pointmall_main_tablet.jpg") no-repeat center center; }
-
-  .banner-bey {
-    background: url("../img/bey-showme-tablet.jpg") no-repeat center center; } }
+    background: url("../img/pointmall_main_tablet.jpg") no-repeat center center; } }
 @media all and (min-width: 1200px) {
-  .banner-preorder-iphone7 {
-    background: black url("../img/iphone7-nomal-pc.jpg") no-repeat center center; }
-
   .banner-v20 {
     background: white url("../img/v20-pc.jpg") no-repeat center center; }
 
@@ -4842,14 +4734,8 @@ main {
     background: url("../img/banner-note7-media-pc.jpg") no-repeat center center; }
 
   .banner-pointmall {
-    background: url("../img/pointmall_main_pc.jpg") no-repeat center center; }
-
-  .banner-bey {
-    background: url("../img/bey-showme-pc.jpg") no-repeat center center; } }
+    background: url("../img/pointmall_main_pc.jpg") no-repeat center center; } }
 @media all and (min-width: 1450px) {
-  .banner-preorder-iphone7 {
-    background: black url("../img/iphone7-nomal-wide.jpg") no-repeat center center; }
-
   .banner-v20 {
     background: white url("../img/v20-wide.jpg") no-repeat center center; }
 
@@ -4869,10 +4755,7 @@ main {
     background: url("../img/banner-note7-media-wide.jpg") no-repeat center center; }
 
   .banner-pointmall {
-    background: url("../img/pointmall_main_wide.jpg") no-repeat center center; }
-
-  .banner-bey {
-    background: url("../img/bey-showme-wide.jpg") no-repeat center center; } }
+    background: url("../img/pointmall_main_wide.jpg") no-repeat center center; } }
 .inlinelist {
   margin: 0;
   padding: 0;
@@ -5169,26 +5052,20 @@ main {
   margin: 0;
   padding: 0;
   list-style: none; }
-  .list > li {
+  .list li {
     margin: 0;
     padding: 0;
     list-style: none;
-    padding: 10px 16px; }
-    .list > li i {
-      margin-right: 10px; }
-
-.list-inside {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-  .list-inside > li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    padding: 10px 0; }
-    .list-inside > li i {
-      margin-right: 5px;
-      margin-bottom: 5px; }
+    position: relative;
+    display: block;
+    color: tint(#2e333a, 10);
+    padding: 10px 0;
+    padding-left: 45px; }
+    .list li i {
+      position: absolute;
+      display: block;
+      top: 7px;
+      left: 5px; }
 
 .katalk-friend {
   width: 100%;
@@ -6281,8 +6158,9 @@ main {
 .inp-group {
   display: block;
   border: 0;
-  padding: 10px 0;
+  padding: 0;
   margin: 0;
+  margin-top: 20px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.1); }
 
 .inp-tit {
@@ -6790,10 +6668,6 @@ body {
   .section-no-padding {
     padding: 0 !important; }
 
-.wrap-dense {
-  margin: 0 auto;
-  text-align: center; }
-
 .simplehead-logo {
   color: inherit;
   text-decoration: none; }
@@ -6881,15 +6755,11 @@ img {
   border: 0;
   background: url("img/menu.png") no-repeat right 70%; }
 
-.tit, .tit-dense, .egg-tit {
-  font-size: 2.3em;
+.tit, .egg-tit {
+  font-size: 1.8em;
   margin-bottom: 50px;
   margin-top: 50px;
   font-weight: normal; }
-
-.tit-dense {
-  margin-bottom: 0;
-  margin-top: 0; }
 
 .section-tit {
   font-size: 2em; }
@@ -6901,7 +6771,7 @@ img {
   font-size: 1.5em; }
 
 .tit-sub {
-  font-size: 1.3em;
+  font-size: 1.7em;
   margin: 0;
   margin-bottom: 20px; }
 
@@ -7173,28 +7043,6 @@ nav {
   margin: 0;
   list-style: none; }
 
-.layer-banner-wrap {
-  display: none;
-  padding: 5%; }
-  .layer-banner-wrap.active {
-    display: block; }
-
-.layer-banner {
-  position: relative;
-  width: 95%;
-  height: 300px;
-  top: 50%;
-  margin: 0 auto;
-  background: white;
-  padding: 10px;
-  margin-top: -150px; }
-
-.layer-banner-btn {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  right: 0; }
-
 .txt-bold {
   font-weight: bold; }
 
@@ -7207,7 +7055,7 @@ footer {
   text-align: center;
   color: #aaa; }
 
-.overlay, .layer-banner-wrap, .layer-view-wrap, .gift-view-wrap {
+.overlay, .layer-view-wrap, .gift-view-wrap {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -7215,7 +7063,7 @@ footer {
   right: 0;
   z-index: 999999999;
   background: rgba(0, 0, 0, 0.8); }
-  html.lte-ie8 .overlay, html.lte-ie8 .layer-banner-wrap, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
+  html.lte-ie8 .overlay, html.lte-ie8 .layer-view-wrap, html.lte-ie8 .gift-view-wrap {
     background: transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
     zoom: 1; }
@@ -7466,15 +7314,6 @@ footer {
     text-align: left;
     display: none; }
 
-  .wrap-dense {
-    width: 700px; }
-
-  .tit, .tit-dense, .egg-tit {
-    font-size: 2em; }
-
-  .tit-sub {
-    font-size: 1.7em; }
-
   .btn-contact, .btn-contact-kakao, .btn-contact-tel {
     display: -moz-inline-stack;
     display: inline-block;
@@ -7526,8 +7365,7 @@ footer {
     bottom: 20px;
     right: 25px;
     z-index: 5;
-    display: block;
-    width: 433px; }
+    display: block; }
 
   .btn-contact, .btn-contact-kakao, .btn-contact-tel, .btn-contact-kakao {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -7611,7 +7449,7 @@ footer {
   .menuToggler {
     display: none; }
 
-  .tit, .tit-dense, .egg-tit {
+  .tit, .egg-tit {
     font-size: 3em; }
 
   .trio-section {
@@ -7635,10 +7473,7 @@ footer {
     display: none; }
 
   .section, .section-no-padding {
-    padding: 15px 25px; }
-
-  .layer-banner {
-    width: 500px; } }
+    padding: 15px 25px; } }
 @media all and (min-width: 900px) {
   .list-recomm-wrap {
     height: 480px; }
@@ -7720,10 +7555,7 @@ footer {
     margin: 0 auto; }
 
   .layer-view-wrap {
-    padding: 50px; }
-
-  .contact-pc-wrap {
-    width: 470px; } }
+    padding: 50px; } }
 @media all and (min-width: 1200px) {
   .gnb-tit-func-wrap.bookmark {
     display: -moz-inline-stack;
@@ -7759,10 +7591,7 @@ footer {
 
   .nav-mobile-wrap,
   .nav-mobile-btn-wrap {
-    display: none; }
-
-  .contact-pc-wrap {
-    width: 500px; } }
+    display: none; } }
 @media all and (min-width: 1450px) {
   .wrap {
     width: 1400px; }
@@ -8065,26 +7894,20 @@ footer {
   margin: 0;
   padding: 0;
   list-style: none; }
-  .list > li {
+  .list li {
     margin: 0;
     padding: 0;
     list-style: none;
-    padding: 10px 16px; }
-    .list > li i {
-      margin-right: 10px; }
-
-.list-inside {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-  .list-inside > li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    padding: 10px 0; }
-    .list-inside > li i {
-      margin-right: 5px;
-      margin-bottom: 5px; }
+    position: relative;
+    display: block;
+    color: tint(#2e333a, 10);
+    padding: 10px 0;
+    padding-left: 45px; }
+    .list li i {
+      position: absolute;
+      display: block;
+      top: 7px;
+      left: 5px; }
 
 .katalk-friend {
   width: 100%;
@@ -9519,7 +9342,7 @@ h3.sub {
     padding-top: 180px; }
 
   .detail-intro-img-wrap {
-    width: 610px;
+    width: 705px;
     height: 300px;
     margin-bottom: -150px; }
 
