@@ -12,9 +12,16 @@ try{
 		throw new Exception('사전예약이 마감 되었습니다!', 3);
 
 	if(isExist($_POST['paKey'])){
+<<<<<<< HEAD
 		$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
 		if($isValidPaKey === 0)
 			throw new Exception('올바르지 않은 요청입니다.', 3);
+=======
+
+	$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
+	if($isValidPaKey === 0)
+		throw new Exception('올바르지 않은 요청입니다.', 3);
+>>>>>>> develop
 	}
 	$isApplyExist= DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail = %s and paCancel = 0", $mb['mbEmail']); 
 	$isApplyExist = (int)$isApplyExist;
@@ -112,10 +119,13 @@ try{
         if ($blackApply >= 20)
             throw new Exception('매트블랙 색상 이벤트가 마감되었습니다', 3);
     }
+<<<<<<< HEAD
 
 
 
 	
+=======
+>>>>>>> develop
 } catch (Exception $e) {	
 		if ($e->getCode() === 1)
 			$errorURL = $cfg['login_url'];
@@ -189,11 +199,14 @@ $arrApplyMember = array(
 /*	'pa2ndColor' => $_POST['pa2ndColor']*/
 );
 
+<<<<<<< HEAD
 if(isExist($_POST['paEtc2'])){
 	$arrApplyMember['paEtc2'] = 'egg';
 }else{
 	$arrApplyMember['paEtc2'] = '';
 }
+=======
+>>>>>>> develop
 
 
 if($isCanceled === 1){

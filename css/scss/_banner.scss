@@ -127,6 +127,7 @@ main {
 	background:#ececec url('../img/note7-noitem-mobile.png') no-repeat center center;
 }
 .note7-noitem-btn{margin-top:110px;}
+<<<<<<< HEAD
 .layer-banner-wrap{
 	@extend .overlay;
 	display:none;
@@ -150,6 +151,8 @@ main {
 	right:0;
 }
 
+=======
+>>>>>>> develop
 @media all and (min-width:640px){
 	$bannerHeight:600px;
 	main {height:$bannerHeight;}
@@ -164,11 +167,15 @@ main {
 		background:url('../img/main_iphone_se.jpg') no-repeat 65% center;
 	}
 	.banner-preorder-iphone7{
+<<<<<<< HEAD
 <<<<<<< f89b684ffb9cab467e7d32086948ec9ab554167d
 		background-image:url('../img/iphone7event-landscape.jpg');
 =======
 		background:white url('../img/iphone7event-landscape.jpg') no-repeat center center;
 >>>>>>> 동기화
+=======
+		background-image:url('../img/iphone7event-landscape.jpg');
+>>>>>>> develop
 	}
 
 	.banner-iphone-se-logo{
@@ -235,18 +242,25 @@ main {
 }
  
 @media all and (min-width:900px){
+<<<<<<< HEAD
 	.layer-banner{
 		width:500px;
 	}
+=======
+>>>>>>> develop
 	.banner-v20{
 		background:white url('../img/v20-tablet.jpg') no-repeat center center;
 	}
 	.banner-preorder-iphone7{
+<<<<<<< HEAD
 <<<<<<< f89b684ffb9cab467e7d32086948ec9ab554167d
 		background-image:url('../img/iphone7event-tablet.jpg');
 =======
 		background:white url('../img/iphone7event-tablet.jpg') no-repeat center center;
 >>>>>>> 동기화
+=======
+		background-image:url('../img/iphone7event-tablet.jpg');
+>>>>>>> develop
 	}
 
 	.banner-tit{font-size:2em;}
@@ -282,10 +296,14 @@ main {
 }
 
 @media all and (min-width:1200px){
+<<<<<<< HEAD
 <<<<<<< f89b684ffb9cab467e7d32086948ec9ab554167d
 
 =======
 >>>>>>> 동기화
+=======
+
+>>>>>>> develop
 	.banner-v20{
 		background:white url('../img/v20-pc.jpg') no-repeat center center;
 	}

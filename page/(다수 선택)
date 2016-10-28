@@ -1,0 +1,36 @@
+<?
+
+require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
+include_once(PATH_LIB."/lib.snoopy.inc.php");
+include_once(PATH_LIB."/lib.parsing.inc.php");
+
+try{
+	$preorder = DB::queryFirstRow("SELECT * FROM tmPreorderV20 WHERE mbEmail=%s", $mb['mbEmail']);	
+	$isV20ApplyExist = (int)DB::count();
+	if($isV20ApplyExist === 1 && $_GET['v'] != 'edit')
+		throw new Exception('이미 사전예약을 신청하셨습니다.', 3);
+}
+catch (Exception $e) {	
+
+	alert($e->getMessage(), $cfg['path']."/user/preOrderList.php");
+
+}
+
+$add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/preOrderNote7.css" type="text/css">';
+$js_file = '<script type="text/javascript" src="'.PATH_JS.'/preorderNote7.js"></script>';
+$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/input.js"></script>';
+$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/validate.js"></script>';
+$cfg['title'] = 'LG V20 사전예약안내';
+
+if (isEmail($mb['mbEmail']) === true && $isLogged === TRUE)
+	$validEmail = $mb['mbEmail'];
+
+if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $isLogged === TRUE){
+	$validPhone = $mb['mbPhone'];
+}
+
+require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
+require_once("preorderV20Apply.Form.skin.php");
+//require_once("preOrderV20.skin.php");	
+require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
+?>

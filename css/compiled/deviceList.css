@@ -1,31 +1,39 @@
 /*
-Error: Invalid CP949 character "\xEB"
-        on line 171 of scss/_banner.scss
-        from line 2 of scss/deviceList.scss
+Error: Invalid CSS after ">>>>>>> develop": expected "{", was "}"
+        on line 788 of scss/common.scss
+        from line 1 of scss/deviceList.scss
 
-166: 	.banner-preorder-iphone7{
-167: <<<<<<< f89b684ffb9cab467e7d32086948ec9ab554167d
-168: 		background-image:url('../img/iphone7event-landscape.jpg');
-169: =======
-170: 		background:white url('../img/iphone7event-landscape.jpg') no-repeat center center;
-171: >>>>>>> 동기화
-172: 	}
-173: 
-174: 	.banner-iphone-se-logo{
-175: 		width:270px;
-176: 		height:60px;
+783: 		width:500px;
+784: 	}
+785: =======
+786: >>>>>>> develop
+787: 
+788: }
+789: 
+790: @media all and (min-width:900px){
+791: 	.list-recomm-wrap {height:480px;}
+792: 	.layer-btn-wrap{width:800px;}
+793: 	body{font-size:100%}
 
 Backtrace:
-scss/_banner.scss:171
-scss/deviceList.scss:2
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/util.rb:1300:in `rescue in block in find_encoding_error'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/util.rb:1297:in `block in find_encoding_error'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/util.rb:1296:in `each'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/util.rb:1296:in `each_with_index'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/util.rb:1296:in `find_encoding_error'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/util.rb:905:in `check_sass_encoding'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:436:in `check_encoding!'
-d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:392:in `_to_tree'
+scss/common.scss:788
+scss/deviceList.scss:1
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1125:in `expected'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1120:in `tok!'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:656:in `block'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:726:in `declaration_or_ruleset'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:676:in `block_child'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:657:in `block'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:409:in `media_directive'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:222:in `special_directive'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:197:in `directive'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:675:in `block_child'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:125:in `stylesheet'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:41:in `parse'
+d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:406:in `_to_tree'
 d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:312:in `to_tree'
 d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:326:in `block in visit_import'
 d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:88:in `block in with_import'
@@ -67,4 +75,4 @@ d:/Ruby23/lib/ruby/gems/2.3.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapter.
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CP949 character \"\xEB\"\A         on line 171 of scss/_banner.scss\A         from line 2 of scss/deviceList.scss\A \A 166: 	.banner-preorder-iphone7{\A 167: <<<<<<< f89b684ffb9cab467e7d32086948ec9ab554167d\A 168: 		background-image:url('../img/iphone7event-landscape.jpg');\A 169: =======\A 170: 		background:white url('../img/iphone7event-landscape.jpg') no-repeat center center;\A 171: >>>>>>> 동기화\A 172: 	}\A 173: \A 174: 	.banner-iphone-se-logo{\A 175: 		width:270px;\A 176: 		height:60px;"; }
+  content: "Error: Invalid CSS after \">>>>>>> develop\": expected \"{\", was \"}\"\A         on line 788 of scss/common.scss\A         from line 1 of scss/deviceList.scss\A \A 783: 		width:500px;\A 784: 	}\A 785: =======\A 786: >>>>>>> develop\A 787: \A 788: }\A 789: \A 790: @media all and (min-width:900px){\A 791: 	.list-recomm-wrap {height:480px;}\A 792: 	.layer-btn-wrap{width:800px;}\A 793: 	body{font-size:100%}"; }
