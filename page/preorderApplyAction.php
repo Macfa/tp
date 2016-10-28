@@ -113,10 +113,6 @@ try{
         if ($blackApply >= 20)
             throw new Exception('매트블랙 색상 이벤트가 마감되었습니다', 3);
     }
-
-
-
-	
 } catch (Exception $e) {	
 		if ($e->getCode() === 1)
 			$errorURL = $cfg['login_url'];
