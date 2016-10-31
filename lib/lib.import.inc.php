@@ -9,6 +9,7 @@ class import {
 
 	public function addCSS($css) {
 		$this->css[] = $css;
+		return $this;
 	}
 
 	public function addJS($js, $flag='basic') {
