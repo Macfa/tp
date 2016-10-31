@@ -1,12 +1,12 @@
 @charset "UTF-8";
-@import '_var';
-@import '_functions';
-@import '_lib';
-@import '_animations';
+@import '_var.scss';
+@import '_functions.scss';
+@import '_lib.scss';
+@import '_animations.scss';
 
-@import '_ico';
-@import '_inp';
-@import '_nav';
+@import '_ico.scss';
+@import '_inp.scss';
+@import '_nav.scss';
 
 .inline-block {display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;word-spacing:0;}
 .clear-both {*zoom:1; /* IE5.5~7 브라우저 대응 Hack */&:after {content:" "; display:block; clear:both;}}

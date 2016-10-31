@@ -127,6 +127,7 @@ main {
 	background:#ececec url('../img/note7-noitem-mobile.png') no-repeat center center;
 }
 .note7-noitem-btn{margin-top:110px;}
+
 .layer-banner-wrap{
 	@extend .overlay;
 	display:none;
@@ -149,7 +150,6 @@ main {
 	bottom:0;
 	right:0;
 }
-
 
 @media all and (min-width:640px){
 	$bannerHeight:600px;
@@ -213,30 +213,29 @@ main {
 	}
 
 	.banner-note7-media{
-	background:url('../img/banner-note7-media-landscape.jpg') no-repeat center center;
+		background:url('../img/banner-note7-media-landscape.jpg') no-repeat center center;
 	}
 	.banner-pointmall{
-	background:url('../img/pointmall_main_landscape.jpg') no-repeat center center;
+		background:url('../img/pointmall_main_landscape.jpg') no-repeat center center;
 	}
 	.banner-preordernote7-qna{
-	background-image:url('../img/banner-preorder-note7-landscape.jpg') no-repeat center center;
+		background-image:url('../img/banner-preorder-note7-landscape.jpg') no-repeat center center;
 	}
-.banner-note7-issue{
-	background:#ececec url('../img/banner-note7-issue-landscape.jpg') no-repeat center center;
-}
-.banner-note7-noitem{
-	background:#ececec url('../img/note7-noitem-tablet.png') no-repeat center center;
-}
-.note7-noitem-btn{margin-top:270px;}
- 
+	.banner-note7-issue{
+		background:#ececec url('../img/banner-note7-issue-landscape.jpg') no-repeat center center;
+	}
+	.banner-note7-noitem{
+		background:#ececec url('../img/note7-noitem-tablet.png') no-repeat center center;
+	}
+	.note7-noitem-btn{margin-top:270px;}
+	 
 }
  
 @media all and (min-width:900px){
-
-
 	.layer-banner{
 		width:500px;
 	}
+
 	.banner-v20{
 		background:white url('../img/v20-tablet.jpg') no-repeat center center;
 	}
@@ -277,6 +276,7 @@ main {
 }
 
 @media all and (min-width:1200px){
+
 	.banner-v20{
 		background:white url('../img/v20-pc.jpg') no-repeat center center;
 	}

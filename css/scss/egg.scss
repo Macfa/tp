@@ -1,6 +1,6 @@
-@import 'common';
-@import 'deviceList';
-@import 'detail';
+@import 'common.scss';
+@import 'deviceList.scss';
+@import 'detail.scss';
 
 .egg-tit{
 @extend .tit;
