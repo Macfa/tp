@@ -3,6 +3,7 @@ class calculator {
 	
 	private $dvId = '';
 	private $dvKey = 0;
+	private $dvCate = '';
 	private $carrier = '';
 
 	private $selectedCarrier = '';
@@ -110,7 +111,7 @@ class calculator {
 		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
 		$this->selectedCarrier = $this->carrier = $carrier;
 
-		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt, dvCate FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
+		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
 		if ($this->capacityCount > 0) {
 			$this->lockedPropertyCount += 1;
 			$this->isExistChild = true;
@@ -119,9 +120,9 @@ class calculator {
 
 		//--------------------------------------------
 
-		$dvCate = DB::queryFirstField("SELECT dvCate FROM tmDevice WHERE dvKey = %i", $this->dvKey);
+		$this->dvCate = DB::queryFirstField("SELECT dvCate FROM tmDevice WHERE dvKey = %i", $this->dvKey);
 		$deviceInfo = new deviceInfo();
-		$deviceInfo->setCarrier($this->carrier)->setMode($dvCate);
+		$deviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
 
 		//-------------------------------------------
 
@@ -359,8 +360,9 @@ class calculator {
 
 	public function setPlanSelect($default=''){
 		$tmpDeviceInfo = new deviceInfo();
-
-		$this->selectedPlan = (isExist($default))?$default:$this->arrPlan[getFirstArrKey($this->arrPlan)];
+		$tmpDeviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
+		$this->selectedPlan = (isExist($default))?$default:getFirstArrKey($this->arrPlan);
+		//var_dump($this->arrPlan);
 		if (isExist($default)) {
 			foreach ($this->arrPlan as $val) {
 				if ($val == $default) {
@@ -399,7 +401,9 @@ class calculator {
 		$data['discountType'] = $this->selectedDiscountType;
 		$data['plan'] = $this->selectedPlan;
 		$data['id'] = $this->dvId;
+		//var_dump($data);
 		$this->defaultInfo = getPlanInfo($data);
+		var_dump($this->defaultInfo);
 		return $this;
 	}
 

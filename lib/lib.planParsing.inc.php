@@ -16,45 +16,93 @@ class parseSupportPrice{
 	private $carrier = '';
 	private $arrData = array();
 	private $arrTitle = array();
-	private $isChangedHTML = FALSE;
+	private $isHTMLChanged = FALSE;
 
 	private $deviceInfo = NULL;
 
-	private $retailPriceIndex = '3';
-	private $supportIndex = '4';
-	private $addSupportIndex = '5';
+	//테이블 구조가 바뀌었는지 확인 하기 위함
+	private $arrColumnName = array(
+											'sk' => array(
+												1 => '단말기',
+												2 => '모델명',
+												4 => '출고가',
+												5 => '지원금',
+												6 => '추가지원금'
+											)
+										);
+	private $arrParsingIndex = array(
+													'sk'=>array(
+														'device' => 1,
+														'model' => 2,
+														'retailPrice' => 4,
+														'support' => 5,
+														'addSupport' => 6,
+														'date' => 9
+													),
+													'kt'=>array(
+														'retailPrice' => 3,
+														'support' => 4,
+														'addSupport' => 5
+													),
+													'lg'=>array()
+												);
+
 
 	//private $arrVendor = array('S'=>'SKT', 'K'=>'KT', 'L'=>'LG U+', 'C'=>'CJ');
-	private $arrManuf = array('samsung'=>'', 'lg'=>'', 'apple'=>'Apple');
+	private $arrManuf = array(
+										'sk' => array(
+											'samsung'=>'', 
+											'lg'=>'', 
+											'apple'=>'Apple'
+										),
+										'kt' => array(
+											'samsung'=>'', 
+											'lg'=>'', 
+											'apple'=>'Apple'
+										)
+									);
 
 	private $targetURL = '';
-	private $arrTargetCarrierURL = array('sk'=>'http://www.tworlddirect.com/handler/Dantong-TWD',
-												'kt'=>'',
-												'lguplus'=>'https://www.uplus.co.kr/sqr/prdt/post/RetriveProdDiscountPostList.hpi'
-									);
+	private $arrTargetCarrierURL = array('sk'=>'http://shop.tworld.co.kr/handler/Dantong-SKT',
+															'kt'=>'http://shop.olleh.com/smart/supportAmtList.json',
+															'lguplus'=>'https://www.uplus.co.kr/sqr/prdt/post/RetriveProdDiscountPostList.hpi'
+														);
 
 	private $rexTable = '/<div class="board_list2 tbl_pa">([\s\S]*?)<\/table>[\s\S]*?<\/div>/';
 	private $rexTitle = '/<thead>([\s\S]*?)<\/thead>/i';
 	private $rexCapacity = '/(16g|32g|64g|128g)/';
+
 	private $arrRexTable = array(
-											'sk'=>'/<div class="board_list2 tbl_pa">([\s\S]*?)<\/table>[\s\S]*?<\/div>/',
+											'sk'=>'/<table border="1" style="display:none"[\s\S]*?>([\s\S]*?)<\/table>/i',
 											'lguplus'=>'/<div class="section table_molaw">([\s\S]*?)<\/table>[\s\S]*?<\/div>/'
 										);
-
-	private $arrPostSubmitVal = array();
+	private $arrRexColumn = array(
+											'sk'=>'/<thead>[\s\S]*?<tr>([\s\S]*?)<tr>[\s\S]*?<\/thead>/i',
+											'lguplus'=>'/<div class="section table_molaw">([\s\S]*?)<\/table>[\s\S]*?<\/div>/'
+										);
 	private $arrCarrierPostSubmitVal = array(
-																'sk'=>array('ORDER_FIELD' => 'ORDER_SEQ',
-																				'ORDER_TYPE'			=>'ASC',
-																				'MODEL_NW_TYPE'	=>'',
-																				'LIST_COUNT'			=>100,
-																				'TAB_PROD_ID'			=>'',
-																				'CHG_PROD_ID'		=>'',
-																				'PROD_ID'					=>'NA00004776',
-																				'PROD_TYPE'				=>'BASIC',
-																				'COMPANY_NM'			=>'',
-																				'PROD_GRP_ID'		=>'',
+																'sk'=>array(
+																	'ORDER_FIELD'			=> 'ORDER_SEQ',
+																	'ORDER_TYPE'			=>'ASC',
+																	'MODEL_NW_TYPE'	=>'',
+																	'LIST_COUNT'			=>100,
+																	'TAB_PROD_ID'			=>'',
+																	'CHG_PROD_ID'		=>'',
+																	'PROD_ID'					=>'NA00004776',
+																	'PROD_TYPE'				=>'BASIC',
+																	'COMPANY_NM'			=>'',
+																	'PROD_GRP_ID'		=>''
 																),
-																'lguplus'=>array(),
+																'kt'=>array(
+																	'prodNm'		=>'',
+																	'prdcCd	'		=>'',
+																	'prodType'	=>'',
+																	'makrCd'		=>'',
+																	'sortProd'		=>'HOT',
+																	'searchNm'	=>'',
+																	'pageNo'		=>1
+																),
+																'lguplus'=>array()
 															);
 	private $arrPhonePlanName =	array();
 	private $arrKidsPlanName = array();
@@ -63,69 +111,55 @@ class parseSupportPrice{
 	private $arrPlan = array();
 
 	public function __construct(){
-		$this->arrManuf['samsung'] = iconv("UTF-8", "EUC-KR", '삼성전자(주)');
-		$this->arrManuf['lg'] = iconv("UTF-8", "EUC-KR", 'LG전자(주)');
+		$this->arrManuf['sk']['samsung'] = iconv("UTF-8", "EUC-KR", '삼성전자(주)');
+		$this->arrManuf['sk']['lg'] = iconv("UTF-8", "EUC-KR", 'LG전자(주)');
 		$this->deviceInfo = new deviceInfo();
 	}
 
 	public function setCarrier($input) {
 		$this->carrier = $input;
-		$this->targetURL = $this->arrTargetCarrierURL[$this->carrier];
-		$this->arrPostSubmitVal = $this->arrCarrierPostSubmitVal[$this->carrier];
+		$this->isHTMLChanged = false;
 		return $this;
 	}
 
 	public function setMode($mode) {
 		$this->mode = $mode;
 		if ($mode == 'phone') {
-			$this->arrPostSubmitVal['MODEL_NW_TYPE'] = 'LTE';
-			$this->arrPostSubmitVal['CHG_PROD_ID'] =  'LTE';
+			$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = 'LTE';
+			$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  'LTE';
+			$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
+			$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
 		} else if ($mode == 'watch') {
-			$this->arrPostSubmitVal['MODEL_NW_TYPE'] = '3G';
-			$this->arrPostSubmitVal['CHG_PROD_ID'] =  '3G';
+			$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = '3G';
+			$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  '3G';
 		} else if ($mode == 'pocketfi' || $mode == 'kids') {
-			$this->arrPostSubmitVal['MODEL_NW_TYPE'] = 'ETC';
-			$this->arrPostSubmitVal['CHG_PROD_ID'] =  'ETC';
+			$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = 'ETC';
+			$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  'ETC';
+			$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
+			$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
 		}
 		return $this;
 	}
 	
 	public function setManuf($manuf){
 		$this->manuf = $manuf;
-		$this->arrPostSubmitVal['COMPANY_NM'] = $this->arrManuf[$manuf];
+		$this->arrCarrierPostSubmitVal['sk']['COMPANY_NM'] = $this->arrManuf[$this->carrier][$manuf];
 		return $this;
 	}
-
-	public function getPage() {
-		$data = new snoopy;
-		$data->agent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
-		$data->referer = "http://www.tworlddirect.com/handler/Dantong-TWD";
-		$data->fetch($this->targetURL.'?'.http_build_query($this->arrPostSubmitVal));
-		$this->page = $data->results;
-		return $this;
-	}
-
-	public function getDataAndInsert(){
-		//$this->getPage();
-		$arrPlan = $this->getArrPlan();
-		foreach($arrPlan as $key => $val){
-			$this->setPlan($val)->getPage()->getTable()->getCont()->insertUpdate();
-		}
-		return $this;
-	}
-
+	
 	public function getArrPlan(){
 		return $this->deviceInfo->setCarrier($this->carrier)->setMode($this->mode)->getArrPlan();
 	}
 
 	public function setPlan($input){
 		$this->plan = $input;
-		$this->arrPostSubmitVal['PROD_ID'] = $this->deviceInfo->arrPlanValue[$input];
+		$this->arrCarrierPostSubmitVal['sk']['PROD_ID'] = $this->deviceInfo->arrPlan[$this->carrier][$this->mode][$input]['value'];
 		return $this;
 	}
 
 	private function getTable() {
-		$result = getRexMatch($this->page, $this->rexTable); 
+		$result = getRexMatch($this->page, $this->arrRexTable[$this->carrier]); 
+		//var_dump(clean_html($result));
 		if (is_array($result))
 			$this->page = $result[0];
 		else
@@ -134,60 +168,158 @@ class parseSupportPrice{
 	}
 
 	private function getCont() {
+		if($this->carrier === 'sk') {
+			$this->getContSK();
+		} else if($this->carrier === 'kt') {
+			
+		}
+		return $this;
+	}
+
+	private function getContSK(){
 		$this->page = explode('<tbody>', $this->page);
+		//echo clean_html($this->page[0]);
 		$this->getTitle($this->page[0]);
 		$rows = preg_split('#</tr>#i', $this->page[1]);
 		foreach ($rows as $key => $row) {
-			$row = strtolower(iconv("EUC-KR", "UTF-8", $row));
-			$deviceRow[$key] = $this->stripTags(preg_split('#</td>#i', $row)); //td태그를 기분으로 배열로
-			$deviceRow[$key][9] = $this->getIconClass($deviceRow[$key][0]);
-			$deviceRow[$key][10] = $this->getCapacity($deviceRow[$key][0]);
-			$deviceRow[$key][11] = strtoupper($this->convert2name($deviceRow[$key][0]));
-			$deviceRow[$key][0] = $this->convert2id($deviceRow[$key][0]);
-			if ($deviceRow[$key][0] == false || isContain('\*\*\*', $deviceRow[$key][4])) {
-				unset($deviceRow[$key]);
+			$row = strtolower($row);
+			$tmpRow = $this->stripTags(preg_split('#</td>#i', $row)); //td태그를 기준으로 배열로
+
+			if(isNotExist($tmpRow[0]))
 				continue;
-			}
+
+			$tmpRow['deviceName'] = $tmpRow[$this->arrParsingIndex[$this->carrier]['device']];			
+			$tmpRow['capacity'] = $this->getCapacity($tmpRow['deviceName']);
+
+			if($tmpRow['capacity'] !== false)
+				$deviceRow[$key]['capacity'] = $tmpRow['capacity'];
+
+			$deviceRow[$key]['dvTit'] = strtoupper($this->convert2name($tmpRow['deviceName']));
+			$deviceRow[$key]['dvId'] = $this->convert2id($tmpRow['deviceName']);
+			$deviceRow[$key]['deviceName'] = $tmpRow['deviceName'];
+			$deviceRow[$key]['icon'] = $this->getIconClass($tmpRow['deviceName']);
+			$deviceRow[$key]['dvRetailPrice'] = getNumOnly(
+																		$tmpRow[$this->arrParsingIndex[$this->carrier]['retailPrice']]
+																	); 
+			$deviceRow[$key]['spSupport'] =  getNumOnly(
+																		$tmpRow[$this->arrParsingIndex[$this->carrier]['support']]
+																	);
+			$deviceRow[$key]['spAddSupport'] =  getNumOnly(
+																			$tmpRow[$this->arrParsingIndex[$this->carrier]['addSupport']]
+																		);
+
+			$deviceRow[$key]['spDate'] = $tmpRow[$this->arrParsingIndex[$this->carrier]['date']];
+			
 			if ($this->mode == 'pocketfi'){
-				if(isContain('pocketfi', $deviceRow[$key][0]) === false)
-					unset($deviceRow[$key]);
+				if(isContain('pocketfi', $deviceRow[$key]['deviceName']) === false)
+					unset($tmpRow[$key]);
 			}
 		}
 		$this->arrData = $deviceRow;
-		//print_r($deviceRow);
-		//								dvId										x							제조사			출고가				공시지원금			추가지원금					x					공시날짜
-		//Array ( [0] => iphone6splus16g [1] => IPHONE6S+_16G [2] => Apple [3] => 999,900 [4] => 122,000 [5] => 18,300 [6] => 859,600 [7] => 2015-10-23 [8] => 64g  [9] => 아이콘 )
-		//$this->page = getRexMatch($this->page, $this->rexTable); 
+		echo '<pre>';
+		print_r($deviceRow);
+		echo '</pre>';
+	}
+
+	private function getContKT(){
+		$this->page = explode('<tbody>', $this->page);
+		//echo clean_html($this->page[0]);
+		$this->getTitle($this->page[0]);
+		$rows = preg_split('#</tr>#i', $this->page[1]);
+		foreach ($rows as $key => $row) {
+			$row = strtolower($row);
+			$tmpRow = $this->stripTags(preg_split('#</td>#i', $row)); //td태그를 기준으로 배열로
+
+			if(isNotExist($tmpRow[0]))
+				continue;
+
+			$tmpRow['deviceName'] = $tmpRow[$this->arrParsingIndex[$this->carrier]['device']];			
+			$tmpRow['capacity'] = $this->getCapacity($tmpRow['deviceName']);
+
+			if($tmpRow['capacity'] !== false)
+				$deviceRow[$key]['capacity'] = $tmpRow['capacity'];
+
+			$deviceRow[$key]['dvTit'] = strtoupper($this->convert2name($tmpRow['deviceName']));
+			$deviceRow[$key]['dvId'] = $this->convert2id($tmpRow['deviceName']);
+			$deviceRow[$key]['deviceName'] = $tmpRow['deviceName'];
+			$deviceRow[$key]['icon'] = $this->getIconClass($tmpRow['deviceName']);
+			$deviceRow[$key]['dvRetailPrice'] = getNumOnly(
+																		$tmpRow[$this->arrParsingIndex[$this->carrier]['retailPrice']]
+																	); 
+			$deviceRow[$key]['spSupport'] =  getNumOnly(
+																		$tmpRow[$this->arrParsingIndex[$this->carrier]['support']]
+																	);
+			$deviceRow[$key]['spAddSupport'] =  getNumOnly(
+																			$tmpRow[$this->arrParsingIndex[$this->carrier]['addSupport']]
+																		);
+
+			$deviceRow[$key]['spDate'] = $tmpRow[$this->arrParsingIndex[$this->carrier]['date']];
+			
+			if ($this->mode == 'pocketfi'){
+				if(isContain('pocketfi', $deviceRow[$key]['deviceName']) === false)
+					unset($tmpRow[$key]);
+			}
+		}
+		$this->arrData = $deviceRow;
+		echo '<pre>';
+		print_r($deviceRow);
+		echo '</pre>';
+	}
+
+	public function getPage() {
+		$targetDomain = parse_url($this->arrTargetCarrierURL[$this->carrier]);
+		$data = new snoopy;
+		$data->agent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+		$data->referer = $targetDomain['host'];
+		if($this->carrier == 'sk'){
+			$data->fetch($this->arrTargetCarrierURL[$this->carrier].'?'.http_build_query($this->arrCarrierPostSubmitVal[$this->carrier]));
+			$this->page = iconv("EUC-KR", "UTF-8", removeTabLinebreak($data->results));
+		}
+		return $this;
+	}
+
+	public function getDataAndInsert(){
+		//$this->getPage();
+		if($this->isHTMLChanged === true)
+			return $this;
+
+		$arrPlan = $this->getArrPlan();
+		foreach($arrPlan as $key => $val){
+			$this->setPlan($val)->getPage()->getTable()->getCont()->checkHTMLChanged();//->insertUpdate();
+		}
 		return $this;
 	}
 
 	public function insertUpdate() {
+		$deviceIndex = $this->arrParsingIndex[$this->carrier]['device'];
+
+		if($this->isHTMLChanged === true)
+			return false;
 		
 		foreach($this->arrData as $row) {
-			if (!$row[0]) continue;
-			$dvTit = $row[11];
-			$fullDeviceName = $row[0].$row[10];
-			$parentDeviceName = $row[0];
-			$retailPrice = $row[3];
+			if (!$row[$deviceIndex]) continue;
+			$fullDeviceName = $row['dvId'].$row['capacity'];
 			$parentKey = 0;
-			if ($fullDeviceName !== $parentDeviceName) $isNotParent = true;
+
+			//
+			if ($fullDeviceName !== $row['dvId']) $isNotParent = true;
 
 			//하위 16g 32g 같은 용량 분류가 있을때
 			if ($isNotParent) {//parent 아닐때
-				$isExistParentDevice = DB::queryFirstField("SELECT COUNT(*) FROM tmDevice WHERE dvId=%s", $parentDeviceName);
-				if ($isExistParentDevice == 0){
+				$isExistParentDevice = DB::queryFirstField("SELECT COUNT(*) FROM tmDevice WHERE dvId=%s", $row['dvId']);
+				if ($isExistParentDevice == 0) {
 					DB::insert('tmDevice', array(
-						'dvId' => $parentDeviceName,
+						'dvId' => $row['dvId'],
 						'dvParent' => 0,
-						'dvTit' => $dvTit,
+						'dvTit' => $row['dvTit'],
 						'dvManuf' => $this->manuf,
-						'dvRetailPrice' => str_replace(',', '',$retailPrice),
-						'dvIcon' => $row[9],
+						'dvRetailPrice' => $row['dvRetailPrice'],
+						'dvIcon' => $row['icon'],
 						'dvDisplay' => 0
 					));
 				}
-				$parentKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId=%s", $parentDeviceName);
-				$dvTit = strtoupper($row[10]);
+				$parentKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId=%s", $row['dvId']);
+				$row['dvTit'] = strtoupper($row['capacity']);
 			}
 			
 			$isExistDevice = DB::queryFirstField("SELECT COUNT(*) FROM tmDevice WHERE dvId=%s", $fullDeviceName);
@@ -195,25 +327,32 @@ class parseSupportPrice{
 				DB::insert('tmDevice', array(
 					'dvId'				=> $fullDeviceName,
 					'dvParent'			=> $parentKey,
-					'dvTit'				=> $dvTit,
+					'dvTit'				=> $row['dvTit'],
 					'dvThumb'			=> 'device-big-iphone6.png',
 					'dvManuf'			=> $this->manuf,
-					'dvIcon'			=> $row[9],
-					'dvRetailPrice'	=> str_replace(',', '',$retailPrice),
+					'dvIcon'			=> $row['icon'],
+					'dvRetailPrice'	=> $row['dvRetailPrice'],
 					'dvDisplay'		=> 0
 				));
 			}
 			
 			$dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId=%s", $fullDeviceName);
-			$isNotUpdated = DB::queryFirstField("SELECT COUNT(*) FROM tmSupport WHERE spCarrier = 'sk' and spPlan = %s and dvKey=%s and spDate = %t", $this->plan, $dvKey, $row[7]);
+			$isNotUpdated = DB::queryFirstField("SELECT COUNT(*) FROM tmSupport WHERE spCarrier = %s_spCarrier and spPlan = %i_spPlan and dvKey=%i_dvKey and spDate = %t_spDate", 
+				array(
+					'spPlan' => $this->plan, 
+					'spCarrier' => $this->carrier,
+					'dvKey' => $dvKey, 
+					'spDate' => $row['spDate']
+				)
+			);
 			if($isNotUpdated == 0) {
 				DB::insert('tmSupport', array(
 					'dvKey' => $dvKey,
 					'spPlan' => $this->plan,
 					'spCarrier' => 'sk',
-					'spSupport' => str_replace(',', '',$row[4]),
-					'spAddSupport' => str_replace(',', '',$row[5]),
-					'spDate' => $row[7],
+					'spSupport' => $row['spSupport'],
+					'spAddSupport' => $row['spAddSupport'],
+					'spDate' => $row['spDate'],
 				));
 			}
 		}
@@ -221,10 +360,21 @@ class parseSupportPrice{
 
 
 	private function getTitle($page) {
-		$page = getRexMatch($page, $this->rexTitle);
-		$rows = preg_split('#</th>#i', $page);
-		$this->arrTitle = array_splice($rows, 0, 6);
-		//print_r($this->arrTitle);
+		$page = getRexMatch($page, $this->arrRexColumn[$this->carrier]);
+		$rows = explode('|||', $this->stripTags(str_replace('</th>', '|||', $page)));
+		$this->arrTitle = $rows;
+		//var_dump($rows);
+		return $this;
+	}
+
+	private function checkHTMLChanged(){
+		foreach($this->arrColumnName[$this->carrier] as $key => $val) {
+			if(isContain($val, $this->arrTitle[$key]) === false) {
+				$this->isHTMLChanged = true;
+				return $this;
+			}
+		}
+		$this->isHTMLChanged = false;
 		return $this;
 	}
 
