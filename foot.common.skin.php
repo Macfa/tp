@@ -46,6 +46,7 @@ src="https://www.facebook.com/tr?id=1044525538935836&ev=PageView&noscript=1"
         baseUrl: '<?=PATH_JS_LIB?>'
     };
 </script>
+<?php $import->importJS(); ?>
 <script type="text/javascript" src="<?=PATH_JS_LIB?>/require.js"></script>
 <?=$js_file?>
 </body>
