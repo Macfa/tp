@@ -1,1 +1,0 @@
-node-sass scss/ -o compiled/

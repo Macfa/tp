@@ -1,8 +1,8 @@
 @import 'common.scss';
 @import '_list.scss';
 @import '_row.scss';
-@import 'jquery-ui.min.css.scss';
-@import 'jquery-ui.theme.min.css.scss';
+@import 'jquery-ui.min.css';
+@import 'jquery-ui.theme.min.css';
 
 .sortable-grid { list-style-type: none; margin: 0; padding: 0; width: 900px;}
 .sortable-grid li {@include inlineBlock; padding: 1px;width: 18%; height: 150px; font-size: 1.5em; text-align: center; vertical-align:top;}
