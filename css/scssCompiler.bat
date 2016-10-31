@@ -1,1 +1,1 @@
-sass --watch scss:compiled
+node-sass scss/ -o compiled/

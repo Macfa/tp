@@ -2036,7 +2036,10 @@ footer {
     display: none; }
 
   .section, .section-no-padding {
-    padding: 15px 25px; } }
+    padding: 15px 25px; }
+
+  .layer-banner {
+    width: 500px; } }
 @media all and (min-width: 900px) {
   .list-recomm-wrap {
     height: 480px; }

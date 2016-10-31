@@ -1,8 +1,8 @@
-@import '_parsley';
-@import 'common';
-@import '_row';
-@import '_list';
-@import '_userInfo';
+@import '_parsley.scss';
+@import 'common.scss';
+@import '_row.scss';
+@import '_list.scss';
+@import '_userInfo.scss';
 
 .preorder-process-wrap{
 	margin:0;

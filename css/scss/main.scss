@@ -1,9 +1,9 @@
 /* CSS Document */
 
-@import 'common';
-@import '_banner';
-@import '_list';
-@import '_vacance';
+@import 'common.scss';
+@import '_banner.scss';
+@import '_list.scss';
+@import '_vacance.scss';
 
 .rasiel-slide {} 
 .traumguard-tit,.stellaglass-tit {z-index:100;}
