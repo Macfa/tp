@@ -41,7 +41,7 @@ main {
 	background:black url('../img/banner-preorder-note7-mobile.jpg') no-repeat center center;
 }
 .banner-preorder-iphone7{
-	background:white url('../img/iphone7event-mobile.jpg') no-repeat center center;
+	background:black url('../img/iphone7-nomal-mobile.jpg') no-repeat center center;
 }
 
 .banner-iphone-se-device{
@@ -127,6 +127,11 @@ main {
 	background:#ececec url('../img/note7-noitem-mobile.png') no-repeat center center;
 }
 .note7-noitem-btn{margin-top:110px;}
+
+.banner-bey{
+	background:url('../img/bey-mobile.jpg') no-repeat center center;	
+}
+
 .layer-banner-wrap{
 	@extend .overlay;
 	display:none;
@@ -165,7 +170,7 @@ main {
 		background:url('../img/main_iphone_se.jpg') no-repeat 65% center;
 	}
 	.banner-preorder-iphone7{
-		background-image:url('../img/iphone7event-landscape.jpg');
+		background:black url('../img/iphone7-nomal-landscape.jpg') no-repeat center center;
 	}
 
 	.banner-iphone-se-logo{
@@ -219,7 +224,7 @@ main {
 	background:url('../img/pointmall_main_landscape.jpg') no-repeat center center;
 	}
 	.banner-preordernote7-qna{
-	background-image:url('../img/banner-preorder-note7-landscape.jpg') no-repeat center center;
+	background:black url('../img/banner-preorder-note7-landscape.jpg') no-repeat center center;
 	}
 .banner-note7-issue{
 	background:#ececec url('../img/banner-note7-issue-landscape.jpg') no-repeat center center;
@@ -228,20 +233,21 @@ main {
 	background:#ececec url('../img/note7-noitem-tablet.png') no-repeat center center;
 }
 .note7-noitem-btn{margin-top:270px;}
- 
+
+.banner-bey{
+	background:url('../img/bey-showme-landscape.jpg') no-repeat center center;	
 }
  
+}
+
+
+ 
 @media all and (min-width:900px){
-
-
-	.layer-banner{
-		width:500px;
-	}
 	.banner-v20{
 		background:white url('../img/v20-tablet.jpg') no-repeat center center;
 	}
 	.banner-preorder-iphone7{
-		background-image:url('../img/iphone7event-tablet.jpg');
+		background:black url('../img/iphone7-nomal-tablet.jpg') no-repeat center center;
 	}
 
 	.banner-tit{font-size:2em;}
@@ -271,12 +277,19 @@ main {
 	}
 	.banner-pointmall{
 	background:url('../img/pointmall_main_tablet.jpg') no-repeat center center;
-	}		
+	}
+	.banner-bey{
+	background:url('../img/bey-showme-tablet.jpg') no-repeat center center;	
+	}
 
 
 }
 
 @media all and (min-width:1200px){
+	.banner-preorder-iphone7{
+		background:black url('../img/iphone7-nomal-pc.jpg') no-repeat center center;
+	}
+
 	.banner-v20{
 		background:white url('../img/v20-pc.jpg') no-repeat center center;
 	}
@@ -298,10 +311,16 @@ main {
 	.banner-pointmall{
 	background:url('../img/pointmall_main_pc.jpg') no-repeat center center;
 	}
+	.banner-bey{
+	background:url('../img/bey-showme-pc.jpg') no-repeat center center;	
+	}
 
 }
 
 @media all and (min-width:1450px){
+	.banner-preorder-iphone7{
+		background:black url('../img/iphone7-nomal-wide.jpg') no-repeat center center;
+	}
 
 	.banner-v20{
 		background:white url('../img/v20-wide.jpg') no-repeat center center;
@@ -323,5 +342,8 @@ main {
 	}
 	.banner-pointmall{
 	background:url('../img/pointmall_main_wide.jpg') no-repeat center center;
+	}
+	.banner-bey{
+	background:url('../img/bey-showme-wide.jpg') no-repeat center center;	
 	}
 }

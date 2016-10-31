@@ -12,15 +12,6 @@ try{
 		throw new Exception('사전예약이 마감 되었습니다!', 3);
 
 	if(isExist($_POST['paKey'])){
-
-	$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
-	if($isValidPaKey === 0)
-		throw new Exception('올바르지 않은 요청입니다.', 3);
-
-		$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
-		if($isValidPaKey === 0)
-			throw new Exception('올바르지 않은 요청입니다.', 3);
-
 		$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
 		if($isValidPaKey === 0)
 			throw new Exception('올바르지 않은 요청입니다.', 3);

@@ -49,6 +49,7 @@ body {
 		padding:0 !important;
 	}
 }
+.wrap-dense{margin:0 auto;text-align:center;}
 
 .simplehead-logo {color:inherit;text-decoration:none;}
 img{display:block;max-width:100%;height:auto;margin:0 auto;text-align:center}
@@ -112,14 +113,19 @@ img{display:block;max-width:100%;height:auto;margin:0 auto;text-align:center}
 .menuToggler{@extend .inline-block;width:5%;float:right;height:100%;line-height:40px;border:0;background:url('img/menu.png') no-repeat right 70%;}
 
 .tit {
-	font-size:1.8em;margin-bottom:50px;margin-top:50px;
+	font-size:2.3em;margin-bottom:50px;margin-top:50px;
 	font-weight:normal;
+}
+.tit-dense{
+	@extend .tit;
+	margin-bottom:0;
+	margin-top:0;
 }
 .section-tit{font-size:2em}
 .tit-affix{font-size:0.6em;}
 .tit-inside{font-size:1.5em;}
 .tit-sub{
-	font-size:1.7em;
+	font-size:1.3em;
 	margin:0;
 	margin-bottom:20px;
 }
@@ -363,6 +369,28 @@ nav{
 	padding:0;margin:0;list-style:none;
 }
 
+.layer-banner-wrap{
+	@extend .overlay;
+	display:none;
+	padding:5%;
+	&.active{display:block;}
+}
+.layer-banner{
+	position:relative;
+	width:95%;
+	height:300px;
+	top:50%;
+	margin:0 auto;
+	background:white;
+	padding:10px;
+	margin-top:-150px;
+}
+.layer-banner-btn{
+	position:absolute;
+	width:100%;
+	bottom:0;
+	right:0;
+}
 
 .txt-bold{font-weight:bold;}
 footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #ddd;background:#f3f3f3;text-align:center;color:#aaa}
@@ -645,6 +673,12 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 		text-align:left;
 		display:none;
 	}
+	.wrap-dense{
+		width:700px;
+	}
+
+	.tit {	font-size:2em;}
+	.tit-sub {	font-size:1.7em;}
 
 	.btn-contact{
 		@include inlineBlock;
@@ -696,6 +730,7 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 		right:25px;
 		z-index:5;
 		display:block;
+		width:433px;
 	}
 	.btn-contact, .btn-contact-kakao {	
 		@include shadow-level(2);
@@ -841,6 +876,9 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	.layer-view-wrap{
 		padding:50px;
 	}
+	.contact-pc-wrap {
+		width:470px;
+	}
 }
 @media all and (min-width:1200px){
 	.gnb-tit-func-wrap.bookmark{
@@ -870,6 +908,9 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	}
 	.nav-mobile-wrap,
 	.nav-mobile-btn-wrap{display:none;}
+	.contact-pc-wrap {
+		width:500px;
+	}
 }
 @media all and (min-width:1450px){
 	.wrap{width:1400px;}

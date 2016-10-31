@@ -14,7 +14,11 @@
 		<input type="hidden" name="poKey" value="<?php echo $preorderTitle['poKey']?>">
 		<input type="hidden" name="paKey" value="<?php echo $preorder['paKey']?>">
 		<input type="hidden" name="mbEmail" value="<?php echo $_GET['mbEmail']?>">
+<<<<<<< HEAD
+		<input type="hidden" name="isEditKey" value="<?php echo $_GET['v'] ?>">
+=======
 		<input type="hidden" name="isEditKey" value="<?php echo $_GET['v']?>">
+>>>>>>> develop
 		<section class="section txt-left">
 			<h2 class="tit-sub">아이폰7 / 아이폰7플러스 <?echo (isExist($_GET['mbEmail']) === true && $isAdmin === TRUE)?"수정하기":"신청하기"?></h2>
 			<i class="ico-person-small"></i>예약자명 <Br/> <span><?php echo $vailName?></span><br/><br/>
@@ -90,7 +94,11 @@
 						로즈골드
 					</label>
 					<Br/>
+<<<<<<< HEAD
+					<i class="ico-caution-small"></i> 블랙/제트블랙 100대 선착순 신청시<span class="txt-highlight"> 즉시 수령! </span>
+=======
 					<i class="ico-caution-small"></i> 블랙과 제트블랙은 수요과잉으로 <span class="txt-highlight">기기수령이 늦어질 수 있습니다.</span>
+>>>>>>> develop
 				</fieldset>
 			<!--<fieldset class="inp-group js-secondColor" data-default=<?echo $editMember['pa2ndColor']?>>
 				<i class="ico-color-small"></i> 2지망 색상 <span class="txt-advice">(색상이 없을시 대신 받을 색상)</span><br/>
@@ -189,6 +197,18 @@
 					KT olleh
 				</label>
 			</fieldset>			
+<<<<<<< HEAD
+			
+			<fieldset class="inp-group" data-default="<?echo $editMember['paEtc2']?>">
+				<i class="ico-carrier-small"></i> 에그도 같이 신청<br/>
+				<label class="inp-chk">
+					<input type="checkbox" name="paEtc2" value="egg"/>
+					<div class="inp-chk-box"></div>
+					신청하고 사은품 업그레이드 하겠습니다.
+				</label>
+			</fieldset>	
+=======
+>>>>>>> develop
 			<div class="inp-tit"><i class="ico-plan-small"></i> 요금제선택 : <?echo $plan[$editMember['paPlan']]?></div>
 			<br/>
 			<select class="js-planselect inp-select" style="height:60px;border:solid 1px rgba(0,0,0,0.15)"  name="paPlan" data-default=<?echo $editMember['paPlan']?>>
