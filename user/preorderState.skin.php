@@ -26,14 +26,13 @@
 		</ul>
 		<Br/>
 		<div class="tit-sub">디바이스 신청정보</div>
-<<<<<<< HEAD
 		<ul class="inlinelist">
 			<li>
 				<span class="label"><i class="ico-person-small"></i> 신청 디바이스 </span><span class="cont"><?php echo $device[$arrOrderList['dvKey']] ?></span>								
 			</li><li>
 				<span class="label"><i class="ico-person-small"></i> 순 번</span><span class="cont"><?php echo $arrOrderList['paWatingNumber'] ?></span>								
 			</li><li>
-				<span class="label"><i class="ico-carrier-small"></i> 신청할 통신사</span><span class="cont"><?php echo $arrOrderList['paChangeCarrier'] ?></span>			
+				<span class="label"><i class="ico-carrier-small"></i> 신청할 통신`</span><span class="cont"><?php echo $arrOrderList['paChangeCarrier'] ?></span>			
 			</li><li>
 				<span class="label"><i class="ico-apply-type-small"></i> 가입유형</span><span class="cont"><?php echo $type[$arrOrderList['paApplyType']] ?></span>
 			</li><li>
@@ -50,30 +49,6 @@
 				<span class="label"><i class="ico-gift-small"></i> 기타사항</span><span class="cont">에그신청</span>	
 			</li><?php endif?>		
 		<Br/>
-=======
-
-		<ul class="inlinelist">
-		<li>
-			<span class="label"><i class="ico-person-small"></i> 신청 디바이스 </span><span class="cont"><?php echo $device[$arrOrderList['dvKey']] ?></span>								
-		</li><li>
-			<span class="label"><i class="ico-person-small"></i> 순 번</span><span class="cont"><?php echo $arrOrderList['paWatingNumber'] ?></span>								
-		</li><li>
-			<span class="label"><i class="ico-carrier-small"></i> 신청할 통신사</span><span class="cont"><?php echo $arrOrderList['paChangeCarrier'] ?></span>			
-		</li><li>
-			<span class="label"><i class="ico-apply-type-small"></i> 가입유형</span><span class="cont"><?php echo $type[$arrOrderList['paApplyType']] ?></span>
-		</li><li>
-			<span class="label"><i class="ico-carrier-small"></i> 이용중인 통신사</span><span class="cont"><?php echo $arrOrderList['paCurrentCarrier'] ?></span>		
-		</li><li>
-			<span class="label"><i class="ico-plan-small"></i> 요금제</span><span class="cont"><?php echo (isExist($plan[$arrOrderList['paPlan']]))?$plan[$arrOrderList['paPlan']]:$arrOrderList['paPlan']; ?></span>
-		</li><li>
-			<span class="label"><i class="ico-color-small"></i> 색상</span><span class="cont"><?php echo $color[$arrOrderList['paColorType']] ?></span>	
-		</li><li>
-			<span class="label"><i class="ico-color-small"></i>2지망 색상</span><span class="cont"><?php echo $color[$arrOrderList['pa2ndColor']] ?></span>	
-		</li><li>
-			<span class="label"><i class="ico-gift-small"></i> 선택 사은품</span><span class="cont"><?php foreach($arrOrderList['paGift'] as $giftList){echo $gift[$giftList]."<Br/>";} ?></span>	
-		</li><li>		
-	<Br/>
->>>>>>> develop
 		</ul>
 	</section>
 	
@@ -81,7 +56,6 @@
 		<div class="center"><i class="ico-caution-small"></i> 기타 요금제 선택하신 고객님은 실가입 신청시 메모장에 원하시는 요금제를 써주세요.</div>
 	<?php endif?>
 
-<<<<<<< HEAD
 	<?if($arrOrderList['paChangeCarrier'] === 'kt') :?>
 		<div class="center"><i class="ico-caution-small"></i> 원하시는 색상은 반드시 메모란에 적어주세요!</div>
 	<? endif ?>
@@ -93,15 +67,6 @@
 		<span class="cont"><a href="/page/preorderApply.php?device=<?echo $preorderTitle['poDeviceName']?>&v=edit" class="btn-filled-primary-dense">수정하기</a></span></li>		
 	<? endif ?>
 	
-=======
-
-	<?if($arrOrderList['paProcess'] == 0) :?>
-		<span class="cont"><a href="/page/preorderApplyDelete.php" class="btn-flat-primary-dense">취소하기</a></span><span class="cont"><a href="/page/preorderApply.php?device=<?echo $preorderTitle['poDeviceName']?>&v=edit" class="btn-filled-primary-dense">수정하기</a></span></li>			
-	<? endif ?>
-	<?if($arrOrderList['paChangeCarrier'] === 'kt') :?>
-		<div class="center"><i class="ico-caution-small"></i> 원하시는 색상은 반드시 메모란에 적어주세요!</div>
-	<? endif ?>
->>>>>>> develop
 	<?if($arrOrderList['paProcess'] == 2 ) :?>
 		<span class="label"></span><span class="cont"><a href=<? echo $applyLinkUrl ?> target="_blank" class="btn-filled-primary-dense js-applyBtn">실가입신청</a></span>
 	<? endif ?>
