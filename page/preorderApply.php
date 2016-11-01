@@ -5,7 +5,6 @@ include_once(PATH_LIB."/lib.snoopy.inc.php");
 include_once(PATH_LIB."/lib.parsing.inc.php");
 //include_once(PATH_LIB."/lib.calculator.inc.php");
 
-<<<<<<< HEAD
 if(isExist($_GET['mbEmail']) && isAdmin === false)
 	$mbEmail = $_GET['mbEmail'];
 else
@@ -13,40 +12,23 @@ else
 
 $preorderTitle = DB::queryFirstRow("SELECT poKey, poDeviceName FROM tmPreorder WHERE poDeviceName=%s",$_GET['device']);
 $editMember = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s",$mbEmail);
-=======
-
-$preorderTitle = DB::queryFirstRow("SELECT poKey, poDeviceName FROM tmPreorder WHERE poDeviceName=%s",$_GET['device']);
-$editMember = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s",$_GET['mbEmail']);
->>>>>>> develop
 
 
 try{
 	$preorder = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0", $mb['mbEmail']);	
 	$isApplyExist = (int)$preorder;
 
-<<<<<<< HEAD
 	if($isApplyExist === 0 && $_GET['v'] === 'edit')
-=======
-	if($isApplyExist === 0 && $_GET['v'] === 'edit' && isExist($_GET['mbEmail']) === FALSE)
->>>>>>> develop
 		throw new Exception('구매후 수정이 가능합니다', 2);
 
 	if(isExist($_GET['mbEmail']) === true && $isAdmin === FALSE)
 		throw new Exception('잘못된 접근 입니다', 1);
 
-<<<<<<< HEAD
 	if($isApplyExist === 1 && $_GET['v'] != 'edit' )
 		throw new Exception('이미 신청서를 작성하셨습니다.', 3);
 
 	if($isApplyExist === 1 && $_GET['v'] == 'edit' && $preorder['paProcess'] >=3)
 		throw new Exception('수정할수 없습니다.', 3);
-=======
-	if($isApplyExist === 1 && $_GET['v'] != 'edit' && isExist($_GET['mbEmail']) === FALSE)
-		throw new Exception('이미 신청서를 작성하셨습니다.', 3);
-
-	if($isApplyExist === 1 && $_GET['v'] === 'edit' && $_GET['device'] && $preorder['paProcess']>='2')
-		throw new Exception('수정하실수 없습니다.', 3);
->>>>>>> develop
 
 	if(!$_GET['device'])
 		throw new Exception('잘못된 접근 입니다', 1);
@@ -54,18 +36,9 @@ try{
 	if($_GET['device']=== '' || $_GET['device'] != $preorderTitle ['poDeviceName'])
 		throw new Exception('잘못된 접근 입니다', 1);
 
-<<<<<<< HEAD
-	if($mbEmail
-		!= $editMember['mbEmail'])
-=======
-	if($_GET['mbEmail'] != $editMember['mbEmail'])
->>>>>>> develop
+	if($mbEmail != $editMember['mbEmail'])
 		throw new Exception('잘못된 접근 입니다', 1);
 
-
-
-
-	
 } catch (Exception $e) {	
 	if ($e->getCode() === 1)
 		alert($e->getMessage(), $cfg['path']);
