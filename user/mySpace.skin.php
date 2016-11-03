@@ -27,6 +27,14 @@
 	</div>
 	<br/>
 	<?endif?>
+	<? if ($isGalaxyS7edgeBlueExist === 1) : ?>
+	<div class="myspace-preorder galaxys7edgeBlue">
+		<a href="/user/galaxys7EdgeBlueState.php" class="preorderLink">
+			<h1 class="preoderTitle">갤럭시 S7엣지 블루코랄 신청현황</h1>
+		</a>
+	</div>
+	<br/>
+	<?endif?>
 			<ul class="myspace-list-group">
 				<li class="myspace-list-wrap"><a href="/cart" class="myspace-list">장바구니</a></li>
 				<li class="myspace-list-wrap"><a href="orderList.php" class="myspace-list">주문내역</a></li>
