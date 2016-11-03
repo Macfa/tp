@@ -150,11 +150,17 @@ main {
 	bottom:0;
 	right:0;
 }
+.banner-s7edgecoral {
+	background:white url('../img/s7edgecoral-mainbanner-mobile.jpg') no-repeat center center;
+}
 
 @media all and (min-width:640px){
 	$bannerHeight:600px;
 	main {height:$bannerHeight;}
 	main .btn {font-size:17px}
+	.banner-s7edgecoral {
+	background:white url('../img/s7edgecoral-mainbanner-landscape.jpg') no-repeat center center;
+	}
 	.banner-v20{
 		background:white url('../img/v20-landscape.jpg') no-repeat center center;
 	}
@@ -236,6 +242,9 @@ main {
 		width:500px;
 	}
 
+	.banner-s7edgecoral {
+	background:white url('../img/s7edgecoral-mainbanner-tablet.jpg') no-repeat center center;
+	}
 	.banner-v20{
 		background:white url('../img/v20-tablet.jpg') no-repeat center center;
 	}
@@ -276,7 +285,9 @@ main {
 }
 
 @media all and (min-width:1200px){
-
+	.banner-s7edgecoral {
+	background:white url('../img/s7edgecoral-mainbanner-pc.jpg') no-repeat center center;
+	}
 	.banner-v20{
 		background:white url('../img/v20-pc.jpg') no-repeat center center;
 	}
@@ -302,7 +313,9 @@ main {
 }
 
 @media all and (min-width:1450px){
-
+	.banner-s7edgecoral {
+	background:white url('../img/s7edgecoral-mainbanner-wide.jpg') no-repeat center center;
+	}
 	.banner-v20{
 		background:white url('../img/v20-wide.jpg') no-repeat center center;
 	}
