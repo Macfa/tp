@@ -33,12 +33,16 @@ $osClass = $userAgent->getOS();
 <meta property="og:description" content="티플 : 노트7사전예약,갤S7,G5,아이폰,스마트워치,포켓파이,준2">
 <meta property="og:image" content="<?=PATH_IMG?>/og-img.jpg">
 <meta property="og:url" content="http://tplanit.co.kr">
-<script type="text/javascript" src="<?=PATH_JS_LIB?>/jquery.js"></script>
 <script>
 $isMobileTablet = false;
 </script>
-<script type="text/javascript" src="<?=PATH_JS?>/common.js?v=2"></script>
-<script type="text/javascript" src="<?=PATH_JS_LIB?>/webFontLoader.js"></script>
+<?php 
+$importHead = new import();
+$importHead->addJS("jquery.js", "lib")
+			->addJS("common.js")
+			->addJS("webFontLoader.js", "lib")
+			->importJS();
+?>
 <script>
 if ($isMobileTablet == false) {
 	WebFont.load({
@@ -48,9 +52,11 @@ if ($isMobileTablet == false) {
     }
   });
 }
+
 $('html').addClass('<?=$userAgent->parse()->getBrowserClass();?>');
 </script>
-<link rel="stylesheet" href="<?=PATH_CSS?>/normalize.css" type="text/css">
+<!-- <link rel="stylesheet" href="<?=PATH_CSS?>/normalize.css" type="text/css"> -->
+<?php $import->importCSS(); ?>
 <?=$header?>
 <?=$add_css?>
 <!--[if lt IE 9]>

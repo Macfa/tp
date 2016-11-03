@@ -6,6 +6,19 @@
 		<li class="slide-item banner-v20">
 			<a href="/page/preorderV20.php"></a>
 		</li>
+		<li class="slide-item banner-s7edgecoral">
+			<a href="/page/preorderS7coral.php"></a>
+		</li>
+		<!--li class="slide-item banner-note7-noitem">				
+					<div class="vert-wrap">
+					<div class="note7-noitem-btn">
+								<a href="http://tplanit.co.kr/page/note7Notice.php#cancel" class="btn-filled-primary">노트7 예약취소</a>
+								<a href="http://tplanit.co.kr/page/note7Notice.php#note7" class="btn-filled-primary">노트7 교품안내</a>
+								<a href="http://tplanit.co.kr/page/note7Notice.php#gift" class="btn-filled-primary">노트7 사은품안내</a>
+								<a target="_blank" href="http://blog.naver.com/traumplanit" class="btn-filled-primary">공지사항</a>
+					</div>
+					</div>
+		</li-->
 		<!--li class="slide-item banner-bey">
 			<a href="/page/bey.php"></a>
 		</li-->
@@ -19,6 +32,7 @@
 					</div>
 					</div>
 		</li-->
+		
 		<!--li class="slide-item banner-preordernote7-qna">
 			<a target="_blank" href="http://blog.naver.com/traumplanit/220799290509"></a>
 		</li-->

@@ -10,10 +10,12 @@ $isV20ApplyExist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderV20 WHERE
 $isApplyExist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0", $mb['mbEmail']);	
 $preorderTable = DB::queryFirstRow("SELECT * FROM tmPreorder WHERE poDisplay=1");
 $isExchangeRefundNote7Exist = DB::queryFirstField("SELECT COUNT(*) FROM tmExchangeRefundNote7 WHERE mbEmail=%s", $mb['mbEmail']);	
+$isGalaxyS7edgeBlueExist = DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4", $mb['mbEmail']);	
 
 $isApplyExist = (int)$isApplyExist;
 $isV20ApplyExist = (int)$isV20ApplyExist;
 $isExchangeRefundNote7Exist = (int)$isExchangeRefundNote7Exist;
+$isGalaxyS7edgeBlueExist =(int)$isGalaxyS7edgeBlueExist;
 
 
 if($isApplyExist >= 1){

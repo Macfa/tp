@@ -57,7 +57,7 @@ $cfg['user_path'] = $cfg['path']."/".$cfg['user_dir'];
 $cfg['img_path'] = $cfg['url']."/".$cfg['img_dir'];
 $cfg['common_path'] = $cfg['path']."/".$cfg['common_dir'];
 $cfg['lib_path'] = $cfg['path']."/".$cfg['lib_dir'];
-$cfg['js_path'] =	"/".$cfg['js_dir'];
+$cfg['js_path'] =	$cfg['path']."/".$cfg['js_dir'];
 $cfg['css_path'] =	$cfg['path']."/".$cfg['css_dir']."/compiled";
 
 define("META_CHARSET", "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">");

@@ -1,0 +1,409 @@
+@import 'common.scss';
+@import '_list.scss';
+
+$pageTopDecrease: 20px;
+$hrBgColor: #48CFAD;
+$hrColor: #FFFFFF;
+$hrSize: 0px;
+$coralcolor:#6ac9ff;
+$pointyellow:#ffcc00;
+
+*{margin:0 auto;}
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: red;
+}
+a{
+	text-decoration:none;
+}
+
+footer {
+	margin-top:0px; 
+}
+.vert-center {
+ 	margin:0 auto;
+	text-align:center;
+	padding:20px;
+}
+.vert-left {
+ 	margin:0 auto;
+	width:330px;
+	text-align:center;
+	padding:10px;
+}
+.tit {
+	font-size:2em;
+}
+.sub {
+	font-size:1.8em;
+}
+.txt{
+	font-size: 1.2em;
+}
+.add {
+	font-size: 1em;
+}
+.link {
+	font-size: 1em;
+	color: #ffcc00;
+	text-decoration:underline;
+}
+.link:hover {
+	color: white;
+}
+.bn {
+	font-size:1em;
+	text-align:center;
+	width:200px;
+	padding:5px 20px;
+	border:1px solid $coralcolor;
+	background:red;
+	color:$coralcolor;
+}
+.bn:hover {
+	border:1px solid $coralcolor;
+	background:$coralcolor;
+	color:black;
+	font-weight:bold;
+}
+.bn-w {
+	font-size:1em;
+	text-align:center;
+	width:200px;
+	padding:5px 20px;
+	border:1px solid black;
+	background:white;
+	color:black;
+	font-weight:bold;
+}
+.bn-w:hover {
+	border:1px solid black;
+	background:black;
+	color:$coralcolor;
+}
+.coral {
+	color:$coralcolor;
+}
+.yellow {
+	color:$pointyellow;
+}
+.white {
+	color:white;
+}
+
+
+
+
+
+
+#header {
+  background:black;
+  background-size: cover;
+  position: fixed;
+  height: 90%;
+  bottom: 10%;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+.center {
+    background:white url(http://www.startgd.com/img/s7coral-intro-mobile.jpg) no-repeat center top;
+	height:280px;
+    text-align: center;
+    position: absolute;
+    color: #FFFFFF;
+    color: #F5F7FA;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+#header .tit {
+	margin-top:330px;
+	margin-bottom:20px;
+}
+
+
+
+
+
+#page {
+	background:white;
+  position: relative;
+  height: 1300px;
+  top: 600px;
+}
+
+#point{
+	background:black url(http://www.startgd.com/img/s7coral-point-mobile.jpg) no-repeat center -100px;
+	color:white;
+	height:830px;
+}
+#point .add {
+	margin-top:50px;
+}
+#point .sub {
+	margin-top:10px;
+	line-height:1.3em;
+}
+#point .txt {
+	margin-top:30px;
+}
+#point .link {
+	margin-top:10px;
+}
+
+
+#set {
+	background:white url(http://www.startgd.com/img/s7coral-set-mobile.jpg) no-repeat center top 0px;
+}
+#set .sub {
+	margin-top:80px;
+}
+#set .txt {
+	margin-top:20px;
+}
+#set .add {
+	margin-top:5px;
+}
+#set .bn-w {
+	margin-top:380px;
+	margin-bottom:50px;
+}
+
+@media all and (min-width:640px){
+	.tit {
+	font-size:3.5em;
+}
+.sub {
+	font-size:2.3em;
+}
+.txt{
+	font-size: 1.4em;
+}
+.add {
+	font-size: 1.1em;
+}
+.link {
+	font-size: 1.3em;
+	color: #ffcc00;
+	text-decoration:underline;
+}
+.bn {
+		font-size:1.3em;
+		width:340px;
+		padding:8px 10px;
+	}
+.bn-w {
+		font-size:1.3em;
+		width:340px;
+		padding:8px 10px;
+	}
+
+.center {
+    background:white url(http://www.startgd.com/img/s7coral-intro-landscape.jpg) no-repeat center top;
+	height:500px;
+	}
+	#header .tit {
+	margin-top:550px;
+	margin-bottom:20px;
+}
+	
+	
+	#point{
+	background:black url(http://www.startgd.com/img/s7coral-point-landscape.jpg) no-repeat center top;
+	height:1000px;
+	}
+	
+	#page {
+  height: 1300px;
+  top: 1300px;
+}
+	#point .add {
+	margin-top:90px;
+}
+	#point .link {
+	margin-top:30px;
+}
+	.vert-left {
+	width:380px;
+	padding:10px;
+		margin-left:20px;
+}
+	#set {
+	background:white url(http://www.startgd.com/img/s7coral-set-landscape.jpg) no-repeat center top 50px;
+		height:800px;
+}
+	#set .sub{
+		margin-top:100px;
+	} 
+	#set .bn-w {
+	margin-top:30px;
+		margin-bottom:180px;
+}
+}
+@media all and (min-width:900px){
+	.tit {
+	font-size:4.5em;
+}
+.sub {
+	font-size:2.5em;
+}
+.txt{
+	font-size: 1.4em;
+}
+.add {
+	font-size: 1.1em;
+}
+.link {
+	font-size: 1.3em;
+	color: #ffcc00;
+	text-decoration:underline;
+}
+	#point{
+	background:black url(http://www.startgd.com/img/s7coral-point-tablet.jpg) no-repeat center bottom;
+	height:950px;
+	}
+	.center {
+    background:white url(http://www.startgd.com/img/s7coral-intro-tablet.jpg) no-repeat center top;
+		height:500px;
+	}
+	#header .tit {
+	margin-top:550px;
+	margin-bottom:20px;
+}
+	#page {
+  height: 1300px;
+  top: 1500px;
+}
+	#point .link {
+	margin-top:30px;
+}
+	.vert-left {
+	width:380px;
+	padding:30px;
+		margin-left:5%;
+}	
+	#set {
+	background:white url(http://www.startgd.com/img/s7coral-set-tablet.jpg) no-repeat center center;
+}
+	#set .sub{
+		margin-top:220px;
+	} 
+	#set .bn-w {
+	margin-top:30px;
+		margin-bottom:150px;
+}
+	
+}
+@media all and (min-width:1200px){
+		.tit {
+	font-size:4em;
+}
+.sub {
+	font-size:2.5em;
+}
+.txt{
+	font-size: 1.4em;
+}
+.add {
+	font-size: 1.1em;
+}
+.link {
+	font-size: 1.3em;
+	color: #ffcc00;
+	text-decoration:underline;
+}
+	#point{
+	background:black url(http://www.startgd.com/img/s7coral-point-pc.jpg) no-repeat center top;
+	height:1000px;
+	}
+	.center {
+    background:white url(http://www.startgd.com/img/s7coral-intro-pc.jpg) no-repeat center top;
+	height:500px;
+	}
+	#header .tit {
+	margin-top:550px;
+	margin-bottom:20px;
+}
+	#page {
+  height: 1300px;
+  top: 1500px;
+}
+	#point .link {
+	margin-top:30px;
+}
+	.vert-left {
+	width:420px;
+	padding:30px;
+		margin-left:10%;
+}	
+	#set {
+	background:white url(http://www.startgd.com/img/s7coral-set-pc.jpg) no-repeat center center;
+}
+	#set .sub{
+		margin-top:250px;
+	} 
+	#set .bn-w {
+	margin-top:30px;
+		margin-bottom:200px;
+}
+}
+@media all and (min-width:1450px){
+		.tit {
+	font-size:5em;
+}
+.sub {
+	font-size:2.5em;
+}
+.txt{
+	font-size: 1.4em;
+}
+.add {
+	font-size: 1.1em;
+}
+.link {
+	font-size: 1.3em;
+	color: #ffcc00;
+	text-decoration:underline;
+}
+	#point{
+	background:black url(http://www.startgd.com/img/s7coral-point-wide.jpg) no-repeat center top;
+	height:1000px;
+	}
+	.center {
+    background:white url(http://www.startgd.com/img/s7coral-intro-wide.jpg) no-repeat center top;
+	height:550px;
+	}
+	#header .tit {
+	margin-top:600px;
+	margin-bottom:20px;
+}
+	#page {
+  height: 1300px;
+  top: 1600px;
+}
+	#point .link {
+	margin-top:30px;
+}
+	.vert-left {
+	width:450px;
+	padding:30px;
+	left:20%;
+		margin-left:8%;
+}	
+		#set {
+	background:white url(http://www.startgd.com/img/s7coral-set-wide.jpg) no-repeat center right;
+}
+	#set .sub{
+		margin-top:250px;
+	} 
+	#set .bn-w {
+	margin-top:30px;
+		margin-bottom:250px;
+	}
+}

@@ -85,4 +85,5 @@ if (getSession('tmLoggedId')){
 	}
 }
 
+$import = new import();
 $userAgent = new parseUserAgent();

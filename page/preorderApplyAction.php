@@ -15,10 +15,6 @@ try{
 		$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
 		if($isValidPaKey === 0)
 			throw new Exception('올바르지 않은 요청입니다.', 3);
-
-		$isValidPaKey = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE paKey = %i and mbEmail = %s and poKey=%i", $_POST['paKey'], $mb['mbEmail'], $_POST['poKey']);
-		if($isValidPaKey === 0)
-			throw new Exception('올바르지 않은 요청입니다.', 3);
 	}
 	$isApplyExist= DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail = %s and paCancel = 0", $mb['mbEmail']); 
 	$isApplyExist = (int)$isApplyExist;
