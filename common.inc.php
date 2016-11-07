@@ -6,7 +6,6 @@ ini_set( 'display_errors', true );
 	
 ////////////////////////////////// 세션설정
 
-
 ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
 ini_set("session.cookie_lifetime", 0); 
 ini_set("session.cache_expire", 86400); 
