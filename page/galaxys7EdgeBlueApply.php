@@ -15,7 +15,7 @@ $cfg['title'] = '갤럭시S7 엣지 블루코랄 신청안내';
 	
 try{
 
-	list($isApplyExistList, $taKey) = DB::queryFirstList("SELECT COUNT(*), taKey FROM tmApply WHERE mbEmail = %s AND taColor='blue' AND dvKey=664", $mb['mbEmail']);
+	list($isApplyExistList, $taKey) = DB::queryFirstList("SELECT COUNT(*), taKey FROM tmApply WHERE mbEmail = %s AND taColor='blue' AND dvKey=664 AND taCancel=0", $mb['mbEmail']);
 	$isApplyExist = (int)$isApplyExistList;
 	
 

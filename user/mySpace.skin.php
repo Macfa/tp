@@ -19,7 +19,7 @@
 	</div>
 	<br/>
 	<?endif?>
-	<? if ($isExchangeRefundNote7Exist === 1) : ?>
+	<? if ($isExchangeRefundNote7Count === 1) : ?>
 	<div class="myspace-preorder note7">
 		<a href="exchangeRefundNote7State.php" class="preorderLink">
 			<h1 class="preoderTitle">갤럭시 노트7 <? echo $type[$isExchangeRefundNote7Exist['enApplyType']]?> 신청현황</h1>
@@ -42,7 +42,6 @@
 				<li class="myspace-list-wrap"><a href="pointHistory.php" class="myspace-list">포인트 조회</a></li>
 			</ul>
 	<div class="clear"></div>
-
 
 
 	

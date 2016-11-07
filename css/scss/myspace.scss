@@ -1,6 +1,6 @@
-@import '_parsley.scss';
-@import 'common.scss';
-@import '_row.scss';
+@import '_parsley';
+@import 'common';
+@import '_row';
 
 .preorder {
 	margin:0 auto;
@@ -42,6 +42,31 @@
 	}
 }
 .clear {clear:both;}
+
+.myspace-preorder {
+  width: 98%;
+  margin: 0 auto;
+  height: 100px; }
+  .myspace-preorder.v20 {
+    background: #000 url("../img/preorderBanner-v20-bg.jpg") no-repeat center center; }
+  .myspace-preorder.iphone7 {
+    background: #000 url("../img/preorderBanner-iphone7-bg.jpg") no-repeat center center; }
+  .myspace-preorder.note7 {
+    background: #000 url("../img/preorderBanner-note7-bg.jpg") no-repeat center center; }
+  .myspace-preorder.galaxys7edgeBlue {
+    background: #000 url("../img/preorderBanner-s7edgeblue-bg.jpg") no-repeat center center; }
+
+.preorderLink {
+  width: 100%;
+  display: block;
+  text-decoration: none; }
+
+.preoderTitle {
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  font-size: 1.9em;
+  text-shadow: 0 0 20px #000; }
 
 
 

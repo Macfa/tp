@@ -6,7 +6,7 @@ include_once(PATH_LIB."/lib.parsing.inc.php");
 //include_once(PATH_LIB."/lib.calculator.inc.php");
 
 try{
-	$applyMember = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s", $mb['mbEmail']);
+	$applyMember = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s AND taChangeCarrier='kt' AND taColor != 'blue'", $mb['mbEmail']);
 	$isApplyMemberExist = (int)DB::count();	 
 	if($isApplyMemberExist === 1)
 		throw new Exception('이미 신청서를 작성하셨습니다.', 3);

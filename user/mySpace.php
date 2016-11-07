@@ -9,12 +9,12 @@ $js_file = '<script type="text/javascript" src="'.PATH_JS.'/myspace.js"></script
 $isV20ApplyExist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderV20 WHERE mbEmail=%s and pvCancel = 0", $mb['mbEmail']);	
 $isApplyExist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0", $mb['mbEmail']);	
 $preorderTable = DB::queryFirstRow("SELECT * FROM tmPreorder WHERE poDisplay=1");
-$isExchangeRefundNote7Exist = DB::queryFirstField("SELECT COUNT(*) FROM tmExchangeRefundNote7 WHERE mbEmail=%s", $mb['mbEmail']);	
-$isGalaxyS7edgeBlueExist = DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4", $mb['mbEmail']);	
+$isExchangeRefundNote7Exist = DB::queryFirstRow("SELECT * FROM tmExchangeRefundNote7 WHERE mbEmail=%s", $mb['mbEmail']);	
+$isGalaxyS7edgeBlueExist = DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4 AND taCancel = 0", $mb['mbEmail']);	
 
 $isApplyExist = (int)$isApplyExist;
 $isV20ApplyExist = (int)$isV20ApplyExist;
-$isExchangeRefundNote7Exist = (int)$isExchangeRefundNote7Exist;
+$isExchangeRefundNote7Count = (int)$isExchangeRefundNote7Exist;
 $isGalaxyS7edgeBlueExist =(int)$isGalaxyS7edgeBlueExist;
 
 
