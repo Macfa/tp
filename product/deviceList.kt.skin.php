@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="grid-item-tit">
-				갤럭시 S7 엣지 			</div>
+				V20			</div>
 		</a>
 	</li>
 </ul>
