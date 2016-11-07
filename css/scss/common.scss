@@ -55,6 +55,8 @@ body {
 .simplehead-logo {color:inherit;text-decoration:none;}
 img{display:block;max-width:100%;height:auto;margin:0 auto;text-align:center}
 .wrap{margin:0 auto;padding:0 1%;position:relative;}
+.wrap-dense{margin:0 auto;text-align:center;}
+
 .media-container {
 	position: relative;
 
@@ -72,6 +74,7 @@ img{display:block;max-width:100%;height:auto;margin:0 auto;text-align:center}
 		top:0;
 	}	
 }
+
 .youtube{
 	background-position: center center;
     background-repeat: no-repeat;
@@ -782,6 +785,9 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	}
 	.layer-banner{
 		width:500px;
+	}
+	.wrap-dense{
+		width:700px;
 	}
 
 }
