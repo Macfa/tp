@@ -118,6 +118,7 @@ $gift = array(
 
 
 
+
 list($deviceRamKey,$parentKey) = DB::queryFirstList("SELECT dvTit, dvParent FROM tmDevice WHERE dvKey=%i", $editMember['dvKey']);
 $deviceKey = DB::queryFirstField("SELECT dvId FROM tmDevice WHERE dvKey=%i",$parentKey );
 
