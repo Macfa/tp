@@ -61,12 +61,11 @@
 				</a>
 			</li>
 			<?php endif?>
-			<?php if (($_GET['carrier']== 'sk' && $_GET['manuf'] == 'all') || ($_GET['carrier']== 'sk' && $_GET['manuf'] == '') || ($_GET['carrier']== 'sk' && $_GET['manuf'] == 'samsung') || $_GET['manuf'] == 'samsung' 
-						|| $device['dvManuf']=== 'samsung' ):?>
+			<?php if ($_GET['manuf'] == 'all'|| $_GET['manuf'] == '' || $_GET['manuf'] == 'apple' || $device['dvManuf']=== 'apple' ):?>
 			<li class="nav-device-item">
-				<a href="<?=$cfg['path']?>/page/preOrderNote7.php" class="nav-device-item-wrap" id="link-snb-device-v20">
-					<i class="ico-device-galaxy"></i>
-					<span class="nav-device-tit">갤럭시 노트7</span>
+				<a href="/page/preorderApply.php?device=아이폰7" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
+					<i class="ico-device-iphone"></i>
+					<span class="nav-device-tit">아이폰7 </span>
 				</a>
 			</li>
 			<?php endif?>
