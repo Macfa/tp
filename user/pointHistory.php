@@ -5,7 +5,7 @@ $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/mypageList.css" type="text
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/cart.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
 
-$arrPointList = DB::query("SELECT * FROM tmPointHistory WHERE mbEmail = %s", $mb['mbEmail']);
+$arrPointList = DB::query("SELECT * FROM tmPointHistory WHERE mbEmail = %s ORDER BY phCont DESC", $mb['mbEmail']);
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 require_once("pointHistory.skin.php");		
