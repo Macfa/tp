@@ -48,7 +48,7 @@
 				갤럭시 S7 엣지 			</div>
 		</a>
 	</li><li class="grid-item-wrap">
-		<a class="grid-item" href="/page/preorderApply.php?device=BeY" id="link-deviceList-bey">
+		<a class="grid-item" href="/page/bey.php" id="link-deviceList-bey">
 			<div class="grid-item-thumb-wrap">
 				<div class="vert-wrap">
 				<div class="vert-align">

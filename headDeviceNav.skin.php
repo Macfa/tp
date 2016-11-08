@@ -24,7 +24,7 @@
 					<span class="nav-device-tit">갤럭시 S7 엣지 </span>
 				</a>
 			</li><li class="nav-device-item">			
-				<a href="/page/preorderApply.php?device=BeY" class="nav-device-item-wrap" id="link-snb-device-egg">
+				<a href="/page/bey.php" class="nav-device-item-wrap" id="link-snb-device-egg">
 					<i class="ico-device-galaxy"></i>
 					<span class="nav-device-tit">비와이폰</span>
 				</a>
