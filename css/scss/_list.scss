@@ -165,7 +165,6 @@ $gift-big-col-height : 400px;
 	&:hover{
 		padding:1px;
 		.grid-item{border:solid 2px $mainYellow;}
-		.select-btn-tit{display:block}
 	}
 }
 .grid-item{
@@ -233,6 +232,8 @@ $gift-big-col-height : 400px;
 }
 .gift-view{
 	font-size:0;
+	background:white;
+	min-height:100%;
 	img{
 		width:100%;
 		height:auto;
