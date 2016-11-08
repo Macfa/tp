@@ -6,7 +6,6 @@ $js_file = '<script type="text/javascript" src="'.PATH_JS.'/cart.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
 
 $arrPointList = DB::query("SELECT * FROM tmPointHistory WHERE mbEmail = %s ORDER BY phCont DESC", $mb['mbEmail']);
-
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 require_once("pointHistory.skin.php");		
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
