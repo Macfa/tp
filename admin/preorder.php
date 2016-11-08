@@ -11,8 +11,8 @@ switch ($_GET['searchDevice']) {
         break;
     case 4:
 
-		require_once("preorder.s7edgeblue.php");
-        require_once("preorder.s7edgeblue.skin.php");
+		require_once("preorderS7EdgeBlue.php");
+        require_once("preorderS7EdgeBlue.skin.php");
         break;
 	default:
 		require_once("preorder.default.php");

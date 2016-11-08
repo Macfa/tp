@@ -144,6 +144,7 @@ $deviceKey = array(
 	'745' => '아이폰7플러스 32G',
 	'746' => '아이폰7플러스 128G',
 	'747' => '아이폰7플러스 256G',
+	'749' => '비와이폰'
 );
 
 
@@ -152,13 +153,19 @@ $color = array(
 	'black' => '블랙',
 	'silver' => '실버',
 	'gold' => '골드',
-	'roseGold' => '로즈골드'
+	'roseGold' => '로즈골드',
+	'white' => '화이트'
 );
 
-$carrier = array(
-	'sk' => 'sk',
-	'kt' => 'kt'
-);
+foreach($existList as $key => $row) {	
+	
+$preorderOrderNum = $row['paWatingNumber'] + 100; 
+	$preorderOrderNumString[$key] = "01 - ".$preorderOrderNum;
+	if($row['paWatingNumber'] > 200){		
+		$preorderOrderNum = $preorderOrderNum - 200;
+		$preorderOrderNumString[$key] = "02 - ".$arrOrderNum[$key];
+	}
+}
 
 
 ?>

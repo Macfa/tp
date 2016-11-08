@@ -18,20 +18,18 @@
 	<br/>
 	<form method="post">
 		<div class="center">
-			<!--<? if( $count > 15 || isExist($search))  :?>
 				선택된 행을
 				<select name="changeProcess" class="js-stateSelect">
 					<? foreach ($changeState as $key => $val) : ?>				
 						<option value="<?echo $key?>"><?echo $val?></option>
 					<?endforeach?>
 				</select>
-				상태로 -->
+				상태로 
 				<br/>	
-				
 					<input type="hidden" value="<?echo $searchDevice?>" name="hidden">
-					<!--<input type="submit" class="btn-filled" data-action="preorderAction.php" value="적용"/>-->
-					<input type="submit" class="btn-filled" data-action="preorder.s7edgeblueDelete.php" value="취소"/>
-					<input type="submit" class="btn-filled" data-action="preorder.s7edgeblueDeleteRestore.php" value="취소복구"/>
+					<input type="submit" class="btn-filled" data-action="preorderS7EdgeBlueAction.php" value="적용"/>
+					<input type="submit" class="btn-filled" data-action="preorderS7EdgeBlueDelete.php" value="취소"/>
+					<input type="submit" class="btn-filled" data-action="preorderS7EdgeBlueDeleteRestore.php" value="취소복구"/>
 				<!--<br/>
 				<input type="submit" class="btn-filled" data-action="preorderTrackingNum.php" value="송장번호입력"/>-->
 				<br/><br/>
@@ -39,8 +37,7 @@
 				<?if (isExist($downloadFullUrl)):?>
 					<button class="btn-filled-sub-dense" data-action="<?echo $downloadFullUrl ?>">조회된 사전예약자 엑셀 다운로드</button>
 				<?endif?>
-				<button class="btn-filled-sub-dense" data-action="preorder.s7edgeblueDownload.php">체크된 사전예약자 엑셀다운로드</button>
-			<?endif?>	
+				<button class="btn-filled-sub-dense" data-action="preorderS7EdgeBlueDownload.php">체크된 사전예약자 엑셀다운로드</button>			
 		</div>
 		<br/>
 		<table class="table">
@@ -53,7 +50,7 @@
 							</div>
 						</label>
 					</td>
-					<!--<td class="table-item-str">진행상황</td>-->
+					<td class="table-item-str">진행상황</td>
 					<td class="table-item-str">예약자명</td>
 					<td class="table-item-str">이메일</td>
 					<td class="table-item-str">전화번호</td>
@@ -80,7 +77,7 @@
 								<div class="inp-chk-box"></div>
 							</label>
 						</td>	
-						<!--<td class="table-item-str"><?php echo $state[$row['paProcess']] ?></td>-->
+						<td class="table-item-str"><?php echo $state[$row['taProcess']] ?></td>
 						<td class="table-item-str"><!--<a href="/page/preorderApply.php?device=<?echo $preorderTitle?>&mbEmail=<?echo $row['taEmail']?>">--><?php echo $row['mbName'] ?></td>
 						<td class="table-item-str"><?php echo $row['mbEmail'] ?></td>
 						<td class="table-item-str"><?php echo $row['mbPhone'] ?></td>
