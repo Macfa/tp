@@ -383,8 +383,7 @@ class parseSupportPrice{
 			}
 		}
 	}
-
-
+	
 	private function getTitle($page) {
 		$page = getRexMatch($page, $this->arrRexColumn[$this->carrier]);
 		$rows = explode('|||', $this->stripTags(str_replace('</th>', '|||', $page)));
