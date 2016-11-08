@@ -319,6 +319,7 @@ function syncCurrentAndTargetCarrier() {
 		return true;
 
 	if($paDevice == 'bey'){
+		
 		$('[name=paApplyType]').parent('.inp-chk').show();
 
 		if($paCurrentCarrier == 'kt'){
