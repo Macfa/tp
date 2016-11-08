@@ -137,7 +137,7 @@ if($isApplyExist === 0 && $isEdit === FALSE){
 	
 	
 	$SMS = new SMS();
-	$sendCont = "[티플 사전예약] 티플에서 갤럭시 s7엣지 블루코랄을 사전예약해주셔서 감사합니다.";
+	$sendCont = "[티플 사전예약] 갤럭시 s7엣지 블루코랄을 신청해해주셔서 감사합니다.";
 	$SMS->sendMode(0)->sendMemberPhone($_POST['taPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 }
 

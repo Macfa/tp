@@ -5,20 +5,20 @@ include_once(PATH_LIB."/lib.snoopy.inc.php");
 include_once(PATH_LIB."/lib.parsing.inc.php");
 //include_once(PATH_LIB."/lib.calculator.inc.php");
 
-if(isExist($_GET['mbEmail']) && isAdmin === false)
+if(isExist($_GET['mbEmail']) && $isAdmin === false)
 	$mbEmail = $_GET['mbEmail'];
 else
 	$mbEmail = $mb['mbEmail'];
 
-$preorderTitle = DB::queryFirstRow("SELECT poKey, poDeviceName FROM tmPreorder WHERE poDeviceName=%s",$_GET['device']);
-$editMember = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s",$mbEmail);
+$preorderTitle = DB::queryFirstRow("SELECT * FROM tmPreorder WHERE poDeviceName=%s",$_GET['device']);
+$editMember = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s AND poKey=%s and paCancel = 0",$mbEmail,$preorderTitle['poKey']);
 
 
 try{
-	$preorder = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0", $mb['mbEmail']);	
+	$preorder = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0 AND poKey=%s", $mb['mbEmail'], $preorderTitle['poKey']);	
 	$isApplyExist = (int)$preorder;
 
-	if($isApplyExist === 0 && $_GET['v'] === 'edit')
+	if($isApplyExist === 0 && $_GET['v'] == 'edit')
 		throw new Exception('구매후 수정이 가능합니다', 2);
 
 	if(isExist($_GET['mbEmail']) === true && $isAdmin === FALSE)
@@ -30,22 +30,28 @@ try{
 	if($isApplyExist === 1 && $_GET['v'] == 'edit' && $preorder['paProcess'] >=3)
 		throw new Exception('수정할수 없습니다.', 3);
 
-	if(!$_GET['device'])
-		throw new Exception('잘못된 접근 입니다', 1);
+	if(isExist($_GET['mbEmail']) === true){
 
-	if($_GET['device']=== '' || $_GET['device'] != $preorderTitle ['poDeviceName'])
-		throw new Exception('잘못된 접근 입니다', 1);
+		if(!$_GET['device'])
+			throw new Exception('잘못된 접근 입니다', 1);
 
-	if($mbEmail != $editMember['mbEmail'])
-		throw new Exception('잘못된 접근 입니다', 1);
+		if(isNullVal($_GET['device']) || $_GET['device'] != $preorderTitle ['poDeviceName'])
+			throw new Exception('잘못된 접근 입니다', 1);
+		if(isExist($editMember)){
+			if($mbEmail != $editMember['mbEmail']){
+				throw new Exception('잘못된 접근 입니다', 1);
+			}
+		}
+	}
+
 
 } catch (Exception $e) {	
 	if ($e->getCode() === 1)
 		alert($e->getMessage(), $cfg['path']);
 	else if ($e->getCode() === 2)
-		alert($e->getMessage(), $cfg['path']."/page/preorderIphone7.php");
+		alert($e->getMessage(), $cfg['path']."/page/preorderApply.php?device=".$preorderTitle['poDeviceName']);
 	else if ($e->getCode() === 3)	
-		alert($e->getMessage(), $cfg['path']."/user/preorderState.php");
+		alert($e->getMessage(), $cfg['path']."/user/preorderState.php?device=".$preorderTitle['poDeviceName']);
 }
 
 
@@ -74,6 +80,8 @@ if (isEmail($mb['mbEmail']) === true && $isLogged === TRUE)
 if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $isLogged === TRUE){
 	$validPhone = $mb['mbPhone'];
 }
+
+// 어드민에서 신청정보 수정시 ================================
 
 if(isExist($_GET['mbEmail']) === true && $isAdmin === TRUE){	
 	$vailName = $editMember['paName'];
@@ -108,9 +116,62 @@ $gift = array(
 	'skMirroring' => 'SK 미러링'
 );
 
+
+
 list($deviceRamKey,$parentKey) = DB::queryFirstList("SELECT dvTit, dvParent FROM tmDevice WHERE dvKey=%i", $editMember['dvKey']);
 $deviceKey = DB::queryFirstField("SELECT dvId FROM tmDevice WHERE dvKey=%i",$parentKey );
+
+} 
+
+// END================================
+
+
+
+switch($preorderTitle ['poKey']){
+	case 3 :
+	$deviceName = array (
+	'iphone7' => '아이폰7',
+	'iphone7plus' => '아이폰7 플러스'
+	);
+	break;
+	case 5 : 
+	$deviceName =array(		
+	'bey' => '비와이폰'
+	);
+	break;
 }
+
+switch($preorderTitle ['poKey']){
+	case 3 :
+	$paColorType = array (
+	'silver' => '실버',
+	'gold' => '골드',
+	'roseGold' => '로즈골드'
+	);
+	break;
+	case 5 : 
+	$paColorType =array(		
+	'white' => '화이트',
+	'black' => '블랙'
+	);
+	break;
+}
+
+switch($preorderTitle ['poKey']){
+	case 3 :
+	$paDeviceRam = array (
+	'128G' => '128G',
+	'256G' => '256G'
+	);
+	break;
+	case 5 : 
+	$paDeviceRam =array(		
+	'64G' => '14 + 64G'
+	);
+	break;
+}
+
+
 
 /*
 $phone = new deviceInfo();
@@ -132,7 +193,6 @@ $blackApply = (int)DB::queryFirstField("SELECT count(*) FROM tmPreorderApplyList
 if ($blackApply >= 20) $isDisableBlack = 'disabled';
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
-
 require_once("preorderApply.skin.php");
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 ?>

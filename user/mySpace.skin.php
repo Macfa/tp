@@ -11,10 +11,10 @@
 		</a>
 	</div>
 	<?endif?>
-	<? if ($isApplyExist >= 1) : ?>
-	<div class="myspace-preorder <?echo $deviceEngName?>">
-		<a href="<?echo $applyUrl?>" class="preorderLink">
-			<h1 class="preoderTitle"><?echo $applyTitle?></h1>
+	<? if ($isIphone7Exist === 1) : ?>
+	<div class="myspace-preorder iphone7">
+		<a href="/user/preorderState.php?device=아이폰7" class="preorderLink">
+			<h1 class="preoderTitle">아이폰7 신청현황</h1>
 		</a>
 	</div>
 	<br/>
@@ -31,6 +31,14 @@
 	<div class="myspace-preorder galaxys7edgeBlue">
 		<a href="/user/galaxys7EdgeBlueState.php" class="preorderLink">
 			<h1 class="preoderTitle">갤럭시 S7엣지 블루코랄 신청현황</h1>
+		</a>
+	</div>
+	<br/>
+	<?endif?>
+	<? if ($isBeyExist === 1) : ?>
+	<div class="myspace-preorder bey">
+		<a href="/user/preorderState.php?device=BeY" class="preorderLink">
+			<h1 class="preoderTitle">BeY폰 신청현황</h1>
 		</a>
 	</div>
 	<br/>

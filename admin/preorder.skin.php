@@ -18,7 +18,7 @@
 	<br/>
 	<form method="post">
 		<div class="center">
-			<? if( $count > 15 || isExist($search))  :?>
+			
 				선택된 행을
 				<select name="changeProcess" class="js-stateSelect">
 					<? foreach ($changeState as $key => $val) : ?>				
@@ -39,7 +39,7 @@
 					<button class="btn-filled-sub-dense" data-action="<?echo $downloadFullUrl ?>">조회된 사전예약자 엑셀 다운로드</button>
 				<?endif?>
 				<button class="btn-filled-sub-dense" data-action="preorderApplyListDownload.php">체크된 사전예약자 엑셀다운로드</button>
-			<?endif?>	
+			
 		</div>
 		<br/>
 		<table class="table">
@@ -51,9 +51,9 @@
 							<div class="inp-chk-box">
 							</div>
 						</label>
-					</td>
+					</td>					
 					<td class="table-item-str">진행상황</td>
-					<td class="table-item-str">예약자명</td>
+					<td class="table-item-str">예약자명</td>										
 					<td class="table-item-str">이메일</td>
 					<!--<td class="table-item-str">송장번호</td>-->
 					<td class="table-item-str">전화번호</td>
@@ -64,7 +64,7 @@
 					<td class="table-item-str">순 번</td>
 					<td class="table-item-str">신청기기</td>
 					<td class="table-item-str">색 상</td>
-					<td class="table-item-str">2지망 색상</td>
+					<!--<td class="table-item-str">2지망 색상</td>-->
 					<td class="table-item-str">선택요금제</td>
 					<td class="table-item-str">선택사은품</td>				
 					<td class="table-item-str">성별</td>					
@@ -75,15 +75,15 @@
 			</thead>	
 			<tbody>
 				<? foreach($existList as $row) : ?>
-					<tr class="js-cartRow<?php echo $row['paKey']?>" <?php echo $row['cancelClass']?>>
+					<tr class="js-cartRow<?php echo $row['paKey']?>" <?php echo $row['cancelClass']?>>					
 						<td class="chk-wrap">
 							<label class="inp-chk">
 								<input type="checkbox" class="js-tableChk" value="<?php echo $row['paKey']?>" name="chk[]" ?>
 								<div class="inp-chk-box"></div>
 							</label>
-						</td>	
+						</td>							
 						<td class="table-item-str"><?php echo $state[$row['paProcess']] ?></td>
-						<td class="table-item-str"><a href="/page/preorderApply.php?device=<?echo $preorderTitle?>&mbEmail=<?echo $row['paEmail']?>"><?php echo $row['paName'] ?></a></td>
+						<td class="table-item-str"><a href="/page/preorderApply.php?device=<?echo $preorderTitle?>&mbEmail=<?echo $row['paEmail']?>"><?php echo $row['paName'] ?></a></td>			
 						<td class="table-item-str"><?php echo $row['paEmail'] ?></td>
 						<!--<td class="table-item-str"><input type="text" value="<?php echo (isExist($row['paTrackingNum']))?$row['paTrackingNum']:"" ?>" name="paTrackingNum[]" class="trackinNum js-trackingNum"></td>-->
 						<td class="table-item-str"><?php echo $row['paPhone'] ?></td>
@@ -94,13 +94,14 @@
 						<td class="table-item-str"><?php echo $row['paWatingNumber'] ?></td>
 						<td class="table-item-str"><?php echo $deviceKey[$row['dvKey']] ?></td>
 						<td class="table-item-str"><?php echo $color[$row['paColorType']] ?></td>
-						<td class="table-item-str"><?php echo $color[$row['pa2ndColor']] ?></td>
+						<!--<td class="table-item-str"><?php echo $color[$row['pa2ndColor']] ?></td>-->
 						<td class="table-item-str"><?php echo (isExist($plan[$row['paPlan']]))?$plan[$row['paPlan']]:$row['paPlan'] ?></td>
 						<td class="table-item-str"><?php foreach($row['paGift'] as $giftList){echo $gift[$giftList]."<Br/>";} ?></td>						
 						<td class="table-item-str"><?php echo $sex [$row['paSexType']] ?></td>					
 						<td class="table-item-str"><?php echo $cancel[$row['paCancel']] ?></td>
 						<td class="table-item-str"><?php echo $row['paContactTime'] ?></td>
 						<td class="table-item-str"><?php echo $row['paDatetime'] ?></td>
+						
 					</tr>
 				<?php endforeach?>
 			</tbody>

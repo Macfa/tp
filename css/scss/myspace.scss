@@ -55,6 +55,8 @@
     background: #000 url("../img/preorderBanner-note7-bg.jpg") no-repeat center center; }
   .myspace-preorder.galaxys7edgeBlue {
     background: #000 url("../img/preorderBanner-s7edgeblue-bg.jpg") no-repeat center center; }
+   .myspace-preorder.bey {
+    background: #000 url("../img/preorderBanner-bey-bg.jpg") no-repeat center center; }
 
 .preorderLink {
   width: 100%;
@@ -76,7 +78,10 @@
 
 }
 @media all and (min-width:900px){
-	.myspace-wrap{width:900px; margin:0 auto;}
+	.myspace-wrap {
+    width: 900px;
+    margin: 0 auto;
+	}
 }
 @media all and (min-width:1200px){
 	

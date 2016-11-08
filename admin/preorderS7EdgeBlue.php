@@ -12,7 +12,7 @@ if(isExist($_GET['chkedCancel']) || isExist($_GET['searchDevice']) || isExist($s
 	$sql  .= " WHERE";
 	$downloadUrl = $_SERVER['REQUEST_URI'];
 	$downloadUrl = explode("?",$downloadUrl);
-	$downloadFullUrl = "preorder.s7edgeblueDownload.php?".$downloadUrl[1];
+	$downloadFullUrl = "preorderS7EdgeBlueDownload.php?".$downloadUrl[1];
 }
 
 if(isExist($search)){
@@ -67,7 +67,7 @@ $type = array(
 );
 
 foreach($existList as $key => $row) {			
-	$existList[$key]['cancelClass'] = ($row['paCancel']==='1')?'style=color:red':'1';
+	$existList[$key]['cancelClass'] = ($row['taCancel']==='1')?'style=color:red':'1';
 }
 $gift = array(
 	'tablet' => '엠피지오 태블릿',

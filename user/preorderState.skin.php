@@ -1,6 +1,6 @@
 <div class="mypage-wrap center ">
 	<h1 class="tit center"></h1>
-	<h2 class="tit-sub">아이폰 신청 내역</h2>
+	<h2 class="tit-sub"><?echo $preorderList['poDeviceName']; ?> 신청 내역</h2>
 	<div class="tit-sub">진행단계</div>
 	<ul class="preorder-process-wrap">
 		<?php foreach($state as $key => $val) :?>
@@ -41,11 +41,9 @@
 				<span class="label"><i class="ico-plan-small"></i> 요금제</span><span class="cont"><?php echo (isExist($plan[$arrOrderList['paPlan']]))?$plan[$arrOrderList['paPlan']]:$arrOrderList['paPlan']; ?></span>
 			</li><li>
 				<span class="label"><i class="ico-color-small"></i> 색상</span><span class="cont"><?php echo $color[$arrOrderList['paColorType']] ?></span>	
-			</li><li>
-				<span class="label"><i class="ico-color-small"></i>2지망 색상</span><span class="cont"><?php echo $color[$arrOrderList['pa2ndColor']] ?></span>	
-			</li><li>
+			</li><? if (isExist($gift[$giftList])) :?><li>
 				<span class="label"><i class="ico-gift-small"></i> 선택 사은품</span><span class="cont"><?php foreach($arrOrderList['paGift'] as $giftList){echo ($gift[$giftList])?$gift[$giftList]:$giftList."<Br/>";} ?></span>	
-			</li><?php if(isExist($arrOrderList['paEtc2'])) :?><li>
+			</li><?endif?><?php if(isExist($arrOrderList['paEtc2'])) :?><li>
 				<span class="label"><i class="ico-gift-small"></i> 기타사항</span><span class="cont">에그신청</span>	
 			</li><?php endif?>		
 		<Br/>
@@ -59,12 +57,13 @@
 	<?if($arrOrderList['paChangeCarrier'] === 'kt') :?>
 		<div class="center"><i class="ico-caution-small"></i> 원하시는 색상은 반드시 메모란에 적어주세요!</div>
 	<? endif ?>
-
+	<!--
 	<?if($arrOrderList['paProcess'] == 0) :?>
 		<span class="cont"><a href="/page/preorderApplyDelete.php" class="btn-flat-primary-dense">취소하기</a></span>
 	<? endif ?>
+	-->
 	<?if($arrOrderList['paProcess'] < 3) :?>
-		<span class="cont"><a href="/page/preorderApply.php?device=<?echo $preorderTitle['poDeviceName']?>&v=edit" class="btn-filled-primary-dense">수정하기</a></span></li>		
+		<span class="cont"><a href="/page/preorderApply.php?device=<?echo $preorderList['poDeviceName']?>&v=edit" class="btn-filled-primary-dense">수정하기</a></span></li>		
 	<? endif ?>
 	
 	<?if($arrOrderList['paProcess'] == 2 ) :?>

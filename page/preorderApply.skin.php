@@ -1,8 +1,9 @@
 
 <section style="background:white">
-	<img src="../img/iphone7.jpg">
+	<img src="../img/<?echo $preorderTitle['poEngName']?>.jpg">
 </section>
 <br/>
+
 <div class="preorder-wrap">
 	<?php if($isLogged == false) :?>
 	<section class="section">
@@ -13,10 +14,10 @@
 	<form action="preorderApplyAction.php" method="post">
 		<input type="hidden" name="poKey" value="<?php echo $preorderTitle['poKey']?>">
 		<input type="hidden" name="paKey" value="<?php echo $preorder['paKey']?>">
-		<input type="hidden" name="mbEmail" value="<?php echo $_GET['mbEmail']?>">
+		<input type="hidden" name="mbEmail" value="<?php echo $_GET['mbEmail']?>"> <!-- // 어드민 회원수정시 -->
 		<input type="hidden" name="isEditKey" value="<?php echo $_GET['v']?>">
 		<section class="section txt-left">
-			<h2 class="tit-sub">아이폰7 / 아이폰7플러스 <?echo (isExist($_GET['mbEmail']) === true && $isAdmin === TRUE)?"수정하기":"신청하기"?></h2>
+			<h2 class="tit-sub"><? echo $preorderTitle['poDeviceName']; ?> <?echo (isExist($_GET['mbEmail']) === true && $isAdmin === TRUE)?"수정하기":"신청하기"?></h2>
 			<i class="ico-person-small"></i>예약자명 <Br/> <span><?php echo $vailName?></span><br/><br/>
 			<label class="inp-wrap">
 				<i class="ico-email-small"></i>
@@ -51,19 +52,17 @@
 			</fieldset>
 			<fieldset class="inp-group" data-default=<?echo $deviceKey?>>
 				모델명 <br/>
-				<label class="inp-chk">
-					<input type="radio" name="paDevice" value="iphone7"/>
-					<div class="inp-chk-box"></div>
-					아이폰7
-				</label>
-				<label class="inp-chk">
-					<input type="radio" name="paDevice" value="iphone7plus"/>
-					<div class="inp-chk-box"></div>
-					아이폰7 플러스
-				</label>				
+				<?php foreach($deviceName as $key => $val) : ?>
+					<label class="inp-chk">
+						<input type="radio" name="paDevice" value="<?echo $key ?>"/>
+						<div class="inp-chk-box"></div>
+						<?echo $val ?>
+					</label>				
+				<?php endforeach ?>
 			</fieldset>
 			<fieldset class="inp-group">
-					<i class="ico-color-small"></i> 색상 <br/>
+				<i class="ico-color-small"></i> 색상 <br/>
+				<?php if($preorderTitle ['poKey'] == 3 ) :?>
 					<label class="inp-chk <?php echo $isDisableJetBlack ?>">
 						<input type="radio" name="paColorType" value="jetBlack" <?php echo $isDisableJetBlack ?>/>
 						<div class="inp-chk-box"></div>
@@ -74,24 +73,19 @@
 						<div class="inp-chk-box"></div>
 						블랙
 					</label>
+				<?php endif ?>
+				<?php foreach($paColorType as $key => $val) : ?>
 					<label class="inp-chk">
-						<input type="radio" name="paColorType" value="silver"/>
+						<input type="radio" name="paColorType" value="<?echo $key ?>"/>
 						<div class="inp-chk-box"></div>
-						실버
+						<?echo $val ?>
 					</label>
-					<label class="inp-chk">
-						<input type="radio" name="paColorType" value="gold"/>
-						<div class="inp-chk-box"></div>
-						골드
-					</label>
-					<label class="inp-chk">
-						<input type="radio" name="paColorType" value="roseGold"/>
-						<div class="inp-chk-box"></div>
-						로즈골드
-					</label>
+				<?php endforeach ?>
+				<?php if($preorderTitle ['poKey'] == 3 ) :?>
 					<Br/>
 					<i class="ico-caution-small"></i> 블랙/제트블랙 100대 선착순 신청시<span class="txt-highlight"> 즉시 수령! </span>
-				</fieldset>
+				<?php endif ?>
+			</fieldset>
 			<!--<fieldset class="inp-group js-secondColor" data-default=<?echo $editMember['pa2ndColor']?>>
 				<i class="ico-color-small"></i> 2지망 색상 <span class="txt-advice">(색상이 없을시 대신 받을 색상)</span><br/>
 				<label class="inp-chk">
@@ -123,21 +117,20 @@
 			-->
 			<fieldset class="inp-group" data-default=<?echo $deviceRamKey?>> 
 				용량 <br/>
-				<label class="inp-chk js-capacity32">
-					<input type="radio" name="paDeviceRam" value="32G"/>
-					<div class="inp-chk-box"></div>
-					32G
-				</label>
-				<label class="inp-chk">
-					<input type="radio" name="paDeviceRam" value="128G"/>
-					<div class="inp-chk-box"></div>
-					128G
-				</label>
-				<label class="inp-chk">
-					<input type="radio" name="paDeviceRam" value="256G"/>
-					<div class="inp-chk-box"></div>
-					256G
-				</label>
+				<?php if($preorderTitle ['poKey'] == 3 ) :?>
+					<label class="inp-chk js-capacity32">
+						<input type="radio" name="paDeviceRam" value="32G"/>
+						<div class="inp-chk-box"></div>
+						32G
+					</label>
+				<?php endif ?>
+				<?php foreach($paDeviceRam as $key => $val) : ?>
+					<label class="inp-chk">
+						<input type="radio" name="paDeviceRam" value="<?echo $key ?>"/>
+						<div class="inp-chk-box"></div>
+						<?echo $val ?>
+					</label>
+				<?php endforeach ?>
 			</fieldset>
 			<fieldset class="inp-group" data-default=<?echo $editMember['paCurrentCarrier']?>>
 				<i class="ico-carrier-small"></i> 현재 이용중인 통신사 <br/>
@@ -178,25 +171,29 @@
 
 			<fieldset class="inp-group" data-default=<?echo $editMember['paChangeCarrier']?>>
 				<i class="ico-carrier-small"></i> 변경 통신사 <br/>
+				<?php if($preorderTitle ['poKey'] == 3 ) :?>
 				<label class="inp-chk">
 					<input type="radio" name="paChangeCarrier" value="sk"/>
 					<div class="inp-chk-box"></div>
 					SKT
-				</label>
+				</label>				
+				<?endif?>
 				<label class="inp-chk">
 					<input type="radio" name="paChangeCarrier" value="kt"/>
 					<div class="inp-chk-box"></div>
 					KT olleh
 				</label>
-			</fieldset>			
-			<fieldset class="inp-group" data-default="<?echo $editMember['paEtc2']?>">
-				<i class="ico-carrier-small"></i> 에그도 같이 신청<br/>
-				<label class="inp-chk">
-					<input type="checkbox" name="paEtc2" value="egg"/>
-					<div class="inp-chk-box"></div>
-					신청하고 사은품 업그레이드 하겠습니다.
-				</label>
 			</fieldset>	
+			<?php if($preorderTitle ['poKey'] == 3 ) :?>		
+				<fieldset class="inp-group" data-default="<?echo $editMember['paEtc2']?>">
+					<i class="ico-carrier-small"></i> 에그도 같이 신청<br/>
+					<label class="inp-chk">
+						<input type="checkbox" name="paEtc2" value="egg"/>
+						<div class="inp-chk-box"></div>
+						신청하고 사은품 업그레이드 하겠습니다.
+					</label>
+				</fieldset>	
+			<? endif ?>
 			<div class="inp-tit"><i class="ico-plan-small"></i> 요금제선택 : <?echo $plan[$editMember['paPlan']]?></div>
 			<br/>
 			<select class="js-planselect inp-select" style="height:60px;border:solid 1px rgba(0,0,0,0.15)"  name="paPlan" data-default=<?echo $editMember['paPlan']?>>
@@ -315,19 +312,29 @@ function syncCurrentAndTargetCarrier() {
 	var $paApplyType = $('[name=paApplyType]:checked').val();
 	var $paCurrentCarrier = $('[name=paCurrentCarrier]:checked').val();
 	var $targetCarrier = $('[name=paChangeCarrier]:checked').val();
+	var $paDevice = $('[name=paDevice]:checked').val();
+	
 
 	if(!$paCurrentCarrier)
 		return true;
 
+	if($paDevice == 'bey'){
+		$('[name=paApplyType]').parent('.inp-chk').show();
+
+		if($paCurrentCarrier == 'kt'){
+			$('[name=paApplyType][value=02]').prop('checked',false);
+			$('[name=paApplyType][value=02]').parent('.inp-chk').hide();
+			return true;
+		}
+	}
 	if($('[name=paChangeCarrier][value='+$paCurrentCarrier+']').length < 1) {
 		if($paApplyType == '06') {
 			$('[name=paApplyType]').prop('checked',false);
 			$('[name=paApplyType][value=02]').prop('checked',true);
 			$paApplyType = '02';
 		}
+
 		$('[name=paApplyType][value=06]').parent('.inp-chk').hide();
-	}else{
-		$('[name=paApplyType]').parent('.inp-chk').show();
 	}
 
 	if($paApplyType == '06') {
