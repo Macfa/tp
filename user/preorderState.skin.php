@@ -30,7 +30,7 @@
 			<li>
 				<span class="label"><i class="ico-person-small"></i> 신청 디바이스 </span><span class="cont"><?php echo $device[$arrOrderList['dvKey']] ?></span>								
 			</li><li>
-				<span class="label"><i class="ico-person-small"></i> 순 번</span><span class="cont"><?php echo $arrOrderList['paWatingNumber'] ?></span>								
+				<span class="label"><i class="ico-person-small"></i> 순 번</span><span class="cont"><?php echo $preorderOrderNumString ?></span>								
 			</li><li>
 				<span class="label"><i class="ico-carrier-small"></i> 신청할 통신`</span><span class="cont"><?php echo $arrOrderList['paChangeCarrier'] ?></span>			
 			</li><li>

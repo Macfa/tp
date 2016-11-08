@@ -191,6 +191,12 @@ $color = array(
 
 );
 
+$preorderOrderNum = $arrOrderList['paWatingNumber'] + 100; 
+$preorderOrderNumString = "01 - ".$preorderOrderNum;
+	if($arrOrderList['paWatingNumber'] > 200){		
+		$preorderOrderNum = $preorderOrderNum - 200;
+		$preorderOrderNumString = "02 - ".$preorderOrderNum;
+}
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 

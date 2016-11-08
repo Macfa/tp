@@ -157,10 +157,15 @@ $color = array(
 	'white' => '화이트'
 );
 
-$carrier = array(
-	'sk' => 'sk',
-	'kt' => 'kt'
-);
+foreach($existList as $key => $row) {	
+	
+$preorderOrderNum = $row['paWatingNumber'] + 100; 
+	$preorderOrderNumString[$key] = "01 - ".$preorderOrderNum;
+	if($row['paWatingNumber'] > 200){		
+		$preorderOrderNum = $preorderOrderNum - 200;
+		$preorderOrderNumString[$key] = "02 - ".$arrOrderNum[$key];
+	}
+}
 
 
 ?>

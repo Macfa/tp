@@ -74,7 +74,7 @@
 				</tr>
 			</thead>	
 			<tbody>
-				<? foreach($existList as $row) : ?>
+				<? foreach($existList as $key => $row) : ?>
 					<tr class="js-cartRow<?php echo $row['paKey']?>" <?php echo $row['cancelClass']?>>					
 						<td class="chk-wrap">
 							<label class="inp-chk">
@@ -91,7 +91,7 @@
 						<td class="table-item-str"><?php echo $row['paCurrentCarrier'] ?></td>
 						<td class="table-item-str"><?php echo $type[$row['paApplyType']] ?></td>
 						<td class="table-item-str"><?php echo $row['paChangeCarrier'] ?></td>
-						<td class="table-item-str"><?php echo $row['paWatingNumber'] ?></td>
+						<td class="table-item-str"><?php echo $preorderOrderNumString[$key] ?></td>
 						<td class="table-item-str"><?php echo $deviceKey[$row['dvKey']] ?></td>
 						<td class="table-item-str"><?php echo $color[$row['paColorType']] ?></td>
 						<!--<td class="table-item-str"><?php echo $color[$row['pa2ndColor']] ?></td>-->
