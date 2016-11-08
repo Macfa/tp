@@ -544,6 +544,10 @@ function removeBlank($input) {
 	return $output = preg_replace("/\s+/", "", $input);
 }
 
+function removeTabLinebreak($input){
+	return preg_replace('/([\t\n])/m', '', $input);
+}
+
 function getResultTemplate($data, $template, $isEmptyValueRemove = false){
 	$result = $template;
 	foreach ($data as $key => $val) {

@@ -23,6 +23,9 @@ function is_deleted($url, $type) {
 function get_scrap($url, $type) {
 }
 
+function getNumOnly($input){
+	return preg_replace("/[^0-9]*/s", "", $input);
+}
 
 //기본 파싱 함수
 function getParsing($url) {

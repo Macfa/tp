@@ -28,6 +28,13 @@ class parseSupportPrice{
 												4 => '출고가',
 												5 => '지원금',
 												6 => '추가지원금'
+											),
+											'kt' => array(
+												1 => '단말기',
+												2 => '모델명',
+												3 => '출고가',
+												4 => '공시지원금',
+												5 => '추가지원금'
 											)
 										);
 	private $arrParsingIndex = array(
@@ -40,9 +47,12 @@ class parseSupportPrice{
 														'date' => 9
 													),
 													'kt'=>array(
+														'device' => 1,
+														'device' => 2,
 														'retailPrice' => 3,
 														'support' => 4,
-														'addSupport' => 5
+														'addSupport' => 5,
+														'date' => 7
 													),
 													'lg'=>array()
 												);
@@ -56,9 +66,10 @@ class parseSupportPrice{
 											'apple'=>'Apple'
 										),
 										'kt' => array(
-											'samsung'=>'', 
-											'lg'=>'', 
-											'apple'=>'Apple'
+											'samsung'=>13, 
+											'lg'=>07, 
+											'apple'=>15,
+											'etc'=>99
 										)
 									);
 
@@ -95,7 +106,7 @@ class parseSupportPrice{
 																),
 																'kt'=>array(
 																	'prodNm'		=>'',
-																	'prdcCd	'		=>'',
+																	'prdcCd'		=>'',
 																	'prodType'	=>'',
 																	'makrCd'		=>'',
 																	'sortProd'		=>'HOT',
@@ -104,9 +115,9 @@ class parseSupportPrice{
 																),
 																'lguplus'=>array()
 															);
-	private $arrPhonePlanName =	array();
+	private $arrPhonePlanName = array();
 	private $arrKidsPlanName = array();
-	private $arrWatchPlanName =	 array();
+	private $arrWatchPlanName = array();
 	private $arrPocketfiPlanName = array();
 	private $arrPlan = array();
 
@@ -124,19 +135,32 @@ class parseSupportPrice{
 
 	public function setMode($mode) {
 		$this->mode = $mode;
-		if ($mode == 'phone') {
-			$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = 'LTE';
-			$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  'LTE';
-			$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
-			$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
-		} else if ($mode == 'watch') {
-			$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = '3G';
-			$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  '3G';
-		} else if ($mode == 'pocketfi' || $mode == 'kids') {
-			$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = 'ETC';
-			$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  'ETC';
-			$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
-			$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
+		switch($mode) {
+			case 'phone':
+				//sk
+				$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = 'LTE';
+				$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  'LTE';
+				//kt
+				$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
+				$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
+				break;
+			case 'watch':
+				//sk
+				$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = '3G';
+				$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  '3G';
+				//kt
+				$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
+				$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
+				break;
+			case 'pocketfi': 
+			case 'kids':
+				//sk
+				$this->arrCarrierPostSubmitVal['sk']['MODEL_NW_TYPE'] = 'ETC';
+				$this->arrCarrierPostSubmitVal['sk']['CHG_PROD_ID'] =  'ETC';
+				//kt
+				$this->arrCarrierPostSubmitVal['kt']['prodNm'] = 'mobile';
+				$this->arrCarrierPostSubmitVal['kt']['prodType'] =  15;
+				break;
 		}
 		return $this;
 	}
@@ -153,7 +177,21 @@ class parseSupportPrice{
 
 	public function setPlan($input){
 		$this->plan = $input;
-		$this->arrCarrierPostSubmitVal['sk']['PROD_ID'] = $this->deviceInfo->arrPlan[$this->carrier][$this->mode][$input]['value'];
+		$this->arrCarrierPostSubmitVal[$this->carrier]['PROD_ID'] = $this->deviceInfo->arrPlan[$this->carrier][$this->mode][$input]['value'];
+		return $this;
+	}
+
+	public function getPage() {
+		$targetDomain = parse_url($this->arrTargetCarrierURL[$this->carrier]);
+		$data = new snoopy;
+		$data->agent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+		$data->referer = $targetDomain['host'];
+		$data->fetch($this->arrTargetCarrierURL[$this->carrier].'?'.http_build_query($this->arrCarrierPostSubmitVal[$this->carrier]));
+		if($this->carrier === 'sk')
+			$this->page = iconv("EUC-KR", "UTF-8", removeTabLinebreak($data->results));
+		else if($this->carrier === 'kt')
+			$this->page = json_decode($data->results);
+
 		return $this;
 	}
 
@@ -264,18 +302,6 @@ class parseSupportPrice{
 		echo '<pre>';
 		print_r($deviceRow);
 		echo '</pre>';
-	}
-
-	public function getPage() {
-		$targetDomain = parse_url($this->arrTargetCarrierURL[$this->carrier]);
-		$data = new snoopy;
-		$data->agent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
-		$data->referer = $targetDomain['host'];
-		if($this->carrier == 'sk'){
-			$data->fetch($this->arrTargetCarrierURL[$this->carrier].'?'.http_build_query($this->arrCarrierPostSubmitVal[$this->carrier]));
-			$this->page = iconv("EUC-KR", "UTF-8", removeTabLinebreak($data->results));
-		}
-		return $this;
 	}
 
 	public function getDataAndInsert(){
