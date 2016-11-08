@@ -6,7 +6,8 @@
 @import '_calculator.scss';
 
 html .gift-btn-select{display:block;}
-html .gift-btn-cart{display:none;}
+html .gift-btn-cart,
+html .btn-cart-list {display:none;}
 
 .parsley-errors-apply{
 	padding:0;margin:0;list-style:none;
@@ -67,6 +68,8 @@ html .gift-btn-cart{display:none;}
 		@include anmation(fadeIn, .2s);
 	}
 }
+
+.grid-item-wrap:hover .select-btn-tit{display:block}
 
 .select-btn-tit {
 	display:block;

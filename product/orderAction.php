@@ -170,7 +170,7 @@ DB::update('tmMember', array(
 	'mbPoint' => $mb['mbPoint']-$totalPoint
 ),'mbEmail = %s', $mb['mbEmail']);
 
-alert('주문이 완료되었습니다.', '/dev-cart');
+alert('주문이 완료되었습니다.', '/cart');
 /*
 'arTit' => $_POST['arTit'],
 		'arName' => $_POST['arName'],
