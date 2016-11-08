@@ -9,6 +9,11 @@
 					<span class="nav-device-tit">아이폰7 </span>
 				</a>
 			</li><li class="nav-device-item ">
+				<a href="/page/preorderApply.php?device=아이폰7" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
+					<i class="ico-device-iphone"></i>
+					<span class="nav-device-tit">아이폰7 플러스</span>
+				</a>
+			</li><li class="nav-device-item ">
 				<a href="/page/galaxys7Apply.php" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
 					<i class="ico-device-galaxy"></i>
 					<span class="nav-device-tit">갤럭시 S7 </span>
@@ -66,6 +71,11 @@
 				<a href="/page/preorderApply.php?device=아이폰7" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
 					<i class="ico-device-iphone"></i>
 					<span class="nav-device-tit">아이폰7 </span>
+				</a>
+			</li><li class="nav-device-item">
+				<a href="/page/preorderApply.php?device=아이폰7" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
+					<i class="ico-device-iphone"></i>
+					<span class="nav-device-tit">아이폰7 플러스</span>
 				</a>
 			</li>
 			<?php endif?>
