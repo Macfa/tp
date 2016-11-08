@@ -137,7 +137,28 @@ main{
 	text-decoration:underline;
 }
 
+.device {	
+	background: #202020 url('../img/bey-device-mobile.png') no-repeat center bottom;
+	height:500px;
+}
+.bey-wrap {
+	@extend .wrap;
+	padding:20px;
+}
 
+.device-text{	
+	color:#fff;
+
+}
+.color {
+	color:#24cbc1;
+}
+
+.music {
+	background: #f6f6f6 url('../img/bey-music-mobile.jpg') no-repeat top center;
+	height:570px;
+	position:relative;
+}
 .end {
 	background:url('../img/bey-end-mobile.jpg') no-repeat center 210px;
 	height:700px;
@@ -148,10 +169,16 @@ main{
 	font-size:7.5em;
 }
 
+.pc-view{display:none;}
+
+.bey-right-wrap {width:100%; margin:0 auto;}
+
+.right {position: absolute; bottom:100px;}
 
 
 
-
+.font-size {@exdend .tit;
+	font-size:2.5em;}
 
 
 
@@ -172,7 +199,21 @@ main{
 	padding-bottom:900px;
 	background:url('../img/bey-showme-poster-landscape.png') no-repeat bottom center;
 }
+.device {
+	
+	background: #202020 url('../img/bey-device.png') no-repeat center bottom;
+	height:650px;
+}
+.pc-view{display:block;}
 
+.music {
+	background: #f6f6f6 url('../img/bey-music-landscape.jpg') no-repeat top center;
+	height:500px;
+}
+
+.bey-right-wrap {width:100%; margin:0 auto;}
+
+.right {position: absolute; bottom: 82px;}
 
 .end {
 	background:url('../img/bey-end-landscape.jpg') no-repeat center 220px;
@@ -200,6 +241,16 @@ main{
 	padding-bottom:1100px;
 	background:url('../img/bey-showme-poster-tablet.png') no-repeat bottom center;
 }
+
+.music {
+	background: #f6f6f6 url('../img/bey-music-tablet.jpg') no-repeat top center;
+	height:500px;
+}
+
+.bey-right-wrap {width:600px; margin:0 auto;}
+
+.right {position: absolute; right:100px; bottom:45px}
+
 .end {
 	background:url('../img/bey-end-tablet.jpg') no-repeat center 230px;
 	height:970px;
@@ -244,6 +295,14 @@ main{
 	background:url('../img/bey-ram-b.png') no-repeat top center;
 }
 
+.music {
+	background: #f6f6f6 url('../img/bey-music-pc.jpg') no-repeat top center;
+	height:450px;
+}
+
+.bey-right-wrap {width:700px; margin:0 auto;}
+
+.right {position: absolute; right:100px; top:100px;}
 .end .sub {
 	padding-top:0px;
 }
@@ -270,9 +329,14 @@ main{
 	background:url('../img/bey-showme-gradient-wide.jpg') top left;
 	height:1500px;
 }
+.music {
+	background: #f6f6f6 url('../img/bey-music-wide.jpg') no-repeat top center;
+	height:450px;
+}
 .end .sub {
 	padding-top:0px;
 }
+
 
 }
 	
