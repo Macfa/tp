@@ -210,8 +210,8 @@ if($_POST['poKey'] == '3'){
 
 if($_POST['poKey'] == '5'){
 	$arrApplyMember['paGift'] = '';
-	$arrApplyMember['paProcess'] = 0;
-	$sendCont = "[티플 비와이폰] 비와이폰신청이 접수되었습니다. 감사합니다.";
+	$arrApplyMember['paProcess'] = 2;
+	$sendCont = "[티플 비와이폰] 로그인 후 마이페이지에서 실가입을 신청해주세요.";
 }
 
 //===============================================
