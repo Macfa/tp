@@ -6,19 +6,25 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/myspace.css" type="text/css">';
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/myspace.js"></script>';
 
-$isV20ApplyExist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderV20 WHERE mbEmail=%s and pvCancel = 0", $mb['mbEmail']);	
-$isIphone7Exist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0 and poKey = 3", $mb['mbEmail']);	
 $preorderTable = DB::queryFirstRow("SELECT * FROM tmPreorder WHERE poDisplay=1");
+
+//V20 신청현황
+$isV20ApplyExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderV20 WHERE mbEmail=%s and pvCancel = 0", $mb['mbEmail']);	
+//아이폰7 신청현황
+$isIphone7Exist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0 and poKey = 3", $mb['mbEmail']);	
+
+
+//노트7 교환 환불 현황
 $isExchangeRefundNote7Exist = DB::queryFirstRow("SELECT * FROM tmExchangeRefundNote7 WHERE mbEmail=%s", $mb['mbEmail']);	
-$isGalaxyS7edgeBlueExist = DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4 AND taCancel = 0", $mb['mbEmail']);	
-$isBeyExist = DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0 and poKey = 5", $mb['mbEmail']);	
+//갤럭시S7 시리즈 신청현황
+$isGalaxyS7edgeBlueExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4 AND taCancel = 0", $mb['mbEmail']);	
+$isGalaxyS7edgeExist = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s AND taCancel = 0 AND poKey = 6", $mb['mbEmail']);	
 
-$isIphone7Exist = (int)$isIphone7Exist;
-$isV20ApplyExist = (int)$isV20ApplyExist;
-$isExchangeRefundNote7Count = (int)$isExchangeRefundNote7Exist;
-$isGalaxyS7edgeBlueExist =(int)$isGalaxyS7edgeBlueExist;
-$isBeyExist = (int)$isBeyExist;
+$isExchangeRefundNote7Count =(int)$isExchangeRefundNote7Exist;
+$isGalaxyS7edgeExistCount = (int)$isGalaxyS7edgeExist;
 
+//비와이폰 신청현황
+$isBeyExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0 and poKey = 5", $mb['mbEmail']);	
 
 $type = array(
 	'exchange' => '교환',

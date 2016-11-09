@@ -15,7 +15,7 @@ try{
 		if($isValidPvKey === 0)
 			throw new Exception('올바르지 않은 요청입니다.', 3);
 	}
-	$isapplyMember = DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s", $mb['mbEmail']);
+	$isapplyMember = DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 6 AND taColor!='blue'", $mb['mbEmail']); // s7 - s7엣지 블루 제외 신청서
 	$isapplyMember = (int)$isapplyMember;	
 
 	if($isapplyMember >= 1 && $isValidPvKey === 0)
@@ -108,8 +108,10 @@ $arrApplyMember = array(
 	'taColor' => $_POST['colorType'],
 	'dvKey' => $applyDeviceKey,
 	'taPlan' => $Plan,
-	'dateTime' => $cfg['time_ymdhis']
-);
+	'dateTime' => $cfg['time_ymdhis'],
+	'taProcess' => 2, //실가입 신청가능
+	'poKey' => 6
+	);
 
 if($isapplyMember === 0){
 

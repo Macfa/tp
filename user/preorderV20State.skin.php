@@ -49,6 +49,9 @@
 		</li>
 		</ul>
 	</section>
+
+	<?require_once("./preorderStateInfo.php");?>
+
 	<!--table class="table str">
 	<tbody>
 		<tr>

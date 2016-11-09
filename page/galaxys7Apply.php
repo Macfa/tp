@@ -22,7 +22,7 @@ $js_file = '<script type="text/javascript" src="'.PATH_JS.'/preorderNote7.js"></
 //$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/calculator.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/input.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/validate.js"></script>';
-$cfg['title'] = 'LG V20 구매안내';
+$cfg['title'] = '갤럭시 S7 S7엣지 구매안내';
 
 $validEmail = '';
 $validPhone = '';
