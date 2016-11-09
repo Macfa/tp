@@ -64,13 +64,11 @@
 		<span class="cont"><a href="/page/galaxys7EdgeBlueDelete.php" class="btn-flat-primary-dense">취소하기</a></span>
 	<? endif ?>
 		<span class="cont"><a href="/page/galaxys7EdgeBlueApply.php?v=edit" class="btn-filled-primary-dense">수정하기</a></span>
-	<!--
+	
 	<?if($arrOrderList['taProcess'] == 2 ) :?>
 		<div class="center"><i class="ico-caution-small"></i> 원하시는 색상은 반드시 메모란에 적어주세요!</div>
 		<span class="label"></span><span class="cont"><a href=<? echo $applyLinkUrl ?> target="_blank" class="btn-filled-primary-dense js-applyBtn">실가입신청</a></span>
 	<? endif ?>
-
-	-->
 
 	<!--
 	<?if($arrOrderList['taProcess'] == 2 && $arrOrderList['taChangeCarrier'] === 'kt' && isExist($arrOrderList['paContactTime']) === False) :?>
