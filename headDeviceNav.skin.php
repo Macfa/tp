@@ -66,7 +66,7 @@
 				</a>
 			</li>
 			<?php endif?>
-			<?php if ($_GET['manuf'] == 'all'|| $_GET['manuf'] == '' || $_GET['manuf'] == 'apple' || $device['dvManuf']=== 'apple' ):?>
+			<?php if ($_GET['manuf'] == 'all'|| $_GET['manuf'] == '' || $_GET['manuf'] == 'apple' || $device['dvManuf']=== 'apple' || $_GET['device'] != 'watch' || $_GET['device'] != 'pocketfi' || $_GET['device'] != 'kids' ):?>
 			<li class="nav-device-item">
 				<a href="/page/preorderApply.php?device=아이폰7" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
 					<i class="ico-device-iphone"></i>
