@@ -62,10 +62,24 @@
 	font-size:.9em;
 }
 
-.mypage-wrap{margin:0 auto;}
+.mypage-wrap{
+	margin:0 auto;
+}
 
-.mypage-list-wrap{margin:0 auto; padding:0 1%}
-.applyList-wrap {width:98%;}
+.mypage-list-wrap{
+	margin:0 auto;
+	padding:0 1%
+}
+
+.applyList-wrap {
+	width:98%;
+}
+
+
+.infoCont{
+	padding:15px 80px;
+	text-align: left;
+}
 
 @media all and (min-width:640px){
 

@@ -49,6 +49,9 @@
 		<Br/>
 		</ul>
 	</section>
+
+	<?require_once("./preorderStateInfo.php");?>
+
 	
 	<?php if($arrOrderList['paChangeCarrier'] === 'sk' && isNullVal($plan[$arrOrderList['paPlan']])) :?>
 		<div class="center"><i class="ico-caution-small"></i> 기타 요금제 선택하신 고객님은 실가입 신청시 메모장에 원하시는 요금제를 써주세요.</div>
