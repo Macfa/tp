@@ -81,7 +81,10 @@ $color = array(
 	'blue' => '코랄블루'
 );
 
-
+$buy = array(
+	'0' => '비구매',
+	'1' => '구매'	
+);
 
 $preorder = DB::query("SELECT * FROM tmPreorder WHERE poDisplay=%i", '1');
 
@@ -131,7 +134,8 @@ $obj_excel->setActiveSheetIndex(0)
 				->setCellValueExplicit('J1', '생년월일', PHPExcel_Cell_DataType::TYPE_STRING)
 				->setCellValueExplicit('K1', '성별', PHPExcel_Cell_DataType::TYPE_STRING)
 				->setCellValueExplicit('L1', '전화번호', PHPExcel_Cell_DataType::TYPE_STRING)
-				->setCellValueExplicit('M1', '취소상태', PHPExcel_Cell_DataType::TYPE_STRING);
+				->setCellValueExplicit('M1', '취소상태', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('N1', '노트7구매', PHPExcel_Cell_DataType::TYPE_STRING);
 $row = 2;
 foreach ($list as $key => $val){
 
@@ -164,7 +168,8 @@ foreach ($list as $key => $val){
 					->setCellValueExplicit('J'.$row, $val['taBirth'], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('K'.$row, $sex [$val['taSexType']], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('L'.$row, $val['mbPhone'], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('M'.$row, $cancel[$val['taCancel']], PHPExcel_Cell_DataType::TYPE_STRING);
+					->setCellValueExplicit('M'.$row, $cancel[$val['taCancel']], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('N'.$row, $buy[$val['isBuyNote7']], PHPExcel_Cell_DataType::TYPE_STRING);
 	$row++;
 }
 
