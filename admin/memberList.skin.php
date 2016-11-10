@@ -5,6 +5,7 @@
 	<input type="text" name="search"><input type="submit" value="검색">
 	</div>	
 	<br/><br/>
+	</form>
 	<table class="table">
 	<thead>
 		<tr>
@@ -19,6 +20,7 @@
 			<td class="table-item-str">회원이름</td>
 			<td class="table-item-str">전화번호</td>
 			<td class="table-item-str">현재포인트</td>
+			<td class="table-item-str">포인트지급</td>
 		</tr>
 	</thead>	
 	<tbody>
@@ -33,7 +35,10 @@
 			<td class="table-item-str"><?php echo $row['mbEmail'] ?></td>
 			<td class="table-item-str"><?php echo $row['mbName'] ?></td>
 			<td class="table-item-str"><?php echo $row['mbPhone'] ?></td>
-			<td class="table-item-str"><?php echo number_format($row['mbPoint']) ?></td>		</tr>
+			<td class="table-item-str"><?php echo number_format($row['mbPoint']) ?></td>		
+			<td class="table-item-str"><a class="btn-filled" href="/admin/givePoint.php?mbEmail=<?php echo $row['mbEmail']?>">포인트지급</a></td>
+		</tr>
+
 	<?php endforeach?>
 	
 	</tbody>
@@ -44,7 +49,6 @@
 </div>
 
 
-</form>
 </div>
 <script>
 $('.js-tableChk').change(function(){
