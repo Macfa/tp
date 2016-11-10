@@ -17,8 +17,8 @@ $isIphone7Exist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApply
 //노트7 교환 환불 현황
 $isExchangeRefundNote7Exist = DB::queryFirstRow("SELECT * FROM tmExchangeRefundNote7 WHERE mbEmail=%s", $mb['mbEmail']);	
 //갤럭시S7 시리즈 신청현황
-$isGalaxyS7edgeBlueExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4 AND taCancel = 0", $mb['mbEmail']);	
-$isGalaxyS7edgeExist = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s AND taCancel = 0 AND poKey = 6", $mb['mbEmail']);	
+$isGalaxyS7edgeBlueExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mbEmail=%s AND poKey = 4 AND taCancel = 0 AND taColor ='blue' ", $mb['mbEmail']);	
+$isGalaxyS7edgeExist = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s AND taCancel = 0 AND poKey = 6 AND taColor !='blue'", $mb['mbEmail']);	
 
 $isExchangeRefundNote7Count =(int)$isExchangeRefundNote7Exist;
 $isGalaxyS7edgeExistCount = (int)$isGalaxyS7edgeExist;
