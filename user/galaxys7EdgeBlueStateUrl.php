@@ -21,7 +21,7 @@ else if($arrOrderList['taChangeCarrier'] === 'kt' && $arrOrderList['isBuyNote7']
 				$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=9D63071D-9DC7-42A4-80AB-B539C7D5C545"';	
 
 			}else if($arrOrderList['taApplyType'] === '06'){ //기변
-				$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=FE81142F-AE9B-4F47-B258-43F8AEE9E0F7"';	
+				$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=2A4CA115-6B43-4E08-AACE-B650A1FCBB46"';	
 			}
 
 }
