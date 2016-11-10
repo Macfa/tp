@@ -106,7 +106,7 @@ $s4 = $s1-$s2-$s3 ;
 				</div>
 			</div>
 			<div class="center">
-				<a class="btn" href="http://online.olleh.com/index.jsp?prdcID=3EE62685-4539-4915-94E4-11408B6CC5F4"target="_blank">
+				<a class="btn" href="http://online.olleh.com/index.jsp?prdcID=B7D212CB-FEED-463E-9EB5-23925DB5C8B3"target="_blank">
 				<span>가입 신청</span>
 				</a>
 			</div>
@@ -199,7 +199,7 @@ $s4 = $s1-$s2-$s3 ;
 				</div>
 			</div>
 			<div class="center">
-				<a class="btn" href="http://online.olleh.com/index.jsp?prdcID=C18DAEAD-70B5-49EF-BDDC-D44CE89DCE62"target="_blank">
+				<a class="btn" href="http://online.olleh.com/index.jsp?prdcID=C63698ED-13D5-4D29-8BB4-F4B66CAB03A0"target="_blank">
 				<span>가입 신청</span>
 				</a>
 			</div>
