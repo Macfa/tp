@@ -122,7 +122,8 @@ $arrApplyMember = array(
 	'taPlan' => $taPlan,	
 	'isBuyNote7' => $_POST['isBuyNote7'],
 	'dateTime' => $cfg['time_ymdhis'],
-	'poKey' => 4
+	'poKey' => 4,
+	'taProcess' => 2
 
 );
 
@@ -137,7 +138,7 @@ if($isApplyExist === 0 && $isEdit === FALSE){
 	
 	
 	$SMS = new SMS();
-	$sendCont = "[티플 사전예약] 갤럭시 s7엣지 블루코랄을 신청해해주셔서 감사합니다.";
+	$sendCont = "[티플 갤럭시S7엣지 블루코랄] 로그인 후 마이페이지에서 실가입을 신청해주세요.";
 	$SMS->sendMode(0)->sendMemberPhone($_POST['taPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 }
 
