@@ -3,7 +3,7 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 
 $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/mypageList.css" type="text/css">';
 
-$arrOrderList = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail = %s and taCancel = 0 AND taColor = 'blue'", $mb['mbEmail']);
+$arrOrderList = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail = %s and taCancel = 0 AND poKey = 4 AND taColor ='blue' ", $mb['mbEmail']);
 
 
 
@@ -31,12 +31,6 @@ try{
 
 
 
-
-list($isExistApplyCode, $arrApplyCode)  = DB::queryFirstList("SELECT COUNT(*), cdCode FROM tmCode WHERE dvKey = %i0 and cdType = %i1 and cdCarrier = %s2", 
-$arrOrderList['dvKey'], str_replace("0","",$arrOrderList['taApplyType']), $arrOrderList['taChangeCarrier']);
-
-
-$isBuyNote7 = $arrOrderList['isBuyNote7'];
 require_once("./galaxys7EdgeBlueStateUrl.php");
 
 
@@ -96,12 +90,18 @@ $state = array(
 $currentState[$arrOrderList['taProcess']] = 'active';
 
 $device = array(
-	'664' => '갤럭시 S7 엣지'
+	'637' => '갤럭시 S7 32G',
+	'640' => '갤럭시 S7 64G',
+	'655' => '갤럭시 S7엣지 64G',
+	'664' => '갤럭시 S7엣지 32G'
 );
 
 $color = array(
-
-	'blue' => '코랄블루'
+	'silver' => '실버',
+	'black' => '블랙',
+	'gold' => '골드',
+	'white' => '화이트',
+	'blue' => '블루코랄'
 );
 
 
@@ -114,7 +114,7 @@ $preorderOrderNum = DB::queryFirstField("SELECT taWatingNumber FROM tmApply WHER
 
 
 
-$preorderOrderNum = $arrOrderList['taWatingNumber'] + 100; 
+$preorderOrderNum = $arrOrderList['taWatingNumber'] + 101; 
 $preorderOrderNumString = "01 - ".$preorderOrderNum;
 	if($arrOrderList['taWatingNumber'] > 200){		
 		$preorderOrderNum = $preorderOrderNum - 200;
