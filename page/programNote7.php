@@ -5,6 +5,6 @@ $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/programNote7.css" type="te
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/programNote7.js"></script>';
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
-require_once("preorderS7coral.skin.php");	
+require_once("programNote7.skin.php");	
 require_once($cfg['path']."/foot.inc.php");			// 헤더 부분 (스킨포함)
 ?>

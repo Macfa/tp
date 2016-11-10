@@ -1,172 +1,324 @@
-@import 'common';
-@import '_list';
+@import 'common.scss';
+@import '_list.scss';
 
-@import "compass/css3";
+$tp-color:#ffc600;
 
 
-.demo__info {
-position: absolute;
 
-z-index:100;
-bottom: 1vh;
-top: auto;
-font-size:80%;
-text-align:center;
-width: 100%;
+ul, li {
+	list-style: none;
+	padding-left: 0px;
+	margin: 0 auto;
+	text-align: center;
+}
+a {
+	text-decoration: none;
+	text-align: center;
+}
+p {
+	margin:0 auto;
+	padding:5px 20px;
+	padding-top:100px;
+	text-align: center;
 }
 
-/* Parallax base styles
-  --------------------------------------------- */
 
-  .parallax {
-    height: 500px; /* fallback for older browsers */
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-perspective: 300px;
-    -webkit-overflow-scrolling: touch;
-    perspective: 300px;
+/************************************
+BACKGROUND
+************************************/
+.bg {
+  background: url('http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/diagmonds.png');
+  position: fixed;
+  width: 100%;
+  height: 300%;
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+/************************************
+SECTION
+************************************/
+section{
+  color: #fff;
+  font-family:Raleway;
+  width: 100%;
+  margin: auto;
+  font-size: 1em;
+  font-weight:700;
+  margin-top:0px;
   }
 
-  .parallax__group {
-    position: relative;
-    height: 500px; /* fallback for older browsers */
-    height: 100vh;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  }
+/************************************
+MY BLACK OVERLAY
+************************************/
+.black{
+  background:rgba(0,0,0,0.5);
+  padding:20px 20px 20px 20px;
+  border-top:1px solid rgba(255,255,255,0.2);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  margin-top: 0px;
+}
+.blue{
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
 
-  .parallax__layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
+/************************************
+SOME PADDING
+************************************/
+.white{
+}
 
-  .parallax__layer--fore {
-    -webkit-transform: translateZ(90px) scale(.7);
-    transform: translateZ(90px) scale(.7);
-    z-index: 1;
-  }
-
-  .parallax__layer--base {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    z-index: 4;
-  }
-
-  .parallax__layer--back {
-    -webkit-transform: translateZ(-300px) scale(2);
-    transform: translateZ(-300px) scale(2);
-    z-index: 3;
-  }
-
-  .parallax__layer--deep {
-    -webkit-transform: translateZ(-600px) scale(3);
-    transform: translateZ(-600px) scale(3);
-    z-index: 2;
-  }
-
-
-  /* Debugger styles - used to show the effect
-  --------------------------------------------- */
-
-  .debug {
-    position: fixed;
-    top: 0;
-    left: .5em;
-    z-index: 999;
-    background: rgba(0,0,0,.85);
-    color: #fff;
-    padding: .5em;
-    border-radius: 0 0 5px 5px;
-  }
-  .debug-on .parallax__group {
-    -webkit-transform: translate3d(800px, 0, -800px) rotateY(30deg);
-    transform: translate3d(700px, 0, -800px) rotateY(30deg);
- }
-  .debug-on .parallax__layer {
-    box-shadow: 0 0 0 2px #000;
-    opacity: 0.9;
-  }
-  .parallax__group {
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s;
-  }
-
-
-  /* demo styles
-  --------------------------------------------- */
-
-  body, html {
-    overflow: hidden;
-  }
-
-  body {
-    font: 100% / 1.5 Arial;
-  }
-
-  * {
-    margin:0;
-    padding:0;
-  }
-
-  .parallax {
-    font-size: 200%;
-  }
-
-   /* centre the content in the parallax layers */
-  .title {
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
+/************************************
+TEXT
+************************************/
+.tit {
+	font-size: 2.5em;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+.tit-y {
+	font-size: 2.5em;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	text-align: center;
+	color:$tp-color;
+}
+.tit-b{
+	font-size: 3.4em;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	text-align: center;
+	color:$tp-color;
+	text-decoration: underline;
+	letter-spacing: -.05em;
+}
+.normal {
+	font-weight: normal;
+}
+.sub {
+	font-size: 1.8em;
+	margin:0;
+	margin-top:20px;
+	text-align: center;
+	font-weight: bold;
+}
+.sub-1 {
+	font-size: 1.8em;
+	margin:0;
+	margin-top:40px;
+	text-align: center;
+	font-weight: bold;
+}
+.sub-2 {
+	font-size: 1.8em;
+	margin:0;
+	margin-top:10px;
+	text-align: center;
+	font-weight: bold;
+}
+.txt {
+	font-size: 1em;
+	margin:0 auto;
+	text-align: center;
+	padding: 5px 10px;
+	max-width: 580px;
+	line-height: 1.4em;
+	letter-spacing: -.05em;
+}
+.link {
+	padding:5px 30px;
+	background:$tp-color;
+	border-radius: 10px;
+	color:black;
+	width:220px;
+	margin: 0 auto;
+	margin-bottom:50px;
+	font-weight: bold;
+}
 
 
+.ss {
+	padding-top:50px;
+}
+.ss-end {
+	padding-top: 10px;
+	padding-bottom:60px;
+}
 
-  /* style the groups
-  --------------------------------------------- */
+.tiple-top {
+	margin-top: 50px;
+}
+.for {
+	margin-top: 50px;
+}
 
-  #group1 {
-    z-index: 5; /* slide over group 2 */
-  }
-  #group1 .parallax__layer--base {
-    background: rgb(102,204,102);
-  }
+.bey-3gb{
+	margin-top:40px;
+}
+.bey-64 {
 
-  #group2 {
-    z-index: 3; /* slide under groups 1 and 3 */
-  }
-  #group2 .parallax__layer--back {
-    background: rgb(123,210,102);
-  }
+}
+.bey-touch {
+	margin-bottom: 40px;
+}
+.vs {
+	color:$tp-color;
+	margin-top:60px;
+}
+.add {
+	margin-bottom:50px;
+}
+.bey-intro {
+	margin-top:120px;
+}
+.note8 {
+	margin-top:50px;
+}
+.note8-end {
+	margin-bottom: 20px;
+}
+.note8-padding {
+	margin-bottom:30px;
+}
+.pricevs {
+	margin-bottom:30px;
+}
+/************************************
+UL,LI
+************************************/
+.pricein li {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	width:100px;
+	font-size: .8em;
+	padding:15px 0px;
+}
+.pricein .price {
+	width:100px;
+	font-size: 1.5em;
+	font-weight: bold;
+	color:$tp-color;
+}
+.spec li {
+	display: inline-block;
+	padding:5px 1px;
+	padding-top:80px;
+	width:70px;
+	vertical-align: top;
+}
+.spec-li {
+	margin-right:2px;
+}
 
-  #group3 {
-    z-index: 4; /* slide over group 2 and 4 */
-  }
-  #group3 .parallax__layer--base {
-    background: rgb(153,216,101);
-  }
-
-  #group4 {
-    z-index: 2; /* slide under group 3 and 5 */
-  }
-  #group4 .parallax__layer--deep {
-    background: rgb(184,223,101);
-  }
-
-
-
-
-
-
+/************************************
+IMG
+************************************/
+.intro {
+	background: url('../img/intro-back.jpg') no-repeat right bottom;
+}
+.sub-1 {
+	background: url('../img/samnews-1-mobile.png') no-repeat center bottom;
+	padding-bottom:600px;
+}
+.sub-2 {
+	background: url('../img/samnews-2-mobile.png') no-repeat center bottom;
+	padding-bottom:720px;
+}
+.tiple {
+	background: url('../img/vs-mobile.png') no-repeat center 100px;
+}
+.touch {
+	background: url('../img/bey-touch-s.png') no-repeat center top;
+}
+.memory{
+	background: url('../img/bey-gb-s.png') no-repeat center top;
+}
+.hd {
+	background: url('../img/bey-hd-s.png') no-repeat center top;
+}
+.ram {
+	background: url('../img/bey-ram-s.png') no-repeat center top;
+}
+.bey-3gb{
+	background: url('../img/bey-ram-b.png') no-repeat center top;
+	padding-top:130px;
+}
+.bey-64 {
+	background: url('../img/bey-gb-b.png') no-repeat center top;
+	padding-top:130px;
+	margin-top:30px;
+}
+.bey-touch {
+	background: url('../img/bey-touch-b.png') no-repeat center top;
+	padding-top:130px;
+	margin-top:30px;
+}
+.bey-back {
+	background: url('../img/bey-mobile.png') no-repeat right bottom;
+	padding-bottom:260px;
+}
+.bey-b {
+	background:rgba(0,0,0,0.7) url('../img/bey-b-mobile.png') no-repeat center 50px;
+}
+.blue {
+	background:rgba(3,13,79,.6) url('../img/ss-logo.png');
+}
 
 @media all and (min-width:640px){
-	
+
+
+	.bey-b {
+		background:rgba(0,0,0,0.7) url('../img/bey-b-tablet.png') no-repeat center 50px;
+	}
+	.tiple {
+		background: url('../img/vs-tablet.png') no-repeat center  100px;
+	}
+	.bey-back {
+		background: url('../img/bey-mobile.png') no-repeat right bottom;
+		padding-bottom:220px;
+	}
+	.sub-1 {
+		background: url('../img/samnews-1-tablet.png') no-repeat center bottom;
+		padding-bottom:610px;
+	}
+	.sub-2 {
+		background: url('../img/samnews-2-tablet.png') no-repeat center bottom;
+		padding-bottom:580px;
+	}
+	section{
+  		width: 640px;
+		margin-top:30px;
+  	}
+
+	.pricein li {
+		width:130px;
+		font-size: 1.1em;
+		padding:15px 0px;
+	}
+	.pricein .price {
+		width:170px;
+		font-size: 1.9em;
+	}
+	.spec li {
+		padding:5px 15px;
+		padding-top:80px;
+		width:90px;
+	}
+	.note8 {
+		margin-top:100px;
+	}
+	.note8-end {
+		margin-bottom: 30px;
+	}
+	.note8-padding {
+		margin-bottom:100px;
+	}
 }
 @media all and (min-width:900px){
 	
