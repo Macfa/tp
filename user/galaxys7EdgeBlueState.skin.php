@@ -71,10 +71,10 @@
 	<?if($arrOrderList['taProcess'] <= 2 ) :?> <!-- 실가입 필요 단계가지 확인 -->		
 		<span class="cont"><a href="/page/galaxys7EdgeBlueApply.php?v=edit" class="btn-filled-primary-dense">수정하기</a></span>
 	<? endif ?>
-	<?if($arrOrderList['taProcess'] == 2 && $isBuyNote7 == '0') :?> <!-- 노트7비구매자 실가입신청 -->
+	<?if($arrOrderList['taProcess'] == 2 &&  ($arrOrderList['taChangeCarrier'] === 'sk' || ($arrOrderList['taChangeCarrier'] === 'kt' && $arrOrderList['isBuyNote7'] == '0'))) :?> <!-- 노트7비구매자 실가입신청 -->
 		<span class="label"></span><span class="cont"><a href=<? echo $applyLinkUrl ?> target="_blank" class="btn-filled-primary-dense js-applyBtn">실가입신청</a></span>
 	<? endif ?>
-	<?if($arrOrderList['taProcess'] == 2 && $isBuyNote7 == '1') :?>
+	<?if($arrOrderList['taProcess'] == 2 && ($arrOrderList['taChangeCarrier'] === 'kt' && $arrOrderList['isBuyNote7'] == '1')) :?>
 
 		<div class="center"> <i class="ico-caution-small"></i>  노트7 구매자분들 중 KT를 신청하시는 분들은 담당자가 유선상으로 진행합니다!</div>
 		

@@ -31,13 +31,7 @@ try{
 
 
 
-
-list($isExistApplyCode, $arrApplyCode)  = DB::queryFirstList("SELECT COUNT(*), cdCode FROM tmCode WHERE dvKey = %i0 and cdType = %i1 and cdCarrier = %s2", 
-$arrOrderList['dvKey'], str_replace("0","",$arrOrderList['taApplyType']), $arrOrderList['taChangeCarrier']);
-
-
-$isBuyNote7 = $arrOrderList['isBuyNote7'];
-require_once("./galaxys7EdgeBlueStateUrl.php");
+require_once("./galaxys7EdgeStateUrl.php");
 
 
 

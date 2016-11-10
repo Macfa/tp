@@ -49,6 +49,8 @@ $defAddress = DB::queryFirstRow("SELECT * FROM tmAddress WHERE mbEmail = %s and 
 $arrAddress = DB::query("SELECT * FROM tmAddress WHERE mbEmail = %s", $mb['mbEmail']);
 */
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
+
+
 require_once("galaxys7EdgeBlueApply.skin.php");
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 ?>

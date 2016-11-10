@@ -48,7 +48,6 @@
 	<div class="wrap">
 		<ul class="nav-device">
 
-
 			<?php foreach ($deviceNavResult as $deviceNavRow) :?>
 			<li class="nav-device-item <?php echo $deviceNavItemActive[$deviceNavRow['dvId']]?>">
 				<a href="<?=$cfg['path']?>/device/<?php echo $deviceNavRow['dvId']?>" class="nav-device-item-wrap" id="link-snb-device-<?php echo $deviceNavRow['dvId']?>">
@@ -57,6 +56,15 @@
 				</a>
 			</li>
 			<?php endforeach?>
+
+			<?php if ($_GET['device']== 'pocketfi'):?>
+			<li class="nav-device-item">			
+				<a href="<?=$cfg['path']?>/product/egg.php" class="nav-device-item-wrap" id="link-snb-device-v20">
+					<i class="ico-device-portable-wifim"></i>
+					<span class="nav-device-tit">KT 에그</span>
+				</a>
+			</li>
+			<?php endif?>
 
 			<?php if (($_GET['carrier']== 'sk' && $_GET['manuf'] == 'all') || ($_GET['carrier']== 'sk' && $_GET['manuf'] == '') || ($_GET['carrier']== 'sk' && $_GET['manuf'] == 'lg') || $_GET['manuf'] == 'lg' || $device['dvManuf']=== 'lg'):?>
 			<li class="nav-device-item">			
