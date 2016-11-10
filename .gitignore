@@ -4,3 +4,6 @@
 admin/(다수 선택)
 css/compiled/
 css/.sass-cache/
+scssCompiler.bat
+scssCompilerANDsyncronizer.bat
+personalTest/
