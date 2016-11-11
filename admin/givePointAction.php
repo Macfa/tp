@@ -60,6 +60,7 @@ try{
 $givePoint = new givePoint();
 $givePoint->setPoint($_POST['gpPoint'])->setMember($_POST['gpEmail'])->setCont($_POST['gpCont'])->give();
 
+
 alert('지급완료되었습니다.', "/admin/memberList.php?search=".$_POST['gpEmail']);
 
 ?>
