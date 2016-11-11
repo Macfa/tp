@@ -1,5 +1,8 @@
 <main role="main">
 	<ul class="main-slider bxslider">
+		<li class="slide-item banner-note7program">
+			<a href="/page/programNote7.php"></a>
+		</li>
 		<li class="slide-item banner-s7edgecoral">
 			<a href="/page/preorderS7coral.php"></a>
 		</li>
@@ -9,6 +12,7 @@
 		<li class="slide-item banner-v20">
 			<a href="/page/preorderV20.php"></a>
 		</li>
+
 		
 		<!--li class="slide-item banner-note7-noitem">				
 					<div class="vert-wrap">

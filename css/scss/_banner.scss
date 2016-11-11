@@ -44,6 +44,10 @@ main {
 	background:white url('../img/iphone7event-mobile.jpg') no-repeat center center;
 }
 
+.banner-note7program{
+	background:black url('../img/banner-note7program-mobile.jpg') no-repeat center center;
+}
+
 .banner-iphone-se-device{
 	float:initial;
 	width:100%;
@@ -161,6 +165,9 @@ main {
 	.banner-s7edgecoral {
 	background:white url('../img/s7edgecoral-mainbanner-landscape.jpg') no-repeat center center;
 	}
+	.banner-note7program{
+		background-image:url('../img/banner-note7program-landscape.jpg');
+	}
 	.banner-v20{
 		background:white url('../img/v20-landscape.jpg') no-repeat center center;
 	}
@@ -241,6 +248,9 @@ main {
 	.layer-banner{
 		width:500px;
 	}
+	.banner-note7program{
+		background-image:url('../img/banner-note7program-tablet.jpg');
+	}
 
 	.banner-s7edgecoral {
 	background:white url('../img/s7edgecoral-mainbanner-tablet.jpg') no-repeat center center;
@@ -285,6 +295,9 @@ main {
 }
 
 @media all and (min-width:1200px){
+	.banner-note7program{
+		background-image:url('../img/banner-note7program-pc.jpg');
+	}
 	.banner-s7edgecoral {
 	background:white url('../img/s7edgecoral-mainbanner-pc.jpg') no-repeat center center;
 	}
@@ -313,6 +326,9 @@ main {
 }
 
 @media all and (min-width:1450px){
+	.banner-note7program{
+		background-image:url('../img/banner-note7program-wide.jpg');
+	}
 	.banner-s7edgecoral {
 	background:white url('../img/s7edgecoral-mainbanner-wide.jpg') no-repeat center center;
 	}
