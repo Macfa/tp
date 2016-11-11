@@ -1,6 +1,6 @@
 <div class="mypage-wrap center ">
 	<h1 class="tit center"></h1>
-	<h2 class="tit-sub">갤럭시 S7 / S7엣지 신청내역</h2>
+	<h2 class="tit-sub"><? if(isExist($arrpreorderS7EdgeBlue)){echo "갤럭시 S7엣지 블루코랄 사전예약현황";}else echo "갤럭시 S7 / S7엣지 신청내역"?></h2>
 
 	<div class="tit-sub">진행단계</div>
 	<ul class="preorder-process-wrap">
@@ -31,9 +31,9 @@
 		<ul class="inlinelist">
 			<li>
 				<span class="label"><i class="ico-person-small"></i> 신청 디바이스 </span><span class="cont"><?php echo $device[$arrOrderList['dvKey']] ?></span>								
-			</li><li>
-				<span class="label"><i class="ico-person-small"></i> 순 번</span><span class="cont"><?php echo $preorderOrderNumString ?></span>								
-			</li><li>
+			</li><?if($arrOrderList['taWatingNumber'] != '0') :?><li>
+				<span class="label"><i class="ico-person-small"></i> 순 번</span><span class="cont"><?php echo $preorderOrderNumString ?></span>							
+			</li><?endif?><li>
 				<span class="label"><i class="ico-carrier-small"></i> 신청할 통신사</span><span class="cont"><?php echo $arrOrderList['taChangeCarrier'] ?></span>			
 			</li><li>
 				<span class="label"><i class="ico-apply-type-small"></i> 가입유형</span><span class="cont"><?php echo $type[$arrOrderList['taApplyType']] ?></span>
@@ -55,24 +55,31 @@
 		</ul>
 	</section>
 
-	<?require_once("./preorderStateInfo.php");?>
+	<?require_once("./preorderStateInfo.php");?>  <!-- 실가입 전  유의사항 -->
 
 	
 	<?php if($arrOrderList['taChangeCarrier'] === 'sk' && isNullVal($plan[$arrOrderList['taPlan']])) :?>
 		<div class="center"><i class="ico-caution-small"></i> 기타 요금제 선택하신 고객님은 실가입 신청시 메모장에 원하시는 요금제를 써주세요.</div>
 	<?php endif?>
-	<?if($arrOrderList['taProcess'] == 2):?>
+	<?if($arrOrderList['taProcess'] == 2 && $arrOrderList['isBuyNote7'] == '0'):?>
 		<div class="center"><i class="ico-caution-small"></i> 원하시는 색상은 반드시 메모란에 적어주세요!</div>
 	<? endif ?>
-	<?if($arrOrderList['taProcess'] == 0) :?> <!-- 예약접수 상태에서 취소 -->
-		<span class="cont"><a href="/page/galaxys7EdgeBlueDelete.php" class="btn-flat-primary-dense">취소하기</a></span>
+	<!--
+	<?if($arrOrderList['taProcess'] == 0) :?> 
+		<span class="cont"><a href="/page/galaxys7Delete.php" class="btn-flat-primary-dense">취소하기</a></span>
 	<? endif ?>
-
-	<?if($arrOrderList['taProcess'] <= 2) :?> <!-- 실가입 필요 단계가지 확인 -->		
-		<span class="cont"><a href="/page/galaxys7EdgeBlueApply.php?v=edit" class="btn-filled-primary-dense">수정하기</a></span>
+	-->
+	
+	<?if($arrOrderList['taProcess'] <= 2 && $arrOrderList['poKey'] !== '4') :?> <!-- 실가입 필요 단계가지 확인 -->		
+		<span class="cont"><a href="/page/galaxys7Apply.php?v=edit" class="btn-filled-primary-dense">수정하기</a></span>
 	<? endif ?>
-	<?if($arrOrderList['taProcess'] == 2) :?> 
+	<?if($arrOrderList['taProcess'] == 2 &&  ($arrOrderList['taChangeCarrier'] === 'sk' || ($arrOrderList['taChangeCarrier'] === 'kt' && $arrOrderList['isBuyNote7'] == '0'))) :?> <!-- 노트7비구매자 실가입신청 -->
 		<span class="label"></span><span class="cont"><a href=<? echo $applyLinkUrl ?> target="_blank" class="btn-filled-primary-dense js-applyBtn">실가입신청</a></span>
+	<? endif ?>
+	<?if($arrOrderList['taProcess'] == 2 && ($arrOrderList['taChangeCarrier'] === 'kt' && $arrOrderList['isBuyNote7'] == '1')) :?>
+
+		<div class="center"> <i class="ico-caution-small"></i>  노트7 구매자분들 중 KT를 신청하시는 분들은 담당자가 유선상으로 진행합니다!</div>
+		
 	<? endif ?>
 
 	<!--
@@ -85,13 +92,12 @@
 	<? endif ?>
 	-->
 
-
 	<br/>
 </div>
 
 <script>
 $('.js-applyBtn').click(function(){
-	<?php if($arrOrderList['paChangeCarrier'] === 'sk') :?>
+	<?php if($arrOrderList['taChangeCarrier'] === 'sk') :?>
 	if(!confirm('선택약정은 개통 중에 수정 가능하니 공시지원금으로 신청 먼저 부탁드립니다.'))
 		return false;
 	<?php endif?>

@@ -65,11 +65,6 @@ try{
 	if($_POST['plan'] === 'etc' &&  isExist($_POST['etcPlan']) === false)
 		throw new Exception('기타요금제를 입력해주세요 ', 3);
 
-
-
-
-
-
 	
 } catch (Exception $e) {	
 	if ($e->getCode() === 1)

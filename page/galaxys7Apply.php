@@ -6,16 +6,23 @@ include_once(PATH_LIB."/lib.parsing.inc.php");
 //include_once(PATH_LIB."/lib.calculator.inc.php");
 
 try{
-	$applyMember = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s AND taChangeCarrier='kt' AND taColor != 'blue'", $mb['mbEmail']);
+	$applyMember = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail=%s AND taCancel = 0 ", $mb['mbEmail']);
 	$isApplyMemberExist = (int)DB::count();	 
-	if($isApplyMemberExist === 1)
-		throw new Exception('이미 신청서를 작성하셨습니다.', 3);
-	//if($preorder['pvProcess'] >= 1)
-		//throw new Exception('신청완료 상태이므로 수정할수 없습니다.', 3);
+
+
+	if($isApplyMemberExist === 0 && $_GET['v'] === 'edit')
+		throw new Exception('구매후 수정이 가능합니다', 2);
 	
-} catch (Exception $e) {	
-	alert($e->getMessage(), $cfg['path']);
-}
+	if($isApplyMemberExist === 1 && $_GET['v'] != 'edit' )
+		throw new Exception('이미 신청서를 작성하셨습니다.', 3);
+	
+} catch (Exception $e) {
+	if ($e->getCode() === 2)	
+		alert($e->getMessage(), $cfg['path']."/page/galaxys7Apply.php");
+	
+	if ($e->getCode() === 3)	
+		alert($e->getMessage(), $cfg['path']."/user/galaxys7EdgeState.php");
+	}
 
 $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/preOrderNote7.css" type="text/css">';
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/preorderNote7.js"></script>';
@@ -26,12 +33,16 @@ $cfg['title'] = '갤럭시 S7 S7엣지 구매안내';
 
 $validEmail = '';
 $validPhone = '';
-if (isEmail($mb['mbEmail']) === true && $isLogged === TRUE)
-	$validEmail = $mb['mbEmail'];
 
 if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $isLogged === TRUE){
 	$validPhone = $mb['mbPhone'];
 }
+
+
+//어드민에서 수정할때 
+if (isEmail($mb['mbEmail']) === true && $isLogged === TRUE)
+	$validEmail = $mb['mbEmail'];
+
 
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)

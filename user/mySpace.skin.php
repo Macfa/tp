@@ -27,16 +27,16 @@
 	</div>
 	<br/>
 	<?endif?>
-	<? if ($isGalaxyS7edgeBlueExist === 1) : ?>
+	<? if ($isS7edgeBlueExist === 1) : ?>
 	<div class="myspace-preorder galaxys7edgeBlue">
-		<a href="/user/galaxys7EdgeBlueState.php" class="preorderLink">
-			<h1 class="preoderTitle">갤럭시 S7엣지 블루코랄 신청현황</h1>
+		<a href="/user/galaxys7EdgeState.php" class="preorderLink">
+			<h1 class="preoderTitle">갤럭시 S7엣지 블루코랄 사전예약</h1>
 		</a>
 	</div>
 	<br/>
 	<?endif?>
-	<!--
-	<? if ($isGalaxyS7edgeExistCount === 1) : ?>
+	
+	<? if ($isS7edgeExist === 1) : ?>
 	<div class="myspace-preorder galaxys7edge">
 		<a href="/user/galaxys7EdgeState.php" class="preorderLink">
 			<h1 class="preoderTitle">갤럭시 S7 / S7엣지 신청현황</h1>
@@ -44,7 +44,7 @@
 	</div>
 	<br/>
 	<?endif?>
-	-->
+	
 	<? if ($isBeyExist === 1) : ?>
 	<div class="myspace-preorder bey">
 		<a href="/user/preorderState.php?device=BeY" class="preorderLink">
