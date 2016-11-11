@@ -1,5 +1,8 @@
 <main role="main">
 	<ul class="main-slider bxslider">
+		<li class="slide-item banner-note7program">
+			<a href="/page/programNote7.php"></a>
+		</li>
 		<li class="slide-item banner-preorder-iphone7">
 			<a href="/page/iphone7Event.php"></a>
 		</li>	
