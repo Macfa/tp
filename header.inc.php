@@ -48,7 +48,7 @@ if ($isMobileTablet == false) {
 	WebFont.load({
     custom: {
         families: ['Noto Sans KR'],
-        urls: ['<?=PATH_CSS?>/notoSansKrFont.css']
+        urls: ['<?=PATH_CSS?>/notoSansFontKR.css']
     }
   });
 }

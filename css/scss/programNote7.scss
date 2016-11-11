@@ -18,7 +18,6 @@ a {
 p {
 	margin:0 auto;
 	padding:5px 20px;
-	padding-top:100px;
 	text-align: center;
 }
 
@@ -27,7 +26,7 @@ p {
 BACKGROUND
 ************************************/
 .bg {
-  background: url('http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/diagmonds.png');
+  background: url('../img/diagmonds.png');
   position: fixed;
   width: 100%;
   height: 300%;
@@ -41,7 +40,6 @@ SECTION
 ************************************/
 section{
   color: #fff;
-  font-family:Raleway;
   width: 100%;
   margin: auto;
   font-size: 1em;
@@ -54,7 +52,7 @@ MY BLACK OVERLAY
 ************************************/
 .black{
   background:rgba(0,0,0,0.5);
-  padding:50px 5px 20px 5px;
+  padding:20px 5px 0px 5px;
   border-top:1px solid rgba(255,255,255,0.2);
   border-bottom:1px solid rgba(255,255,255,0.2);
   margin-top: 0px;
@@ -74,7 +72,7 @@ TEXT
 ************************************/
 .tit {
 	font-size: 2.5em;
-	margin-top: 10px;
+	margin-top: 0px;
 	margin-bottom: 20px;
 	font-weight: bold;
 	text-align: center;
@@ -90,12 +88,13 @@ TEXT
 .tit-b{
 	font-size: 2.91em;
 	margin-top: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-weight: bold;
 	text-align: center;
 	color:$tp-color;
 	text-decoration: underline;
 	letter-spacing: -.05em;
+	line-height: 1.2em;
 }
 .sub {
 	font-size: 1.8em;
@@ -127,12 +126,24 @@ TEXT
 	line-height: 1.4em;
 	letter-spacing: -.05em;
 }
+.warming {
+	margin-bottom: 15px;
+}
+.w-first {
+	width:258px;
+}
+.w-sec {
+	width:290px;
+}
+.w {
+	color: white;
+}
 .link {
-	padding:5px 30px;
+	padding:7px 30px;
 	background:$tp-color;
-	border-radius: 10px;
+	border-radius: 5px;
 	color:black;
-	width:220px;
+	width:180px;
 	margin: 0 auto;
 	margin-bottom:50px;
 	font-weight: bold;
@@ -155,37 +166,6 @@ TEXT
 .tit-add {
 	margin-bottom:0px;
 }
-.arrow {
-	color:$tp-color;
-}
-.problem{	
-	text-align: left;
-	width: 240px;
-	margin-top: 20px;
-	margin-bottom: 40px;
-}
-.choice {
-	margin-bottom: 20px;
-	color:$tp-color;
-}
-.answer1 {
-	text-align: left;
-	padding:5px 15px;
-	width: 250px;
-}
-.answer2 {
-	text-align: left;
-	padding:5px 5px;
-	width: 300px;
-}
-.answer3 {
-	padding:5px 15px;
-	font-size: 1.5em;
-	line-height: 1.2em;
-	font-weight: bold;
-	margin-top:15px;
-	margin-bottom: 80px;
-}
 .bey-add {
 	position: relative;
 	    left: 21%;
@@ -198,29 +178,199 @@ TEXT
 	color:blue;
 }
 
+
+
+
+
+
+
+
+
 .ss {
 	padding-top:50px;
 }
-.ss-end {
-	padding-top: 10px;
-	padding-bottom:60px;
+.ss-in {
+	color: $tp-color;
+	margin-bottom: 80px;
 }
+.ss-in li {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+.ss-box {
+	width:80%;
+	max-width: 500px;
+	padding: 10px 20px;
+	background: #040823;
+	color:white;
+}
+.ss-circle {
+	width:60%;
+	max-width: 500px;
+	padding: 10px 20px;
+	border-radius: 50px;
+	background: $tp-color;
+	color: black;
+	font-weight: bold;
+}
+.ss-arrow {
+	transform: rotate(0deg);
+}
+
+.progress-for {
+	width:90%;
+	max-width: 500px;
+	color:black;
+	background: white;
+	padding:  35px 20px 20px 20px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.5em;
+	margin-top: 40px;
+}
+.progress-for-head {
+	width: 50%;
+	max-width: 300px;
+	padding: 5px 10px;
+	color:black;
+	background: $tp-color;
+	border-radius: 25px;
+	font-size: .9em;
+
+	position: absolute;
+	left: 25%;
+	margin-top: -50px;
+}
+.progress {
+	margin-top:30px;
+	margin-bottom: 80px;
+}
+.progress li {
+	font-size: .5em;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0px 2px;
+}
+.progress-box{
+	width: 100%;
+	max-width: 200px;
+	background: #242424;
+	padding: 20px 10px;
+	font-size: 1.2em;
+	min-height: 100px;
+	vertical-align: middle;
+}
+.hit {
+	color:$tp-color;
+}
+.progress-head {
+	width:60%;
+	min-width:40px;
+	background: $tp-color;
+	color:black;
+	border-radius: 50px;
+	font-size: .8em;
+	padding: 5px 5px;
+
+	position: relative;
+	left: 8%;
+	margin-top:-35px;
+	font-weight: bold;
+}
+.very-s-txt {
+	font-size: .4em;
+}
+
+
+
+.greenlight li {
+	display: block;
+}
+.boom {
+	width:260px;
+	height: 260px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1.9em;
+	line-height: 1.1em;
+	padding-top: 105px;
+	letter-spacing: -.05em;
+	margin-top: 30px;
+	color:black
+}
+.green {
+	width: 150px;
+	height: 150px;
+	line-height: 1.1em;
+	border-radius: 100px;
+	vertical-align: middle;
+	font-size: 1.4em;
+	background: $tp-color;
+	color:black;
+}
+.yellow {
+	width: 150px;
+	height: 150px;
+	line-height: 1.1em;
+	border-radius: 100px;
+	vertical-align: middle;
+	font-size: 1.4em;
+	background: #2c2c2c;
+	color:#bebebe;
+}
+.red {
+	width: 150px;
+	height: 150px;
+	line-height: 1.1em;
+	border-radius: 100px;
+	vertical-align: middle;
+	font-size: 1.5em;
+	background: #2c2c2c;
+	color:#bebebe;
+}
+.green-link {
+	margin-top:20px;
+}
+.box-tit {
+	font-size: .9em;
+	padding-top: 38px;
+	margin-bottom: 5px;
+}
+.yellow .box-tit {
+	padding-top: 25px;
+}
+.red .box-tit {
+	padding-top: 30px;
+}
+
+
+
+
+.bey-b .tit {
+	font-size:1.8em;
+}
+.check-box {
+	margin: 0 auto;
+	width:95%;
+	padding: 10px 10px;
+	background: rgba(0,0,0,0.7);
+	color:#c9c9c9;
+	font-size: 1.3em;
+	margin-top:20px;
+	margin-bottom: 20px;
+}
+.add-txt {
+	font-size:.5em;
+	margin-top:2px;
+	line-height:1.3em;
+}
+
+
 
 .tiple-top {
-	margin-top: 50px;
-}
-.for {
-	margin-top: 100px;
-}
-
-.bey-3gb{
-	margin-top:40px;
-}
-.bey-64 {
-
-}
-.bey-touch {
-	margin-bottom: 40px;
+	margin-top: 30px;
+	margin-bottom: 10px;
 }
 .vs {
 	color:$tp-color;
@@ -231,7 +381,7 @@ TEXT
 	margin-bottom:50px;
 }
 .bey-intro {
-	margin-top:120px;
+	margin-top:0px;
 }
 .note8 {
 	margin-top:50px;
@@ -255,7 +405,7 @@ UL,LI
 	text-align: center;
 	width:80px;
 	font-size:1.2em;
-	padding:10px 5px;
+	padding:5px 5px;
 }
 .pricein .price {
 	width:80px;
@@ -272,20 +422,6 @@ UL,LI
 }
 .spec-li {
 	margin-right:2px;
-}
-
-.progress {
-	padding: 15px 10px;
-	margin:0 auto;
-	margin-bottom: 50px;
-	margin-top: 20px;
-	text-align: center;
-	paddint-top:2px;
-}
-.progress li {
-	margin:0px 2px; 
-	display: inline-block;
-	vertical-align: middle;
 }
 .ul-box {
 	font-size:.9em;
@@ -308,10 +444,6 @@ IMG
 .intro {
 	background: url('../img/intro-back.jpg') no-repeat right bottom;
 }
-.sub-1 {
-	background: url('../img/samnews-1-mobile.png') no-repeat center bottom;
-	padding-bottom:600px;
-}
 .sub-2 {
 	background: url('../img/samnews-2-mobile.png') no-repeat center bottom;
 	padding-bottom:720px;
@@ -322,26 +454,13 @@ IMG
 .blue {
 	background:rgba(3,13,79,.6) url('../img/ss-logo.png');
 }
-
-
-.problem {
-	background: url('../img/problem-m.png') no-repeat left center;
-	padding-left: 100px;
+.warming {
+	background: url('../img/warming-icon (2).png') no-repeat left center;
+	padding-left: 33px;
 }
-.answer1 {
-	background: url('../img/answer1-s.png') no-repeat left center;
-	padding-left: 60px;
+.boom {
+	background: url('../img/boom-img.png') no-repeat center center;
 }
-.answer2 {
-	background: url('../img/answer2-s.png') no-repeat left center;
-	padding-left: 66px;
-}
-.answer3 {
-	background: url('../img/answer3-s.png') no-repeat center top;
-	padding-top: 45px;
-}
-
-
 @media all and (min-width:640px){
 
 
@@ -349,15 +468,18 @@ IMG
 
 	section{
   		width: 640px;
-		margin-top:30px;
+  		margin-top: 20px;
   	}
-
+.intro {
+	height:380px;
+}
 	.tit {
 		font-size: 3.4em;
 		margin-top: 10px;
 		margin-bottom: 20px;
 		font-weight: bold;
 		text-align: center;
+		line-height: 1.2em;
 	}
 	.tit-y {
 		font-size: 3.4em;
@@ -373,7 +495,6 @@ IMG
 		margin-bottom: 20px;
 		font-weight: bold;
 		text-align: center;
-		color:$tp-color;
 		text-decoration: underline;
 		letter-spacing: -.05em;
 	}
@@ -409,77 +530,157 @@ IMG
 	}
 
 
-	.problem{	
+
+	.ss {
+		padding-top:70px;
+	}
+	.ss-in {
+		margin-bottom: 70px;
+	}
+	.ss-in li {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.ss-box {
+		max-width: 130px;
+		height:130px;
+		font-size: .9em;
+		padding: 35px 5px 20px 5px;
+	}
+	.ss-circle {
+		max-width: 150px;
+		height:150px;
+		font-size: 1.3em;
+		padding: 10px 10px;
+		border-radius: 200px;
+		padding-top: 20px;
+	}
+	.ss-arrow {
+		transform: rotate(-90deg);	}
+
+
+
+
+.w-first {
+	width:440px;
+}
+.w-sec {
+	width:330px;
+
+}
+.intro-top{
+		margin-top: 30px;
+	}
+	.tiple-top{
+		margin-top: 80px;
+	}
+	
+	.progress-for {
+		width:62%;
 		margin-top: 60px;
-		margin-bottom: 80px;
-		font-size: 1.8em;
-		width: 380px;
 	}
-	.choice {
-		margin-bottom: 60px;
-		font-size: 2.5em;
-		text-decoration: underline;
+	.progress-for-head {
+		left: 50%;
+		margin-left: -150px;
 	}
-	.answer1 {
-		text-align: center;
-		padding:5px 15px;
-		font-size: 1.6em;
-		width: 100%;
-		margin-bottom: 20px;
+	.progress {
+		margin-top:50px;
 	}
-	.answer2 {
-		text-align: center;
-		padding:5px 15px;
-		font-size: 1.6em;
-		width: 100%;
-		margin-bottom: 20px;
+	.progress li {
+		font-size: .5em;
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0px 2px;
 	}
-	.answer3 {
+	.progress-box{
+		max-width: 400px;
+		padding: 30px 10px 40px 10px;
 		font-size: 3.5em;
-		line-height: 1.2em;
-		font-weight: bold;
-		margin-top:15px;
-		margin-bottom: 120px;
-		text-decoration: underline;
 	}
-	.bey-add {
-		    left: 29%;
-		    margin-bottom: 30px;
+	.progress-head {
+		min-width:50px;
+		border-radius: 80px;
+		padding: 8px 8px;
+		line-height: 1.1em;
+
+		left: 22%;
+		margin-top:-60px;
+	}
+	.very-s-txt {
+		font-size: .6em;
 	}
 
+.greenlight li {
+	display: inline-block;
+}
+	.boom {
+		width:330px;
+		height: 330px;
+		font-size: 2.5em;
+		padding-top: 140px;
+		margin-top: 20px;
+    		padding-right: 10px;
+	}
+	.green {
+		width: 180px;
+		height: 180px;
+		margin: 0px 5px;
+		font-size: 1.5em;
+	}
+	.yellow {
+		width: 180px;
+		height: 180px;
+		margin: 0px 5px;
+	}
+	.red {
+		width: 180px;
+		height: 180px;
+		margin: 0px 5px;
+	}
+	.green-link {
+		margin-top:40px;
+	}
+	.box-tit {
+		padding-top: 30px;
+	}
+	.yellow .box-tit {
+		padding-top: 17px;
+	}
+	.red .box-tit {
+		padding-top: 25px;
+	}
+
+
+
+
+	.bey-add {
+		left:17%;
+		    margin-left: 70px;
+	}
+.bey-b .tit {
+	margin-top: 50px;
+	font-size:2.5em;
+		line-height: 1.2em;
+}
+.check-box {
+	width:85%;
+	padding: 10px 40px;
+	margin-top:50px;
+}
 
 
 	.vs {
 		margin-bottom: 0px;
 	}
 	.bey-b {
-		background:rgba(0,0,0,0.7) url('../img/vs-tablet.png') no-repeat center 170px;
-	}
-	.bey-back {
-		background: url('../img/bey-mobile.png') no-repeat right bottom;
-		padding-bottom:220px;
-	}
-	.sub-1 {
-		background: url('../img/samnews-1-tablet.png') no-repeat center bottom;
-		padding-bottom:610px;
+		background:rgba(0,0,0,0.7) url('../img/vs-tablet.png') no-repeat center 150px;
 	}
 	.sub-2 {
 		background: url('../img/samnews-2-tablet.png') no-repeat center bottom;
 		padding-bottom:580px;
 	}
-	.answer1 {
-		background: url('../img/answer1-s.png') no-repeat center top;
-		padding-left: 0px;
-		padding-top: 45px;
-	}
-	.answer2 {
-		background: url('../img/answer2-s.png') no-repeat center top;
-		padding-left: 0px;
-		padding-top: 45px;
-	}
-	.answer3 {
-		background: url('../img/answer3-s.png') no-repeat center top;
-		padding-top: 45px;
+.boom {
+	background: url('../img/boom-img-tab.png') no-repeat center center;
 }
 }
 @media all and (min-width:900px){
