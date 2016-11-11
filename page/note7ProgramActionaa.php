@@ -24,19 +24,19 @@ try{
 		throw new Exception('현재통신사를 선택해주세요 ', 3);
 	}
 
-
 	
  catch (Exception $e) {	
 	if ($e->getCode() === 1)
 		$errorURL = $cfg['login_url'];	
 	else if ($e->getCode() === 2)
-		$errorURL = $cfg['url']."/user/note7ProgramState.php";
+		$errorURL = $cfg['url']."/page/programNote7.php";
 	else if ($e->getCode() === 3)
 		$errorURL = $cfg['url']."/page/note7Program.php";
 
 	alert($e->getMessage(), $errorURL);
 
 }
+
 
 
 if(isPhoneNum($mb['mbEmail']) === false) {
@@ -66,7 +66,7 @@ $arrApplyMember = array(
 	$sendCont = "[티플 아이폰7 사전예약] 티플에서 아이폰7을 사전예약해주셔서 감사합니다. 사전예약이 처리되면 공지해드리겠습니다.";
 	$SMS->sendMode(0)->sendMemberPhone($_POST['paPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 */
-}
+
 
 
 

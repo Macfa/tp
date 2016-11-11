@@ -30,7 +30,7 @@ try{
 	if ($e->getCode() === 1)
 		$errorURL = $cfg['login_url'];	
 	else if ($e->getCode() === 2)
-		$errorURL = $cfg['url']."/user/note7ProgramState.php";
+		$errorURL = $cfg['url']."/page/programNote7.php";
 	else if ($e->getCode() === 3)
 		$errorURL = $cfg['url']."/page/note7Program.php";
 
