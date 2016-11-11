@@ -31,7 +31,7 @@ try{
 
 
 
-require_once("./galaxys7EdgeBlueStateUrl.php");
+require_once("./galaxys7EdgeStateUrl.php");
 
 
 

@@ -4,6 +4,11 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/mypageList.css" type="text/css">';
 
 $arrOrderList = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail = %s and taCancel = 0 AND poKey = 6", $mb['mbEmail']);
+$arrpreorderS7EdgeBlue = DB::queryFirstRow("SELECT * FROM tmApply WHERE mbEmail = %s and taCancel = 0 AND poKey = 4", $mb['mbEmail']);
+
+if(isExist($arrpreorderS7EdgeBlue)){
+	$arrOrderList = $arrpreorderS7EdgeBlue;
+}
 
 
 
@@ -25,7 +30,7 @@ try{
 		alert($e->getMessage(), $cfg['path']);
 	
 	else if ($e->getCode() === 2)		
-		$errorURL = $cfg['url']."/page/galaxys7EdgeBlueApply.php";
+		$errorURL = $cfg['url']."/page/galaxys7Apply.php";
 	alert($e->getMessage(), $errorURL);
 }
 
@@ -100,7 +105,8 @@ $color = array(
 	'silver' => '실버',
 	'black' => '블랙',
 	'gold' => '골드',
-	'white' => '화이트'
+	'white' => '화이트',
+	'blue' => '블루코랄'
 );
 
 
@@ -111,15 +117,14 @@ $preorderOrderNum = DB::queryFirstField("SELECT taWatingNumber FROM tmApply WHER
   ) 
 );
 
-
-
-$preorderOrderNum = $arrOrderList['taWatingNumber'] + 101; 
-$preorderOrderNumString = "01 - ".$preorderOrderNum;
-	if($arrOrderList['taWatingNumber'] > 200){		
-		$preorderOrderNum = $preorderOrderNum - 200;
-		$preorderOrderNumString = "02 - ".$preorderOrderNum;
+if($arrOrderList['taWatingNumber'] !== '0'){
+	$preorderOrderNum = $arrOrderList['taWatingNumber'] + 101; 
+	$preorderOrderNumString = "01 - ".$preorderOrderNum;
+		if($arrOrderList['taWatingNumber'] > 200){		
+			$preorderOrderNum = $preorderOrderNum - 200;
+			$preorderOrderNumString = "02 - ".$preorderOrderNum;
+	}
 }
-
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 
 require_once("galaxys7EdgeState.skin.php");		
