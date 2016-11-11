@@ -54,7 +54,7 @@ MY BLACK OVERLAY
 ************************************/
 .black{
   background:rgba(0,0,0,0.5);
-  padding:20px 20px 20px 20px;
+  padding:50px 5px 20px 5px;
   border-top:1px solid rgba(255,255,255,0.2);
   border-bottom:1px solid rgba(255,255,255,0.2);
   margin-top: 0px;
@@ -88,7 +88,7 @@ TEXT
 	color:$tp-color;
 }
 .tit-b{
-	font-size: 3.4em;
+	font-size: 2.91em;
 	margin-top: 10px;
 	margin-bottom: 20px;
 	font-weight: bold;
@@ -96,9 +96,6 @@ TEXT
 	color:$tp-color;
 	text-decoration: underline;
 	letter-spacing: -.05em;
-}
-.normal {
-	font-weight: normal;
 }
 .sub {
 	font-size: 1.8em;
@@ -140,7 +137,66 @@ TEXT
 	margin-bottom:50px;
 	font-weight: bold;
 }
+.bey-link {
+	text-decoration: underline;
+	color:white;
+}
+.bey-link:hover {
+	color:blue;
+}
 
+.normal {
+	font-weight: normal;
+}
+.nope {
+	text-decoration: none;
+	color:white;
+}
+.tit-add {
+	margin-bottom:0px;
+}
+.arrow {
+	color:$tp-color;
+}
+.problem{	
+	text-align: left;
+	width: 240px;
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+.choice {
+	margin-bottom: 20px;
+	color:$tp-color;
+}
+.answer1 {
+	text-align: left;
+	padding:5px 15px;
+	width: 250px;
+}
+.answer2 {
+	text-align: left;
+	padding:5px 5px;
+	width: 300px;
+}
+.answer3 {
+	padding:5px 15px;
+	font-size: 1.5em;
+	line-height: 1.2em;
+	font-weight: bold;
+	margin-top:15px;
+	margin-bottom: 80px;
+}
+.bey-add {
+	position: relative;
+	    left: 21%;
+	    text-decoration: underline;
+	    color: white;
+	    margin-top: 0px;
+	    margin-bottom: 30px;
+}
+.bey-add:hover {
+	color:blue;
+}
 
 .ss {
 	padding-top:50px;
@@ -154,7 +210,7 @@ TEXT
 	margin-top: 50px;
 }
 .for {
-	margin-top: 50px;
+	margin-top: 100px;
 }
 
 .bey-3gb{
@@ -169,6 +225,7 @@ TEXT
 .vs {
 	color:$tp-color;
 	margin-top:60px;
+	margin-bottom: 0px;
 }
 .add {
 	margin-bottom:50px;
@@ -186,6 +243,7 @@ TEXT
 	margin-bottom:30px;
 }
 .pricevs {
+	margin-top: 30px;
 	margin-bottom:30px;
 }
 /************************************
@@ -195,12 +253,12 @@ UL,LI
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
-	width:100px;
-	font-size: .8em;
-	padding:15px 0px;
+	width:80px;
+	font-size:1.2em;
+	padding:10px 5px;
 }
 .pricein .price {
-	width:100px;
+	width:80px;
 	font-size: 1.5em;
 	font-weight: bold;
 	color:$tp-color;
@@ -214,6 +272,34 @@ UL,LI
 }
 .spec-li {
 	margin-right:2px;
+}
+
+.progress {
+	padding: 15px 10px;
+	margin:0 auto;
+	margin-bottom: 50px;
+	margin-top: 20px;
+	text-align: center;
+	paddint-top:2px;
+}
+.progress li {
+	margin:0px 2px; 
+	display: inline-block;
+	vertical-align: middle;
+}
+.ul-box {
+	font-size:.9em;
+	max-width:140px;
+	padding:10px 5px;
+	background: #3b3b3b;
+	letter-spacing: -.06em;
+	margin-top:5px;
+	border-radius: 15px;
+	line-height: 1.3em;
+}
+.li-tit {
+	font-size:2.3em;
+	vertical-align: middle;
 }
 
 /************************************
@@ -230,79 +316,81 @@ IMG
 	background: url('../img/samnews-2-mobile.png') no-repeat center bottom;
 	padding-bottom:720px;
 }
-.tiple {
-	background: url('../img/vs-mobile.png') no-repeat center 100px;
-}
-.touch {
-	background: url('../img/bey-touch-s.png') no-repeat center top;
-}
-.memory{
-	background: url('../img/bey-gb-s.png') no-repeat center top;
-}
-.hd {
-	background: url('../img/bey-hd-s.png') no-repeat center top;
-}
-.ram {
-	background: url('../img/bey-ram-s.png') no-repeat center top;
-}
-.bey-3gb{
-	background: url('../img/bey-ram-b.png') no-repeat center top;
-	padding-top:130px;
-}
-.bey-64 {
-	background: url('../img/bey-gb-b.png') no-repeat center top;
-	padding-top:130px;
-	margin-top:30px;
-}
-.bey-touch {
-	background: url('../img/bey-touch-b.png') no-repeat center top;
-	padding-top:130px;
-	margin-top:30px;
-}
-.bey-back {
-	background: url('../img/bey-mobile.png') no-repeat right bottom;
-	padding-bottom:260px;
-}
 .bey-b {
-	background:rgba(0,0,0,0.7) url('../img/bey-b-mobile.png') no-repeat center 50px;
+	background:rgba(0,0,0,0.7) url('../img/vs-mobile.png') no-repeat center 70px;
 }
 .blue {
 	background:rgba(3,13,79,.6) url('../img/ss-logo.png');
 }
 
+
+.problem {
+	background: url('../img/problem-m.png') no-repeat left center;
+	padding-left: 100px;
+}
+.answer1 {
+	background: url('../img/answer1-s.png') no-repeat left center;
+	padding-left: 60px;
+}
+.answer2 {
+	background: url('../img/answer2-s.png') no-repeat left center;
+	padding-left: 66px;
+}
+.answer3 {
+	background: url('../img/answer3-s.png') no-repeat center top;
+	padding-top: 45px;
+}
+
+
 @media all and (min-width:640px){
 
 
-	.bey-b {
-		background:rgba(0,0,0,0.7) url('../img/bey-b-tablet.png') no-repeat center 50px;
-	}
-	.tiple {
-		background: url('../img/vs-tablet.png') no-repeat center  100px;
-	}
-	.bey-back {
-		background: url('../img/bey-mobile.png') no-repeat right bottom;
-		padding-bottom:220px;
-	}
-	.sub-1 {
-		background: url('../img/samnews-1-tablet.png') no-repeat center bottom;
-		padding-bottom:610px;
-	}
-	.sub-2 {
-		background: url('../img/samnews-2-tablet.png') no-repeat center bottom;
-		padding-bottom:580px;
-	}
+
+
 	section{
   		width: 640px;
 		margin-top:30px;
   	}
 
+	.tit {
+		font-size: 3.4em;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		font-weight: bold;
+		text-align: center;
+	}
+	.tit-y {
+		font-size: 3.4em;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		font-weight: bold;
+		text-align: center;
+		color:$tp-color;
+	}
+	.tit-b{
+		font-size: 3.4em;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		font-weight: bold;
+		text-align: center;
+		color:$tp-color;
+		text-decoration: underline;
+		letter-spacing: -.05em;
+	}
+	.txt {
+		font-size: 1.3em;
+	}
+	.link {
+		font-size: 1.4em;
+		    width: 240px;
+	}
 	.pricein li {
-		width:130px;
+		width:80px;
 		font-size: 1.1em;
 		padding:15px 0px;
 	}
 	.pricein .price {
-		width:170px;
+		width:110px;
 		font-size: 1.9em;
 	}
 	.spec li {
@@ -319,6 +407,80 @@ IMG
 	.note8-padding {
 		margin-bottom:100px;
 	}
+
+
+	.problem{	
+		margin-top: 60px;
+		margin-bottom: 80px;
+		font-size: 1.8em;
+		width: 380px;
+	}
+	.choice {
+		margin-bottom: 60px;
+		font-size: 2.5em;
+		text-decoration: underline;
+	}
+	.answer1 {
+		text-align: center;
+		padding:5px 15px;
+		font-size: 1.6em;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	.answer2 {
+		text-align: center;
+		padding:5px 15px;
+		font-size: 1.6em;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	.answer3 {
+		font-size: 3.5em;
+		line-height: 1.2em;
+		font-weight: bold;
+		margin-top:15px;
+		margin-bottom: 120px;
+		text-decoration: underline;
+	}
+	.bey-add {
+		    left: 29%;
+		    margin-bottom: 30px;
+	}
+
+
+
+	.vs {
+		margin-bottom: 0px;
+	}
+	.bey-b {
+		background:rgba(0,0,0,0.7) url('../img/vs-tablet.png') no-repeat center 170px;
+	}
+	.bey-back {
+		background: url('../img/bey-mobile.png') no-repeat right bottom;
+		padding-bottom:220px;
+	}
+	.sub-1 {
+		background: url('../img/samnews-1-tablet.png') no-repeat center bottom;
+		padding-bottom:610px;
+	}
+	.sub-2 {
+		background: url('../img/samnews-2-tablet.png') no-repeat center bottom;
+		padding-bottom:580px;
+	}
+	.answer1 {
+		background: url('../img/answer1-s.png') no-repeat center top;
+		padding-left: 0px;
+		padding-top: 45px;
+	}
+	.answer2 {
+		background: url('../img/answer2-s.png') no-repeat center top;
+		padding-left: 0px;
+		padding-top: 45px;
+	}
+	.answer3 {
+		background: url('../img/answer3-s.png') no-repeat center top;
+		padding-top: 45px;
+}
 }
 @media all and (min-width:900px){
 	
