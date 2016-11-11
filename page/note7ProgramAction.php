@@ -14,7 +14,7 @@ try{
 	$isApplyExist = (int)$isApplyExist;
 	
 	if($isApplyExist > 0)
-		throw new Exception('이미 교환/환불 신청을 하셨습니다.', 2);
+		throw new Exception('이미 신청을 하셨습니다.', 2);
 
 
 	if(isNullVal($_POST['isBuyTplanitNote7']))
