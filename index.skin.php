@@ -141,7 +141,7 @@
 	<section>
 		<h1>최신 기기</h1>
 		<?php 
-		$incList['deviceSql'] = "SELECT * FROM tmDevice d LEFT JOIN tmMainSort o ON d.dvKey = o.maTargetKey WHERE d.dvDisplay=1 and d.dvParent = 0 ORDER BY o.maOrder is null ASC, o.maOrder ASC ";
+		$incList['deviceSql'] = "SELECT * FROM tmDevice d LEFT JOIN tmMainSort o ON d.dvKey = o.maTargetKey WHERE d.dvDisplay = 1 and (d.dvSK = 1 OR d.dvKT = 1 OR d.dvLG = 1) and d.dvParent = 0 ORDER BY o.maOrder is null ASC, o.maOrder ASC ";
 		$incList['additialWhere'] = "LIMIT 15"; 
 		require(PATH_PRD."/deviceList.inc.php");	
 		?>

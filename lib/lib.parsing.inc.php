@@ -66,21 +66,25 @@ function parsingMatch($url, $rex) {
 	
 }
 
-
 function getRexNum($target) {
 	return $output = preg_replace("/[^0-9]*/s", "", $target);
 }
 
 function getRexMatch($target, $rex) {
+	if(preg_match($rex, $target) === 0)
+		return false;
+
 	preg_match_all($rex, $target, $output);
-	if (count($output) <= 1)	
-		return $output[0][0];
-	else {	
-		if (count($output[1]) <= 1)
-			return $output[1][0];
-		else
-			return $output[1];
-	}
+	if (count($output[1]) === 1)
+		return $output[1][0];
+	else
+		return $output[1];
+}
+
+//preg_match_all 중에서 결과값($output[1])만 가지고 오는 함수
+function getRexMatchAll($target, $rex){
+	preg_match_all($rex, $target, $output);
+	return $output[1];
 }
 
 //보안으로 인한 allow_open_fopen = off 때문에 만든 url로 부터 내용을 얻어오는 함수

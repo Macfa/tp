@@ -196,6 +196,7 @@ class deviceInfo {
 												'name' => 'LTE 데이터 선택 32.8',
 												'description' => '데이터 300MB/음성 무제한/영상&부가30분 추가제공',
 												'fee' => 29900,
+												
 												'selectPlanDiscount' => 6000,
 												'value' => 'KJPLTE029'
 											)
@@ -214,6 +215,38 @@ class deviceInfo {
 												'fee' => 22000,
 												'selectPlanDiscount' => 0,
 												'value' => 'LTEEGG22G'
+											)
+										),
+										'watch'=>array(
+											25 => array(
+												'name' => 'Wearable LTE',
+												'description' => '',
+												'fee' => 10000,
+												'selectPlanDiscount' => 0,
+												'value' => 'KTFWEAR4G'
+											),
+											26 => array(
+												'name' => 'Wearable 3G',
+												'description' => '',
+												'fee' => 10000,
+												'selectPlanDiscount' => 0,
+												'value' => 'KTFWEAR3G'
+											)
+										),
+										'kids'=>array(
+											27 => array(
+												'name' => '키즈80 차단형',
+												'description' => '데이터100MB/망내지정1회선 음성&문자무제한(소진시차단,충전가능)/문자250건',
+												'fee' => 8000,
+												'selectPlanDiscount' => 0,
+												'value' => 'KTFWEARLM'
+											),
+											28 => array(
+												'name' => '키즈80 일반형',
+												'description' => '데이터100MB/망내지정1회선 음성&문자무제한/문자250건',
+												'fee' => 8000,
+												'selectPlanDiscount' => 0,
+												'value' => 'KTFWEARAS'
 											)
 										)
 									),

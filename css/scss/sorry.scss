@@ -1,7 +1,7 @@
 @charset "UTF-8";
-@import 'common';
-@import '_list';
-@import '_calculator';
+@import 'common.scss';
+@import '_list.scss';
+@import '_calculator.scss';
 
 .count-top {position:relative; top:175px; padding:0; text-align:center;}
 .count-box {margin:auto;width:160px; height:48px; background-color:rgba(white,0.7);border-radius:5px}

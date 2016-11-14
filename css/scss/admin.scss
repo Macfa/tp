@@ -1,6 +1,6 @@
-@import 'common';
-@import '_list';
-@import '_row';
+@import 'common.scss';
+@import '_list.scss';
+@import '_row.scss';
 .contact-pc-wrap {display:none;}
 .contact-ico {
 	background:url('../img/ico-contact-btn.png') no-repeat center center;

@@ -1,9 +1,9 @@
-@import 'common';
-@import '_list';
-@import '_row';
-@import '_vacance';
-@import '_calculator';
-@import '_giftDetail';
+@import 'common.scss';
+@import '_list.scss';
+@import '_row.scss';
+@import '_vacance.scss';
+@import '_calculator.scss';
+@import '_giftDetail.scss';
 
 $navHeight : 50px;
 $detailHeadHeight : 60px;

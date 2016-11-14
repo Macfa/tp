@@ -16,27 +16,31 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		var $isContainVAT = false;
 
 	if ($('[name=capacity]').size() > 0) {
-		var $capacityType = $('[name=capacity]:checked').val();
+		var $capacity = $('[name=capacity]:checked').val();
+		var $affixCapacityKey = '-'+$capacity;
 	} else {
-		var $capacityType = 'noCapacity';
+		var $capacity = undefined;
+		var $affixCapacityKey = '';
 	}
 	var $isSelectPlanDiscount = ($discountType == 'selectPlan')?true:false;
 
-	if($('.js-id').val() == 'galaxys7edge' && $capacityType == '64G') {
+	if($('.js-id').val() == 'galaxys7edge' && $capacity == '64G') {
 		alert('갤럭시S7엣지 64G는 현재 판매하지 않습니다.');
 		$('[name=capacity][value=32G]').prop('checked', true);
 	}
 
 	var $data = {
-		dataCapacity : $capacityType,
+		capacity : $capacity,
 		discountType : $discountType,
+		applyType : $applyType,
 		plan : $plan,
 		id : $('.js-id').val(),
 		token : $('.js-token').val()
 	 };
 
 	//ajax 통신으로 데이터를 받아옴
-	if ($isLoadedData[$capacityType+'-'+$plan] == undefined) {
+
+	if ($isLoadedData[$plan+'-'+$applyType+'-'+$discountType+$affixCapacityKey] == undefined) {
 		$.ajax({
 			url:'/product/detailGetPlan.php',
 			type:'post',
@@ -44,15 +48,15 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 			data:$data,
 			success:function(data){
 				console.log(data);
-				$isLoadedData[$capacityType+'-'+$plan] = true;
-				if ($arrPlanData[$capacityType] == undefined) $arrPlanData[$capacityType] = [];
-				$arrPlanData[$capacityType][$plan] = $.parseJSON(data);
+				$isLoadedData[$affixCapacityKey+$plan] = true;
+				if ($arrPlanData[$capacity] == undefined) $arrPlanData[$capacity] = [];
+				$arrPlanData[$capacity][$plan] = $.parseJSON(data);
 			}
 		});
 	}
 	
 
-	$targetData = $arrPlanData[$capacityType][$plan];
+	$targetData = $arrPlanData[$capacity][$plan];
 
 	//console.log($targetData);
 

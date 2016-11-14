@@ -132,6 +132,7 @@ catch(Exception $e)
 
 if ($isOrderGift) {
 	$countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
+	//첫 주문일시 무료 배송
 	$isShippingFree = ($countOrder>0)?FALSE:TRUE;
 	$shipping = ($isShippingFree===true)?0:2500;
 
