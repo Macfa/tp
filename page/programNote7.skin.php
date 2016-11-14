@@ -6,7 +6,7 @@
 		<h1 class="tit-b w">삼성 Galaxy Note7</br>고객을 살려줘!!</h1>
 		<p class="warming w-first">
 			돌아갈 기기가 있으신 분은  뒤로가기 버튼을 눌러주세요 :D</p>
-		<a href="/page/note7Program.php"><div class="link">구조요청하기</div></a>
+		<a href="/page/programNote7Apply.php"><div class="link">구조요청하기</div></a>
 	</div>
 
 
@@ -113,7 +113,7 @@
 				</div>
 			</li>
 		</ul>
-		<a href="/page/note7Program.php"><div class="link green-link">구조요청하기</div></a>
+		<a href="/page/programNote7Apply.php"><div class="link green-link">구조요청하기</div></a>
 	</div>
 
 
@@ -148,14 +148,14 @@
 				* Galaxy Note8 외의 타기기 기변도 가능합니다. 주의사항과 혜택은 동일하게 적용 됩니다.</br>
 				* 가입 폭주로 인해 BeY폰 물량이 부족한 경우, 타 단말로 진행 할 수 있습니다.
 		</div>
-		<a href="/page/note7Program.php"><div class="link">구조요청하기</div></a>
+		<a href="/page/programNote7Apply.php"><div class="link">구조요청하기</div></a>
 	</div>
 
 	<div class="white">
 		<h3 class="txt note8">출시 예상일 2017년 8월 경</h3>
 			<h1 class="tit-y">자동 갤럭시 노트8</br>사전사전예약 실시</h1>
 			<h3 class="txt note8-end">해당 프로그램을 신청하실 시 자동으로 노트8 사전예약이 되며 차후 진행할 노트8 사전예약 프로모션에서도 최우선 순위로 신청됩니다.</h3>
-			<a href="/page/note7Program.php"><div class="link note8-padding">구조요청하기</div></a>
+			<a href="/page/programNote7Apply.php"><div class="link note8-padding">구조요청하기</div></a>
 	</div>
 
 </section>
