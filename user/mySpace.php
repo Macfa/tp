@@ -27,6 +27,8 @@ $isS7edgeExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmApply WHERE mb
 //비와이폰 신청현황
 $isBeyExist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmPreorderApplyList WHERE mbEmail=%s and paCancel = 0 and poKey = 5", $mb['mbEmail']);	
 
+$isprogramNote7Exist = (int)DB::queryFirstField("SELECT COUNT(*) FROM tmNote7Program WHERE mbEmail=%s and tnCancel = 0 ", $mb['mbEmail']);	
+
 $type = array(
 	'exchange' => '교환',
 	'refund' => '환불'
