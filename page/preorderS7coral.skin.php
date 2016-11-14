@@ -5,7 +5,7 @@
 			국내 유일 기어S7엣지</br>
 			<b class="coral">블루코랄</b> 일반구매 실시
 			</h1>
-		<a href="<?php echo URL?>/page/galaxys7EdgeBlueApply.php">
+		<a href="<?php echo URL?>/page/galaxys7Apply.php">
 			<div class="bn">
 				S7엣지 블루코랄 구매하기
 			</div>
@@ -44,7 +44,7 @@
 		* 노트7 교품 대상자는 해당 제외됩니다. *
 <!--노트7 교품 대상자는 뭐가 제외되는지 정확히 모름.-->
 		</h3>
-		<a href="<?php echo URL?>/page/galaxys7EdgeBlueApply.php">
+		<a href="<?php echo URL?>/page/galaxys7Apply.php">
 			<div class="bn-w">
 				S7엣지 블루코랄 구매하기
 			</div>
