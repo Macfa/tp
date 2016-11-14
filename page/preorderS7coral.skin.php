@@ -3,11 +3,11 @@
 		<div class="intro">
 			<h1 class="tit">
 			국내 유일 기어S7엣지</br>
-			<b class="coral">블루코랄</b> 사전예약 실시
+			<b class="coral">블루코랄</b> 일반구매 실시
 			</h1>
-		<a href="<?php echo URL?>/page/galaxys7EdgeBlueApply.php">
+		<a href="<?php echo URL?>/page/galaxys7Apply.php">
 			<div class="bn">
-				S7엣지 블루코랄 예약하기
+				S7엣지 블루코랄 구매하기
 			</div>
 		</a>
 		</div>
@@ -21,7 +21,7 @@
 		</h3>
 		<h2 class="sub">
 			티플에서 <b class="coral">블루코랄</b></br>
-		<b class="coral">사전예약</b>하면 드리는 사은품
+		<b class="coral">구매</b>하면 드리는 사은품
 		</h2>
 		<h3 class="txt">
 		요금제 옵션별 <b class="yellow">별★포인트</b> 지급</br>
@@ -43,9 +43,9 @@
 		<h3 class="add"> * 노트7 교품 대상자도 포함됩니다.  *
 <!--노트7 교품 대상자는 뭐가 제외되는지 정확히 모름.-->
 		</h3>
-		<a href="<?php echo URL?>/page/galaxys7EdgeBlueApply.php">
+		<a href="<?php echo URL?>/page/galaxys7Apply.php">
 			<div class="bn-w">
-				S7엣지 블루코랄 예약하기
+				S7엣지 블루코랄 구매하기
 			</div>
 		</a>
 	</div>
