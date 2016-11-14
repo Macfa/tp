@@ -15,12 +15,7 @@ html, body {
   margin: 0;
 }
 body {
-<<<<<<< HEAD
-  background: red;
-=======
-  background: #000;
->>>>>>> parent of 10e09c5... 일반구매로 내용변경
-}
+  background: black;
 a{
 	text-decoration:none;
 }
@@ -65,11 +60,7 @@ footer {
 	width:200px;
 	padding:5px 20px;
 	border:1px solid $coralcolor;
-<<<<<<< HEAD
-	background:red;
-=======
-	background:#000;
->>>>>>> parent of 10e09c5... 일반구매로 내용변경
+	background:black;
 	color:$coralcolor;
 }
 .bn:hover {
@@ -393,7 +384,7 @@ footer {
 }
 	#page {
   height: 1300px;
-  top: 1600px;
+  top: 1500px;
 }
 	#point .link {
 	margin-top:30px;
