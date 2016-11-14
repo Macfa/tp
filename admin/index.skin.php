@@ -20,7 +20,9 @@
 		</li><li class="myspace-list-wrap">
 			<a href="memberList.php" class="myspace-list">회원리스트검색</a>
 		</li><li class="myspace-list-wrap">
-		<a href="exchangeRefundNote7List.php" class="myspace-list">노트7환불/교환</a>
+			<a href="exchangeRefundNote7List.php" class="myspace-list">노트7환불/교환</a>
+		</li><li class="myspace-list-wrap">
+			<a href="programNote7List.php" class="myspace-list">노트7 프로그램 신청</a>
 		</li>
 	</ul>
 	<div class="clear"></div>

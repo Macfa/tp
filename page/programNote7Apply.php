@@ -24,7 +24,7 @@ try{
 
 }catch (Exception $e) {	
 	if ($e->getCode() === 3)	
-		alert($e->getMessage(), $cfg['path']."/page/programNote7.php");
+		alert($e->getMessage(), $cfg['path']."/user/programNote7State.php");
 }
 $validEmail = '';
 $validPhone = '';

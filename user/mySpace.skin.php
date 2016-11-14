@@ -53,6 +53,15 @@
 	</div>
 	<br/>
 	<?endif?>
+
+	<? if ($isprogramNote7Exist === 1) : ?>
+	<div class="myspace-preorder programNote7">
+		<a href="/user/programNote7State.php" class="preorderLink">
+			<h1 class="preoderTitle">노트7 프로그램 신청현황</h1>
+		</a>
+	</div>
+	<br/>
+	<?endif?>
 			<ul class="myspace-list-group">
 				<li class="myspace-list-wrap"><a href="/cart" class="myspace-list">장바구니</a></li>
 				<li class="myspace-list-wrap"><a href="orderList.php" class="myspace-list">주문내역</a></li>

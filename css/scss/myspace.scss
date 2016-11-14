@@ -30,10 +30,10 @@
 	height:100%;
 	cursor:pointer;
 	transition:box-shadow .2s, color .2s;
-	line-height:180px;
+	padding-top: 60px;
 	color:inherit;
 	text-decoration:none;
-	font-size:1.5em;
+	font-size:1.4em;
 	text-align:center;
 	@include shadow-level(2);
 	&:hover{
@@ -48,17 +48,19 @@
   margin: 0 auto;
   height: 100px; }
   .myspace-preorder.v20 {
-    background: #000 url("../img/preorderBanner-v20-bg.jpg") no-repeat center center; }
+    background: #000 url("../img/mypageBanner-v20-bg.jpg") no-repeat center center; }
   .myspace-preorder.iphone7 {
-    background: #000 url("../img/preorderBanner-iphone7-bg.jpg") no-repeat center center; }
+    background: #000 url("../img/mypageBanner-iphone7-bg.jpg") no-repeat center center; }
   .myspace-preorder.note7 {
-    background: #000 url("../img/preorderBanner-note7-bg.jpg") no-repeat center center; }
+    background: #000 url("../img/mypageBanner-note7-bg.jpg") no-repeat center center; }
   .myspace-preorder.galaxys7edgeBlue {
-    background: #000 url("../img/preorderBanner-s7edgeblue-bg.jpg") no-repeat center center; }
+    background: #000 url("../img/mypageBanner-s7edgeblue-bg.jpg") no-repeat center center; }
    .myspace-preorder.bey {
-    background: #000 url("../img/preorderBanner-bey-bg.jpg") no-repeat center center; }
+    background: #000 url("../img/mypageBanner-bey-bg.jpg") no-repeat center center; }
    .myspace-preorder.galaxys7edge {
-   	background: #000 url("../img/preorderBanner-s7edge-bg.jpg") no-repeat center center; }
+   	background: #000 url("../img/mypageBanner-s7edge-bg.jpg") no-repeat center center; }
+   .myspace-preorder.programNote7 {
+   	background: #000 url("../img/mypageBanner-programNote7-bg.jpg") no-repeat center center; }
 
 .preorderLink {
   width: 100%;
