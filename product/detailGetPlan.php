@@ -13,25 +13,27 @@ if ($isNeedToken === true && chkToken($_POST['token']) === false) {
 	exit;
 }
 
-if ($_POST['dataCapacity'] == 'noCapacity')
-	$_POST['dataCapacity'] = '';
+//-------------------------------
 
-$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvId = %s", $_POST['id'].strtolower($_POST['dataCapacity']));
+if (isExist($_POST['capacity']))
+	$dvId = $_POST['id'].strtolower($_POST['capacity'])
+
+$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvId = %s and dv{strtoupper($_POST['carrier'])} = 1", $dvId);
 
 $deviceInfo = new deviceInfo();
-$deviceInfo->setCarrier('sk')->setMode($device['dvCate'])->setMonth(24)->setPlan($_POST['plan']);
+$deviceInfo->setCarrier($_POST['carrier'])->setMode($device['dvCate'])->setMonth(24)->setPlan($_POST['plan']);
 $deviceInfo->setDevicePrice($device['dvRetailPrice']);
 
-$result	= DB::query("SELECT * FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = %s2 ORDER BY spDate DESC LIMIT 5", $device['dvKey'], $_POST['plan'],'sk');
+$result	= DB::query("SELECT * FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = %s2 ORDER BY spDate DESC LIMIT 5", $device['dvKey'], $_POST['plan'], $_POST['carrier']);
 $output = $result[0];
 
 $discount = 0;
 $resultDevicePrice = $device['dvRetailPrice'];
 if ($_POST['discountType'] == 'support')
 	$resultDevicePrice = $device['dvRetailPrice'] - ($output['spSupport'] + $output['spAddSupport']);
+else
+	$output['selectPlanDiscount'] = $deviceInfo->getSelectPlanDiscount() * 24;
 
-$output['selectPlanDiscountPerMonth'] = $deviceInfo->getSelectPlanDiscount();
-$output['selectPlanDiscount'] = $output['selectPlanDiscountPerMonth'] * 24;
 $output['repayment'] = $deviceInfo->calcInterest($resultDevicePrice)->getRepayment();
 $output['planFee'] = $deviceInfo->getPlanFee();
 $output['dvRetailPrice'] = $device['dvRetailPrice'];
@@ -39,6 +41,10 @@ $output['containVatInterest'] = $deviceInfo->getContainVatInterest();
 
 
 $resultCode = DB::query("SELECT cdType,cdCode FROM tmCode WHERE dvKey = %i0 and spPlan = %i1", $device['dvKey'], $_POST['plan']);
+if ($resultCode === array()) {
+	$resultCode = DB::query("SELECT cdType,cdCode FROM tmCode WHERE dvKey = %i0 and spPlan IS NULL", $device['dvKey']);
+}
+
 if ($resultCode === array()) {
 	$output['applyUrl']['02'] = "https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
 	$output['applyUrl']['06'] = "https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
