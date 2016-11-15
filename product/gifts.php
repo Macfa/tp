@@ -20,7 +20,7 @@ require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 <main role="main">
 	<ul class="main-slider bxslider">
 		<li class="slide-item banner-rasiel">
-			<a href="http://traumshop.co.kr/product/detail.html?product_no=812&cate_no=1&display_group=2"></a>
+			<a class="js-giftViewToggle" data-key="107"></a>
 		</li>
 	</ul>
 </main>
