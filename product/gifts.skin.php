@@ -1,10 +1,3 @@
-<main role="main">
-	<ul class="main-slider bxslider">
-		<li class="slide-item banner-rasiel">
-			<a href="http://traumshop.co.kr/product/detail.html?product_no=812&cate_no=1&display_group=2"></a>
-		</li>
-	</ul>
-</main>
 <div class="gifts-wrap">
 	<form id="js-giftsForm">
 	<label class="inp-wrap">
