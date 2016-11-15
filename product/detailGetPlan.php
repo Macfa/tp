@@ -27,32 +27,25 @@ $deviceInfo->setDevicePrice($device['dvRetailPrice']);
 $result	= DB::query("SELECT * FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = %s2 ORDER BY spDate DESC LIMIT 5", $device['dvKey'], $_POST['plan'], $_POST['carrier']);
 $output = $result[0];
 
-$discount = 0;
-$resultDevicePrice = $device['dvRetailPrice'];
+
 if ($_POST['discountType'] == 'support')
 	$resultDevicePrice = $device['dvRetailPrice'] - ($output['spSupport'] + $output['spAddSupport']);
-else
+else if ($_POST['discountType'] == 'selectPlan') {
+	$resultDevicePrice = $device['dvRetailPrice'];
 	$output['selectPlanDiscount'] = $deviceInfo->getSelectPlanDiscount() * 24;
+}
 
 $output['repayment'] = $deviceInfo->calcInterest($resultDevicePrice)->getRepayment();
 $output['planFee'] = $deviceInfo->getPlanFee();
 $output['dvRetailPrice'] = $device['dvRetailPrice'];
-$output['containVatInterest'] = $deviceInfo->getContainVatInterest();
+//$output['containVatInterest'] = $deviceInfo->getContainVatInterest();
 
+$cdCode = DB::queryOneField("SELECT cdCode FROM tmCode WHERE dvKey = %i0 and spPlan = %i1 and cdType = %i2", $device['dvKey'], $_POST['plan'], (int)$_POST['applyType']);
 
-$resultCode = DB::query("SELECT cdType,cdCode FROM tmCode WHERE dvKey = %i0 and spPlan = %i1", $device['dvKey'], $_POST['plan']);
-if ($resultCode === array()) {
-	$resultCode = DB::query("SELECT cdType,cdCode FROM tmCode WHERE dvKey = %i0 and spPlan IS NULL", $device['dvKey']);
-}
-
-if ($resultCode === array()) {
-	$output['applyUrl']['02'] = "https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
-	$output['applyUrl']['06'] = "https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
+if (isExist($cdCode) === true) {
+	$output['applyUrl'] = $deviceInfo->getApplyURL($cdCode, $_POST['applyType']);
 }else{ 
-	foreach($resultCode as $key => $val) {
-		$val['cdType'] = '0'.$val['cdType'];
-		$output['applyUrl'][$val['cdType']] = $deviceInfo->getApplyURL($val['cdCode'], $val['cdType']);
-	}
+	$output['applyUrl'] ="https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
 }
 
 $cntDevicePlanGraph = count($result);
@@ -125,18 +118,17 @@ if($cntDevicePlanGraph > 1){
 
 //-------------------------------------
 
-$arrRewardPoint = DB::query("SELECT rpPoint, rpDiscountType, rpApplyType FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier", 
+$rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
 	array(
 		'dvKey' => $device['dvKey'],
 		'rpPlan' => $_POST['plan'],
-		'rpCarrier' => 'sk'
+		'rpCarrier' => $_POST['carrier'],
+		'rpApplyType' => (int)$_POST['applyType'],
+		'rpDiscountType' => $_POST['discountType']
 	)
 );
 
-foreach($arrRewardPoint as $val){
-	$output['rewardPoint'][$val['rpDiscountType']]['0'.$val['rpApplyType']] = $val['rpPoint'];
-}
-
+$output['rewardPoint'] = $rpPoint;
 
 //-------------------------------------
 

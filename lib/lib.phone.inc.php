@@ -1,4 +1,7 @@
 <?
+include_once(PATH_LIB.'/lib.snoopy.inc.php');
+include_once(PATH_LIB.'/lib.parsing.inc.php');
+
 function getPlanInfo($data){
 	global $cfg;
 	$snoopy=new snoopy;
@@ -320,6 +323,8 @@ class deviceInfo {
 
 	public function getArrPlan(){
 		//var_dump($this->arrPlan[$this->carrier][$this->mode]);
+		var_dump($this->carrier);
+		var_dump($this->mode);
 		return array_keys($this->arrPlan[$this->carrier][$this->mode]);
 	}
 

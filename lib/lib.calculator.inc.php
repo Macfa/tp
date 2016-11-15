@@ -1,10 +1,14 @@
 <?php
-class calculator {
+class planCalculator {
 	
-	private $dvId = '';
-	private $dvKey = 0;
-	private $dvCate = '';
-	private $carrier = '';
+	private $dvId;
+	private $dvKey;
+	private $dvCate;
+	private $carrier;
+	private $applyType;
+	private $discountType;
+	private $deviceType;
+	private $plan;
 
 	private $selectedCarrier = '';
 	private $selectedDeviceType = '';
@@ -48,10 +52,10 @@ class calculator {
 
 	private $htmlPadTemplate = '<div class="calc-pad-wrap js-calcPad">{content}</div>';
 
-	private $htmlPadWrapTemplate = '<div class="calc-row-{calcRowAffix}">
+	private $htmlPadWrapTemplate = '<fieldset class="calc-row-{calcRowAffix}">
 																<div class="calc-row-label">{tit}</div>
 																{content}
-															</div>';
+															</fieldset>';
 
 	private $htmlPadButtonTemplate = '<label class="calc-btn">
 																<input type="radio" value="{value}" name="{name}" {isChecked}/>
@@ -106,10 +110,49 @@ class calculator {
 																<div class="spacer" style="clear: both;"></div>
 															</section>';
 
-	function __construct ($dvId, $carrier='sk') {
+	public function setDevice($dvId) {
 		$this->dvId = $dvId;
-		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
+		return $this;
+	}
+
+	public function setCarrier($carrier = null) {
 		$this->selectedCarrier = $this->carrier = $carrier;
+		return $this;
+	}
+
+	public function setCapacity($capacity = null) {
+		$this->capacity = $capacity;
+		return $this;
+	}
+
+	//LTE형 3G형 같은 용량외 세부 기기 종류 
+	public function setDeviceType($deviceType = null) {
+		$this->deviceType = $deviceType;
+		return $this;
+	}
+
+	public function setApplyType($applyType = null) {
+		$this->applyType = $applyType;
+		return $this;
+	}
+
+	public function setDiscountType($discountType = null) {
+		$this->discountType = $discountType;
+		return $this;
+	}
+
+	public function setPlan($plan = null) {
+		$this->$plan = $plan;
+		return $this;
+	}
+
+	public function create() {
+		$this->init()->setCarrierSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
+		return $this->getCalculator();
+	}
+
+	private function init() {
+		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
 
 		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
 		if ($this->capacityCount > 0) {
@@ -168,11 +211,11 @@ class calculator {
 
 		$this->arrPlan = $deviceInfo->getArrPlan();
 
-
 		//---------------------------------------------------
+		return $this;
 	}
 
-	public function setCarrierTypeSelect(){
+	public function setCarrierSelect(){
 
 		if (isExist($this->carrier)) {
 			foreach ($this->arrCarrierType as $key => $val) {
@@ -181,7 +224,6 @@ class calculator {
 				}
 			}
 		}else{
-			
 			$carrierTypeChecked[getFirstArrKey($this->arrCarrierType)]['isChecked'] = 'checked';
 		}
 
@@ -202,12 +244,12 @@ class calculator {
 		return $this;
 	}
 
-	public function setDeviceTypeSelect($default=''){
+	public function setDeviceTypeSelect(){
 		if ($this->deviceTypeCount == 0) return $this;
 
-		if (isExist($default)) {
+		if (isExist($this->deviceType)) {
 			foreach ($this->arrDeviceType as $val) {
-				if ($val == $default) {
+				if ($val == $this->deviceType) {
 					$deviceTypeChecked[$val]['isChecked'] = 'checked';
 				}
 			}
@@ -219,8 +261,8 @@ class calculator {
 		if($this->deviceTypeCount === 1) {
 			
 			$this->selectedDeviceType = $this->arrDeviceType[getFirstArrKey($this->arrDeviceType)];
-		} else if(isExist($default)){
-			$this->selectedDeviceType = $default;
+		} else if(isExist($this->deviceType)){
+			$this->selectedDeviceType = $this->deviceType;
 		}
 
 		foreach ($this->arrDeviceType as $val) {
@@ -239,13 +281,13 @@ class calculator {
 		return $this;
 	}
 
-	public function setCapacitySelect($default=''){
+	public function setCapacitySelect(){
 		if($this->capacityCount == 0) return $this;
 
 		$child = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if (isExist($default)) {
+		if (isExist($this->capacity)) {
 			foreach ($child as $key => $val) {
-				if ($val['dvTit'] == $default) {
+				if ($val['dvTit'] == $this->capacity) {
 					$child[$key]['isChecked'] = 'checked';
 				}
 			}
@@ -255,8 +297,8 @@ class calculator {
 
 		if($this->capacityCount == 1) {
 			$this->selectedCapacity = $child[0]['dvTit'];
-		} else if(isExist($default)){
-			$this->selectedCapacity = $default;
+		} else if(isExist($this->capacity)){
+			$this->selectedCapacity = $this->capacity;
 		}
 
 		foreach ($child as $key => $val) {
@@ -274,10 +316,10 @@ class calculator {
 		return $this;
 	}
 
-	public function setApplyTypeSelect($default=''){
-		if (isExist($default)) {
+	public function setApplyTypeSelect(){
+		if (isExist($this->applyType)) {
 			foreach ($this->arrApplyType as $key => $val) {
-				if ($key == $default) {
+				if ($key == $this->applyType) {
 					$applyTypeChecked[$key]['isChecked'] = 'checked';
 				}
 			}
@@ -288,8 +330,8 @@ class calculator {
 
 		if($this->applyTypeCount == 1) {
 			$this->selectedApplyType = getFirstArrKey($this->arrApplyType);
-		} else if(isExist($default)){
-			$this->selectedApplyType = $default;
+		} else if(isExist($this->applyType)){
+			$this->selectedApplyType = $this->applyType;
 		}
 
 		foreach ($this->arrApplyType as $key => $val) {
@@ -308,11 +350,11 @@ class calculator {
 		return $this;
 	}
 
-	public function setDiscountTypeSelect($default=''){
+	public function setDiscountTypeSelect(){
 
-		if (isExist($default)) {
+		if (isExist($this->discountType)) {
 			foreach ($this->arrDiscountType as $key => $val) {
-				if ($key == $default) {
+				if ($key == $this->discountType) {
 					$discountTypeChecked[$key]['isChecked'] = 'checked';
 				}
 			}
@@ -323,8 +365,8 @@ class calculator {
 
 		if($this->discountTypeCount == 1) {
 			$this->selectedDiscountType = getFirstArrKey($this->arrDiscountType);
-		} else if(isExist($default)){
-			$this->selectedDiscountType = $default;
+		} else if(isExist($this->discountType)){
+			$this->selectedDiscountType = $this->discountType;
 		}
 
 		foreach ($this->arrDiscountType as $key => $val) {
@@ -358,14 +400,14 @@ class calculator {
 		return $this;
 	}
 
-	public function setPlanSelect($default=''){
+	public function setPlanSelect(){
 		$tmpDeviceInfo = new deviceInfo();
 		$tmpDeviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
-		$this->selectedPlan = (isExist($default))?$default:getFirstArrKey($this->arrPlan);
+		$this->selectedPlan = (isExist($this->plan))?$this->plan:getFirstArrKey($this->arrPlan);
 		//var_dump($this->arrPlan);
-		if (isExist($default)) {
+		if (isExist($this->plan)) {
 			foreach ($this->arrPlan as $val) {
-				if ($val == $default) {
+				if ($val == $this->plan) {
 					$planSelected[$val] = 'selected';
 				}
 			}
@@ -397,7 +439,9 @@ class calculator {
 		if ($isSelectedCapacity && isNullVal($this->selectedDiscountType) && isNullVal($this->selectedPlan))
 			return $this;
 		*/
-		$data['capacityType'] = $this->selectedCapacity;
+		$data['capacity'] = $this->selectedCapacity;
+		$data['discountType'] = $this->selectedDiscountType;
+		$data['applyType'] = $this->selectedApplyType;
 		$data['discountType'] = $this->selectedDiscountType;
 		$data['plan'] = $this->selectedPlan;
 		$data['id'] = $this->dvId;
@@ -506,7 +550,7 @@ class calculator {
 		return $this;
 	}
 
-	public function getCalculator() {
+	private function getCalculator() {
 		$this->getDefaultInfo()->setArrResultRow()->setResultSection();
 
 		$data['content'] = $this->calculatorResult;
