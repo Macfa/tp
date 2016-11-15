@@ -1,6 +1,5 @@
 setCalcHeight();
 var $arrPlanData = [];
-var $isLoadedData = [];
 
 $(window).resize(function(){
 	setCalcHeight();
@@ -17,10 +16,8 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 
 	if ($('[name=capacity]').size() > 0) {
 		var $capacity = $('[name=capacity]:checked').val();
-		var $affixCapacityKey = '-'+$capacity;
 	} else {
 		var $capacity = undefined;
-		var $affixCapacityKey = '';
 	}
 	var $isSelectPlanDiscount = ($discountType == 'selectPlan')?true:false;
 
@@ -39,8 +36,13 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	 };
 
 	//ajax 통신으로 데이터를 받아옴
+	if($capacity == undefined)
+		var $key = $plan+'-'+$applyType+'-'+$discountType;
+	
+	if($capacity != undefined)
+		$key = $key+'-'+$capacity;
 
-	if ($isLoadedData[$plan+'-'+$applyType+'-'+$discountType+$affixCapacityKey] == undefined) {
+	if ($arrPlanData[$key] == undefined) {
 		$.ajax({
 			url:'/product/detailGetPlan.php',
 			type:'post',
@@ -48,15 +50,13 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 			data:$data,
 			success:function(data){
 				console.log(data);
-				$isLoadedData[$affixCapacityKey+$plan] = true;
-				if ($arrPlanData[$capacity] == undefined) $arrPlanData[$capacity] = [];
-				$arrPlanData[$capacity][$plan] = $.parseJSON(data);
+				$arrPlanData[$key] = $.parseJSON(data);
 			}
 		});
 	}
 	
 
-	$targetData = $arrPlanData[$capacity][$plan];
+	$targetData = $arrPlanData[$key];
 
 	//console.log($targetData);
 
@@ -91,7 +91,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 
 	var $result = $resultDevicePricePerMonth + $planFeePerMonth - $selectPlanDiscountPerMonth;
 
-	var $availablePoint = parseInt($targetData['rewardPoint'][$discountType][$applyType]);
+	var $availablePoint = parseInt($targetData['rewardPoint']);
 
 	var $mbPoint = parseInt($('.js-totalResultInp').attr('data-mb-point'));
 
