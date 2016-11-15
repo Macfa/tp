@@ -1,3 +1,10 @@
+<main role="main">
+	<ul class="main-slider bxslider">
+		<li class="slide-item banner-rasiel">
+			<a href="http://traumshop.co.kr/product/detail.html?product_no=812&cate_no=1&display_group=2"></a>
+		</li>
+	</ul>
+</main>
 <div class="gifts-wrap">
 	<form id="js-giftsForm">
 	<label class="inp-wrap">
@@ -66,4 +73,28 @@ $(function(){
 	});
 });
 <?php endif?>
+$(function(){
+	require([ 
+		'jquery.bxslider'
+	], function (bxslider) {
+		if ($isMobileTablet)
+			$bxSliderOption = {auto:true};
+		else
+			$bxSliderOption = {mode:'fade',auto:true};
+
+		$('.main-slider').bxSlider($bxSliderOption);
+	});
+
+	<?php if(isNotExist(get_cookie('isLayerBannerHide2016-10-27'))) :?>
+	$('.js-layerBanner').show();
+	<?php endif?>
+});
+
+$('.js-layerBannerClose').click(function(){
+	if($('[name=isHide]:checked').val() == 1) {
+		setCookie('isLayerBannerHide2016-10-27','yes',1);
+	}
+	
+	$('.js-layerBanner').hide();
+});
 </script>
