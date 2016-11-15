@@ -56,6 +56,7 @@ try
 		throw new Exception('상세주소를 입력해주세요', 3);
 	*/
 
+
 	if($isLogged == false)
 		throw new Exception('별 포인트 적립을 위해 로그인 해주세요!', 3);
 
@@ -67,6 +68,9 @@ try
 
 	if(isNullVal($_POST['plan']))
 		throw new Exception('요금제를 선택해주세요 ', 3);
+
+	if(isNullVal($_POST['color']))
+		throw new Exception('색상을 선택해주세요 ', 3);
 
 	$dvKeyWhere = "SELECT COUNT(*), dvKey FROM tmDevice WHERE dvDisplay = 1 and dvId = %s_dvId";
 	$dvKeyArray = array('dvId' => $_POST['dvId']);
@@ -158,6 +162,8 @@ if ($isOrderGift) {
 		));
 	}
 }
+
+
 
 /*
 $isSetDefAddr = (isExist($_POST['setDefaultAddress']))?TRUE:FALSE;
