@@ -370,7 +370,7 @@ class planParsing{
 
 		$arrPlan = $this->getArrPlan();
 		foreach($arrPlan as $key => $val){
-			$this->setPlan($val)->getPage()->getTable()->getCont()->checkHTMLChanged();//->insertUpdate();
+			$this->setPlan($val)->getPage()->getTable()->getCont()->checkHTMLChanged()->insertUpdate();
 		}
 		return $this;
 	}
@@ -443,7 +443,7 @@ class planParsing{
 				'dvModelCode = %s', $row['commonModel']
 			);
 			
-			$isNotUpdated = 0;/*= DB::queryFirstField("SELECT COUNT(*) FROM tmSupport WHERE spCarrier = %s_spCarrier and spPlan = %i_spPlan and dvKey=%i_dvKey and spDate = %t_spDate", 
+			$isNotUpdated = DB::queryFirstField("SELECT COUNT(*) FROM tmSupport WHERE spCarrier = %s_spCarrier and spPlan = %i_spPlan and dvKey=%i_dvKey and spDate = %t_spDate", 
 				array(
 					'spPlan' => $this->plan, 
 					'spCarrier' => $this->carrier,
@@ -451,9 +451,7 @@ class planParsing{
 					'spDate' => $row['spDate']
 				)
 			);
-			*/
 			if($isNotUpdated == 0) {
-				/*
 				DB::insert('tmSupport', array(
 					'dvKey' => $dvKey,
 					'spPlan' => $this->plan,
@@ -462,12 +460,6 @@ class planParsing{
 					'spAddSupport' => $row['spAddSupport'],
 					'spDate' => $row['spDate'],
 				));
-				*/
-				DB::update('tmSupport', array(
-					'spSupport' => $row['spSupport'],
-					'spAddSupport' => $row['spAddSupport']
-					),'dvKey = %i and spPlan = %i and spCarrier = %s and spDate = %s', $dvKey, $this->plan, $this->carrier, $row['spDate']
-				);
 			}
 		}
 	}

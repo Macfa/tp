@@ -24,7 +24,7 @@ RewriteRule ^orderAction$ ./product/orderAction.php
 
 RewriteRule ^seo\/naver-syndication\.xml$ ./seo/naver-syndication\.php
 
-RewriteRule ^(.*\.(css|js)).*$ ./lib/min/index.php?f=$1 [L]
+RewriteRule ^(.*\.jsaa).*$ ./lib/min/index.php?f=$1 [L]
 RewriteCond %{HTTP_HOST} ^(mo\.startgd\.com)(:80)? [NC]
 RewriteRule ^(.*) http://tplanit.co.kr/$1 [R=301,L]
 </IfModule>

@@ -3,11 +3,10 @@ include_once(PATH_LIB.'/lib.snoopy.inc.php');
 include_once(PATH_LIB.'/lib.parsing.inc.php');
 
 function getPlanInfo($data){
-	global $cfg;
 	$snoopy=new snoopy;
 	$snoopy->httpmethod = "POST";
 	$data['authentication'] = $cfg['authentication'];
-	$snoopy->submit($cfg['url'].'/product/detailGetPlan.php', $data);
+	$snoopy->submit(URL.'/product/detailGetPlan.php', $data);
 	$page=$snoopy->results;
 	if ($page == FALSE) return false;
 	return json_decode($page, true);
@@ -323,8 +322,8 @@ class deviceInfo {
 
 	public function getArrPlan(){
 		//var_dump($this->arrPlan[$this->carrier][$this->mode]);
-		var_dump($this->carrier);
-		var_dump($this->mode);
+		//var_dump($this->carrier);
+		//var_dump($this->mode);
 		return array_keys($this->arrPlan[$this->carrier][$this->mode]);
 	}
 
@@ -345,12 +344,16 @@ class deviceInfo {
 		return $this->arrWatchPlanName;
 	}
 
+	public function getArrPocketfiPlanName(){
+		return $this->arrPocketfiPlanName;
+	}
+
 	public function getPlanValue($input){
 		return $this->arrPlan[$this->carrier][$this->mode][$input]['value'];
 	}
 
-	public function getArrPocketfiPlanName(){
-		return $this->arrPocketfiPlanName;
+	public function getPlanName($input) {
+		return $this->arrPlan[$this->carrier][$this->mode][$input]['name'];
 	}
 
 	public function getPlanInfo($input) {
@@ -385,10 +388,6 @@ class deviceInfo {
 
 	public function getApplyURL($input, $type) {
 		return 'https://tgate.sktelecom.com/applform/main.do?prod_seq='.$input.'&scrb_cl='.$type.'&mall_code=00001';
-	}
-
-	public function getPlanName($input) {
-		return $this->arrPlan[$this->carrier][$this->mode][$input]['name'];
 	}
 
 	public function calcInterest($resultDevicePrice) { //할부이자계산

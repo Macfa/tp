@@ -117,11 +117,13 @@ class planCalculator {
 
 	public function setCarrier($carrier = null) {
 		$this->selectedCarrier = $this->carrier = $carrier;
+		$this->carrier = strtolower($this->carrier);
 		return $this;
 	}
 
 	public function setCapacity($capacity = null) {
 		$this->capacity = $capacity;
+		$this->capacity = strtoupper($this->capacity);
 		return $this;
 	}
 
@@ -142,7 +144,7 @@ class planCalculator {
 	}
 
 	public function setPlan($plan = null) {
-		$this->$plan = $plan;
+		$this->plan = $plan;
 		return $this;
 	}
 
@@ -155,7 +157,7 @@ class planCalculator {
 		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
 
 		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if ($this->capacityCount > 0) {
+		if ((int)$this->capacityCount === 0) {
 			$this->lockedPropertyCount += 1;
 			$this->isExistChild = true;
 			$this->capacityLockIcon = $this->lockIcon;
@@ -230,7 +232,7 @@ class planCalculator {
 		foreach ($this->arrCarrierType as $key => $val) {
 			$data['value'] = $key;
 			$data['label'] = $val;
-			$data['name'] = 'carrierType';
+			$data['name'] = 'carrier';
 			$data['isChecked'] = $carrierTypeChecked[$key]['isChecked'];
 			$data['lockIcon'] = $this->carrierTypeLockIcon;
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
@@ -291,14 +293,14 @@ class planCalculator {
 					$child[$key]['isChecked'] = 'checked';
 				}
 			}
-		}else{
+		}/*else{
 			$child[0]['isChecked'] = 'checked';
-		}
+		}*/
 
-		if($this->capacityCount == 1) {
-			$this->selectedCapacity = $child[0]['dvTit'];
-		} else if(isExist($this->capacity)){
+		if(isExist($this->capacity)){
 			$this->selectedCapacity = $this->capacity;
+		}else if($this->capacityCount == 1) {
+			$this->selectedCapacity = $child[0]['dvTit'];
 		}
 
 		foreach ($child as $key => $val) {
@@ -404,16 +406,9 @@ class planCalculator {
 		$tmpDeviceInfo = new deviceInfo();
 		$tmpDeviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
 		$this->selectedPlan = (isExist($this->plan))?$this->plan:getFirstArrKey($this->arrPlan);
-		//var_dump($this->arrPlan);
-		if (isExist($this->plan)) {
-			foreach ($this->arrPlan as $val) {
-				if ($val == $this->plan) {
-					$planSelected[$val] = 'selected';
-				}
-			}
-		} else {
-			$planSelected[$this->arrPlan[getFirstArrKey($this->arrPlan)]] = 'selected';
-		}
+		////var_dump($this->arrPlan);
+		//var_dump($this->selectedPlan);
+		$planSelected[$this->selectedPlan] = 'selected';
 
 		foreach ($this->arrPlan as $val) {
 			$data['value'] = $val;
@@ -431,23 +426,15 @@ class planCalculator {
 	}
 
 	private function getDefaultInfo(){
-		/*
-		if($this->isExistChild == true)
-			$isSelectedCapacity = isNullVal($this->selectedCapacity);
-		else 
-			$isSelectedCapacity = true;
-		if ($isSelectedCapacity && isNullVal($this->selectedDiscountType) && isNullVal($this->selectedPlan))
-			return $this;
-		*/
+		$data['carrier'] = $this->selectedCarrier;
 		$data['capacity'] = $this->selectedCapacity;
 		$data['discountType'] = $this->selectedDiscountType;
 		$data['applyType'] = $this->selectedApplyType;
-		$data['discountType'] = $this->selectedDiscountType;
 		$data['plan'] = $this->selectedPlan;
 		$data['id'] = $this->dvId;
 		//var_dump($data);
 		$this->defaultInfo = getPlanInfo($data);
-		var_dump($this->defaultInfo);
+		//var_dump($this->defaultInfo);
 		return $this;
 	}
 
@@ -559,10 +546,27 @@ class planCalculator {
 		$data['content'] = $this->calculatorPad;
 		$this->calculatorPad = getResultTemplate($data, $this->htmlPadTemplate);
 
+		$template = getTemplateTag();
+
+		$data['content'] = $this->htmlPlanSelectOptionTemplate;
+		$data['class'] = 'js-planSelectOptionTemplate';
+		$planOptionTemplate = getResultTemplate($data, $template);
+
+		$data['content'] = $this->htmlPadButtonTemplate;
+		$data['class'] = 'js-padButtonTemplate';
+		$padButtonTemplate = getResultTemplate($data, $template);
+
+		$data['content'] = $this->htmlPadWrapTemplate;
+		$data['class'] = 'js-padButtonTemplate';
+		$padWrapTemplate = getResultTemplate($data, $template);
+
+		$data = array();
 		$data['content'] = $this->calculatorResult.$this->calculatorPad;
 		$data['dvKey'] = $this->dvId;
 		$data['token'] = createToken();
-		return $this->calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
+		$calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
+
+		return $calculator.$padWrapTemplate.$padButtonTemplate.$planOptionTemplate;
 	}
 }
 ?>

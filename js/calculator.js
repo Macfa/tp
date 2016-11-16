@@ -1,11 +1,47 @@
 setCalcHeight();
 var $arrPlanData = [];
+var $arrPad = [];
+var $prevCarrier = $('[name=carrier]:checked').val();
 
 $(window).resize(function(){
 	setCalcHeight();
 });
 
 $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
+	var $carrier = $('[name=carrier]:checked').val();
+
+	var $data = {
+		carrier : $carrier,
+		id : $('.js-id').val(),
+		token : $('.js-token').val()
+	};
+
+	if($arrPad[$carrier] == undefined) {
+		$.ajax({
+			url:'/product/getPlanCalculatorPad.php',
+			type:'post',
+			async:false,
+			data:$data,
+			success:function(data){
+				console.log($arrPad);
+				$arrPad[$carrier] = $.parseJSON(data);
+			}
+		});
+	}
+
+	if ($prevCarrier != $carrier) {
+		$('.js-planCalcArg').html('');
+		$.each($arrPad[$carrier]['plan'], function($plan, $value){
+			var $templateData = [];
+			$templateData['name'] = $value['name'];
+			$templateData['info'] = $value['info'];
+			$templateData['value'] = $plan;
+			var $planOption = getResultTemplate($('#js-planSelectOptionTemplate').html(), $templateData);
+			$('.js-planCalcArg').append($planOption);
+		});
+		$prevCarrier = $carrier;
+	}
+
 	var $applyType = $('[name=applyType]:checked').val();
 	var $discountType = $('[name=discountType]:checked').val();
 	var $plan = $('[name=plan]').val();
@@ -26,18 +62,18 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		$('[name=capacity][value=32G]').prop('checked', true);
 	}
 
-	var $data = {
+	$data = {
+		carrier : $carrier,
 		capacity : $capacity,
 		discountType : $discountType,
 		applyType : $applyType,
 		plan : $plan,
 		id : $('.js-id').val(),
 		token : $('.js-token').val()
-	 };
+	};
 
 	//ajax 통신으로 데이터를 받아옴
-	if($capacity == undefined)
-		var $key = $plan+'-'+$applyType+'-'+$discountType;
+	var $key = $carrier+'-'+$plan+'-'+$applyType+'-'+$discountType;
 	
 	if($capacity != undefined)
 		$key = $key+'-'+$capacity;
@@ -50,10 +86,12 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 			data:$data,
 			success:function(data){
 				console.log(data);
-				$arrPlanData[$key] = $.parseJSON(data);
+				$data = $.parseJSON(data);
+				$arrPlanData[$key] = $data;
 			}
 		});
 	}
+
 	
 
 	$targetData = $arrPlanData[$key];
@@ -127,15 +165,20 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		$('.js-availablePoint').text(setNumComma($availablePoint+parseInt($mbPoint)));
 		$('.js-totalResultInp').val($availablePoint + $mbPoint).attr('data-parsley-max', $availablePoint + $mbPoint);
 	}
+
+	//-------------------------------------------------
+
+
 	
 });
 
 function setCalcHeight(){
-	if ($(document).width() < 640) {
+	if ($(window).width() < 635) {
 		$('.calc-result-wrap').css({height:'35%'});
-		return false;
+	} else {
+		$('.calc-result-wrap').height($('.js-calcPad').height());
 	}
-	$('.calc-result-wrap').height($('.calc-wrap').height()).addClass('active');
+	$('.calc-result-wrap').addClass('active');
 }
 
 

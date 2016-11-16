@@ -12,10 +12,11 @@ planParsing::setCarrier('kt')->setMode('phone')->setManuf('lg')->getDataAndInser
 planParsing::setCarrier('kt')->setMode('watch')->getDataAndInsert();
 planParsing::setCarrier('kt')->setMode('pocketfi')->getDataAndInsert();
 planParsing::setCarrier('kt')->setMode('kids')->getDataAndInsert();
-
+/*
 planParsing::setCarrier('sk')->setMode('phone')->setManuf('apple')->getDataAndInsert();
 planParsing::setCarrier('sk')->setMode('phone')->setManuf('samsung')->getDataAndInsert();
 planParsing::setCarrier('sk')->setMode('phone')->setManuf('lg')->getDataAndInsert();
 planParsing::setCarrier('sk')->setMode('watch')->getDataAndInsert();
 planParsing::setCarrier('sk')->setMode('pocketfi')->getDataAndInsert();
 planParsing::setCarrier('sk')->setMode('kids')->getDataAndInsert();
+*/

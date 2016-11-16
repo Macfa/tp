@@ -54,6 +54,10 @@ function getFirstArrayKey($arr){
 	return $output;
 }
 
+function getTemplateTag(){
+	return '<script id="{class}" type="text/x-template">{content}</script>';
+}
+
 //시간을 년/월/일 로
 
 function get_today() {
