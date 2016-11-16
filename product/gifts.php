@@ -16,6 +16,15 @@ if ($_GET['giftId']) {
 }
 
 require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
+?>
+<main role="main">
+	<ul class="main-slider bxslider">
+		<li class="slide-item banner-rasiel">
+			<a class="js-giftViewToggle" data-key="107"></a>
+		</li>
+	</ul>
+</main>
+<?
 require_once("gifts.skin.php");	
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 

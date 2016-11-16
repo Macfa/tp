@@ -66,4 +66,28 @@ $(function(){
 	});
 });
 <?php endif?>
+$(function(){
+	require([ 
+		'jquery.bxslider'
+	], function (bxslider) {
+		if ($isMobileTablet)
+			$bxSliderOption = {auto:true};
+		else
+			$bxSliderOption = {mode:'fade',auto:true};
+
+		$('.main-slider').bxSlider($bxSliderOption);
+	});
+
+	<?php if(isNotExist(get_cookie('isLayerBannerHide2016-10-27'))) :?>
+	$('.js-layerBanner').show();
+	<?php endif?>
+});
+
+$('.js-layerBannerClose').click(function(){
+	if($('[name=isHide]:checked').val() == 1) {
+		setCookie('isLayerBannerHide2016-10-27','yes',1);
+	}
+	
+	$('.js-layerBanner').hide();
+});
 </script>
