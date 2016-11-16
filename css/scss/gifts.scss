@@ -1,10 +1,125 @@
 @import 'common.scss';
-@import '_banner.scss';
 @import '_list.scss';
 @import '_giftDetail.scss';
+@import '_bxslider';
+
+$bannerHeight:220px;
+
+main {
+	height:$bannerHeight; 
+	background:white;
+	a{text-decoration:none;color:inherit;}
+	ul{height:100%;padding:0;margin:0;}
+	li{padding:0;margin:0;height:100%;text-align:center;list-style:none;}
+	& > a, 
+	.bxslider > li > a{display:block;width:100%;height:100%;text-decoration:none;color:inherit;}
+	.yellow-slide{background:$mainYellow;}
+	.rasiel-slide{background:url('img/rasiel_bg.jpg') center center;background-size:cover}
+}
+.slide-item{
+	background:white;
+	.wrap{height:100%;}
+}
+.main-slider{
+	display:none;
+}
+
+
+/***********************************************
+BANNER BACKGROUND AREA - MOBILE
+***********************************************/
+.banner-rasiel{
+		background:url('../img/pointmall_mainbanner_rasiel_mobile.jpg') no-repeat center center;
+	}
+
+
 
 .gifts-wrap{
 	@extend .wrap;
-	padding-top:50px;
+	padding-top:0px;
 	text-align:center;
+}
+
+
+@media all and (min-width:640px){
+	$bannerHeight:400px;
+	main {height:$bannerHeight;}
+
+	main .btn {font-size:17px}
+
+
+
+
+/***********************************************
+BANNER BACKGROUND AREA - LANDSCAPE
+***********************************************/
+
+	.banner-rasiel{
+		background:url('../img/pointmall_mainbanner_rasiel_landscape.jpg') no-repeat center center;
+	}
+
+
+
+
+
+
+}
+
+@media all and (min-width:900px){
+
+
+
+/***********************************************
+BANNER BACKGROUND AREA - TABLET
+***********************************************/
+
+	.banner-rasiel{
+		background:url('../img/pointmall_mainbanner_rasiel_tablet.jpg') no-repeat center center;
+	}
+
+
+
+
+
+
+}
+
+@media all and (min-width:1200px){
+
+.gifts-wrap{
+	padding-top:20px;
+}
+
+/***********************************************
+BANNER BACKGROUND AREA - PC
+***********************************************/
+
+	.banner-rasiel{
+		background:url('../img/pointmall_mainbanner_rasiel_pc.jpg') no-repeat center center;
+	}
+
+
+
+
+
+
+}
+
+@media all and (min-width:1450px){
+
+
+
+/***********************************************
+BANNER BACKGROUND AREA - WIDE
+***********************************************/
+
+	.banner-rasiel{
+		background:url('../img/pointmall_mainbanner_rasiel_wide.jpg') no-repeat center center;
+	}
+
+
+
+
+
+
 }
