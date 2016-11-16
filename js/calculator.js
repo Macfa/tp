@@ -167,18 +167,21 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	}
 
 	//-------------------------------------------------
-
-
-	
 });
+
+$('.js-clculatorDetailToggle').click(function(){
+	$('.js-calculatorResult').toggleClass('active');
+});
+
 
 function setCalcHeight(){
 	if ($(window).width() < 635) {
-		$('.calc-result-wrap').css({height:'35%'});
+		$('.calc-result-wrap').css({height:'25%'});
 	} else {
 		$('.calc-result-wrap').height($('.js-calcPad').height());
 	}
 	$('.calc-result-wrap').addClass('active');
 }
+
 
 

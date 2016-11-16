@@ -129,6 +129,66 @@
 .ico-change-device-small {
   background-position: -360px -50px; }
 
+.ico-common, .ico-small, .ico-person-small, .ico-talk-small, .ico-truck-small, .ico-bike-small, .ico-caution-small, .ico-email-small, .ico-tel-small, .ico-calendar-small, .ico-carrier-small, .ico-gift-small, .ico-color-small, .ico-plan-small,
+.ico-coins-small, .ico-apply-type-small,
+.ico-change-device-small {
+  background-image: url("../img/ico-common.png");
+  background-repeat: no-repeat; }
+
+.ico-small, .ico-person-small, .ico-talk-small, .ico-truck-small, .ico-bike-small, .ico-caution-small, .ico-email-small, .ico-tel-small, .ico-calendar-small, .ico-carrier-small, .ico-gift-small, .ico-color-small, .ico-plan-small,
+.ico-coins-small, .ico-apply-type-small,
+.ico-change-device-small {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  word-spacing: 0;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle; }
+
+.ico-person-small {
+  background-position: 0 -50px; }
+
+.ico-talk-small {
+  background-position: -30px -50px; }
+
+.ico-truck-small {
+  background-position: -60px -50px; }
+
+.ico-bike-small {
+  background-position: -90px -50px; }
+
+.ico-caution-small {
+  margin-top: -5px;
+  background-position: -120px -50px; }
+
+.ico-email-small {
+  background-position: -150px -50px; }
+
+.ico-tel-small {
+  background-position: -180px -50px; }
+
+.ico-calendar-small {
+  background-position: -210px -50px; }
+
+.ico-carrier-small {
+  background-position: -240px -50px; }
+
+.ico-gift-small {
+  background-position: -270px -50px; }
+
+.ico-color-small {
+  background-position: -300px -50px; }
+
+.ico-plan-small,
+.ico-coins-small {
+  background-position: -330px -50px; }
+
+.ico-apply-type-small,
+.ico-change-device-small {
+  background-position: -360px -50px; }
+
 .btn-login-ico, .btn-kakao-login i, .btn-naver-login i, .btn-fb-login i {
   position: absolute;
   width: 25px;
