@@ -35,11 +35,11 @@ if($arrOrderList['pvChangeCarrier'] === 'sk'){
 	$linkUrl2 = '&scrb_cl='.$arrOrderList['pvApplyType'].'&mall_code=00001"';
 	$applyLinkUrl = $linkUrl1.$arrV20ApplyCode.$linkUrl2;
 }
-if($arrOrderList['pvChangeCarrier'] === 'kt' && $arrOrderList['pvApplyType'] === '02' ){	
-	$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=138FF8C1-BD4A-46EC-90E8-DCB5A0CCFC63"';
+if($arrOrderList['pvChangeCarrier'] === 'kt' && $arrOrderList['pvApplyType'] === '02' ){	//번이
+	$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=2D27D595-CB2B-49AF-A365-F3CC065266CC"';
 }
-if($arrOrderList['pvChangeCarrier'] === 'kt' && $arrOrderList['pvApplyType'] === '06' ){	
-	$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=0A93DFC4-A0D0-47F0-B515-CC4EA0EBB066"';
+if($arrOrderList['pvChangeCarrier'] === 'kt' && $arrOrderList['pvApplyType'] === '06' ){	//기변
+	$applyLinkUrl = '"http://online.olleh.com/index.jsp?prdcID=81DED567-A7A4-47C8-9162-4CBE4A3C14F7"';
 }
 
 
