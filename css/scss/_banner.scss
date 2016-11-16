@@ -34,6 +34,9 @@ main {
 	height:100%;
 	float:right;
 }
+.banner-gears3{
+	background:black url('../img/gears3-mobile.jpg') no-repeat center center;
+}
 .banner-note7-issue{
 	background:#ececec url('../img/banner-note7-issue-mobile.jpg') no-repeat center center;
 }
@@ -168,6 +171,9 @@ main {
 	.banner-note7program{
 		background-image:url('../img/banner-note7program-landscape.jpg');
 	}
+	.banner-gears3{
+		background-image:url('../img/gears3-landscape.jpg');
+	}
 	.banner-v20{
 		background:white url('../img/v20-landscape.jpg') no-repeat center center;
 	}
@@ -248,6 +254,9 @@ main {
 	.layer-banner{
 		width:500px;
 	}
+	.banner-gears3{
+		background-image:url('../img/gears3-tablet.jpg');
+	}
 	.banner-note7program{
 		background-image:url('../img/banner-note7program-tablet.jpg');
 	}
@@ -295,6 +304,10 @@ main {
 }
 
 @media all and (min-width:1200px){
+
+	.banner-gears3{
+		background-image:url('../img/gears3-pc.jpg');
+	}
 	.banner-note7program{
 		background-image:url('../img/banner-note7program-pc.jpg');
 	}
@@ -326,6 +339,9 @@ main {
 }
 
 @media all and (min-width:1450px){
+	.banner-gears3{
+		background-image:url('../img/gears3-wide.jpg');
+	}
 	.banner-note7program{
 		background-image:url('../img/banner-note7program-wide.jpg');
 	}

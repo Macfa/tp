@@ -26,13 +26,12 @@ ul, li {
 menu, ol, ul {
     padding: 0 0 0 0px;
 }
-body {
-	background:white;
-}
+
 .tit {
 	margin:0 auto;
 	
 }
+.preorder-wrap{text-align:center; margin:0 auto;}
 
 .btn-filled-primary{color:#333;}
 .tit-mini {
@@ -336,6 +335,7 @@ body {
 @media all and (min-width:400px){
 }
 @media all and (min-width:640px){
+	.preorder-wrap{width:600px;}
 .present-lot .headset {background:black url('../img/v20-headphone-landscape.png') no-repeat center center;}
 .present-lot .soundbar {background:white url('../img/v20-soundbar-landscape.png') no-repeat right center;}
 .present-lot .bt {background:white url('../img/v20-ab-landscape.png') no-repeat center center;}

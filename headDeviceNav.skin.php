@@ -38,6 +38,11 @@
 					<i class="ico-device-lg"></i>
 					<span class="nav-device-tit">V20</span>
 				</a>
+			</li><li class="nav-device-item">			
+				<a href="/page/gears3Apply.php" class="nav-device-item-wrap" id="link-snb-device-gears3">
+					<i class="ico-device-gear"></i>
+					<span class="nav-device-tit">기어 S3</span>
+				</a>
 			</li>
 		</ul>
 	</div>
@@ -85,6 +90,14 @@
 				<a href="/page/preorderApply.php?device=아이폰7" class="nav-device-item-wrap" id="link-snb-device-galaxys7">
 					<i class="ico-device-iphone"></i>
 					<span class="nav-device-tit">아이폰7 플러스</span>
+				</a>
+			</li>
+			<?php endif?>
+			<?php if ($_GET['device'] == 'watch' || ($_GET['carrier']== 'sk' && ($_GET['manuf'] == 'etc' || $_GET['manuf'] == ''))):?>
+			<li class="nav-device-item">			
+				<a href="/page/gears3Apply.php" class="nav-device-item-wrap" id="link-snb-device-gears3">
+					<i class="ico-device-gear"></i>
+					<span class="nav-device-tit">기어 S3</span>
 				</a>
 			</li>
 			<?php endif?>

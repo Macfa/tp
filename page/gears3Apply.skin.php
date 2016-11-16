@@ -34,6 +34,8 @@
 			</label>
 		</section>
 	</form>
+	<?php if($isLogged === true) :?>
 	<a href="http://online.olleh.com/index.jsp?prdcID=A75A0356-FF52-466D-AA88-796E0693E0F9" target="_blank" class="btn-filled-primary-dense">신청하기</a>
+	<?php endif?>
 
 </div>
