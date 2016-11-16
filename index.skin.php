@@ -121,23 +121,21 @@
 					</div>
 				</a>
 			</li><li class="main-event-item-wrap">
-				<a href="/gifts" class="main-small-banner-pointmall vert-wrap">
+				<a href="#" class="main-small-banner-note7program vert-wrap">
+					<div class="vert-align"></div>
+				</a>
+			</li><li class="main-event-item-wrap">
+				<a href="#" class="main-small-banner-iphone7 vert-wrap">
 					<div class="vert-align">
-					<img src="<?=PATH_IMG?>/main-small-banner-pointmall-tit.png" >						
+					<img src="<?=PATH_IMG?>/main-small-banner-iphone7-tit.png" >				
 					</div>
 				</a>
 			</li><li class="main-event-item-wrap">
-				<a href="/device/galaxys7edge" class="main-small-banner-galaxys7 vert-wrap">
-					<div class="vert-align">
-						<span class="main-small-banner-tit">갤럭시S7 엣지</span>
-						<br/>
-							데이터51요금제<br/>
-							할부원금 766,500원<br/>
-							월 91,838원<br/>
-							푸짐한 사은품
-					</div>
+				<a href="#" class="main-small-banner-s7bluecoral vert-wrap">
+				<div class="vert-align"></div>
 				</a>
-			</li><li class="main-event-item-wrap">
+			</li>
+			<!--<li class="main-event-item-wrap">
 				<a href="http://traumshop.co.kr" target="_blank" class="main-small-banner-traumguard vert-wrap">
 					<div class="vert-align">
 						<span class="main-small-banner-sub">
@@ -146,7 +144,7 @@
 						<span class="main-small-banner-tit">트라움가드<br/>방탄필름</span>
 					</div>
 				</a>
-			</li>
+			</li>-->
 		</ul>
 	</section>
 	<section>
