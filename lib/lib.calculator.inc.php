@@ -1,9 +1,14 @@
 <?php
-class calculator {
+class planCalculator {
 	
-	private $dvId = '';
-	private $dvKey = 0;
-	private $carrier = '';
+	private $dvId;
+	private $dvKey;
+	private $dvCate;
+	private $carrier;
+	private $applyType;
+	private $discountType;
+	private $deviceType;
+	private $plan;
 
 	private $selectedCarrier = '';
 	private $selectedDeviceType = '';
@@ -47,10 +52,10 @@ class calculator {
 
 	private $htmlPadTemplate = '<div class="calc-pad-wrap js-calcPad">{content}</div>';
 
-	private $htmlPadWrapTemplate = '<div class="calc-row-{calcRowAffix}">
+	private $htmlPadWrapTemplate = '<fieldset class="calc-row-{calcRowAffix}">
 																<div class="calc-row-label">{tit}</div>
 																{content}
-															</div>';
+															</fieldset>';
 
 	private $htmlPadButtonTemplate = '<label class="calc-btn">
 																<input type="radio" value="{value}" name="{name}" {isChecked}/>
@@ -64,39 +69,64 @@ class calculator {
 
 	private $htmlPlanSelectOptionTemplate = '<option value="{value}" {isSelected}>{name} : {info}</option>';
 
-	private $htmlResultRowTemplate = '<tr class="calc-value-row {class} {isActiveClass}">
-																<td class="calc-value-label">{label}</td>
-																<td>{totalSign}</td>
-																<td class="{totalColumnClass}">{totalValue}</td>
-																<td>{perMonthSign}</td>
-																<td class="{perMonthColumnClass}">{perMonthValue}</td>
-															</tr>';
-
-	private $htmlResultTotalTemplate = '<tr class="calc-result-row">
-																<td class="calc-result-label">월 청구액</td>
-																<td>{sign}</td>
-																<td class="calc-result-price js-result" colspan="3"><div style="overflow:hidden;height:100%;">{result}</div></td>
-															</tr>';
-
-	private $htmlResultWrapTemplate = '<div class="calc-result-wrap">
-																	<table class="calc-result-table">
-																		<colgroup>
-																			<col style="width:47%" />
-																			<col style="width:10px" />
-																			<col style="width:auto" />
-																			<col style="width:10px" />
-																			<col style="width:auto" />
-																		</colgroup>
-																		<thead>
-																			<tr>
-																				<th></th>				
-																				<th colspan="2">총 액</th>
-																				<th colspan="2">매월(24)</th>
-																			</tr>
-																		</thead>
-																		<tbody>{content}</tbody>
-																	</table>
-																</div>';
+	private $htmlResultWrapTemplate =
+	'<div class="calc-result-wrap">
+		<div class="calc-result-inner js-calculatorResult">
+			<div style="height:5px;"></div>
+			<div class="calc-device-section">
+				<div class="calc-section-inner">
+					<div class="calc-value-row">
+						<div class="calc-value-label">출고가</div>
+						<div class="calc-value-price"><span class="js-retailPrice price">{dvRetailPrice}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-support js-supportWrap {isSupportRowActive}">
+						<div class="calc-value-label">공시지원금</div>
+						<div class="calc-value-price">- <span class="js-support price">{spSupport}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-support js-supportWrap {isSupportRowActive}">
+						<div class="calc-value-label">티플지원금</div>
+						<div class="calc-value-price">- <span class="js-addSupport price">{spAddSupport}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-interest js-interestWrap {isInterestRowActive}">
+						<div class="calc-value-label">할부이자율(<span class="js-repaymentType">{repaymentType}</span>)</div>
+						<div class="calc-value-price">+ <span class="js-interestRate price">5.8</span>%</div>
+					</div>
+					<div class="calc-section-result">
+						<div class="calc-section-result-label">기기할부금</div>
+						<div class="calc-section-result-price">월 <span class="js-resultDevicePricePerMonth price">{resultDevicePricePerMonth}</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="calc-plan-section">
+				<div class="calc-section-inner">
+					<div class="calc-value-row">
+						<div class="calc-value-label">요금제기본료</div>
+						<div class="calc-value-price"><span class="js-planFee price">{planFee}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-selectplan js-selectplanWrap {isSelectPlanDiscountRowActive}">
+						<div class="calc-value-label">선택약정할인</div>
+						<div class="calc-value-price">- <span class="js-selectplan price">{selectPlanDiscount}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-interest js-VATWrap {isVATRowActive}">
+						<div class="calc-value-label">부가세</div>
+						<div class="calc-value-price">+ <span class="js-VAT price">{vat}</span></div>
+					</div>
+					<div class="calc-section-result">
+						<div class="calc-section-result-label">통신요금</div>
+						<div class="calc-section-result-price">월 <span class="js-planFeeResult price">{planFeeResult}</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="calc-total-wrap">
+				<div class="calc-total-inner">
+					<div class="calc-point">★포인트 <span class="js-point">{point}</span></div>
+					<span class="calc-total-label">월</span>
+					<span class="calc-total-price js-result">{totalCost}</span>
+				</div>
+			</div>
+			<button class="calc-detail-btn js-calculatorDetailToggle"></button>
+		</div>
+	</div>';
 
 	private $htmlCalculatorTemplate = '<section class="calc-wrap js-hideContactBtn">
 																<input type="hidden" class="js-id" name="dvId" value="{dvKey}"/>
@@ -105,13 +135,54 @@ class calculator {
 																<div class="spacer" style="clear: both;"></div>
 															</section>';
 
-	function __construct ($dvId, $carrier='sk') {
+	public function setDevice($dvId) {
 		$this->dvId = $dvId;
-		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
-		$this->selectedCarrier = $this->carrier = $carrier;
+		return $this;
+	}
 
-		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt, dvCate FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if ($this->capacityCount > 0) {
+	public function setCarrier($carrier = null) {
+		$this->selectedCarrier = $this->carrier = $carrier;
+		$this->carrier = strtolower($this->carrier);
+		return $this;
+	}
+
+	public function setCapacity($capacity = null) {
+		$this->capacity = $capacity;
+		$this->capacity = strtoupper($this->capacity);
+		return $this;
+	}
+
+	//LTE형 3G형 같은 용량외 세부 기기 종류 
+	public function setDeviceType($deviceType = null) {
+		$this->deviceType = $deviceType;
+		return $this;
+	}
+
+	public function setApplyType($applyType = null) {
+		$this->applyType = $applyType;
+		return $this;
+	}
+
+	public function setDiscountType($discountType = null) {
+		$this->discountType = $discountType;
+		return $this;
+	}
+
+	public function setPlan($plan = null) {
+		$this->plan = $plan;
+		return $this;
+	}
+
+	public function create() {
+		$this->init()->setCarrierSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
+		return $this->getCalculator();
+	}
+
+	private function init() {
+		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
+
+		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
+		if ((int)$this->capacityCount === 1) {
 			$this->lockedPropertyCount += 1;
 			$this->isExistChild = true;
 			$this->capacityLockIcon = $this->lockIcon;
@@ -119,9 +190,9 @@ class calculator {
 
 		//--------------------------------------------
 
-		$dvCate = DB::queryFirstField("SELECT dvCate FROM tmDevice WHERE dvKey = %i", $this->dvKey);
+		$this->dvCate = DB::queryFirstField("SELECT dvCate FROM tmDevice WHERE dvKey = %i", $this->dvKey);
 		$deviceInfo = new deviceInfo();
-		$deviceInfo->setCarrier($this->carrier)->setMode($dvCate);
+		$deviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
 
 		//-------------------------------------------
 
@@ -144,7 +215,7 @@ class calculator {
 		}
 
 		//-----------------------------------------
-
+		/*
 		$this->arrDeviceType = $deviceInfo->getArrDeviceType();
 		$this->deviceTypeCount = count($this->arrDeviceType);
 
@@ -152,6 +223,7 @@ class calculator {
 			$this->lockedPropertyCount += 1;
 			$this->deviceTypeLockIcon = $this->lockIcon;
 		}
+		*/
 
 		//------------------------------------------
 
@@ -167,11 +239,11 @@ class calculator {
 
 		$this->arrPlan = $deviceInfo->getArrPlan();
 
-
 		//---------------------------------------------------
+		return $this;
 	}
 
-	public function setCarrierTypeSelect(){
+	public function setCarrierSelect(){
 
 		if (isExist($this->carrier)) {
 			foreach ($this->arrCarrierType as $key => $val) {
@@ -180,14 +252,13 @@ class calculator {
 				}
 			}
 		}else{
-			
 			$carrierTypeChecked[getFirstArrKey($this->arrCarrierType)]['isChecked'] = 'checked';
 		}
 
 		foreach ($this->arrCarrierType as $key => $val) {
 			$data['value'] = $key;
 			$data['label'] = $val;
-			$data['name'] = 'carrierType';
+			$data['name'] = 'carrier';
 			$data['isChecked'] = $carrierTypeChecked[$key]['isChecked'];
 			$data['lockIcon'] = $this->carrierTypeLockIcon;
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
@@ -201,12 +272,12 @@ class calculator {
 		return $this;
 	}
 
-	public function setDeviceTypeSelect($default=''){
+	public function setDeviceTypeSelect(){
 		if ($this->deviceTypeCount == 0) return $this;
 
-		if (isExist($default)) {
+		if (isExist($this->deviceType)) {
 			foreach ($this->arrDeviceType as $val) {
-				if ($val == $default) {
+				if ($val == $this->deviceType) {
 					$deviceTypeChecked[$val]['isChecked'] = 'checked';
 				}
 			}
@@ -218,8 +289,8 @@ class calculator {
 		if($this->deviceTypeCount === 1) {
 			
 			$this->selectedDeviceType = $this->arrDeviceType[getFirstArrKey($this->arrDeviceType)];
-		} else if(isExist($default)){
-			$this->selectedDeviceType = $default;
+		} else if(isExist($this->deviceType)){
+			$this->selectedDeviceType = $this->deviceType;
 		}
 
 		foreach ($this->arrDeviceType as $val) {
@@ -238,24 +309,24 @@ class calculator {
 		return $this;
 	}
 
-	public function setCapacitySelect($default=''){
+	public function setCapacitySelect(){
 		if($this->capacityCount == 0) return $this;
 
 		$child = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if (isExist($default)) {
+		if (isExist($this->capacity)) {
 			foreach ($child as $key => $val) {
-				if ($val['dvTit'] == $default) {
+				if ($val['dvTit'] == $this->capacity) {
 					$child[$key]['isChecked'] = 'checked';
 				}
 			}
-		}else{
+		}/*else{
 			$child[0]['isChecked'] = 'checked';
-		}
+		}*/
 
-		if($this->capacityCount == 1) {
+		if(isExist($this->capacity)){
+			$this->selectedCapacity = $this->capacity;
+		}else if($this->capacityCount == 1) {
 			$this->selectedCapacity = $child[0]['dvTit'];
-		} else if(isExist($default)){
-			$this->selectedCapacity = $default;
 		}
 
 		foreach ($child as $key => $val) {
@@ -273,10 +344,10 @@ class calculator {
 		return $this;
 	}
 
-	public function setApplyTypeSelect($default=''){
-		if (isExist($default)) {
+	public function setApplyTypeSelect(){
+		if (isExist($this->applyType)) {
 			foreach ($this->arrApplyType as $key => $val) {
-				if ($key == $default) {
+				if ($key == $this->applyType) {
 					$applyTypeChecked[$key]['isChecked'] = 'checked';
 				}
 			}
@@ -287,8 +358,8 @@ class calculator {
 
 		if($this->applyTypeCount == 1) {
 			$this->selectedApplyType = getFirstArrKey($this->arrApplyType);
-		} else if(isExist($default)){
-			$this->selectedApplyType = $default;
+		} else if(isExist($this->applyType)){
+			$this->selectedApplyType = $this->applyType;
 		}
 
 		foreach ($this->arrApplyType as $key => $val) {
@@ -307,11 +378,11 @@ class calculator {
 		return $this;
 	}
 
-	public function setDiscountTypeSelect($default=''){
+	public function setDiscountTypeSelect(){
 
-		if (isExist($default)) {
+		if (isExist($this->discountType)) {
 			foreach ($this->arrDiscountType as $key => $val) {
-				if ($key == $default) {
+				if ($key == $this->discountType) {
 					$discountTypeChecked[$key]['isChecked'] = 'checked';
 				}
 			}
@@ -322,8 +393,8 @@ class calculator {
 
 		if($this->discountTypeCount == 1) {
 			$this->selectedDiscountType = getFirstArrKey($this->arrDiscountType);
-		} else if(isExist($default)){
-			$this->selectedDiscountType = $default;
+		} else if(isExist($this->discountType)){
+			$this->selectedDiscountType = $this->discountType;
 		}
 
 		foreach ($this->arrDiscountType as $key => $val) {
@@ -357,19 +428,13 @@ class calculator {
 		return $this;
 	}
 
-	public function setPlanSelect($default=''){
+	public function setPlanSelect(){
 		$tmpDeviceInfo = new deviceInfo();
-
-		$this->selectedPlan = (isExist($default))?$default:$this->arrPlan[getFirstArrKey($this->arrPlan)];
-		if (isExist($default)) {
-			foreach ($this->arrPlan as $val) {
-				if ($val == $default) {
-					$planSelected[$val] = 'selected';
-				}
-			}
-		} else {
-			$planSelected[$this->arrPlan[getFirstArrKey($this->arrPlan)]] = 'selected';
-		}
+		$tmpDeviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
+		$this->selectedPlan = (isExist($this->plan))?$this->plan:getFirstArrKey($this->arrPlan);
+		////var_dump($this->arrPlan);
+		//var_dump($this->selectedPlan);
+		$planSelected[$this->selectedPlan] = 'selected';
 
 		foreach ($this->arrPlan as $val) {
 			$data['value'] = $val;
@@ -387,134 +452,65 @@ class calculator {
 	}
 
 	private function getDefaultInfo(){
-		/*
-		if($this->isExistChild == true)
-			$isSelectedCapacity = isNullVal($this->selectedCapacity);
-		else 
-			$isSelectedCapacity = true;
-		if ($isSelectedCapacity && isNullVal($this->selectedDiscountType) && isNullVal($this->selectedPlan))
-			return $this;
-		*/
-		$data['capacityType'] = $this->selectedCapacity;
+		$data['carrier'] = $this->selectedCarrier;
+		$data['capacity'] = $this->selectedCapacity;
 		$data['discountType'] = $this->selectedDiscountType;
+		$data['applyType'] = $this->selectedApplyType;
 		$data['plan'] = $this->selectedPlan;
 		$data['id'] = $this->dvId;
+		//var_dump($data);
 		$this->defaultInfo = getPlanInfo($data);
+		//var_dump($this->defaultInfo);
 		return $this;
 	}
 
-	private function setArrResultRow(){
-		$this->arrResultRow = array(
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '출고가',
-													'totalColumnClass' => 'js-retailPrice',
-													'perMonthColumnClass' => 'js-retailPricePerMonth',
-													'class' => '',
-													'isActiveClass' => '',
-													'totalValue' => number_format($this->defaultInfo['dvRetailPrice']),
-													'perMonthValue' => number_format(round($this->defaultInfo['dvRetailPrice']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '공시지원금',
-													'totalColumnClass' => 'js-support',
-													'perMonthColumnClass' => 'js-supportPerMonth',
-													'totalSign' => '-',
-													'perMonthSign' => '-',
-													'class' => 'calc-support-discount',
-													'isActiveClass' => ($this->selectedDiscountType == 'support')?'active':'',
-													'totalValue' => number_format($this->defaultInfo['spSupport']),
-													'perMonthValue' => number_format(round($this->defaultInfo['spSupport']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '티플지원금',
-													'totalColumnClass' => 'js-addSupport',
-													'perMonthColumnClass' => 'js-addSupportPerMonth',
-													'totalSign' => '-',
-													'perMonthSign' => '-',
-													'class' => 'calc-support-discount',
-													'isActiveClass' => ($this->selectedDiscountType == 'support')?'active':'',
-													'totalValue' => number_format($this->defaultInfo['spAddSupport']),
-													'perMonthValue' => number_format(round($this->defaultInfo['spAddSupport']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '할부이자',
-													'totalSign' => '+',
-													'perMonthSign' => '+',
-													'totalColumnClass' => 'js-interest',
-													'perMonthColumnClass' => 'js-interestPerMonth',
-													'class' => 'calc-vat'
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '단말기할부',
-													'totalColumnClass' => 'js-resultDevicePrice',
-													'perMonthColumnClass' => 'js-resultDevicePricePerMonth',
-													'totalSign' => '=',
-													'perMonthSign' => '=',
-													'class' => 'calc-result-device-price',
-													'totalValue' => number_format($this->defaultInfo['resultDevicePrice']),
-													'perMonthValue' => number_format(round($this->defaultInfo['resultDevicePrice']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '요금제기본료',
-													'perMonthSign' => '+',
-													'perMonthColumnClass' => 'js-planFeePerMonth',
-													'perMonthValue' => number_format($this->defaultInfo['planFee'])
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '부가세',
-													'perMonthSign' => '+',
-													'perMonthColumnClass' => 'js-VAT',
-													'class' => 'calc-vat'
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '선택약정할인',
-													'totalColumnClass' => 'js-selectPlanDiscount',
-													'perMonthColumnClass' => 'js-selectPlanDiscountPerMonth',
-													'class' => 'calc-select-plan',
-													'totalSign' => '-',
-													'perMonthSign' => '-',
-													'isActiveClass' => ($this->selectedDiscountType == 'selectPlan')?'active':'',
-													'totalValue' => number_format($this->defaultInfo['selectPlanDiscount']),
-													'perMonthValue' => number_format(round($this->defaultInfo['selectPlanDiscount']/24))
-												),
-												array(
-													'template' => $this->htmlResultTotalTemplate,
-													'label' => '월 청구액',
-													'sign' => '=',
-													'result' => number_format(round(($this->defaultInfo['dvRetailPrice'] - $this->defaultInfo['spSupport'] - $this->defaultInfo['spAddSupport'])/24) + $this->defaultInfo['planFee'])
-												)
-											);
-		return $this;
-	}
-
-	private function setResultSection() {
-		foreach ($this->arrResultRow as $val){
-			$this->calculatorResult .= getResultTemplate($val, $val['template'], true);
-		}
-		return $this;
-	}
-
-	public function getCalculator() {
-		$this->getDefaultInfo()->setArrResultRow()->setResultSection();
-
-		$data['content'] = $this->calculatorResult;
+	private function getCalculator() {
+		$this->getDefaultInfo();
+		$resultDevicePricePerMonth = $this->defaultInfo['dvRetailPrice'] - $this->defaultInfo['spSupport'] - $this->defaultInfo['spAddSupport'];
+		$data = array(
+			'dvRetailPrice' => number_format($this->defaultInfo['dvRetailPrice']),
+			'isSupportRowActive' => ($this->selectedDiscountType === 'support')?'active':'',
+			'spSupport' => number_format($this->defaultInfo['spSupport']),
+			'spAddSupport' => number_format($this->defaultInfo['spAddSupport']),
+			'resultDevicePricePerMonth' => number_format($resultDevicePricePerMonth/24),
+			'planFee' => number_format($this->defaultInfo['planFee']),
+			'isSelectPlanDiscountRowActive' => ($this->selectedDiscountType === 'selectPlan')?'active':'',
+			'selectPlanDiscount' => number_format($this->defaultInfo['selectPlanDiscount']),
+			'planFeeResult' => number_format($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount']),
+			'point' => number_format($this->defaultInfo['rewardPoint']),
+			'totalCost' => number_format((int)$resultDevicePricePerMonth/24 + (int)($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount']))
+		);
 		$this->calculatorResult = getResultTemplate($data, $this->htmlResultWrapTemplate);
+		unset($data);
 
 		$data['content'] = $this->calculatorPad;
 		$this->calculatorPad = getResultTemplate($data, $this->htmlPadTemplate);
+		unset($data);
+
+		$template = getTemplateTag();
+
+		$data['content'] = $this->htmlPlanSelectOptionTemplate;
+		$data['class'] = 'js-planSelectOptionTemplate';
+		$planOptionTemplate = getResultTemplate($data, $template);
+		unset($data);
+
+		$data['content'] = $this->htmlPadButtonTemplate;
+		$data['class'] = 'js-padButtonTemplate';
+		$padButtonTemplate = getResultTemplate($data, $template);
+		unset($data);
+
+		$data['content'] = $this->htmlPadWrapTemplate;
+		$data['class'] = 'js-padButtonTemplate';
+		$padWrapTemplate = getResultTemplate($data, $template);
+		unset($data);
 
 		$data['content'] = $this->calculatorResult.$this->calculatorPad;
 		$data['dvKey'] = $this->dvId;
 		$data['token'] = createToken();
-		return $this->calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
+		$calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
+
+		return $calculator.$padWrapTemplate.$padButtonTemplate.$planOptionTemplate;
+
 	}
 }
 ?>

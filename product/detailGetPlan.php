@@ -13,63 +13,67 @@ if ($isNeedToken === true && chkToken($_POST['token']) === false) {
 	exit;
 }
 
-if ($_POST['dataCapacity'] == 'noCapacity')
-	$_POST['dataCapacity'] = '';
+//-------------------------------
 
-$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvId = %s", $_POST['id'].strtolower($_POST['dataCapacity']));
+//var_dump($_POST);
+//DB::debugMode();
+
+if (isExist($_POST['capacity']))
+	$dvId = $_POST['id'].strtolower($_POST['capacity']);
+else 
+	$dvId = $_POST['id'];
+
+$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvId = %s and dv".strtoupper($_POST['carrier'])." = 1", $dvId);
 
 $deviceInfo = new deviceInfo();
-$deviceInfo->setCarrier('sk')->setMode($device['dvCate'])->setMonth(24)->setPlan($_POST['plan']);
+$deviceInfo->setCarrier($_POST['carrier'])->setMode($device['dvCate'])->setMonth(24)->setPlan($_POST['plan']);
 $deviceInfo->setDevicePrice($device['dvRetailPrice']);
 
-$result	= DB::query("SELECT * FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = %s2 ORDER BY spDate DESC LIMIT 5", $device['dvKey'], $_POST['plan'],'sk');
-$output = $result[0];
+$result	= DB::query("SELECT * FROM tmSupport WHERE dvKey = %i and spPlan = %i and spCarrier = %s ORDER BY spDate DESC LIMIT 5", $device['dvKey'], $_POST['plan'], $_POST['carrier']);
+$cntDevicePlanGraph = DB::count();
 
-$discount = 0;
-$resultDevicePrice = $device['dvRetailPrice'];
-if ($_POST['discountType'] == 'support')
-	$resultDevicePrice = $device['dvRetailPrice'] - ($output['spSupport'] + $output['spAddSupport']);
-
-$output['selectPlanDiscountPerMonth'] = $deviceInfo->getSelectPlanDiscount();
-$output['selectPlanDiscount'] = $output['selectPlanDiscountPerMonth'] * 24;
-$output['repayment'] = $deviceInfo->calcInterest($resultDevicePrice)->getRepayment();
-$output['planFee'] = $deviceInfo->getPlanFee();
-$output['dvRetailPrice'] = $device['dvRetailPrice'];
-$output['containVatInterest'] = $deviceInfo->getContainVatInterest();
-
-
-$resultCode = DB::query("SELECT cdType,cdCode FROM tmCode WHERE dvKey = %i0 and spPlan = %i1", $device['dvKey'], $_POST['plan']);
-if ($resultCode === array()) {
-	$output['applyUrl']['02'] = "https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
-	$output['applyUrl']['06'] = "https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
-}else{ 
-	foreach($resultCode as $key => $val) {
-		$val['cdType'] = '0'.$val['cdType'];
-		$output['applyUrl'][$val['cdType']] = $deviceInfo->getApplyURL($val['cdCode'], $val['cdType']);
-	}
+if ($_POST['discountType'] == 'support') {
+	$calcResult = $result[0];
+	$resultDevicePrice = $device['dvRetailPrice'] - ($calcResult['spSupport'] + $calcResult['spAddSupport']);
+}else if ($_POST['discountType'] == 'selectPlan') {
+	$resultDevicePrice = $device['dvRetailPrice'];
+	$calcResult['selectPlanDiscount'] = $deviceInfo->getSelectPlanDiscount();
 }
 
-$cntDevicePlanGraph = count($result);
+$calcResult['repayment'] = $deviceInfo->calcInterest($resultDevicePrice)->getRepayment();
+$calcResult['interestRate'] = $deviceInfo->getInterestRate();
+$calcResult['planFee'] = $deviceInfo->getPlanFee();
+$calcResult['dvRetailPrice'] = $device['dvRetailPrice'];
+//$calcResult['containVatInterest'] = $deviceInfo->getContainVatInterest();
+
+$cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i and spPlan = %i and cdType = %i", $device['dvKey'], $_POST['plan'], (int)$_POST['applyType']);
+
+if (isExist($cdCode) === true) {
+	$calcResult['applyUrl'] = $deviceInfo->getApplyURL($cdCode, $_POST['applyType']);
+}else{ 
+	$calcResult['applyUrl'] ="https://docs.google.com/forms/d/e/1FAIpQLScQfOiyAu4Seha7aDXdj0RUzKYV36n9ZlI3QIz4w-xATXGiAQ/viewform";
+}
+
 $isGraphChanged = TRUE;
 
 foreach ($result as $key => $val) {
-	$output['supportGraph']['spDate'][] = $val['spDate'];
-	$output['supportGraph']['spSupport'][] = $val['spSupport'];
+	$calcResult['supportGraph']['spDate'][] = $val['spDate'];
+	$calcResult['supportGraph']['spSupport'][] = $val['spSupport'];
 
-	if($cntDevicePlanGraph == 1) {
+	if((int)$cntDevicePlanGraph === 1) {
 		$isGraphChanged = FALSE;
-		$output['supportGraph']['spDate'][] = $val['spDate'];
-		$output['supportGraph']['spSupport'][] = $val['spSupport'];
+		$calcResult['supportGraph']['spDate'][] = $val['spDate'];
+		$calcResult['supportGraph']['spSupport'][] = $val['spSupport'];
 	}
 }
 
-$output['supportGraph']['spDate'][$cntDevicePlanGraph-1] = $cfg['time_ymd'];
-$output['supportGraph']['spDate'] = array_reverse($output['supportGraph']['spDate']);
-$output['supportGraph']['spSupport'] = array_reverse($output['supportGraph']['spSupport']);
+$calcResult['supportGraph']['spDate'][$cntDevicePlanGraph-1] = $cfg['time_ymd'];
+$calcResult['supportGraph']['spDate'] = array_reverse($calcResult['supportGraph']['spDate']);
+$calcResult['supportGraph']['spSupport'] = array_reverse($calcResult['supportGraph']['spSupport']);
 $isCurrentBigger = FALSE;
 
 if($cntDevicePlanGraph > 1){
-	foreach($output['supportGraph']['spSupport'] as $val){
+	foreach($calcResult['supportGraph']['spSupport'] as $val){
 		if($graphMinValue == false) {
 			$graphMinValue = $val;
 		}else if($val < $graphMinValue) {
@@ -83,12 +87,12 @@ if($cntDevicePlanGraph > 1){
 		}
 	}
 	
-	$graphPrevVal = $output['supportGraph']['spSupport'][$cntDevicePlanGraph-2];
-	$graphCurrentVal = $output['supportGraph']['spSupport'][$cntDevicePlanGraph-1];
+	$graphPrevVal = $calcResult['supportGraph']['spSupport'][$cntDevicePlanGraph-2];
+	$graphCurrentVal = $calcResult['supportGraph']['spSupport'][$cntDevicePlanGraph-1];
 
 	//바로전 값과 최근값이 같다면
 	if ($graphPrevVal == $graphCurrentVal)
-		$graphPrevVal = $output['supportGraph']['spSupport'][$cntDevicePlanGraph-3];
+		$graphPrevVal = $calcResult['supportGraph']['spSupport'][$cntDevicePlanGraph-3];
 
 	//가장 최근값의 값이 더클때
 	if($graphPrevVal < $graphCurrentVal){
@@ -107,30 +111,37 @@ if($cntDevicePlanGraph > 1){
 	//그래프 단계간 값차이
 	$graphStepGap = floor(($graphEndValue-$graphStartValue) / $graphStep);	
 
-	$output['graphStartValue'] = $graphStartValue;
-	$output['graphStep'] = $graphStep;
-	$output['graphStepGap'] = $graphStepGap;
-	$output['isGraphChanged'] = $isGraphChanged;
+	$calcResult['graphStartValue'] = $graphStartValue;
+	$calcResult['graphStep'] = $graphStep;
+	$calcResult['graphStepGap'] = $graphStepGap;
+	$calcResult['isGraphChanged'] = $isGraphChanged;
 
 	for($i=0;$i<$graphStep;$i++){
-		$output['graphStepYLabels'][] = $output['graphStartValue'] + $graphStep*$i;
+		$calcResult['graphStepYLabels'][] = $calcResult['graphStartValue'] + $graphStep*$i;
 	}
 }
 
 //-------------------------------------
 
-$arrRewardPoint = DB::query("SELECT rpPoint, rpDiscountType, rpApplyType FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier", 
+$rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
 	array(
 		'dvKey' => $device['dvKey'],
 		'rpPlan' => $_POST['plan'],
-		'rpCarrier' => 'sk'
+		'rpCarrier' => $_POST['carrier'],
+		'rpApplyType' => (int)$_POST['applyType'],
+		'rpDiscountType' => $_POST['discountType']
 	)
 );
 
-foreach($arrRewardPoint as $val){
-	$output['rewardPoint'][$val['rpDiscountType']]['0'.$val['rpApplyType']] = $val['rpPoint'];
-}
+$calcResult['rewardPoint'] = (isExist($calcResult['rewardPoint']))?(int)$rpPoint:'미정';
 
+//-------------------------------------
+
+
+//-------------------------------------
+
+$output = $calcResult;
+//$output['calculator'] = $calculator;
 
 //-------------------------------------
 

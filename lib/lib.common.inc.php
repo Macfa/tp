@@ -46,8 +46,16 @@ function alert($msg, $url='') {
 }
 
 function getFirstArrKey($arr){
+	return getFirstArrayKey($arr);
+}
+
+function getFirstArrayKey($arr){
 	list($output) = array_keys($arr);
 	return $output;
+}
+
+function getTemplateTag(){
+	return '<script id="{class}" type="text/x-template">{content}</script>';
 }
 
 //시간을 년/월/일 로
@@ -95,7 +103,24 @@ function set_http($url)
 }
 
 function object2array($object) {
-	return @json_decode(@json_encode($object),1);
+	return objectToArray($object);
+}
+
+function jsonToArray($json) {
+	return json_decode($json, true);
+}
+
+function objectToArray($data) {
+	if (is_array($data) || is_object($data))
+    {
+        $result = array();
+        foreach ($data as $key => $value)
+        {
+            $result[$key] = objectToArray($value);
+        }
+        return $result;
+    }
+    return $data;
 }
 
 // url 파라미터 생성
@@ -370,6 +395,10 @@ function add_hp_hyphen($num){
 
 /////////////////// 날짜 함수
 
+function convertDateFormat($format, $date){
+	return date($format, strtotime($date));
+}
+
 // 기간내 날짜를 배열로 반환
 function getDaysInRange($start, $end, $mode='d') {
 	$max = getDateDiff($start, $end, $mode);
@@ -542,6 +571,10 @@ function array2json( $array ){
 
 function removeBlank($input) {
 	return $output = preg_replace("/\s+/", "", $input);
+}
+
+function removeTabLinebreak($input){
+	return preg_replace('/([\t\n])/m', '', $input);
 }
 
 function getResultTemplate($data, $template, $isEmptyValueRemove = false){

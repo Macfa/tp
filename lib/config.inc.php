@@ -72,6 +72,7 @@ define("PATH_JS_LIB", $cfg['js_path']."/lib");
 define("PATH_CSS", $cfg['css_path']);
 define("PATH", $cfg['path']);
 define("URL", $cfg['url']);
+define("ABSOLUTE_PATH", $_SERVER['DOCUMENT_ROOT']);
 
 
 
