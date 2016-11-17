@@ -15,12 +15,15 @@ if ($isNeedToken === true && chkToken($_POST['token']) === false) {
 
 //-------------------------------
 
+//var_dump($_POST);
+//DB::debugMode();
+
 if (isExist($_POST['capacity']))
 	$dvId = $_POST['id'].strtolower($_POST['capacity']);
 else 
 	$dvId = $_POST['id'];
 
-$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvId = %s and dv".strtoupper($_POST['carrier'])." = 1", $dvId);
+$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvId = %s and dv".strtoupper($_POST['carrier'])." = 1", $dvId);
 
 $deviceInfo = new deviceInfo();
 $deviceInfo->setCarrier($_POST['carrier'])->setMode($device['dvCate'])->setMonth(24)->setPlan($_POST['plan']);
@@ -29,17 +32,16 @@ $deviceInfo->setDevicePrice($device['dvRetailPrice']);
 $result	= DB::query("SELECT * FROM tmSupport WHERE dvKey = %i and spPlan = %i and spCarrier = %s ORDER BY spDate DESC LIMIT 5", $device['dvKey'], $_POST['plan'], $_POST['carrier']);
 $cntDevicePlanGraph = DB::count();
 
-$calcResult = $result[0];
-
-
-if ($_POST['discountType'] == 'support')
+if ($_POST['discountType'] == 'support') {
+	$calcResult = $result[0];
 	$resultDevicePrice = $device['dvRetailPrice'] - ($calcResult['spSupport'] + $calcResult['spAddSupport']);
-else if ($_POST['discountType'] == 'selectPlan') {
+}else if ($_POST['discountType'] == 'selectPlan') {
 	$resultDevicePrice = $device['dvRetailPrice'];
-	$calcResult['selectPlanDiscount'] = $deviceInfo->getSelectPlanDiscount() * 24;
+	$calcResult['selectPlanDiscount'] = $deviceInfo->getSelectPlanDiscount();
 }
 
 $calcResult['repayment'] = $deviceInfo->calcInterest($resultDevicePrice)->getRepayment();
+$calcResult['interestRate'] = $deviceInfo->getInterestRate();
 $calcResult['planFee'] = $deviceInfo->getPlanFee();
 $calcResult['dvRetailPrice'] = $device['dvRetailPrice'];
 //$calcResult['containVatInterest'] = $deviceInfo->getContainVatInterest();
@@ -131,7 +133,7 @@ $rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = 
 	)
 );
 
-$calcResult['rewardPoint'] = $rpPoint;
+$calcResult['rewardPoint'] = (isExist($calcResult['rewardPoint']))?(int)$rpPoint:'미정';
 
 //-------------------------------------
 

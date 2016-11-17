@@ -17,13 +17,14 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	};
 
 	if($arrPad[$carrier] == undefined) {
+		//console.log($data);
 		$.ajax({
 			url:'/product/getPlanCalculatorPad.php',
 			type:'post',
 			async:false,
 			data:$data,
 			success:function(data){
-				console.log($arrPad);
+				console.log(data);
 				$arrPad[$carrier] = $.parseJSON(data);
 			}
 		});
@@ -72,6 +73,8 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		token : $('.js-token').val()
 	};
 
+	console.log($data);
+
 	//ajax 통신으로 데이터를 받아옴
 	var $key = $carrier+'-'+$plan+'-'+$applyType+'-'+$discountType;
 	
@@ -110,11 +113,13 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	var $resultDevicePrice = ($isSelectPlanDiscount)? $retailPrice : $retailPrice-($supportAmount + $addSupportAmount);
 	var $resultDevicePricePerMonth = Math.round($resultDevicePrice/24);
 
-	var $resultDevicePriceVAT = parseInt($targetData['repayment'])*24;
-	var $resultDevicePricePerMonthVAT = $targetData['repayment'];
+	var $resultDevicePriceInterest= parseInt($targetData['repayment'])*24;
+	var $resultDevicePricePerMonthInterest = $targetData['repayment'];
 
-	$resultDevicePrice = ($isContainVAT)? $resultDevicePriceVAT : $resultDevicePrice;
-	$resultDevicePricePerMonth = ($isContainVAT)? $resultDevicePricePerMonthVAT : $resultDevicePricePerMonth;
+	var $interestRate = $targetData['interestRate'];
+
+	$resultDevicePrice = ($isContainVAT)? $resultDevicePriceInterest: $resultDevicePrice;
+	$resultDevicePricePerMonth = ($isContainVAT)? $resultDevicePricePerMonthInterest : $resultDevicePricePerMonth;
 
 	var $planFeePerMonth = parseInt($targetData['planFee']);
 	var $planFee = $planFeePerMonth*24;
@@ -122,42 +127,68 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	var $planFeePerMonthVAT = Math.round($planFeePerMonth * 1.1);
 	var $planFeeVAT = $planFeePerMonthVAT*24;
 
-	$planFeePerMonth = ($isContainVAT)?$planFeePerMonthVAT : $planFeePerMonth;
-
-	var $selectPlanDiscountPerMonth = ($isSelectPlanDiscount)?Math.round(parseInt($targetData['selectPlanDiscount']/24)):0;
+	var $selectPlanDiscountPerMonth = ($isSelectPlanDiscount)?Math.round(parseInt($targetData['selectPlanDiscount'])):0;
 	var $selectPlanDiscount = ($isSelectPlanDiscount)?$selectPlanDiscountPerMonth*24:0;
 
-	var $result = $resultDevicePricePerMonth + $planFeePerMonth - $selectPlanDiscountPerMonth;
+	var $planFeeResultPerMonth = (($isContainVAT)?$planFeePerMonthVAT : $planFeePerMonth)-$selectPlanDiscountPerMonth;
 
-	var $availablePoint = parseInt($targetData['rewardPoint']);
+	var $result = $resultDevicePricePerMonth + $planFeeResultPerMonth;
+
+	var $availablePoint = $targetData['rewardPoint'];
 
 	var $mbPoint = parseInt($('.js-totalResultInp').attr('data-mb-point'));
 
 	$mbPoint = ($mbPoint>0)?$mbPoint : 0;
 
 	$('.js-retailPrice').text(setNumComma($retailPrice));
-	$('.js-retailPricePerMonth').text(setNumComma($retailPricePerMonth));
+	//$('.js-retailPricePerMonth').text(setNumComma($retailPricePerMonth));
+	$('.js-resultDevicePricePerMonth').text(setNumComma($resultDevicePricePerMonth));
+	if($discountType == 'support') {
+		$('.js-support').text(setNumComma($supportAmount));
+		//$('.js-supportPerMonth').text(setNumComma($supportAmountPerMonth));
+		$('.js-addSupport').text(setNumComma($addSupportAmount));
+		//$('.js-addSupportPerMonth').text(setNumComma($addSupportAmountPerMonth));
+	}else if($discountType == 'selectPlan') {
+		$('.js-selectplan').text(setNumComma($selectPlanDiscountPerMonth));
 
-	$('.js-support').text(setNumComma($supportAmount));
-	$('.js-supportPerMonth').text(setNumComma($supportAmountPerMonth));
+	}
 
-	$('.js-addSupport').text(setNumComma($addSupportAmount));
-	$('.js-addSupportPerMonth').text(setNumComma($addSupportAmountPerMonth));
+	if ($isContainVAT == true) {
+		$('.js-VAT').text(setNumComma($planFeePerMonthVAT-$planFeePerMonth));
+		$('.js-interestRate').text($interestRate);
+		if($carrier == 'kt')
+			$('.js-repaymentType').text('연이자율');
+		else
+			$('.js-repaymentType').text('복리');
+	} else {
+		$('.js-VATWrap, .js-interestWrap').removeClass('active');
+	}
 
-	$('.js-planFeePerMonth').text(setNumComma($planFeePerMonth));
-
-	$('.js-selectPlanDiscount').text(setNumComma($selectPlanDiscount));
-	$('.js-selectPlanDiscountPerMonth').text(setNumComma($selectPlanDiscountPerMonth));
+	$('.js-planFee').text(setNumComma($planFeePerMonth));
+	$('.js-planFeeResult').text(setNumComma($planFeeResultPerMonth));
+	
+	//$('.js-selectPlanDiscount').text(setNumComma($selectPlanDiscount));
+	//$('.js-selectPlanDiscountPerMonth').text(setNumComma($selectPlanDiscountPerMonth));
 
 	$('.js-result').text(setNumComma($result));
+	$('.js-point').text(setNumComma($availablePoint));
+
 
 	if ($isSelectPlanDiscount) {
-		$('.calc-select-plan').addClass('active');
-		$('.calc-support-discount').removeClass('active');
-	}else {
-		$('.calc-support-discount').addClass('active');
-		$('.calc-select-plan').removeClass('active');
+		$('.js-selectplanWrap').addClass('active');
+		$('.js-supportWrap').removeClass('active');
+	} else {
+		$('.js-supportWrap').addClass('active');
+		$('.js-selectplanWrap').removeClass('active');
 	}
+
+
+	if ($isContainVAT == true) {
+		$('.js-VATWrap, .js-interestWrap').addClass('active');
+	} else {
+		$('.js-VATWrap, .js-interestWrap').removeClass('active');
+	}
+
 
 	if($availablePoint > 0) {
 		$('.js-availablePointRow').show();
@@ -169,7 +200,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	//-------------------------------------------------
 });
 
-$('.js-clculatorDetailToggle').click(function(){
+$('.js-calculatorDetailToggle').click(function(){
 	$('.js-calculatorResult').toggleClass('active');
 });
 
@@ -178,6 +209,7 @@ function setCalcHeight(){
 	if ($(window).width() < 635) {
 		$('.calc-result-wrap').css({height:'25%'});
 	} else {
+		$('.calc-result-inner').removeClass('active');
 		$('.calc-result-wrap').height($('.js-calcPad').height());
 	}
 	$('.calc-result-wrap').addClass('active');

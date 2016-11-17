@@ -69,39 +69,64 @@ class planCalculator {
 
 	private $htmlPlanSelectOptionTemplate = '<option value="{value}" {isSelected}>{name} : {info}</option>';
 
-	private $htmlResultRowTemplate = '<tr class="calc-value-row {class} {isActiveClass}">
-																<td class="calc-value-label">{label}</td>
-																<td>{totalSign}</td>
-																<td class="{totalColumnClass}">{totalValue}</td>
-																<td>{perMonthSign}</td>
-																<td class="{perMonthColumnClass}">{perMonthValue}</td>
-															</tr>';
-
-	private $htmlResultTotalTemplate = '<tr class="calc-result-row">
-																<td class="calc-result-label">월 청구액</td>
-																<td>{sign}</td>
-																<td class="calc-result-price js-result" colspan="3"><div style="overflow:hidden;height:100%;">{result}</div></td>
-															</tr>';
-
-	private $htmlResultWrapTemplate = '<div class="calc-result-wrap">
-																	<table class="calc-result-table">
-																		<colgroup>
-																			<col style="width:47%" />
-																			<col style="width:10px" />
-																			<col style="width:auto" />
-																			<col style="width:10px" />
-																			<col style="width:auto" />
-																		</colgroup>
-																		<thead>
-																			<tr>
-																				<th></th>				
-																				<th colspan="2">총 액</th>
-																				<th colspan="2">매월(24)</th>
-																			</tr>
-																		</thead>
-																		<tbody>{content}</tbody>
-																	</table>
-																</div>';
+	private $htmlResultWrapTemplate =
+	'<div class="calc-result-wrap">
+		<div class="calc-result-inner js-calculatorResult">
+			<div style="height:5px;"></div>
+			<div class="calc-device-section">
+				<div class="calc-section-inner">
+					<div class="calc-value-row">
+						<div class="calc-value-label">출고가</div>
+						<div class="calc-value-price"><span class="js-retailPrice price">{dvRetailPrice}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-support js-supportWrap {isSupportRowActive}">
+						<div class="calc-value-label">공시지원금</div>
+						<div class="calc-value-price">- <span class="js-support price">{spSupport}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-support js-supportWrap {isSupportRowActive}">
+						<div class="calc-value-label">티플지원금</div>
+						<div class="calc-value-price">- <span class="js-addSupport price">{spAddSupport}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-interest js-interestWrap {isInterestRowActive}">
+						<div class="calc-value-label">할부이자율(<span class="js-repaymentType">{repaymentType}</span>)</div>
+						<div class="calc-value-price">+ <span class="js-interestRate price">5.8</span>%</div>
+					</div>
+					<div class="calc-section-result">
+						<div class="calc-section-result-label">기기할부금</div>
+						<div class="calc-section-result-price">월 <span class="js-resultDevicePricePerMonth price">{resultDevicePricePerMonth}</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="calc-plan-section">
+				<div class="calc-section-inner">
+					<div class="calc-value-row">
+						<div class="calc-value-label">요금제기본료</div>
+						<div class="calc-value-price"><span class="js-planFee price">{planFee}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-selectplan js-selectplanWrap {isSelectPlanDiscountRowActive}">
+						<div class="calc-value-label">선택약정할인</div>
+						<div class="calc-value-price">- <span class="js-selectplan price">{selectPlanDiscount}</span></div>
+					</div>
+					<div class="calc-value-row calc-result-row-interest js-VATWrap {isVATRowActive}">
+						<div class="calc-value-label">부가세</div>
+						<div class="calc-value-price">+ <span class="js-VAT price">{vat}</span></div>
+					</div>
+					<div class="calc-section-result">
+						<div class="calc-section-result-label">통신요금</div>
+						<div class="calc-section-result-price">월 <span class="js-planFeeResult price">{planFeeResult}</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="calc-total-wrap">
+				<div class="calc-total-inner">
+					<div class="calc-point">★포인트 <span class="js-point">{point}</span></div>
+					<span class="calc-total-label">월</span>
+					<span class="calc-total-price js-result">{totalCost}</span>
+				</div>
+			</div>
+			<button class="calc-detail-btn js-calculatorDetailToggle"></button>
+		</div>
+	</div>';
 
 	private $htmlCalculatorTemplate = '<section class="calc-wrap js-hideContactBtn">
 																<input type="hidden" class="js-id" name="dvId" value="{dvKey}"/>
@@ -149,7 +174,7 @@ class planCalculator {
 	}
 
 	public function create() {
-		$this->init()->setCarrierSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
+		$this->init()->setCarrierSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
 		return $this->getCalculator();
 	}
 
@@ -157,7 +182,7 @@ class planCalculator {
 		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
 
 		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if ((int)$this->capacityCount === 0) {
+		if ((int)$this->capacityCount === 1) {
 			$this->lockedPropertyCount += 1;
 			$this->isExistChild = true;
 			$this->capacityLockIcon = $this->lockIcon;
@@ -190,7 +215,7 @@ class planCalculator {
 		}
 
 		//-----------------------------------------
-
+		/*
 		$this->arrDeviceType = $deviceInfo->getArrDeviceType();
 		$this->deviceTypeCount = count($this->arrDeviceType);
 
@@ -198,6 +223,7 @@ class planCalculator {
 			$this->lockedPropertyCount += 1;
 			$this->deviceTypeLockIcon = $this->lockIcon;
 		}
+		*/
 
 		//------------------------------------------
 
@@ -438,135 +464,53 @@ class planCalculator {
 		return $this;
 	}
 
-	private function setArrResultRow(){
-		$this->arrResultRow = array(
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '출고가',
-													'totalColumnClass' => 'js-retailPrice',
-													'perMonthColumnClass' => 'js-retailPricePerMonth',
-													'class' => '',
-													'isActiveClass' => '',
-													'totalValue' => number_format($this->defaultInfo['dvRetailPrice']),
-													'perMonthValue' => number_format(round($this->defaultInfo['dvRetailPrice']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '공시지원금',
-													'totalColumnClass' => 'js-support',
-													'perMonthColumnClass' => 'js-supportPerMonth',
-													'totalSign' => '-',
-													'perMonthSign' => '-',
-													'class' => 'calc-support-discount',
-													'isActiveClass' => ($this->selectedDiscountType == 'support')?'active':'',
-													'totalValue' => number_format($this->defaultInfo['spSupport']),
-													'perMonthValue' => number_format(round($this->defaultInfo['spSupport']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '티플지원금',
-													'totalColumnClass' => 'js-addSupport',
-													'perMonthColumnClass' => 'js-addSupportPerMonth',
-													'totalSign' => '-',
-													'perMonthSign' => '-',
-													'class' => 'calc-support-discount',
-													'isActiveClass' => ($this->selectedDiscountType == 'support')?'active':'',
-													'totalValue' => number_format($this->defaultInfo['spAddSupport']),
-													'perMonthValue' => number_format(round($this->defaultInfo['spAddSupport']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '할부이자',
-													'totalSign' => '+',
-													'perMonthSign' => '+',
-													'totalColumnClass' => 'js-interest',
-													'perMonthColumnClass' => 'js-interestPerMonth',
-													'class' => 'calc-vat'
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '단말기할부',
-													'totalColumnClass' => 'js-resultDevicePrice',
-													'perMonthColumnClass' => 'js-resultDevicePricePerMonth',
-													'totalSign' => '=',
-													'perMonthSign' => '=',
-													'class' => 'calc-result-device-price',
-													'totalValue' => number_format($this->defaultInfo['resultDevicePrice']),
-													'perMonthValue' => number_format(round($this->defaultInfo['resultDevicePrice']/24))
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '요금제기본료',
-													'perMonthSign' => '+',
-													'perMonthColumnClass' => 'js-planFeePerMonth',
-													'perMonthValue' => number_format($this->defaultInfo['planFee'])
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '부가세',
-													'perMonthSign' => '+',
-													'perMonthColumnClass' => 'js-VAT',
-													'class' => 'calc-vat'
-												),
-												array(
-													'template' => $this->htmlResultRowTemplate,
-													'label' => '선택약정할인',
-													'totalColumnClass' => 'js-selectPlanDiscount',
-													'perMonthColumnClass' => 'js-selectPlanDiscountPerMonth',
-													'class' => 'calc-select-plan',
-													'totalSign' => '-',
-													'perMonthSign' => '-',
-													'isActiveClass' => ($this->selectedDiscountType == 'selectPlan')?'active':'',
-													'totalValue' => number_format($this->defaultInfo['selectPlanDiscount']),
-													'perMonthValue' => number_format(round($this->defaultInfo['selectPlanDiscount']/24))
-												),
-												array(
-													'template' => $this->htmlResultTotalTemplate,
-													'label' => '월 청구액',
-													'sign' => '=',
-													'result' => number_format(round(($this->defaultInfo['dvRetailPrice'] - $this->defaultInfo['spSupport'] - $this->defaultInfo['spAddSupport'])/24) + $this->defaultInfo['planFee'])
-												)
-											);
-		return $this;
-	}
-
-	private function setResultSection() {
-		foreach ($this->arrResultRow as $val){
-			$this->calculatorResult .= getResultTemplate($val, $val['template'], true);
-		}
-		return $this;
-	}
-
 	private function getCalculator() {
-		$this->getDefaultInfo()->setArrResultRow()->setResultSection();
-
-		$data['content'] = $this->calculatorResult;
+		$this->getDefaultInfo();
+		$resultDevicePricePerMonth = $this->defaultInfo['dvRetailPrice'] - $this->defaultInfo['spSupport'] - $this->defaultInfo['spAddSupport'];
+		$data = array(
+			'dvRetailPrice' => number_format($this->defaultInfo['dvRetailPrice']),
+			'isSupportRowActive' => ($this->selectedDiscountType === 'support')?'active':'',
+			'spSupport' => number_format($this->defaultInfo['spSupport']),
+			'spAddSupport' => number_format($this->defaultInfo['spAddSupport']),
+			'resultDevicePricePerMonth' => number_format($resultDevicePricePerMonth/24),
+			'planFee' => number_format($this->defaultInfo['planFee']),
+			'isSelectPlanDiscountRowActive' => ($this->selectedDiscountType === 'selectPlan')?'active':'',
+			'selectPlanDiscount' => number_format($this->defaultInfo['selectPlanDiscount']),
+			'planFeeResult' => number_format($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount']),
+			'point' => number_format($this->defaultInfo['rewardPoint']),
+			'totalCost' => number_format((int)$resultDevicePricePerMonth/24 + (int)($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount']))
+		);
 		$this->calculatorResult = getResultTemplate($data, $this->htmlResultWrapTemplate);
+		unset($data);
 
 		$data['content'] = $this->calculatorPad;
 		$this->calculatorPad = getResultTemplate($data, $this->htmlPadTemplate);
+		unset($data);
 
 		$template = getTemplateTag();
 
 		$data['content'] = $this->htmlPlanSelectOptionTemplate;
 		$data['class'] = 'js-planSelectOptionTemplate';
 		$planOptionTemplate = getResultTemplate($data, $template);
+		unset($data);
 
 		$data['content'] = $this->htmlPadButtonTemplate;
 		$data['class'] = 'js-padButtonTemplate';
 		$padButtonTemplate = getResultTemplate($data, $template);
+		unset($data);
 
 		$data['content'] = $this->htmlPadWrapTemplate;
 		$data['class'] = 'js-padButtonTemplate';
 		$padWrapTemplate = getResultTemplate($data, $template);
+		unset($data);
 
-		$data = array();
 		$data['content'] = $this->calculatorResult.$this->calculatorPad;
 		$data['dvKey'] = $this->dvId;
 		$data['token'] = createToken();
 		$calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
 
 		return $calculator.$padWrapTemplate.$padButtonTemplate.$planOptionTemplate;
+
 	}
 }
 ?>

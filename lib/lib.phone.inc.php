@@ -99,7 +99,7 @@ class deviceInfo {
 												'fee' => 29900,
 												'selectPlanDiscount' => 6000,
 												'value' => 'NA00004769'
-											),
+											)
 										),
 										'kids'=>array(
 											9 => array(
@@ -111,15 +111,64 @@ class deviceInfo {
 											)
 										),
 										'watch'=>array(
+																						2 => array(
+												'name' => 'band 데이터 퍼펙트S',
+												'description' => '데이터 16G+무제한/통화문자무한',
+												'fee' => 69000,
+												'selectPlanDiscount' => 13800,
+												'value' => 'NA00005134'
+											),
+											3 => array(
+												'name' => 'band 데이터 퍼펙트',
+												'description' => '데이터 11G+무제한/통화문자무한',
+												'fee' => 59900,
+												'selectPlanDiscount' => 12000,
+												'value' => 'NA00004775'
+											),
+											4 => array(
+												'name' => 'band 데이터 6.5G',
+												'description' => '데이터 6.5G/통화문자무한',
+												'fee' => 51000,
+												'selectPlanDiscount' => 10200,
+												'value' => 'NA00004773'
+											),
+											5 => array(
+												'name' => 'band 데이터 3.5G',
+												'description' => '데이터 3.5G/통화문자무한',
+												'fee' => 47000,
+												'selectPlanDiscount' => 9400,
+												'value' => 'NA00004772'
+											),
+											6 => array(
+												'name' => 'band 데이터 2.2G',
+												'description' => '데이터 2.2G/통화문자무한',
+												'fee' => 42000,
+												'selectPlanDiscount' => 8400,
+												'value' => 'NA00004771'
+											),
+											7 => array(
+												'name' => 'band 데이터 1.2G',
+												'description' => '데이터 1.2G/통화문자무한',
+												'fee' => 36000,
+												'selectPlanDiscount' => 7200,
+												'value' => 'NA00004770'
+											),
+											8 => array(
+												'name' => 'band 데이터 세이브',
+												'description' => '데이터 300M/통화문자무한',
+												'fee' => 29900,
+												'selectPlanDiscount' => 6000,
+												'value' => 'NA00004769'
+											),
 											11 => array(
-												'name' => '',
+												'name' => 'T아웃도어 공유',
 												'description' => 'SK만 가능/데이터무한/통화50분',
 												'fee' => 10000,
 												'selectPlanDiscount' => 0,
 												'value' => 'NA00004461'
 											),
 											12 => array(
-												'name' => '',
+												'name' => 'T아웃도어 단독',
 												'description' => '데이터무한/통화50분',
 												'fee' => 10000,
 												'selectPlanDiscount' => 0,
@@ -198,7 +247,6 @@ class deviceInfo {
 												'name' => 'LTE 데이터 선택 32.8',
 												'description' => '데이터 300MB/음성 무제한/영상&부가30분 추가제공',
 												'fee' => 29900,
-												
 												'selectPlanDiscount' => 6000,
 												'value' => 'KJPLTE029'
 											)
@@ -226,14 +274,14 @@ class deviceInfo {
 												'fee' => 10000,
 												'selectPlanDiscount' => 0,
 												'value' => 'KTFWEAR4G'
-											),
+											)/*,
 											26 => array(
 												'name' => 'Wearable 3G',
 												'description' => '',
 												'fee' => 10000,
 												'selectPlanDiscount' => 0,
 												'value' => 'KTFWEAR3G'
-											)
+											)*/
 										),
 										'kids'=>array(
 											27 => array(
@@ -271,7 +319,7 @@ class deviceInfo {
 												20 => 'LTE 데이터 299'
 											);
 
-	private $arrCarrierInterest = array('sk' => 5.9, 'kt' => 0.27, 'lg' => 5.9);
+	private $arrCarrierInterest = array('sk' => 5.9, 'kt' => 0.135, 'lg' => 5.9);
 
 	public function setCarrier($input) {
 		$this->carrier = $input;
@@ -324,6 +372,7 @@ class deviceInfo {
 		//var_dump($this->arrPlan[$this->carrier][$this->mode]);
 		//var_dump($this->carrier);
 		//var_dump($this->mode);
+		//var_dump(array_keys($this->arrPlan[$this->carrier][$this->mode]));
 		return array_keys($this->arrPlan[$this->carrier][$this->mode]);
 	}
 
@@ -387,13 +436,26 @@ class deviceInfo {
 	}
 
 	public function getApplyURL($input, $type) {
-		return 'https://tgate.sktelecom.com/applform/main.do?prod_seq='.$input.'&scrb_cl='.$type.'&mall_code=00001';
+		if($this->carrier == 'sk') 
+			$output = 'https://tgate.sktelecom.com/applform/main.do?prod_seq='.$input.'&scrb_cl='.$type.'&mall_code=00001';
+		else if($this->carrier == 'kt') 
+			$output = 'http://online.olleh.com/index.jsp?prdcID='.$input;
+		return $output;
 	}
 
 	public function calcInterest($resultDevicePrice) { //할부이자계산
-		$this->repaymentPerMonth = floor(($resultDevicePrice * (($this->arrCarrierInterest[$this->carrier]/12) / 100) / ( 1 - pow( 1 + (($this->arrCarrierInterest[$this->carrier]/12) / 100), - $this->installationMonth))));
+		if($this->carrier === 'kt') {
+			$this->repaymentPerMonth = round(($resultDevicePrice/$this->installationMonth) + ($resultDevicePrice * ($this->installationMonth/12) * ($this->arrCarrierInterest[$this->carrier]/100)));
+		}else {
+			$this->repaymentPerMonth = round(($resultDevicePrice * (($this->arrCarrierInterest[$this->carrier]/12) / 100) / ( 1 - pow( 1 + (($this->arrCarrierInterest[$this->carrier]/12) / 100), - $this->installationMonth))));
+		}
 		return $this;
 	}
+
+	public function getInterestRate() { //할부이자계산
+		return $this->arrCarrierInterest[$this->carrier];
+	}
+
 	public function getContainVatInterest() { //할부이자계산
 		return $this->repaymentPerMonth + ($this->getPlanFee() * $this->addTax);
 	}
