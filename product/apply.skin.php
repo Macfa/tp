@@ -1,130 +1,5 @@
 <div class="wrap apply-wrap center">
 	<h1 class="tit center">신청서 작성</h1>
-	<form action="/product/applyAction.php" method="post" id="apply-form">
-	<input type="hidden" class="js-id" name="dvId" value="<?php echo $_GET['id']?>"/>
-	<input type="hidden" class="js-token" value="<?php echo createToken()?>"/>
-	<section class="calc-wrap js-hideContactBtn">
-		<div class="calc-result-wrap">
-			<table class="calc-result-table">
-				<colgroup>
-					<col style="width:auto;" />
-					<col style="width:20%" />
-					<col style="width:20%" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th></th>
-						<th>총 액</th>
-						<th>24개월</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="calc-value-row">
-						<td class="calc-value-label">출고가</td>
-						<td class="js-retailPrice"><?php echo number_format($calcDefaultValue['dvRetailPrice'])?></td>
-						<td class="js-retailPricePerMonth"><?php echo number_format($calcDefaultValue['dvRetailPricePerMonth'])?></td>
-					</tr>
-					<tr class="calc-value-row calc-support-discount <?php echo $isSupportDiscountRowActive?>">
-						<td class="calc-value-label">- 공시 지원금</td>
-						<td class="js-support"><?php echo number_format($calcDefaultValue['spSupport'])?></td>
-						<td class="js-supportPerMonth"><?php echo number_format($calcDefaultValue['spSupportPerMonth'])?></td>
-					</tr>
-					<tr class="calc-value-row calc-support-discount <?php echo $isSupportDiscountRowActive?>">
-						<td class="calc-value-label">- 티플 지원금</td>
-						<td class="js-addSupport"><?php echo number_format($calcDefaultValue['spAddSupport'])?></td>
-						<td class="js-addSupportPerMonth"><?php echo number_format($calcDefaultValue['spAddSupportPerMonth'])?></td>
-					</tr>
-					<tr class="calc-value-row">
-						<td class="calc-value-label">+ 요금제기본료</td>
-						<td></td>
-						<td class="js-planFeePerMonth"><?php echo number_format($calcDefaultValue['planFee'])?></td>
-					</tr>
-					<tr class="calc-value-row calc-select-plan">
-						<td class="calc-value-label">- 선택약정할인</td>
-						<td class="js-selectPlanDiscount">30,000</td>
-						<td class="js-selectPlanDiscountPerMonth">30,000</td>
-					</tr>
-					<tr class="calc-result-row">
-						<td class="calc-result-label">= 월 청구액</td>
-						<td class="calc-result-price js-result" colspan="2"><?php echo number_format($calcDefaultValue['result'])?></td>
-					</tr>
-					<tr class="calc-value-row js-availablePointRow" style="display:none">
-						<td class="calc-value-label">가용 포인트</td>
-						<td></td>
-						<td class="js-availablePointCalc"><?php echo number_format($defaultRewardPoint)?></td>
-					</tr>
-				</tbody>
-			</table>
-
-		</div><div class="calc-pad-wrap js-calcPad">
-			<?php if ($is3G) :?>
-			<div class="calc-row-lock-<?php echo $lockedPropertyCount?>">
-				<div class="calc-row-label">기기종류</div>
-				<label class="calc-btn">
-					<input type="radio" checked/>
-					<div class="calc-label">
-						<i class='ico-lock'></i>3G모델
-					</div>
-				</label>
-			</div>
-			<?php endif?>
-			<div class="calc-row-<?php echo $applyTypeRowAffix?> js-calcRow">
-				<div class="calc-row-label">가입유형</div>
-				<?php foreach($arrApplyType as $key => $val) :?>
-				<label class="calc-btn">
-					<input type="radio" value="<?php echo $key?>" name="applyType" <?php echo $applyTypeChecked[$key]['isChecked']?>/>
-					<div class="calc-label">
-						<?php echo $applyTypeLockIcon?><?php echo $val?>
-					</div>
-				</label>
-				<?php endforeach?>
-			</div>
-			<?php if ($isCanChildSelect) :?>
-			<div class="calc-row-<?php echo $capacityRowAffix?>">
-				<div class="calc-row-label">기기용량</div>
-				<?php foreach($child as $row) :?>
-				<label class="calc-btn">
-					<input type="radio" value="<?php echo $row['dvTit']?>" name="capacity" <?php echo $row['isChecked']?>/>
-					<div class="calc-label"><?php echo $capacityTypeLockIcon?> <?php echo $row['dvTit']?></div>
-				</label>
-				<?php endforeach?>
-			</div>
-			<?php endif?>
-			<div class="calc-row-<?php echo $discountTypeRowAffix?>">
-				<div class="calc-row-label">할인방식</div>
-				<label class="calc-btn">
-					<input type="radio" value="support" name="discountType" <?php echo $isSupportDiscountChecked?>/>
-					<div class="calc-label"><?php echo $discountTypeLockIcon?>공시지원금</div>
-				</label>
-				<?php if ($onlySupportDiscount == false) :?>
-				<label class="calc-btn">
-					<input type="radio" value="selectPlan" name="discountType" />
-					<div class="calc-label">선택약정할인</div>
-				</label>
-				<?php endif?>
-			</div>
-			<div class="calc-row-2">
-				<div class="calc-row-label">부가세 할부이자</div>
-				<label class="calc-btn">
-					<input type="radio" value="1" name="containVat"/>
-					<div class="calc-label">포함(실청구액)</div>
-				</label>
-				<label class="calc-btn">
-					<input type="radio" value="0" name="containVat" />
-					<div class="calc-label">포함안된 요금</div>
-				</label>
-			</div>
-			<div class="calc-row">
-				<div class="calc-row-label">요금제</div>
-				<select class="inp-select js-planCalcArg" name="plan">
-					<?php foreach($arrSelectPlan as $val) :?>
-					<option value="<?php echo $val?>" <?php echo $isPlanSelected[$val]['isChecked']?>><?php echo $deviceInfo->getPlanName($val)?> : <?php echo $deviceInfo->getPlanInfo($val)?></option>
-					<?php endforeach?>
-				</select>
-			</div>
-		</div>
-		<div class="spacer" style="clear: both;"></div>
-	</section>
 
 	<?php if($isLogged == false) :?>
 	<section class="section txt-left js-loginSection">
@@ -134,6 +9,81 @@
 	</section>
 	<?php endif?>
 
+	<form action="/product/applyAction.php" method="post" id="apply-form">
+	<input type="hidden" name="pvKey" value="<?php echo $preorder['pvKey']?>">
+
+	<section class="section txt-left">
+		<h2 class="tit-sub">신청정보</h2>
+		<i class="ico-person-small"></i> 신청자명 <Br/> <span><?php echo $mb['mbName']?></span><br/><br/>
+
+		<i class="ico-carrier-small"></i> 신청할 통신사
+		<Br/><br/>
+		<span><?php echo $_POST['carrier']?></span><br/><br/>
+
+		<i class="ico-change-device-small"></i> 가입유형
+		<Br/><br/>
+		<span><?php echo $_POST['applyType']?></span><br/><br/>
+
+		<i class="ico-person-small"></i> 할인유형
+		<Br/><br/>
+		<span><?php echo $_POST['discountType']?></span><br/><br/>
+
+		<?php if (isExist($_POST['capacity'])) :?>
+		<i class="ico-person-small"></i> 용량
+		<Br/><br/>
+		<span><?php echo $_POST['capacity']?></span><br/><br/>
+		<?php endif?>
+	</section>
+
+	<section class="section txt-left">
+		<h2 class="tit-sub">추가정보입력</h2>
+		<label class="inp-wrap">
+			<i class="ico-tel-small"></i>
+			<input type="text" class="inp-txt" name="apPhone" value="<?php echo ($validPhone)?$validPhone:''; ?>" />
+			<div class="inp-label">전화번호</div>
+		</label>
+		<br>
+		<label class="inp-wrap">
+			<i class="ico-calendar-small"></i> 
+			<input type="text" class="inp-txt" name="apBirth" value="<?php echo str_replace('-','',$preorder['pvBirth']); ?>" />
+			<div class="inp-label">생년월일</div>
+			<span class="inp-hint">19701015 형식으로 입력</span>
+		</label>
+		<br>
+		<label class="inp-wrap">
+			<i class="ico-color-small"></i> 
+			<input type="text" class="inp-txt" name="apColor" value="" />
+			<div class="inp-label">색상</div>
+		</label>
+		<fieldset class="inp-group">
+			<i class="ico-carrier-small"></i> 현재 이용중인 통신사 <br/>
+			<label class="inp-chk">
+				<input type="radio" name="current" value="sk"/>
+				<div class="inp-chk-box"></div>
+				SKT
+			</label>
+			<label class="inp-chk">
+				<input type="radio" name="current" value="kt"/>
+				<div class="inp-chk-box"></div>
+				KT olleh
+			</label>
+			<label class="inp-chk">
+				<input type="radio" name="current" value="lg"/>
+				<div class="inp-chk-box"></div>
+				LG U+
+			</label>
+			<label class="inp-chk">
+				<input type="radio" name="current" value="etc"/>
+				<div class="inp-chk-box"></div>
+				알뜰폰
+			</label>
+		</fieldset>
+		<!--label class="inp-wrap">
+			<i class="ico-talk-small"></i>
+			<textarea name="pvEtc" class="inp-txtarea" ></textarea>
+			<div class="inp-label">기타사항 & 요구사항</div>
+		</label-->
+	</section>
 	<!--section class="section-no-padding txt-left js-addressWrap js-showContactBtn">
 		<section class="js-addressDetail address-detail active">
 			<h2 class="tit-sub">사은품 받을 주소</h2>

@@ -185,12 +185,15 @@ class planCalculator {
 	private function init() {
 		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
 
-		$this->capacityCount = DB::queryFirstField("SELECT COUNT(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if ((int)$this->capacityCount === 1) {
+		list($dvTit ,$this->capacityCount) = DB::queryFirstList("SELECT min(dvTit), count(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
+		
+		$this->capacityCount = (int)$this->capacityCount;
+		if ($this->capacityCount === 1) {
 			$this->lockedPropertyCount += 1;
 			$this->isExistChild = true;
 			$this->capacityLockIcon = $this->lockIcon;
 		}
+		$defaultCapacity = $dvTit;
 
 		//--------------------------------------------
 
@@ -201,7 +204,7 @@ class planCalculator {
 		//-------------------------------------------
 
 		$this->arrApplyType = $deviceInfo->getArrApplyType();
-		$this->applyTypeCount = count($this->arrApplyType);
+		$this->applyTypeCount = (int)count($this->arrApplyType);
 
 		if($this->applyTypeCount == 1) {
 			$this->lockedPropertyCount += 1;
@@ -211,7 +214,7 @@ class planCalculator {
 		//--------------------------------------------
 
 		$this->arrDiscountType = $deviceInfo->getArrDiscountType();
-		$this->discountTypeCount = count($this->arrDiscountType);
+		$this->discountTypeCount = (int)count($this->arrDiscountType);
 
 		if ($this->discountTypeCount == 1) {
 			$this->lockedPropertyCount += 1;
@@ -221,7 +224,7 @@ class planCalculator {
 		//-----------------------------------------
 		/*
 		$this->arrDeviceType = $deviceInfo->getArrDeviceType();
-		$this->deviceTypeCount = count($this->arrDeviceType);
+		$this->deviceTypeCount = (int)count($this->arrDeviceType);
 
 		if ($this->deviceTypeCount == 1) {
 			$this->lockedPropertyCount += 1;
@@ -232,7 +235,7 @@ class planCalculator {
 		//------------------------------------------
 
 		$this->arrCarrierType = $deviceInfo->getArrCarrierType($this->dvKey);
-		$this->carrierTypeCount = count($this->arrCarrierType);
+		$this->carrierTypeCount = (int)count($this->arrCarrierType);
 
 		if ($this->carrierTypeCount == 1) {
 			$this->lockedPropertyCount += 1;
@@ -241,7 +244,9 @@ class planCalculator {
 
 		//--------------------------------------------------------
 
-		$this->arrPlan = $deviceInfo->getArrPlan();
+		$defaultDvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId.strtolower($defaultCapacity));
+		$this->arrPlan = $deviceInfo->getArrPlan($defaultDvKey);
+		//var_dump($this->arrPlan);
 
 		//---------------------------------------------------
 		return $this;
@@ -315,28 +320,26 @@ class planCalculator {
 
 	public function setCapacitySelect(){
 		if($this->capacityCount == 0) return $this;
-
 		$child = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
-		if (isExist($this->capacity)) {
+
+		if(isExist($this->capacity) === true) {
+			$this->selectedCapacity = $this->capacity;
+		}else if($this->capacityCount === 1) {
+			$this->selectedCapacity = $child[0]['dvTit'];
+		}
+
+		if(isExist($this->selectedCapacity) === true) {
 			foreach ($child as $key => $val) {
-				if ($val['dvTit'] == $this->capacity) {
+				if ($val['dvTit'] == $this->selectedCapacity) {
 					$child[$key]['isChecked'] = 'checked';
 				}
 			}
-		}/*else{
-			$child[0]['isChecked'] = 'checked';
-		}*/
-
-		if(isExist($this->capacity)){
-			$this->selectedCapacity = $this->capacity;
-		}else if($this->capacityCount == 1) {
-			$this->selectedCapacity = $child[0]['dvTit'];
 		}
 
 		foreach ($child as $key => $val) {
 			$data['label'] = $data['value'] = $val['dvTit'];
 			$data['name'] = 'capacity';
-			$data['isChecked'] = $child[$key]['isChecked'];
+			$data['isChecked'] = $val['isChecked'];
 			$data['lockIcon'] = $this->capacityLockIcon;
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
 		}
@@ -436,15 +439,15 @@ class planCalculator {
 		$tmpDeviceInfo = new deviceInfo();
 		$tmpDeviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
 		$this->selectedPlan = (isExist($this->plan))?$this->plan:getFirstArrKey($this->arrPlan);
-		////var_dump($this->arrPlan);
+		//var_dump($this->arrPlan);
 		//var_dump($this->selectedPlan);
 		$planSelected[$this->selectedPlan] = 'selected';
 
-		foreach ($this->arrPlan as $val) {
-			$data['value'] = $val;
-			$data['name'] = $tmpDeviceInfo->getPlanName($val);
-			$data['info'] = $tmpDeviceInfo->getPlanInfo($val);
-			$data['isSelected'] = $planSelected[$val];
+		foreach ($this->arrPlan as $plan) {
+			$data['value'] = $plan;
+			$data['name'] = $tmpDeviceInfo->getPlanName($plan);
+			$data['info'] = $tmpDeviceInfo->getPlanInfo($plan);
+			$data['isSelected'] = $planSelected[$plan];
 			$content .= getResultTemplate($data, $this->htmlPlanSelectOptionTemplate);
 		}
 
@@ -452,7 +455,6 @@ class planCalculator {
 		$data['tit'] = '요금제';
 		$data['content'] = $content;
 		$this->calculatorPad .= getResultTemplate($data, $this->htmlPlanSelectWrapTemplate);
-		return $this;
 	}
 
 	private function getDefaultInfo(){

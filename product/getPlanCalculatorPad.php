@@ -21,19 +21,23 @@ $output['applyType'] = $deviceInfo->getArrApplyType();
 $output['discountType'] = $deviceInfo->getArrDiscountType();
 $output['carrier'] = $deviceInfo->getArrCarrierType($device['dvKey']);
 
-if((int)$device['dvParent'] !== 0) {
-	$childs = DB::queryOneColumn('dvTit', "SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i and dv".strtoupper($_POST['carrier'])." = 1", $device['dvParent']);
-	foreach($childs as $capacity)
+$childs = DB::queryOneColumn('dvTit', "SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i and dv".strtoupper($_POST['carrier'])." = 1", $device['dvKey']);
+//var_dump($childs);
+if($childs !== array()){
+	foreach($childs as $capacity) {
 		$output['capacity'][] = $capacity;
+	}
 }
 
-$arrPlan = $deviceInfo->getArrPlan();
-//var_dump($arrPlan);
-foreach($arrPlan as $val) {
- 	$isExistPlan = DB::queryFirstField("SELECT count(*) FROM tmSupport WHERE dvKey = %i and spCarrier = %s and spPlan = %i", $device['dvKey'], $_POST['carrier'], $val);
- 	if((int)$isExistPlan <= 0)	continue;
-	$output['plan'][$val]['name'] = $deviceInfo->getPlanName($val);
-	$output['plan'][$val]['info'] = $deviceInfo->getPlanInfo($val);
+
+$defaultKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $_POST['id'].strtolower($output['capacity'][0]));
+
+$arrPlan = $deviceInfo->getArrPlan($defaultKey);
+//var_dump($defaultKey);
+
+foreach($arrPlan as $plan) {
+	$output['plan'][$plan]['name'] = $deviceInfo->getPlanName($plan);
+	$output['plan'][$plan]['info'] = $deviceInfo->getPlanInfo($plan);
 }
 
 echo json_encode($output); 

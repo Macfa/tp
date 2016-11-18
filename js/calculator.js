@@ -17,7 +17,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	};
 
 	if($arrPad[$carrier] == undefined) {
-		//console.log($data);
+		console.log($data);
 		$.ajax({
 			url:'/product/getPlanCalculatorPad.php',
 			type:'post',
@@ -57,6 +57,23 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		var $capacity = undefined;
 	}
 	var $isSelectPlanDiscount = ($discountType == 'selectPlan')?true:false;
+
+	var $isRequiredCarrier = ($('[name=carrier]').size()>=2)?true:false;
+	var $isRequiredApplyType = ($('[name=applyType]').size()>=2)?true:false;
+	var $isRequiredCapacity = ($('[name=capacity]').size()>=2)?true:false;
+	var $isRequiredDisocuntType = ($('[name=discountType]').size()>=2)?true:false;
+
+	var $isSelectedCarrier = ($carrier!=undefined)?true:false;
+	var $isSelectedApplyType = ($applyType!=undefined)?true:false;
+	var $isSelectedCapacity = ($capacity!=undefined)?true:false;
+	var $isSelectedDisocuntType = ($discountType!=undefined)?true:false;
+
+	if(
+		($isSelectedCarrier == false && $isRequiredCarrier == true)
+		||($isSelectedApplyType == false && $isRequiredApplyType == true)
+		||($isSelectedCapacity == false && $isRequiredCapacity == true)
+		||($isSelectedDisocuntType == false && $isRequiredDisocuntType == true)
+	) return false;
 
 	if($('.js-id').val() == 'galaxys7edge' && $capacity == '64G') {
 		alert('갤럭시S7엣지 64G는 현재 판매하지 않습니다.');
