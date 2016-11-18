@@ -33,14 +33,9 @@
 				</select>
 			</div>
 			<br/><br/>
-		</fieldset>			
+		</fieldset>
 		<fieldset class="inp-group">
-			요금제<br/>				
-			<input type="text" name="spPlan" size="60">
-			<br/><br/>
-		</fieldset>	
-		<fieldset class="inp-group">
-			모드 
+			모드 (요금제별) 
 			<label class="inp-chk">
 				<input type="radio" name="dvCate" value="phone"/>
 				<div class="inp-chk-box"></div>
