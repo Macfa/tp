@@ -52,20 +52,23 @@ class planCalculator {
 
 	private $htmlPadTemplate = '<div class="calc-pad-wrap js-calcPad">{content}</div>';
 
-	private $htmlPadWrapTemplate = '<fieldset class="calc-row-{calcRowAffix}">
-																<div class="calc-row-label">{tit}</div>
-																{content}
-															</fieldset>';
+	private $htmlPadWrapTemplate = 
+		'<fieldset class="calc-row-{calcRowAffix}">
+			<div class="calc-row-label">{tit}</div>
+			{content}
+		</fieldset>';
 
-	private $htmlPadButtonTemplate = '<label class="calc-btn">
-																<input type="radio" value="{value}" name="{name}" {isChecked}/>
-																<div class="calc-label">{lockIcon} {label}</div>
-															</label>';
+	private $htmlPadButtonTemplate = 
+		'<label class="calc-btn">
+			<input type="radio" value="{value}" name="{name}" {isChecked}/>
+			<div class="calc-label">{lockIcon} {label}</div>
+		</label>';
 
-	private $htmlPlanSelectWrapTemplate = '<div class="calc-row">
-																		<div class="calc-row-label">{tit}</div>
-																		<select class="inp-select js-planCalcArg" name="plan">{content}</select>
-																	</div>';
+	private $htmlPlanSelectWrapTemplate = 
+		'<div class="calc-row">
+			<div class="calc-row-label">{tit}</div>
+			<select class="inp-select js-planCalcArg" name="plan">{content}</select>
+		</div>';
 
 	private $htmlPlanSelectOptionTemplate = '<option value="{value}" {isSelected}>{name} : {info}</option>';
 
@@ -128,12 +131,13 @@ class planCalculator {
 		</div>
 	</div>';
 
-	private $htmlCalculatorTemplate = '<section class="calc-wrap js-hideContactBtn">
-																<input type="hidden" class="js-id" name="dvId" value="{dvKey}"/>
-																<input type="hidden" class="js-token" value="{token}"/>
-																{content}
-																<div class="spacer" style="clear: both;"></div>
-															</section>';
+	private $htmlCalculatorTemplate = 
+		'<section class="calc-wrap js-hideContactBtn">
+			<input type="hidden" class="js-id" name="dvId" value="{dvKey}"/>
+			<input type="hidden" class="js-token" value="{token}"/>
+			{content}
+			<div class="spacer" style="clear: both;"></div>
+		</section>';
 
 	public function setDevice($dvId) {
 		$this->dvId = $dvId;
