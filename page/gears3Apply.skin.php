@@ -3,6 +3,8 @@
 <h1 class="tit">기어S3 신청</h1>
 <BR/><BR/><BR/>
 <div class="preorder-wrap">
+	<?php echo $planCalculator->create();?>
+	<Br/><br/>
 	<?php if($isLogged == false) :?>
 	<section class="section">
 		<h3 class="tit-sub center">로그인후 구매신청이 가능합니다.</h3>
