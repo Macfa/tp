@@ -17,5 +17,4 @@ include_once(PATH_LIB."/lib.phone.inc.php");
 include_once(PATH_LIB."/lib.userAgentParser.inc.php");
 include_once(PATH_LIB."/lib.sms.inc.php");
 include_once(PATH_LIB."/lib.import.inc.php");
-
 ?>
