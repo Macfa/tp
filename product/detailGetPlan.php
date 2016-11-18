@@ -133,6 +133,7 @@ $rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = 
 	)
 );
 
+$calcResult['dvKey'] = $device['dvKey'];
 $calcResult['rewardPoint'] = (isExist($calcResult['rewardPoint']))?(int)$rpPoint:'미정';
 
 //-------------------------------------
