@@ -22,8 +22,8 @@
 class DB {
   // initial connection
   public static $dbName = 'traummobile';
-  public static $user = 'root';
-  public static $password = 'dosman1@lycos';
+  public static $user = 'mktptraumplanet';
+  public static $password = 'tptm95250319';
   public static $host = 'localhost';
   public static $port = null;
   public static $encoding = 'utf-8';

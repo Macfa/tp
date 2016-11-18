@@ -175,7 +175,7 @@ function decodeHtml(html) {
 
 function getResultTemplate($template,$data){
 	var $result = $template;
-	console.log($result);
+	//console.log($result);
 	for (var key in $data) {
 		$result = replaceAll('{'+key+'}', $data[key], $result);
 	}

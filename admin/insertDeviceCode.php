@@ -4,31 +4,40 @@ require_once($cfg['path']."/headSimple.inc.php");			// 헤더 부분 (스킨포�
 
 
 
-$plan = array(
-	0 => 'T시그니쳐 Master',
-	1 => 'T시그니쳐 Classic',
-	2 => 'band 데이터 퍼펙트S',
-	3 => 'band 데이터 퍼펙트',
-	4 => 'band 데이터 6.5G',
-	5 => 'band 데이터 3.5G',
-	6 => 'band 데이터 2.2G',
-	7 => 'band 데이터 1.2G',
-	8 => 'band 데이터 세이브',     // SKT 요금제
-	15 => 'LTE 데이터 선택 109',
-	16 => 'LTE 데이터 선택 76.8',
-	17 => 'LTE 데이터 선택 65.8',
-	18 => 'LTE 데이터 선택 54.8',
-	19 => 'LTE 데이터 선택 49.3',
-	20 => 'LTE 데이터 선택 43.8',
-	23 => 'LTE 데이터 선택 38.3',
-	24 => 'LTE 데이터 선택 32.8'
-);
+$sktDeviceList = DB::query("SELECT * FROM tmDevice WHERE dvSK = 1 AND dvDisplay = 1  AND dvParent = 0 order by dvId");
 
+foreach($sktDeviceList as $val){	
+	
+	$dvChild = DB::query("SELECT * FROM tmDevice WHERE dvSK = 1 AND dvDisplay = 1  AND dvParent=%i", $val['dvKey']);	
+	if($dvChild){
+		foreach ($dvChild as $key => $value){
+			$sktDevice[$value['dvKey']] = $value['dvId'];
+		}
+	}else{
+		$sktDevice[$val['dvKey']] = $val['dvId'];
+	}
+}
 
+$ktDeviceList = DB::query("SELECT * FROM tmDevice WHERE dvKT = 1 AND dvDisplay = 1  AND dvParent = 0 order by dvId");
 
+foreach($ktDeviceList as $val){	
+	
+	$dvChild = DB::query("SELECT * FROM tmDevice WHERE dvKT = 1 AND dvDisplay = 1  AND dvParent=%i", $val['dvKey']);	
+	if($dvChild){
+		foreach ($dvChild as $key => $value){
+			$ktDevice[$value['dvKey']] = $value['dvId'];
+		}
+	}else{
+
+		$ktDevice[$val['dvKey']] = $val['dvId'];
+	}
+} 
 
 
 require_once("insertDeviceCode.skin.php");
+
+
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 
 ?>
+

@@ -6,15 +6,15 @@
 //																					//
 /////////////////////////////////////////////////////////////////////
 
-include_once("lib.common.inc.php");
-include_once("lib.sql.inc.php");
-include_once("lib.meekrodb.inc.php");
-include_once("lib.naverLogin.inc.php");
-include_once("lib.kakaoLogin.inc.php");
-include_once("lib.security.inc.php");
-include_once("lib.validate.inc.php");
-include_once("lib.phone.inc.php");
-include_once("lib.userAgentParser.inc.php");
-include_once("lib.sms.inc.php");
-include_once("lib.import.inc.php");
+include_once(PATH_LIB."/lib.common.inc.php");
+include_once(PATH_LIB."/lib.sql.inc.php");
+include_once(PATH_LIB."/lib.meekrodb.inc.php");
+include_once(PATH_LIB."/lib.naverLogin.inc.php");
+include_once(PATH_LIB."/lib.kakaoLogin.inc.php");
+include_once(PATH_LIB."/lib.security.inc.php");
+include_once(PATH_LIB."/lib.validate.inc.php");
+include_once(PATH_LIB."/lib.phone.inc.php");
+include_once(PATH_LIB."/lib.userAgentParser.inc.php");
+include_once(PATH_LIB."/lib.sms.inc.php");
+
 ?>

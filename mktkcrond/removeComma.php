@@ -1,7 +1,21 @@
-<?php
-require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
-include_once(PATH_LIB.'/lib.snoopy.inc.php');
-include_once(PATH_LIB.'/lib.parsing.inc.php');
+#!/usr/local/php/bin/php 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<?
+$cfg['path'] = $_SERVER['DOCUMENT_ROOT'];
+include_once($cfg['path']."/lib/config.inc.php");
+include_once(PATH_LIB."/lib.inc.php");
 include_once(PATH_LIB.'/lib.planParsing.inc.php');
-include_once(PATH_LIB.'/lib.meekrodb.inc.php');
-?>
+
+planParsing::setCarrier('kt')->setMode('phone')->setManuf('apple')->getDataAndInsert();
+planParsing::setCarrier('kt')->setMode('phone')->setManuf('samsung')->getDataAndInsert();
+planParsing::setCarrier('kt')->setMode('phone')->setManuf('lg')->getDataAndInsert();
+planParsing::setCarrier('kt')->setMode('watch')->getDataAndInsert();
+planParsing::setCarrier('kt')->setMode('pocketfi')->getDataAndInsert();
+planParsing::setCarrier('kt')->setMode('kids')->getDataAndInsert();
+
+planParsing::setCarrier('sk')->setMode('phone')->setManuf('apple')->getDataAndInsert();
+planParsing::setCarrier('sk')->setMode('phone')->setManuf('samsung')->getDataAndInsert();
+planParsing::setCarrier('sk')->setMode('phone')->setManuf('lg')->getDataAndInsert();
+planParsing::setCarrier('sk')->setMode('watch')->getDataAndInsert();
+planParsing::setCarrier('sk')->setMode('pocketfi')->getDataAndInsert();
+planParsing::setCarrier('sk')->setMode('kids')->getDataAndInsert();
