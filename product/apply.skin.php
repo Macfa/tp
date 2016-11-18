@@ -10,7 +10,14 @@
 	<?php endif?>
 
 	<form action="/product/applyAction.php" method="post" id="apply-form">
-	<input type="hidden" name="pvKey" value="<?php echo $preorder['pvKey']?>">
+	<input type="hidden" name="dvKey" value="<?php echo $_POST['dvKey']?>">
+	<?php if (isExist($_POST['capacity'])) :?>
+	<input type="hidden" name="capacity" value="<?php echo $_POST['capacity']?>">
+	<?php endif?>
+	<input type="hidden" name="discountType" value="<?php echo $_POST['discountType']?>">
+	<input type="hidden" name="applyType" value="<?php echo $_POST['applyType']?>">
+	<input type="hidden" name="carrier" value="<?php echo $_POST['carrier']?>">
+	<input type="hidden" name="plan" value="<?php echo $_POST['plan']?>">
 
 	<section class="section txt-left">
 		<h2 class="tit-sub">신청정보</h2>
@@ -52,7 +59,7 @@
 		<br>
 		<label class="inp-wrap">
 			<i class="ico-color-small"></i> 
-			<input type="text" class="inp-txt" name="apColor" value="" />
+			<input type="text" class="inp-txt" name="color" value="" />
 			<div class="inp-label">색상</div>
 		</label>
 		<fieldset class="inp-group">
@@ -84,7 +91,7 @@
 			<div class="inp-label">기타사항 & 요구사항</div>
 		</label-->
 	</section>
-	<!--section class="section-no-padding txt-left js-addressWrap js-showContactBtn">
+	<section class="section-no-padding txt-left js-addressWrap js-showContactBtn">
 		<section class="js-addressDetail address-detail active">
 			<h2 class="tit-sub">사은품 받을 주소</h2>
 			<input type="hidden" class="js-arKey" name="arKey" value="<?php echo $defAddress['arKey']?>" />
@@ -169,7 +176,7 @@
 			<button class="btn-filled-sub-dense js-addressDetailAction js-otherAddress active">다른 주소</button>
 			<button class="btn-filled-sub-dense js-addressListAction js-newAddress">새 주소</button>
 		</div>
-	</section-->
+	</section>
 
 	<section class="js-showContactBtn apply-cart-list js-applyCartList">
 		<table class="table no-border">

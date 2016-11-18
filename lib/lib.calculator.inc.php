@@ -133,7 +133,8 @@ class planCalculator {
 
 	private $htmlCalculatorTemplate = 
 		'<section class="calc-wrap js-hideContactBtn">
-			<input type="hidden" class="js-id" name="dvId" value="{dvKey}"/>
+			<input type="hidden" class="js-id" name="dvId" value="{dvId}"/>
+			<input type="hidden" class="js-key" name="dvKey" value="{dvKey}"/>
 			<input type="hidden" class="js-token" value="{token}"/>
 			{content}
 			<div class="spacer" style="clear: both;"></div>
@@ -511,7 +512,7 @@ class planCalculator {
 		unset($data);
 
 		$data['content'] = $this->calculatorResult.$this->calculatorPad;
-		$data['dvKey'] = $this->dvId;
+		$data['dvId'] = $this->dvId;
 		$data['token'] = createToken();
 		$calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
 

@@ -189,6 +189,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 
 	$('.js-result').text(setNumComma($result));
 	$('.js-point').text(setNumComma($availablePoint));
+	$('.js-key').val($targetData['dvKey']);
 
 	if ($isSelectPlanDiscount) {
 		$('.js-selectplanWrap').addClass('active');
