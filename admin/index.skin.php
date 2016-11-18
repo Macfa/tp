@@ -23,6 +23,8 @@
 			<a href="exchangeRefundNote7List.php" class="myspace-list">노트7환불/교환</a>
 		</li><li class="myspace-list-wrap">
 			<a href="programNote7List.php" class="myspace-list">노트7 프로그램 신청</a>
+		</li><li class="myspace-list-wrap">
+			<a href="insertDeviceCode.php" class="myspace-list">실가입 URL 입력/수정</a>
 		</li>
 	</ul>
 	<div class="clear"></div>

@@ -4,11 +4,11 @@ require_once($cfg['path']."/headSimple.inc.php");			// 헤더 부분 (스킨포�
 
 
 
-$sktDeviceList = DB::query("SELECT * FROM tmDevice WHERE dvSK = 1 AND dvDisplay = 1  AND dvParent = 0 order by dvId");
+$sktDeviceList = DB::query("SELECT * FROM tmDevice WHERE dvSK = 1 AND dvParent = 0 order by dvId");
 
 foreach($sktDeviceList as $val){	
 	
-	$dvChild = DB::query("SELECT * FROM tmDevice WHERE dvSK = 1 AND dvDisplay = 1  AND dvParent=%i", $val['dvKey']);	
+	$dvChild = DB::query("SELECT * FROM tmDevice WHERE dvSK = 1 AND dvParent=%i", $val['dvKey']);	
 	if($dvChild){
 		foreach ($dvChild as $key => $value){
 			$sktDevice[$value['dvKey']] = $value['dvId'];
@@ -18,11 +18,11 @@ foreach($sktDeviceList as $val){
 	}
 }
 
-$ktDeviceList = DB::query("SELECT * FROM tmDevice WHERE dvKT = 1 AND dvDisplay = 1  AND dvParent = 0 order by dvId");
+$ktDeviceList = DB::query("SELECT * FROM tmDevice WHERE dvKT = 1 AND dvParent = 0 order by dvId");
 
 foreach($ktDeviceList as $val){	
 	
-	$dvChild = DB::query("SELECT * FROM tmDevice WHERE dvKT = 1 AND dvDisplay = 1  AND dvParent=%i", $val['dvKey']);	
+	$dvChild = DB::query("SELECT * FROM tmDevice WHERE dvKT = 1 AND dvParent=%i", $val['dvKey']);	
 	if($dvChild){
 		foreach ($dvChild as $key => $value){
 			$ktDevice[$value['dvKey']] = $value['dvId'];
