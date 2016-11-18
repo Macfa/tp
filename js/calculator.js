@@ -173,7 +173,6 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	$('.js-result').text(setNumComma($result));
 	$('.js-point').text(setNumComma($availablePoint));
 
-
 	if ($isSelectPlanDiscount) {
 		$('.js-selectplanWrap').addClass('active');
 		$('.js-supportWrap').removeClass('active');
@@ -182,13 +181,11 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		$('.js-selectplanWrap').removeClass('active');
 	}
 
-
 	if ($isContainVAT == true) {
 		$('.js-VATWrap, .js-interestWrap').addClass('active');
 	} else {
 		$('.js-VATWrap, .js-interestWrap').removeClass('active');
 	}
-
 
 	if($availablePoint > 0) {
 		$('.js-availablePointRow').show();
@@ -206,7 +203,9 @@ $('.js-calculatorDetailToggle').click(function(){
 
 
 function setCalcHeight(){
-	if ($(window).width() < 635) {
+	console.log('document:'+ $(document).width());
+	console.log('window:'+ $(window).width());
+	if ($(document).width() < 623) {
 		$('.calc-result-wrap').css({height:'25%'});
 	} else {
 		$('.calc-result-inner').removeClass('active');

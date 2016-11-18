@@ -111,7 +111,7 @@ class deviceInfo {
 											)
 										),
 										'watch'=>array(
-																						2 => array(
+											2 => array(
 												'name' => 'band 데이터 퍼펙트S',
 												'description' => '데이터 16G+무제한/통화문자무한',
 												'fee' => 69000,
@@ -270,7 +270,7 @@ class deviceInfo {
 										'watch'=>array(
 											25 => array(
 												'name' => 'Wearable LTE',
-												'description' => '',
+												'description' => '데이터500MB/음성50분/문자250건',
 												'fee' => 10000,
 												'selectPlanDiscount' => 0,
 												'value' => 'KTFWEAR4G'
