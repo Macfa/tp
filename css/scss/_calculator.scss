@@ -163,6 +163,10 @@
 	font-size:.95em;
 	word-spacing:0;
 	color:rgba(0,0,0,0.7);
+	html.ie &{
+		height:20px;
+		line-height:20px;
+	}
 	.calc-row.active &{
 		color:rgba(0,0,0,0.5);
 	}

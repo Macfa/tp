@@ -18,6 +18,22 @@ else
 var $cache = {};
 
 $(document).ready(function() {
+	/*
+	//ie 지원 스크립트
+	$("label").on('click', function(){
+		if($('html').hasClass('lte-ie8')){
+			if ($(this).attr("for")) {
+				$("#" + $(this).attr("for")).trigger('click');
+				alert(2);
+			} else if($(this).find('input').size() > 0){
+				$(this).find('input').trigger('click');
+				alert(1);
+			}
+		}
+		console.log(1);
+	});
+	*/
+
 
 	if($('.nav-device-wrap').size() > 0 && $('.nav-device-wrap').hasScrollBar('horizontal'))
 		$('.nav-device-wrap').addClass('has-horizontal-scroll');
