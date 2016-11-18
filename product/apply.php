@@ -9,7 +9,7 @@ try{
 	if($isExistDevice === FALSE)
 		throw new Exception('존재하지 않는 기기입니다.', 3);
 
-	if(isNotExist($_POST) === true)
+	if(isNotExist($_POST['carrier']) === true || isNotExist($_POST['applyType']) === true || isNotExist($_POST['discountType']) === true || isNotExist($_POST['dvKey']) === true || isNotExist($_POST['plan']) === true)
 		throw new Exception('기본정보입력 후 가능합니다.', 1);
 }catch(Exception $e){
 	if($e->getCode === 1) {
