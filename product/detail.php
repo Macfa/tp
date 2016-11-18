@@ -4,10 +4,10 @@
 // 파일명.skin.php 는 다른 파일의 html 부분을 담당하는 파일로 단독적으로 활용될수 없습니다.
 
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
+require_once(PATH_LIB."/lib.calculator.inc.php");
 
-$add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/detail.css" type="text/css">';
-$js_file = '<script type="text/javascript" src="'.PATH_JS.'/'.$includePrefix.'detail.js"></script><!--[if lt IE 9]><script type="text/javascript" src="'.PATH_JS_LIB.'/excanvas.js"></script><![endif]-->';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
+
+$import->addJS('calculator.js')->addJS('excanvas.js')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');
 
 $showDetailHead = true;
 if($isAdmin == true) 
@@ -178,29 +178,8 @@ if($cntDevicePlanGraph == 1){
 	$graphStepGap = floor(($graphEndValue-$graphStartValue) / $graphStep);	
 }
 
-$defaultVal['defaultPlanFee'] = $deviceInfo->setMode($device['dvCate'])->setPlan($defaultPlanId)->getPlanFee();
 $cntDevicePlanGraph = count($devicePlanGraph);
 $devicePlanGraph[$cntDevicePlanGraph-1]['spDate'] = $cfg['time_ymd'];
-$arrApplyType = $deviceInfo->getArrApplyType();
-$arrApplyTypeCnt = count($arrApplyType);
-$applyTypeDefaultKey = getFirstArrKey($arrApplyType);
-$applyTypeDefaultVal = $arrApplyType[$applyTypeDefaultKey];
-
-$planFirstVal = $deviceInfo->getFirstPlan();
-
-$isApplyBtnDisabled = 'disabled';
-if($arrApplyTypeCnt == 1){
-	$defaultVal['code'] = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %s0 and cdType = %i1 and spPlan = %i2", $defaultVal['dvKey'], str_replace('0','',$applyTypeDefaultKey), $planFirstVal);
-	$defaultVal['url'] =  $deviceInfo->getApplyURL($defaultVal['code'], $applyTypeDefaultKey);
-	$isApplyBtnDisabled = '';
-	$defaultVal['href'] = 'href="'.$defaultVal['url'].'"';
-}
-
-if ($device['dvId'] == 'iphonese'){
-	$isApplyBtnDisabled = '';
-	$defaultVal['href'] = 'href="https://docs.google.com/forms/d/1s_Nelfp3aixUkfoASPD5Hbc6uJsrT3joiWMkrvHnOUo/viewform"';
-	
-}
 
 $isShowDeviceNav = true;
 $deviceNavActive = 'active';
@@ -247,6 +226,9 @@ if ($supportCount == 1 && $arrApplyTypeCnt == 1) {
 }
 
 //---------------------------------------------------------------------------------------
+
+$planCalculator = new planCalculator();
+$planCalculator->setDevice($_GET['id'])->setCarrier('sk');
 
 
 $cfg['subTitle'] = $device['dvTit'].' 상세 페이지';

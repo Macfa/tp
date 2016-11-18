@@ -5,7 +5,6 @@ include_once(PATH_LIB."/lib.parsing.inc.php");
 
 try
 {
-	/*
 	//배송지 값 검사
 	if (isNullVal($_POST['arKey']) == false) {
 		$isExistArKey = true;
@@ -54,7 +53,7 @@ try
 
 	if (isNullVal($_POST['arSubAddress'])) 
 		throw new Exception('상세주소를 입력해주세요', 3);
-	*/
+
 
 	if($isLogged == false)
 		throw new Exception('별 포인트 적립을 위해 로그인 해주세요!', 3);
@@ -68,11 +67,11 @@ try
 	if(isNullVal($_POST['plan']))
 		throw new Exception('요금제를 선택해주세요 ', 3);
 
-	$dvKeyWhere = "SELECT COUNT(*), dvKey FROM tmDevice WHERE dvDisplay = 1 and dvId = %s_dvId";
-	$dvKeyArray = array('dvId' => $_POST['dvId']);
-	if (isExist($_POST['capacity'])) {
-		$dvKeyArray['dvId'] = $dvKeyArray['dvId'].strtolower($_POST['capacity']);
-	}
+	if(isNullVal($_POST['color']))
+		throw new Exception('색상을 선택해주세요 ', 3);
+
+	$dvKeyWhere = "SELECT COUNT(*) FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s_dvKey";
+	$dvKeyArray = array('dvKey' => $_POST['dvKey']);
 	list($countDevice, $dvKey) = DB::queryFirstList($dvKeyWhere, $dvKeyArray);
 	$isExistDevice = ($countDevice>0)?TRUE:FALSE;
 	if($isExistDevice === FALSE)
@@ -107,7 +106,7 @@ try
 
 		$rewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
 			array(
-				'dvKey' => $dvKey,
+				'dvKey' => $_POST['dvKey'],
 				'rpPlan' => $_POST['plan'],
 				'rpCarrier' => 'sk',
 				'rpApplyType' => $_POST['applyType'],
@@ -129,6 +128,7 @@ catch(Exception $e)
 {
     alert($e->getMessage());
 }
+
 
 if ($isOrderGift) {
 	$countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
@@ -160,7 +160,9 @@ if ($isOrderGift) {
 	}
 }
 
-/*
+
+
+
 $isSetDefAddr = (isExist($_POST['setDefaultAddress']))?TRUE:FALSE;
 if($isSetDefAddr) {
 	$isAlreadyDef = DB::queryFirstField("SELECT count(*) FROM tmAddress WHERE arKey = %i and arIsDefault = 1", $_POST['arKey']);
@@ -202,7 +204,6 @@ if ($isNewAddr){
 	$sqlSetAddr['mbEmail'] = $mb['mbEmail'];
 	DB::insert('tmAddress', $sqlSetAddr);
 }
-*/
 
 
 DB::insert('tmPointHistory', array(
@@ -216,16 +217,18 @@ DB::insert('tmPointHistory', array(
 DB::update('tmMember', array(
 	'mbPoint' => $mb['mbPoint']+($rewardPoint-$totalPoint)
 ),'mbEmail = %s', $mb['mbEmail']);
-
-$cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey and spPlan = %i_spPlan and cdType = %s_cdType and cdCarrier = 'sk'", 
-	array('dvKey'=> $dvKey, 
+DB::debugMode();
+$cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey and spPlan = %i_spPlan and cdType = %i_cdType and cdCarrier = %s_cdCarrier", 
+	array('dvKey'=> $_POST['dvKey'], 
 			'spPlan' => $_POST['plan'], 
-			'cdType' => str_replace('0','',$_POST['applyType'])
+			'cdType' => str_replace('0','',$_POST['applyType']),
+			'cdCarrier' => $_POST['carrier']
 	)
 );
 
 $deviceInfo = new deviceInfo();
-consoleLog($cdCode);
+$deviceInfo->setCarrier($_POST['carrier']);
+//consoleLog($cdCode);
 goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));
 
 ?>
