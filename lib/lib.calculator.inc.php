@@ -127,7 +127,7 @@ class planCalculator {
 					<span class="calc-total-price js-result">{totalCost}</span>
 				</div>
 			</div>
-			<button class="calc-detail-btn js-calculatorDetailToggle"></button>
+			<button class="calc-detail-btn js-calculatorDetailToggle" formnovalidate type="button">+</button>
 		</div>
 	</div>';
 
