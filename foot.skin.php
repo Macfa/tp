@@ -19,18 +19,18 @@
 </div>
 <div class="contact-mobile-wrap">
 	<div class="contact-mobile-inner">
-		<a href="https://docs.google.com/forms/d/14hlR5OtjqfDXIkwz52_vDh_9yNWbCi4G3-boCf0PCpQ/viewform" class="contact-consult-mobile js-telReserve" target="layerView">	
+		<div class="contact-consult-mobile js-telReserve" >	
 			<div class="mobile-contact-tit">상담예약</div>
-			<div class="mobile-ico-consult"><i class="contact-mobile-ico-consult"></i></div>
-		</a>
-		<a href="tel:070-7775-2981" class="contact-tel-mobile">	
+			<a href="https://docs.google.com/forms/d/14hlR5OtjqfDXIkwz52_vDh_9yNWbCi4G3-boCf0PCpQ/viewform"  class="mobile-ico-consult"><i class="contact-mobile-ico-consult" target="layerView"></i></a>
+		</div>
+		<div class="contact-tel-mobile">	
 			<div class="mobile-contact-tit">전화상담</div>
-			<div class="mobile-ico-tel"><i class="contact-mobile-ico-tel"></i></div>
-		</a>
-		<a href="http://plus.kakao.com/home/lzsdhrk5" class="contact-kakao-mobile">
+			<a href="tel:070-7775-2981" class="mobile-ico-tel"><i class="contact-mobile-ico-tel"></i></a>
+		</div>
+		<div class="contact-kakao-mobile">
 			<div class="mobile-contact-tit">카톡상담</div>
-			<div class="mobile-ico-kakao"><i class="contact-mobile-ico-kakao"></i></div>
-		</a>
+			<a href="http://plus.kakao.com/home/lzsdhrk5" class="mobile-ico-kakao"><i class="contact-mobile-ico-kakao"></i></a>
+		</div>
 		<button href="#" class="contact-toggle-btn">상담</button>
 	</div>
 </div>

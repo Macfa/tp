@@ -475,7 +475,7 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	opacity:0;
 	right:5px;
 	transition:all .3s;
-	&.active {opacity:1; }
+	@include animate-fadeIn-to-out();
 }
 .contact-consult-mobile{
 	@extend .contact-mobile-btn;
@@ -698,8 +698,9 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 		position:fixed;
 		bottom:20px;
 		right:25px;
-		z-index:5;
+		z-index:999;
 		display:block;
+		width: 450px;
 	}
 	.btn-contact, .btn-contact-kakao {	
 		@include shadow-level(2);
