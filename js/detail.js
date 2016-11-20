@@ -17,7 +17,7 @@ $(function(){
 			$('.js-familyDiscountRow').addClass('active');
 		}
 	});
-	
+
 	setInterval(function() {
 		if (didScroll) {
 			var $header = $('.nav-device-wrap');
@@ -43,12 +43,13 @@ $(function(){
 			if ($isHeaderOut && $isScrollDown)
 				$header.removeClass('active');
 
-			if (!$isHeaderOut || !$isScrollDown)
+			if (!$isHeaderOut)
 				$header.addClass('active');
 
 			lastScrollTop = st;
 		}
 	}, 50);
+
 
 	$(window).on('scroll, touchmove', function(){
 		controlCalcResult();
@@ -139,6 +140,7 @@ $(function(){
 				var $result = Math.floor($originInstallation/24) - $selectPlanDiscountPerMonth + parseInt($targetObj['planFee']);
 				var $planFee = $targetObj['planFee'];
 			}
+			/*
 
 			$('.js-retailPrice').text(setPriceComma($targetObj['dvRetailPrice']));
 			$('.js-retailPricePerMonth').text(setPriceComma(Math.floor($targetObj['dvRetailPrice']/24)));
@@ -178,8 +180,8 @@ $(function(){
 				$('.js-availablePoint').text('선택사항을 모두 선택해주세요');
 			}
 
-			$('.detail-apply-submit').attr('href', $targetObj['applyUrl'][$selectedApplyType]);
-			
+			$('.detail-apply-submit').attr('href', $targetObj['applyUrl'][$selectedApplyType
+			*/			
 			//console.log(JSON.stringify($targetObj));
 			if ($('html').hasClass('lte-ie8')){
 				var ctx = document.getElementById("supportChart").getContext("2d");
