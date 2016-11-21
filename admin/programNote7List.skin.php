@@ -84,8 +84,7 @@
 		</table>
 		<br/><br/>		
 	</form>
-
-
+</div>
 <script>
 $('.js-tableChk').change(function(){
 	if (this.checked == true)

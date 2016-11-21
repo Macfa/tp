@@ -1,4 +1,4 @@
-<div class="wrap mypageList-wrap">
+<div class="wrap">
 	<h1 class="center tit">구매목록</h1>	
 	<table class="table mypageList">
 	<thead>
