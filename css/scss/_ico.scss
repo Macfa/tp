@@ -3,65 +3,100 @@
 	background-repeat:no-repeat;
 }
 .ico-small {
-	@extend .ico-common;
 	@include inlineBlock;
+	@include opacity(0.6);
 	width:30px;
 	height:30px;
 	vertical-align:middle;
+	background-image:url('../img/ico-common-small.png');
+	background-repeat:no-repeat;
+	&:active{@include opacity(1);}
 }
-
+.ico-calculate {
+	@include inlineBlock;
+	width:14px;
+	height:14px;
+	background-image:url('../img/ico-calculate.png');
+	background-repeat:no-repeat;
+	vertical-align:middle;
+}
+.ico-calculate-minus-positive{
+	@extend .ico-calculate;
+	background-position:-28px -14px;
+}
+.ico-calculate-plus{
+	@extend .ico-calculate;
+	@include opacity(0.6);
+	background-position:-14px 0px;
+}
+.ico-more-small{
+	@extend .ico-small;
+	background-position:-540px 0;
+}
+.ico-capacity-small{
+	@extend .ico-small;
+	background-position:-420px 0;
+}
+.ico-vat-small{
+	@extend .ico-small;
+	background-position:-480px 0;
+}
+.ico-sale-small{
+	@extend .ico-small;
+	background-position:-510px 0;
+}
 .ico-person-small{
 	@extend .ico-small;
-	background-position:0 -50px;
+	background-position:-30px 0;
 }
 .ico-talk-small{
 	@extend .ico-small;
-	background-position:-30px -50px;
+	background-position:-30px 0;
 }
 .ico-truck-small{
 	@extend .ico-small;
-	background-position:-60px -50px;
+	background-position:-60px 0;
 }
 .ico-bike-small{
 	@extend .ico-small;
-	background-position:-90px -50px;
+	background-position:-90px 0;
 }
 .ico-caution-small{
 	@extend .ico-small;
 	margin-top:-5px;
-	background-position:-120px -50px;
+	background-position:-120px 0;
 }
 .ico-email-small{
 	@extend .ico-small;
-	background-position:-150px -50px;
+	background-position:-150px 0;
 }
 .ico-tel-small{
 	@extend .ico-small;
-	background-position:-180px -50px;
+	background-position:-180px 0;
 }
 .ico-calendar-small{
 	@extend .ico-small;
-	background-position:-210px -50px;
+	background-position:-210px 0;
 }
 .ico-carrier-small{
 	@extend .ico-small;
-	background-position:-240px -50px;
+	background-position:-240px 0;
 }
 .ico-gift-small{
 	@extend .ico-small;
-	background-position:-270px -50px;
+	background-position:-270px 0;
 }
 .ico-color-small{
 	@extend .ico-small;
-	background-position:-300px -50px;
+	background-position:-300px 0;
 }
 .ico-plan-small, 
 .ico-coins-small{
 	@extend .ico-small;
-	background-position:-330px -50px;
+	background-position:-330px 0;
 }
 .ico-apply-type-small,
 .ico-change-device-small{
 	@extend .ico-small;
-	background-position:-360px -50px;
+	background-position:-360px 0;
 }
