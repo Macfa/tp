@@ -129,6 +129,7 @@
 			<?endif?>	
 		</div>
 	</form>
+</div>
 <script>
 $('.js-tableChk').change(function(){
 	if (this.checked == true)
