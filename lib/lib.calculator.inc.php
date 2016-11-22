@@ -26,10 +26,10 @@ class planCalculator {
 	private $arrDeviceType = array();
 	private $arrDiscountType = array();
 	private $arrApplyType = array();
-	private $arrCarrierType = array();
+	private $arrCarrier = array();
 	private $arrPlan = array();
 
-	private $carrierTypeCount = 0;
+	private $carrierCount = 0;
 	private $deviceTypeCount = 0;
 	private $applyTypeCount = 0;
 	private $discountTypeCount = 2;
@@ -48,7 +48,7 @@ class planCalculator {
 	private $applyTypeLockIcon = '';
 	private $discountTypeLockIcon = '';
 	private $deviceTypeLockIcon = '';
-	private $carrierTypeLockIcon = '';
+	private $carrierLockIcon = '';
 
 	private $htmlPadTemplate = '<div class="calc-pad-wrap js-calcPad">{content}</div>';
 
@@ -154,14 +154,12 @@ class planCalculator {
 	}
 
 	public function setCarrier($carrier = null) {
-		$this->selectedCarrier = $this->carrier = $carrier;
-		$this->carrier = strtolower($this->carrier);
+		$this->carrier = strtolower($carrier);
 		return $this;
 	}
 
 	public function setCapacity($capacity = null) {
-		$this->capacity = $capacity;
-		$this->capacity = strtoupper($this->capacity);
+		$this->capacity = strtoupper($capacity);
 		return $this;
 	}
 
@@ -193,8 +191,26 @@ class planCalculator {
 
 	private function init() {
 		$this->dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId);
-
+		
 		list($dvTit ,$this->capacityCount) = DB::queryFirstList("SELECT min(dvTit), count(dvKey) as cnt FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
+
+		$this->dvCate = DB::queryFirstField("SELECT dvCate FROM tmDevice WHERE dvKey = %i", $this->dvKey);
+
+		$deviceInfo = new deviceInfo();
+
+		//-------------------------------------------
+
+		$this->arrCarrier = $deviceInfo->getArrCarrier($this->dvKey);
+		$this->carrierCount = (int)count($this->arrCarrier);
+		//var_dump($this->arrCarrier);
+		if ($this->carrierCount === 1) {
+			$this->lockedPropertyCount += 1;
+			$this->carrier = getFirstArrKey($this->arrCarrier);
+			$this->carrierLockIcon = $this->lockIcon;
+		}
+		$deviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
+
+		//-------------------------------------------
 		
 		$this->capacityCount = (int)$this->capacityCount;
 		if ($this->capacityCount === 1) {
@@ -203,12 +219,6 @@ class planCalculator {
 			$this->capacityLockIcon = $this->lockIcon;
 		}
 		$defaultCapacity = $dvTit;
-
-		//--------------------------------------------
-
-		$this->dvCate = DB::queryFirstField("SELECT dvCate FROM tmDevice WHERE dvKey = %i", $this->dvKey);
-		$deviceInfo = new deviceInfo();
-		$deviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
 
 		//-------------------------------------------
 
@@ -241,16 +251,6 @@ class planCalculator {
 		}
 		*/
 
-		//------------------------------------------
-
-		$this->arrCarrierType = $deviceInfo->getArrCarrierType($this->dvKey);
-		$this->carrierTypeCount = (int)count($this->arrCarrierType);
-
-		if ($this->carrierTypeCount == 1) {
-			$this->lockedPropertyCount += 1;
-			$this->carrierTypeLockIcon = $this->lockIcon;
-		}
-
 		//--------------------------------------------------------
 
 		$defaultDvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvId = %s", $this->dvId.strtolower($defaultCapacity));
@@ -262,23 +262,27 @@ class planCalculator {
 	}
 
 	public function setCarrierSelect(){
-
-		if (isExist($this->carrier)) {
-			foreach ($this->arrCarrierType as $key => $val) {
-				if ($key == $this->carrier) {
-					$carrierTypeChecked[$key]['isChecked'] = 'checked';
-				}
-			}
-		}else{
-			$carrierTypeChecked[getFirstArrKey($this->arrCarrierType)]['isChecked'] = 'checked';
+		if($this->carrierCount === 1) {
+			$this->selectedCarrier = getFirstArrKey($this->arrCarrier);
+		}else if(isExist($this->carrier) === true) {
+			$this->selectedCarrier = $this->carrier;
 		}
 
-		foreach ($this->arrCarrierType as $key => $val) {
+
+		if(isExist($this->selectedCarrier) === true) {
+			foreach ($this->arrCarrier as $key => $val) {
+				if ($key == $this->selectedCarrier) {
+					$carrierChecked[$key]['isChecked'] = 'checked';
+				}
+			}
+		}
+
+		foreach ($this->arrCarrier as $key => $val) {
 			$data['value'] = $key;
 			$data['label'] = $val;
 			$data['name'] = 'carrier';
-			$data['isChecked'] = $carrierTypeChecked[$key]['isChecked'];
-			$data['lockIcon'] = $this->carrierTypeLockIcon;
+			$data['isChecked'] = $carrierChecked[$key]['isChecked'];
+			$data['lockIcon'] = $this->carrierLockIcon;
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
 		}
 
@@ -286,7 +290,7 @@ class planCalculator {
 		$data['ico'] = 'carrier';
 		$data['tit'] = '통신사선택';
 		$data['content'] = $content;
-		$data['calcRowAffix'] = ($this->carrierTypeCount==1)?'lock-'.$this->lockedPropertyCount:$this->carrierTypeCount;
+		$data['calcRowAffix'] = ($this->carrierCount==1)?'lock-'.$this->lockedPropertyCount:$this->carrierCount;
 		$this->calculatorPad .= getResultTemplate($data, $this->htmlPadWrapTemplate);
 		return $this;
 	}
@@ -332,10 +336,10 @@ class planCalculator {
 		if($this->capacityCount == 0) return $this;
 		$child = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $this->dvKey);
 
-		if(isExist($this->capacity) === true) {
-			$this->selectedCapacity = $this->capacity;
-		}else if($this->capacityCount === 1) {
+		if($this->capacityCount === 1) {
 			$this->selectedCapacity = $child[0]['dvTit'];
+		}else if(isExist($this->capacity) === true) {
+			$this->selectedCapacity = $this->capacity;
 		}
 
 		if(isExist($this->selectedCapacity) === true) {

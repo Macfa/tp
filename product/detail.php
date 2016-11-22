@@ -7,7 +7,7 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 require_once(PATH_LIB."/lib.calculator.inc.php");
 
 
-$import->addJS('calculator.js')->addJS('excanvas.js')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');
+$import->addJS('calculator.js')->addJS('excanvas.js', 'lib')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');
 
 $showDetailHead = true;
 if($isAdmin == true) 
@@ -20,14 +20,18 @@ if($device['cnt'] == 0 && !$isAdmin) {
 	alert('존재하지 않거나 판매하지 않는 기종입니다.');
 }
 
-if ($device['dvRefer'] > 0) {
-	$detailImg = $device['dvDetailThumb'];
-	$device = DB::queryFirstRow("SELECT * FROM tmDevice WHERE dvKey = %i", $device['dvRefer']);
-	$device['dvDetailThumb'] = $detailImg;
+$devicePlanGraph = DB::query("SELECT spSupport,spDate,spAddSupport FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = 'sk' ORDER BY spDate DESC LIMIT 5", $defaultVal['dvKey'], $defaultPlanId);
+
+switch($device['dvId']) {
+	case 'galaxys7':
+		$detailSpecLink= 'http://www.samsung.com/sec/consumer/mobile-tablet/mobile-phone/galaxy-s/SM-G930SZIASKO';
+		break;
+
+	default:
+		$detailSpecLink= '#';
+		break;
 }
 
-$deviceInfo = new deviceInfo();
-$deviceInfo->setCarrier('sk')->setMonth(24);
 
 $childDevice = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $device['dvKey']);
 //32g 64g 가 나눠져있는 기종이 있을때
@@ -46,88 +50,6 @@ $defaultPlanId = $arrSelectPlan[$defaultPlanKey]['spPlan'];
 if ($defaultPlanId == 9) $defaultPlanId = 10;
 
 $devicePlanGraph = DB::query("SELECT spSupport,spDate,spAddSupport FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = 'sk' ORDER BY spDate DESC LIMIT 5", $defaultVal['dvKey'], $defaultPlanId);
-$capacityCnt = count($childDevice);
-
-switch($device['dvCate']) {
-	case 'watch':
-	case 'pocketfi':
-	case 'kids':
-		$isNotSupportSelPlanDc = true;
-		$supportCount = 1;
-		$supportRowActive = 'active';
-		$defDiscountType = 'support';
-		$defaultVal['dvDeviceInstallation'] = $defaultVal['dvRetailPrice'] - $devicePlanGraph[0]['spSupport'] - $devicePlanGraph[0]['spAddSupport'];
-		break;
-	default:
-		$isNotSupportSelPlanDc = false;
-		$supportCount = 2;
-		$supportRowActive = '';
-		$defaultVal['dvDeviceInstallation'] = $defaultVal['dvRetailPrice'];
-		$detailSuffix = 'phone';
-		break;
-}
-
-switch($device['dvId']) {
-	case 'joon2':
-		$detailSuffix = 'kids';
-		break;
-	/*
-	case 'gears':
-	case 'gears2':
-	case 'gears2bandclassic':
-	*/
-	
-	case 'tgw500s':
-	case 'gears2':
-	case 'gears2bandclassic':
-		$detailSuffix = 'pocketfi';
-		break;
-	case 'tpocketfim':
-		$detailSuffix = 'pocketfim';
-		break;
-	case 'tpocketfi':
-	case 'tpocketfiy':
-		$detailSuffix = 'pocketfiy';
-		break;
-
-	case 'galaxys7':
-	case 'galaxys7edge':
-		$detailSuffix = 'galaxys7';
-		break;
-	case 'galaxywide':	
-		$detailSuffix = 'galaxywide';
-		break;
-	case 'gears':
-		$detailSuffix = 'gears';
-		break;
-	case 'iphone6':
-		$detailSuffix = 'iphone6';
-		break;
-	default:
-		$detailSuffix = 'subdevice1';
-		break;
-}
-
-switch($device['dvId']) {
-	case 'joon2':
-	case 'gears':
-	case 'gears2':
-	case 'gears2bandclassic':
-	case 'tgw500s':
-	case 'tpocketfiy':
-	case 'tpocketfi':
-		$detailNone = 'none';
-		break;
-}
-switch($device['dvId']) {
-	case 'galaxys7':
-		$detailSpecLink= 'http://www.samsung.com/sec/consumer/mobile-tablet/mobile-phone/galaxy-s/SM-G930SZIASKO';
-		break;
-
-	default:
-		$detailSpecLink= '#';
-		break;
-}
 
 $devicePlanGraph = array_reverse($devicePlanGraph);
 $cntDevicePlanGraph = count($devicePlanGraph);

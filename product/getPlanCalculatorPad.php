@@ -19,7 +19,7 @@ $deviceInfo->setCarrier($_POST['carrier'])->setMode($device['dvCate']);
 $output['deviceType'] = $deviceInfo->getArrDeviceType();
 $output['applyType'] = $deviceInfo->getArrApplyType();
 $output['discountType'] = $deviceInfo->getArrDiscountType();
-$output['carrier'] = $deviceInfo->getArrCarrierType($device['dvKey']);
+$output['carrier'] = $deviceInfo->getArrCarrier($device['dvKey']);
 
 $childs = DB::queryOneColumn('dvTit', "SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i and dv".strtoupper($_POST['carrier'])." = 1", $device['dvKey']);
 //var_dump($childs);
