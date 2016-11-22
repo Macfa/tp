@@ -54,7 +54,10 @@ class planCalculator {
 
 	private $htmlPadWrapTemplate = 
 		'<fieldset class="calc-row-{calcRowAffix}">
-			<div class="calc-row-label">{tit}</div>
+			<div class="calc-row-label">
+				<i class="ico-{ico}-small"></i>
+				{tit}
+			</div>
 			{content}
 		</fieldset>';
 
@@ -66,7 +69,10 @@ class planCalculator {
 
 	private $htmlPlanSelectWrapTemplate = 
 		'<div class="calc-row">
-			<div class="calc-row-label">{tit}</div>
+			<div class="calc-row-label">
+				<i class="ico-{ico}-small"></i>
+				{tit}
+			</div>
 			<select class="inp-select js-planCalcArg" name="plan">{content}</select>
 		</div>';
 
@@ -84,15 +90,15 @@ class planCalculator {
 					</div>
 					<div class="calc-value-row calc-result-row-support js-supportWrap {isSupportRowActive}">
 						<div class="calc-value-label">공시지원금</div>
-						<div class="calc-value-price">- <span class="js-support price">{spSupport}</span></div>
+						<div class="calc-value-price"><i class="ico-calculate-minus-positive"></i> <span class="js-support price">{spSupport}</span></div>
 					</div>
 					<div class="calc-value-row calc-result-row-support js-supportWrap {isSupportRowActive}">
 						<div class="calc-value-label">티플지원금</div>
-						<div class="calc-value-price">- <span class="js-addSupport price">{spAddSupport}</span></div>
+						<div class="calc-value-price"><i class="ico-calculate-minus-positive"></i> <span class="js-addSupport price">{spAddSupport}</span></div>
 					</div>
 					<div class="calc-value-row calc-result-row-interest js-interestWrap {isInterestRowActive}">
 						<div class="calc-value-label">할부이자율(<span class="js-repaymentType">{repaymentType}</span>)</div>
-						<div class="calc-value-price">+ <span class="js-interestRate price">5.8</span>%</div>
+						<div class="calc-value-price"><i class="ico-calculate-plus"></i> <span class="js-interestRate price">5.8</span>%</div>
 					</div>
 					<div class="calc-section-result">
 						<div class="calc-section-result-label">기기할부금</div>
@@ -108,11 +114,11 @@ class planCalculator {
 					</div>
 					<div class="calc-value-row calc-result-row-selectplan js-selectplanWrap {isSelectPlanDiscountRowActive}">
 						<div class="calc-value-label">선택약정할인</div>
-						<div class="calc-value-price">- <span class="js-selectplan price">{selectPlanDiscount}</span></div>
+						<div class="calc-value-price"><i class="ico-calculate-minus-positive"></i> <span class="js-selectplan price">{selectPlanDiscount}</span></div>
 					</div>
 					<div class="calc-value-row calc-result-row-interest js-VATWrap {isVATRowActive}">
 						<div class="calc-value-label">부가세</div>
-						<div class="calc-value-price">+ <span class="js-VAT price">{vat}</span></div>
+						<div class="calc-value-price"><i class="ico-calculate-plus"></i> <span class="js-VAT price">{vat}</span></div>
 					</div>
 					<div class="calc-section-result">
 						<div class="calc-section-result-label">통신요금</div>
@@ -127,7 +133,9 @@ class planCalculator {
 					<span class="calc-total-price js-result">{totalCost}</span>
 				</div>
 			</div>
-			<button class="calc-detail-btn js-calculatorDetailToggle" formnovalidate type="button">+</button>
+			<button class="calc-detail-btn js-calculatorDetailToggle" formnovalidate type="button">
+				<i class="ico-more-small"></i>
+			</button>
 		</div>
 	</div>';
 
@@ -275,6 +283,7 @@ class planCalculator {
 		}
 
 		$data = array();
+		$data['ico'] = 'carrier';
 		$data['tit'] = '통신사선택';
 		$data['content'] = $content;
 		$data['calcRowAffix'] = ($this->carrierTypeCount==1)?'lock-'.$this->lockedPropertyCount:$this->carrierTypeCount;
@@ -345,6 +354,7 @@ class planCalculator {
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
 		}
 		$data = array();
+		$data['ico'] = 'capacity';
 		$data['tit'] = '기기용량';
 		$data['content'] = $content;
 		$data['calcRowAffix'] = ($this->capacityCount===1)?'lock-'.$this->lockedPropertyCount:$this->capacityCount;
@@ -379,6 +389,7 @@ class planCalculator {
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
 		}
 		$data = array();
+		$data['ico'] = 'change-device';
 		$data['tit'] = '가입유형';
 		$data['content'] = $content;
 		$data['calcRowAffix'] = ($this->applyTypeCount===1)?'lock-'.$this->lockedPropertyCount:$this->applyTypeCount;
@@ -414,6 +425,7 @@ class planCalculator {
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate);
 		}
 		$data = array();
+		$data['ico'] = 'sale';
 		$data['tit'] = '할인방식';
 		$data['content'] = $content;
 		$data['calcRowAffix'] = ($this->discountTypeCount===1)?'lock-'.$this->lockedPropertyCount:$this->discountTypeCount;
@@ -429,7 +441,8 @@ class planCalculator {
 			$content .= getResultTemplate($data, $this->htmlPadButtonTemplate, true);
 		}
 		$data = array();
-		$data['tit'] = '부가세 & 할부이자';
+		$data['ico'] = 'vat';
+		$data['tit'] = '부가세<span class="calc-vat-character"> & </span>할부이자';
 		$data['content'] = $content;
 		$data['calcRowAffix'] = 2;
 		$this->calculatorPad .= getResultTemplate($data, $this->htmlPadWrapTemplate);
@@ -453,6 +466,7 @@ class planCalculator {
 		}
 
 		$data = array();
+		$data['ico'] = 'plan';
 		$data['tit'] = '요금제';
 		$data['content'] = $content;
 		$this->calculatorPad .= getResultTemplate($data, $this->htmlPlanSelectWrapTemplate);

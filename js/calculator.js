@@ -24,7 +24,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 			async:false,
 			data:$data,
 			success:function(data){
-				console.log(data);
+				//console.log(data);
 				$arrPad[$carrier] = $.parseJSON(data);
 			}
 		});
@@ -90,7 +90,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		token : $('.js-token').val()
 	};
 
-	console.log($data);
+	//console.log($data);
 
 	//ajax 통신으로 데이터를 받아옴
 	var $key = $carrier+'-'+$plan+'-'+$applyType+'-'+$discountType;
@@ -105,7 +105,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 			async:false,
 			data:$data,
 			success:function(data){
-				console.log(data);
+				//console.log(data);
 				$data = $.parseJSON(data);
 				$arrPlanData[$key] = $data;
 			}
@@ -221,8 +221,8 @@ $('.js-calculatorDetailToggle').click(function(){
 
 
 function setCalcHeight(){
-	console.log('document:'+ $(document).width());
-	console.log('window:'+ $(window).width());
+	//console.log('document:'+ $(document).width());
+	//console.log('window:'+ $(window).width());
 	if ($(document).width() < 623) {
 		$('.calc-result-wrap').css({height:'25%'});
 	} else {
