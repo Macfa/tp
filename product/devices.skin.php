@@ -26,6 +26,7 @@
 	<section>
 	<h2 class="tit-sec">최신 기기</h2>
 	<?php 
+		$incList['additialWhere'] = ' and dv'.strtoupper($_GET['carrier']).' = 1';
 		require(PATH_PRD."/deviceList.inc.php");	
 	?>
 	</section>

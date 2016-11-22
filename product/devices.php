@@ -151,9 +151,7 @@ require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 if(file_exists("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"))
 	require_once("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"); 
 
-if ($_GET['carrier'] == 'kt') 
-    require_once("devices.kt.skin.php");
-else if ($_GET['carrier'] == 'lguplus') 
+if ($_GET['carrier'] == 'lguplus') 
     require_once("devicesKt.skin.php");
 else if ($_GET['device'] == 'pocketfi')
     require("reviewpocketfi.skin.php");    
