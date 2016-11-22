@@ -44,7 +44,7 @@ class deviceInfo {
 			'kt'=>array(
 				'phone'=>array(15,16,17,18,19,20,23,24),
 				'pocketfi'=>array(21,22),
-				'watch'=>array(25,26),
+				'watch'=>array(25,26,29,30),
 				'kids'=>array(27,28)
 			),	
 			'lguplus'=>array(
@@ -248,6 +248,20 @@ class deviceInfo {
 				'fee' => 8000,
 				'selectPlanDiscount' => 0,
 				'value' => 'KTFWEARAS'
+			),
+			29 => array(
+				'name' => 'LTE Watch(단독)',
+				'description' => '데이터250MB/음성50분/문자기본제공',
+				'fee' => 12100,
+				'selectPlanDiscount' => 0,
+				'value' => 'NA00004997'
+			),
+			30 => array(
+				'name' => 'LTE Watch(공유)',
+				'description' => '데이터250MB/음성50분/문자기본제공',
+				'fee' => 12100,
+				'selectPlanDiscount' => 0,
+				'value' => 'NA00004761'
 			)
 		);	
 	private $arrPlanName =	
