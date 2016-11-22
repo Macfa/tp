@@ -5,19 +5,19 @@
 	<section class="section txt-left js-loginSection">
 		<h2 class="tit-sub">남은 별 적립</h2>
 		<h3>사은품 선택 후 남은 포인트를 모아<br/><span class="txt-highlight">다른 사은품을 살 수 있습니다.</span></h3>
-		<a href="<?php echo $cfg['url']?>/user/login.php?returnURL=<?php echo $cfg['current_url']?>" class="btn-filled-sub">로그인/회원가입	</a>
+		<a href="<?php echo $cfg['url']?>/user/login.php?returnURL=<?php echo urlencode($cfg['current_url'])?>" class="btn-filled-sub">로그인/회원가입	</a>
 	</section>
 	<?php endif?>
 
 	<form action="/product/applyAction.php" method="post" id="apply-form">
-	<input type="hidden" name="dvKey" value="<?php echo $_POST['dvKey']?>">
-	<?php if (isExist($_POST['capacity'])) :?>
-	<input type="hidden" name="capacity" value="<?php echo $_POST['capacity']?>">
+	<input type="hidden" name="dvKey" value="<?php echo $_GET['dvKey']?>">
+	<?php if (isExist($_GET['capacity'])) :?>
+	<input type="hidden" name="capacity" value="<?php echo $_GET['capacity']?>">
 	<?php endif?>
-	<input type="hidden" name="discountType" value="<?php echo $_POST['discountType']?>">
-	<input type="hidden" name="applyType" value="<?php echo $_POST['applyType']?>">
-	<input type="hidden" name="carrier" value="<?php echo $_POST['carrier']?>">
-	<input type="hidden" name="plan" value="<?php echo $_POST['plan']?>">
+	<input type="hidden" name="discountType" value="<?php echo $_GET['discountType']?>">
+	<input type="hidden" name="applyType" value="<?php echo $_GET['applyType']?>">
+	<input type="hidden" name="carrier" value="<?php echo $_GET['carrier']?>">
+	<input type="hidden" name="plan" value="<?php echo $_GET['plan']?>">
 
 	<section class="section txt-left">
 		<h2 class="tit-sub">신청정보</h2>
@@ -25,25 +25,25 @@
 
 		<i class="ico-carrier-small"></i> 신청할 통신사
 		<Br/><br/>
-		<span><?php echo $deviceInfo->getCarrierName($_POST['carrier'])?></span><br/><br/>
+		<span><?php echo $deviceInfo->getCarrierName($_GET['carrier'])?></span><br/><br/>
 
 		<i class="ico-change-device-small"></i> 가입유형
 		<Br/><br/>
-		<span><?php echo $deviceInfo->getApplyTypeName($_POST['applyType'])?></span><br/><br/>
+		<span><?php echo $deviceInfo->getApplyTypeName($_GET['applyType'])?></span><br/><br/>
 
 		<i class="ico-person-small"></i> 할인유형
 		<Br/><br/>
-		<span><?php echo $deviceInfo->getDiscountTypeName($_POST['discountType'])?></span><br/><br/>
+		<span><?php echo $deviceInfo->getDiscountTypeName($_GET['discountType'])?></span><br/><br/>
 
-		<?php if (isExist($_POST['capacity'])) :?>
+		<?php if (isExist($_GET['capacity'])) :?>
 		<i class="ico-person-small"></i> 용량
 		<Br/><br/>
-		<span><?php echo $_POST['capacity']?></span><br/><br/>
+		<span><?php echo $_GET['capacity']?></span><br/><br/>
 		<?php endif?>
 
 		<i class="ico-person-small"></i> 요금제
 		<Br/><br/>
-		<span><?php echo $deviceInfo->getPlanName($_POST['plan'])?></span><br/><br/>
+		<span><?php echo $deviceInfo->getPlanName($_GET['plan'])?></span><br/><br/>
 	</section>
 
 	<section class="section txt-left">

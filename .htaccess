@@ -11,7 +11,7 @@ RewriteRule ^gift\/(.*)$ ./product/giftDetail.php?id=$1
 
 RewriteRule ^preorder$ http://tplanit.co.kr/page/preOrderNote7.php
 
-RewriteRule ^apply\/(.*)$ ./product/apply.php?id=$1
+RewriteRule ^apply\/(.*)$ ./product/apply.php$1
 
 RewriteRule ^gifts$ ./product/gifts.php
 RewriteRule ^gifts\/(.*)$ ./product/gifts.php?category=$1
