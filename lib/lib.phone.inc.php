@@ -316,6 +316,18 @@ class deviceInfo {
 		return $this;
 	}
 
+	public function getDiscountTypeName($input) {
+		return $this->arrDefaultDiscountType[$input];
+	}
+
+	public function getApplyTypeName($input) {
+		return $this->arrDefaultApplyType[$input];
+	}
+
+	public function getCarrierName($input) {
+		return $this->arrDefaultCarrierType[$input];
+	}
+
 	public function setMode($input) {
 		$this->mode = $input;
 		$this->arrDiscountType = $this->arrDefaultDiscountType;
