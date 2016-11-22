@@ -60,7 +60,7 @@
 		<i class="benefit-ico-color">가입시 선택</i>
 	</li>
 	</ul-->
-	<form class="js-plan-calc-arg" method="post" action="/apply/<?php echo $_GET['id']?>">
+	<form class="js-plan-calc-arg" method="GET" action="/apply/">
 	<?php echo $planCalculator->create();?>
 	<button class="detail-apply-submit btn-filled js-trackLink" id="link-detail-plan-apply">신청하기</button>
 	</form>
