@@ -19,6 +19,8 @@ try{
 		alert($e->getMessage());
 }
 
+$deviceInfo = new deviceInfo();
+
 //--------------------------------------------------------------------------------------------------------
 
 $defAddress = DB::queryFirstRow("SELECT * FROM tmAddress WHERE mbEmail = %s and arIsDefault = 1", $mb['mbEmail']);

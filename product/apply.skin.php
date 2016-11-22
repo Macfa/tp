@@ -25,21 +25,25 @@
 
 		<i class="ico-carrier-small"></i> 신청할 통신사
 		<Br/><br/>
-		<span><?php echo $_POST['carrier']?></span><br/><br/>
+		<span><?php echo $deviceInfo->getCarrierName($_POST['carrier'])?></span><br/><br/>
 
 		<i class="ico-change-device-small"></i> 가입유형
 		<Br/><br/>
-		<span><?php echo $_POST['applyType']?></span><br/><br/>
+		<span><?php echo $deviceInfo->getApplyTypeName($_POST['applyType'])?></span><br/><br/>
 
 		<i class="ico-person-small"></i> 할인유형
 		<Br/><br/>
-		<span><?php echo $_POST['discountType']?></span><br/><br/>
+		<span><?php echo $deviceInfo->getDiscountTypeName($_POST['discountType'])?></span><br/><br/>
 
 		<?php if (isExist($_POST['capacity'])) :?>
 		<i class="ico-person-small"></i> 용량
 		<Br/><br/>
 		<span><?php echo $_POST['capacity']?></span><br/><br/>
 		<?php endif?>
+
+		<i class="ico-person-small"></i> 요금제
+		<Br/><br/>
+		<span><?php echo $deviceInfo->getPlanName($_POST['plan'])?></span><br/><br/>
 	</section>
 
 	<section class="section txt-left">
