@@ -1,7 +1,13 @@
 <div class="preorder-wrap">
 	<h1 class="tit center">갤럭시노트7 교환/환불 접수안내</h1>
+	<h2 class="tit txt-highlight">업계 최초 노트7 전담센터 오픈</h2>
+	<div class="tit-sub center">이제 티플 오프라인 매장에서 노트7 교환 및 환불을 진행하실 수 있습니다.</div>
+	<a href="http://map.naver.com/?pinId=21856769&pinType=site&dlevel=14&y=663407fedd97dc94907fa2eee72107d4&x=b171587510c40b7fb698c7d998d63728&enc=b64" target="_blank"><img src="<?php echo PATH_IMG?>/offline-map.jpg?V=11123" /></a>
+	<div class="tit-sub txt-highlight center">서울시 영등포구 당산동2가 37 영등포유통상가 다열 15호<Br/>02-2636-8882</div>
+	<div class="center">(오픈 시간 평일 10시 ~ 19시, 연락가능시간 평일 16 시 ~ 19시)</div>
+	<a href="http://booking.naver.com/12/booking/svc/35125" target="_blank" class="btn-filled-primary">노트7 교환/환불 내방 예약</a>
+	<Br/><br/><Br/><br/><Br/><br/>
 	티플에서 갤럭시노트7을 구매하신 고객님들께 삼성전자 갤럭시노트7의 배터리소손사건으로 인한 교환 및 환불 처리안내를 드립니다.
-	<Br/>
 	<i class="ico-calendar-small"></i> 교환 및 취소 가능 기간 : 2016.10.20 ~ 2016.12.31
 	<Br/>
 	<i class="ico-calendar-small"></i> (번호이동 고객님) 취소 기간 :  ~ 2016.10.31 
