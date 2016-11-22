@@ -6,7 +6,7 @@ include_once(PATH_LIB."/lib.calculator.inc.php");
 require_once($cfg['path']."/headBlank.inc.php");			// 헤더 부분 (스킨포함)
 
 $calculator = new calculator('galaxynote7');
-$calculator->setCarrierTypeSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
+$calculator->setCarrierSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
 ?>
 
 

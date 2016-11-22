@@ -30,7 +30,7 @@ class deviceInfo {
 
 	private $arrDefaultDeviceType = array('3G');
 	private $arrDefaultApplyType = array('01'=>'신규개통','02'=>'번호이동','06'=>'기기변경');
-	private $arrDefaultCarrierType = array('sk'=>'SK', 'kt'=>'KT', 'lguplus'=>'LG U+');
+	private $arrDefaultCarrier = array('sk'=>'SK', 'kt'=>'KT', 'lguplus'=>'LG U+');
 	private $arrDefaultDiscountType = array('support'=>'공시지원금할인','selectPlan'=>'선택약정할인');
 
 	private $arrPlanCategory =
@@ -292,7 +292,7 @@ class deviceInfo {
 	}
 
 	public function getCarrierName($input) {
-		return $this->arrDefaultCarrierType[$input];
+		return $this->arrDefaultCarrier[$input];
 	}
 
 	public function setMode($input) {
@@ -392,13 +392,13 @@ class deviceInfo {
 		return $this->arrDeviceType;
 	}
 
-	public function getArrCarrierType($dvKey) {
+	public function getArrCarrier($dvKey) {
 		list($isSK, $isKT, $isLG) = DB::queryFirstList("SELECT dvSK, dvKT, dvLG FROM tmDevice WHERE dvKey = %i", $dvKey);
 		$isSK = ($isSK==1)?true:false;
 		$isKT = ($isKT==1)?true:false;
 		$isLG = ($isLG==1)?true:false;
 
-		$output = $this->arrDefaultCarrierType;
+		$output = $this->arrDefaultCarrier;
 		if ($isSK === false) unset($output['sk']);
 		if ($isKT === false) unset($output['kt']);
 		if ($isLG === false) unset($output['lguplus']);
