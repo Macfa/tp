@@ -36,10 +36,12 @@ if ($isGnbCarrier && !$_GET['manuf']){
 
 switch($_GET['carrier']) {
 	case 'all' :
+	case 'kt' :
 	case 'sk' :
 		if ($isGnbCarrier)
 			$isShowManufSubNav = true;
-		$isShowDeviceNav = true;	
+		$isShowDeviceNav = true;
+		$deviceListWhere .= "and dv".strtoupper($_GET['carrier'])." = 1 ";
 	case 'lguplus' :
 		$deviceListWhere .= "and dvCate = 'phone'";
 		if ($isGnbCarrier){
@@ -49,9 +51,6 @@ switch($_GET['carrier']) {
 			${'isSub'.ucfirst($_GET['carrier']).'Active'} = 'active';
 			$subTitSub = $_GET['carrier'].' 통신사';
 		}
-		break;
-	case 'kt' :
-		$isShowDeviceNav = true;
 		break;
 	case '' :
 		break;
@@ -87,7 +86,7 @@ switch($_GET['manuf']) {
 
 switch($_GET['device']) {
 	case 'pocketfi' :
-		$deviceTit = '포켓파이';
+		$deviceTit = '휴대용 와이파이';
 	case 'watch' :
 		if(!$deviceTit) $deviceTit = '스마트워치';
 	case 'kids' :
@@ -152,26 +151,6 @@ require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 if(file_exists("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"))
 	require_once("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"); 
 
-if ($_GET['carrier'] == 'kt') 
-	require_once("devices.kt.skin.php");
-else if ($_GET['carrier'] == 'lguplus') 
-	require_once("devicesKt.skin.php");
-else if ($_GET['device'] == 'pocketfi')
-	require("reviewpocketfi.skin.php");	
-else if ($_GET['device'] == 'watch')
-	require("reviewSmart.skin.php");	
-else if ($_GET['device'] == 'kids')
-	require("reviewKiz.skin.php");	
-else if ($_GET['carrier'] == 'sk')
-	require("reviewSKT.skin.php");
-else if ($_GET['manuf'] == 'samsung')
-	require("reviewSamsung.skin.php");
-else if ($_GET['manuf'] == 'apple')
-	require("reviewapple.skin.php");
-else if ($_GET['manuf'] == 'lg')
-	require("reviewLG.skin.php");
-else 
-	require("devices.skin.php");	
-
+require("devices.skin.php");	
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 ?>

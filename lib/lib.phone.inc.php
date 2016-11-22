@@ -33,7 +33,24 @@ class deviceInfo {
 	private $arrDefaultCarrierType = array('sk'=>'SK', 'kt'=>'KT', 'lguplus'=>'LG U+');
 	private $arrDefaultDiscountType = array('support'=>'공시지원금할인','selectPlan'=>'선택약정할인');
 
-	// 반드시 요금제에 부여된 번호대로대로 되어야함
+	private $arrPlanCategory =
+		array(
+			'sk' => array(
+				'phone' => array(0,1,2,3,4,5,6,7,8),
+				'kids'=>array(9),
+				'watch'=>array(11,12),
+				'pocketfi'=>array(13,14)
+			),
+			'kt'=>array(
+				'phone'=>array(15,16,17,18,19,20,23,24),
+				'pocketfi'=>array(21,22),
+				'watch'=>array(25,26),
+				'kids'=>array(27,28)
+			),	
+			'lguplus'=>array(
+				'phone'=>array()
+			)
+		);
 	public $arrPlan =
 		array(
 			0 => array(
@@ -100,60 +117,11 @@ class deviceInfo {
 				'value' => 'NA00004769'
 			),
 			9 => array(
-				'name' => 'band 데이터 세이브',
-				'description' => '데이터 300M/통화문자무한',
-				'fee' => 29900,
-				'selectPlanDiscount' => 6000,
-				'value' => 'NA00004407'
-			),
-			2 => array(
-				'name' => 'band 데이터 퍼펙트S',
-				'description' => '데이터 16G+무제한/통화문자무한',
-				'fee' => 69000,
-				'selectPlanDiscount' => 13800,
-				'value' => 'NA00005134'
-			),
-			3 => array(
-				'name' => 'band 데이터 퍼펙트',
-				'description' => '데이터 11G+무제한/통화문자무한',
-				'fee' => 59900,
-				'selectPlanDiscount' => 12000,
-				'value' => 'NA00004775'
-			),
-			4 => array(
-				'name' => 'band 데이터 6.5G',
-				'description' => '데이터 6.5G/통화문자무한',
-				'fee' => 51000,
-				'selectPlanDiscount' => 10200,
-				'value' => 'NA00004773'
-			),
-			5 => array(
-				'name' => 'band 데이터 3.5G',
-				'description' => '데이터 3.5G/통화문자무한',
-				'fee' => 47000,
-				'selectPlanDiscount' => 9400,
-				'value' => 'NA00004772'
-			),
-			6 => array(
-				'name' => 'band 데이터 2.2G',
-				'description' => '데이터 2.2G/통화문자무한',
-				'fee' => 42000,
-				'selectPlanDiscount' => 8400,
-				'value' => 'NA00004771'
-			),
-			7 => array(
-				'name' => 'band 데이터 1.2G',
-				'description' => '데이터 1.2G/통화문자무한',
-				'fee' => 36000,
-				'selectPlanDiscount' => 7200,
-				'value' => 'NA00004770'
-			),
-			8 => array(
-				'name' => 'band 데이터 세이브',
-				'description' => '데이터 300M/통화문자무한',
-				'fee' => 29900,
-				'selectPlanDiscount' => 6000,
-				'value' => 'NA00004769'
+				'name' => '쿠키즈 워치',
+				'description' => '데이터 100M/통화30분',
+				'fee' => 8800,
+				'selectPlanDiscount' => 1760,
+				'value' => 'NA00004484'
 			),
 			11 => array(
 				'name' => 'T아웃도어 공유',
@@ -259,15 +227,14 @@ class deviceInfo {
 				'fee' => 10000,
 				'selectPlanDiscount' => 0,
 				'value' => 'KTFWEAR4G'
-			),/*,
+			),
 			26 => array(
 				'name' => 'Wearable 3G',
 				'description' => '',
 				'fee' => 10000,
 				'selectPlanDiscount' => 0,
 				'value' => 'KTFWEAR3G'
-			)*/
-
+			),
 			27 => array(
 				'name' => '키즈80 차단형',
 				'description' => '데이터100MB/망내지정1회선 음성&문자무제한(소진시차단,충전가능)/문자250건',
@@ -316,6 +283,18 @@ class deviceInfo {
 		return $this;
 	}
 
+	public function getDiscountTypeName($input) {
+		return $this->arrDefaultDiscountType[$input];
+	}
+
+	public function getApplyTypeName($input) {
+		return $this->arrDefaultApplyType[$input];
+	}
+
+	public function getCarrierName($input) {
+		return $this->arrDefaultCarrierType[$input];
+	}
+
 	public function setMode($input) {
 		$this->mode = $input;
 		$this->arrDiscountType = $this->arrDefaultDiscountType;
@@ -354,13 +333,23 @@ class deviceInfo {
 		//var_dump($this->mode);
 		//var_dump(array_keys($this->arrPlan[$this->carrier][$this->mode]));
 		//DB::debugMode();
-		return $output = DB::queryOneColumn('spPlan', "SELECT * FROM tmSupport WHERE dvKey = %i and spCarrier = %s group by spPlan order by spPlan asc", $dvKey, $this->carrier);
+		$arrPlan = $this->arrPlanCategory[$this->carrier][$this->mode];
+		foreach($arrPlan as $plan){
+			if(isExist($where) === true) $where .= ' or ';
+			$where .= 'spPlan = '.$plan;
+		}
+		if(count($arrPlan) >= 1)
+			$where = '('.$where.')';
+
+		$where = 'AND '.$where;
+		$output = DB::queryOneColumn('spPlan', "SELECT * FROM tmSupport WHERE dvKey = %i and spCarrier = %s ".$where." group by spPlan order by spPlan asc", $dvKey, $this->carrier);
+		return $output;
 
 	}
 
 	public function getFirstPlan($dvKey){
-		//list($firstKey) = array_keys($this->arrPlan[$this->carrier][$this->mode]);
-		return DB::queryFirstField("SELECT min(spPlan) FROM tmSupport WHERE dvKey = %i and spCarrier = %s", $dvKey, $this->carrier);
+		return list($firstKey) = array_keys($this->getArrPlan($dvKey));
+		//return DB::queryFirstField("SELECT min(spPlan) FROM tmSupport WHERE dvKey = %i and spCarrier = %s", $dvKey, $this->carrier);
 	}
 
 	public function getArrPhonePlanName(){

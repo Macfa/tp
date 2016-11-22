@@ -15,7 +15,7 @@ $deviceTrackingAction = '';
 
 
 //$calculator = new calculator('galaxynote7');
-//$calculator->setCarrierTypeSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
+//$calculator->setCarrierSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
 
 if($isLogged) {
 	list($fsKey, $pnDeviceTracking) = DB::queryFirstList("SELECT fsKey, pnDeviceTracking FROM tmPreorderNote7 WHERE mbEmail = %s", $mb['mbEmail']);
