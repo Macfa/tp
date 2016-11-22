@@ -217,7 +217,6 @@ DB::insert('tmPointHistory', array(
 DB::update('tmMember', array(
 	'mbPoint' => $mb['mbPoint']+($rewardPoint-$totalPoint)
 ),'mbEmail = %s', $mb['mbEmail']);
-DB::debugMode();
 $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey and spPlan = %i_spPlan and cdType = %i_cdType and cdCarrier = %s_cdCarrier", 
 	array('dvKey'=> $_POST['dvKey'], 
 			'spPlan' => $_POST['plan'], 

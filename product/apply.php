@@ -4,22 +4,27 @@ include_once(PATH_LIB."/lib.snoopy.inc.php");
 include_once(PATH_LIB."/lib.parsing.inc.php");
 
 try{
-	list($countDevice, $dvKey) = DB::queryFirstList("SELECT COUNT(*), dvKey FROM tmDevice WHERE dvDisplay = 1 and dvId = %s", $_GET['id']);
-	$isExistDevice = ($countDevice>0)?TRUE:FALSE;
-	if($isExistDevice === FALSE)
+	$isExistDevice = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvDisplay = 1 and dvKey = %i", $_GET['dvKey']);
+	if(isExist($isExistDevice) === FALSE)
 		throw new Exception('존재하지 않는 기기입니다.', 3);
 
-	if(isNotExist($_POST['carrier']) === true || isNotExist($_POST['applyType']) === true || isNotExist($_POST['discountType']) === true || isNotExist($_POST['dvKey']) === true || isNotExist($_POST['plan']) === true)
+	if(isNotExist($_GET['carrier']) === true 
+		|| isNotExist($_GET['dvId']) === true
+		|| isNotExist($_GET['applyType']) === true 
+		|| isNotExist($_GET['discountType']) === true 
+		|| isNotExist($_GET['dvKey']) === true 
+		|| isNotExist($_GET['plan']) === true)
 		throw new Exception('기본정보입력 후 가능합니다.', 1);
 }catch(Exception $e){
 	if($e->getCode === 1) {
-		$URL = URL.'/device/'.$_GET['id'];
+		$URL = URL.'/device/'.$_GET['dvId'];
+
     	alert($e->getMessage(), $URL);
 	}else 
 		alert($e->getMessage());
 }
-
 $deviceInfo = new deviceInfo();
+
 
 //--------------------------------------------------------------------------------------------------------
 
