@@ -7,7 +7,7 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 require_once(PATH_LIB."/lib.calculator.inc.php");
 
 
-$import->addJS('calculator.js')->addJS('excanvas.js')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');
+$import->addJS('calculator.js')->addJS('excanvas.js', 'lib')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');
 
 $showDetailHead = true;
 if($isAdmin == true) 
@@ -31,6 +31,25 @@ switch($device['dvId']) {
 		$detailSpecLink= '#';
 		break;
 }
+
+
+$childDevice = DB::query("SELECT * FROM tmDevice WHERE dvDisplay = 1 and dvParent = %i", $device['dvKey']);
+//32g 64g 가 나눠져있는 기종이 있을때
+if ($childDevice == true) {
+	$selectedCapacity = $childDevice[0]['dvTit'];
+	$childDevice[0]['isChecked'] = 'checked';
+	$defaultVal = $childDevice[0];
+} else {
+	$defaultVal = $device;
+	$selectedCapacity = '';
+}
+
+$arrSelectPlan = DB::query("SELECT spPlan FROM tmSupport WHERE dvKey = %i0 and spCarrier = 'sk' GROUP BY spPlan", $defaultVal['dvKey']);
+list($defaultPlanKey) = array_keys($arrSelectPlan);
+$defaultPlanId = $arrSelectPlan[$defaultPlanKey]['spPlan'];
+if ($defaultPlanId == 9) $defaultPlanId = 10;
+
+$devicePlanGraph = DB::query("SELECT spSupport,spDate,spAddSupport FROM tmSupport WHERE dvKey = %i0 and spPlan = %i1 and spCarrier = 'sk' ORDER BY spDate DESC LIMIT 5", $defaultVal['dvKey'], $defaultPlanId);
 
 $devicePlanGraph = array_reverse($devicePlanGraph);
 $cntDevicePlanGraph = count($devicePlanGraph);
