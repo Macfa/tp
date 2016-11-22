@@ -121,7 +121,7 @@
 					</div>
 				</a>
 			</li><li class="main-event-item-wrap">
-				<a href="#" class="main-small-banner-note7program vert-wrap">
+				<a href="/page/programNote7.php" class="main-small-banner-note7program vert-wrap">
 					<div class="vert-align"></div>
 				</a>
 			</li><li class="main-event-item-wrap">
