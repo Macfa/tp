@@ -151,6 +151,26 @@ require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 if(file_exists("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"))
 	require_once("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"); 
 
-require("devices.skin.php");	
+if ($_GET['carrier'] == 'kt') 
+    require_once("devices.kt.skin.php");
+else if ($_GET['carrier'] == 'lguplus') 
+    require_once("devicesKt.skin.php");
+else if ($_GET['device'] == 'pocketfi')
+    require("reviewpocketfi.skin.php");    
+else if ($_GET['device'] == 'watch')
+    require("reviewSmart.skin.php");    
+else if ($_GET['device'] == 'kids')
+    require("reviewKiz.skin.php");    
+else if ($_GET['carrier'] == 'sk')
+    require("reviewSKT.skin.php");
+else if ($_GET['manuf'] == 'samsung')
+    require("reviewSamsung.skin.php");
+else if ($_GET['manuf'] == 'apple')
+    require("reviewapple.skin.php");
+else if ($_GET['manuf'] == 'lg')
+    require("reviewLG.skin.php");
+else 
+    require("devices.skin.php");    
+
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 ?>
