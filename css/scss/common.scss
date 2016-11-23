@@ -840,7 +840,9 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 		&.divide{margin-left:1%;}
 	}
 
-	
+	.contact-pc-wrap {
+		width:470px;
+	}	
 
 	.layer-view{
 		width:800px;
@@ -878,6 +880,9 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	}
 	.nav-mobile-wrap,
 	.nav-mobile-btn-wrap{display:none;}
+	.contact-pc-wrap {
+		width:500px;
+	}
 }
 @media all and (min-width:1450px){
 	.wrap{width:1400px;}
