@@ -38,13 +38,13 @@ class deviceInfo {
 			'sk' => array(
 				'phone' => array(0,1,2,3,4,5,6,7,8),
 				'kids'=>array(9),
-				'watch'=>array(11,12),
+				'watch'=>array(11,12,29,30),
 				'pocketfi'=>array(13,14)
 			),
 			'kt'=>array(
 				'phone'=>array(15,16,17,18,19,20,23,24),
 				'pocketfi'=>array(21,22),
-				'watch'=>array(25,26,29,30),
+				'watch'=>array(25,26),
 				'kids'=>array(27,28)
 			),	
 			'lguplus'=>array(
