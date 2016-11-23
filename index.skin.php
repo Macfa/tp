@@ -125,13 +125,13 @@
 					<div class="vert-align"></div>
 				</a>
 			</li><li class="main-event-item-wrap">
-				<a href="#" class="main-small-banner-iphone7 vert-wrap">
+				<a href="/device/iphone7" class="main-small-banner-iphone7 vert-wrap">
 					<div class="vert-align">
 					<img src="<?=PATH_IMG?>/main-small-banner-iphone7-tit.png" >				
 					</div>
 				</a>
 			</li><li class="main-event-item-wrap">
-				<a href="#" class="main-small-banner-s7bluecoral vert-wrap">
+				<a href="/device/galaxys7edge" class="main-small-banner-s7bluecoral vert-wrap">
 				<div class="vert-align"></div>
 				</a>
 			</li>
