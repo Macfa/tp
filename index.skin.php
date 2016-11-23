@@ -114,7 +114,7 @@
 	<section class="main-event">
 		<ul class="main-event-wrap">
 			<li class="main-event-item-wrap">
-				<a href="/product/egg.php" class="main-small-banner-pocketfi vert-wrap">
+				<a href="/device/lteeggplusa" class="main-small-banner-pocketfi vert-wrap">
 					<div class="vert-align">
 						<span class="main-small-banner-sub">데이터를 현명하게 쓰는</span><br/>
 						<span class="main-small-banner-tit">LTE egg + A</span>
