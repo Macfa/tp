@@ -5,8 +5,42 @@
 	<a href="http://map.naver.com/?pinId=21856769&pinType=site&dlevel=14&y=663407fedd97dc94907fa2eee72107d4&x=b171587510c40b7fb698c7d998d63728&enc=b64" target="_blank"><img src="<?php echo PATH_IMG?>/offline-map.jpg?V=11123" /></a>
 	<div class="tit-sub txt-highlight center">서울시 영등포구 당산동2가 37 영등포유통상가 다열 15호<Br/>02-2636-8882</div>
 	<div class="center">(오픈 시간 평일 10시 ~ 19시, 연락가능시간 평일 16 시 ~ 19시)</div>
+	<a class="btn-filled-primary js-reservation">노트7 교환/환불 내방 예약</a>
+	<!--
 	<a href="http://booking.naver.com/12/booking/svc/35125" target="_blank" class="btn-filled-primary">노트7 교환/환불 내방 예약</a>
-	<Br/><br/><Br/><br/><Br/><br/>
+	-->
+	<Br/><Br/>
+	<section class="section txt-left">
+	<h2 class="tit-sub">1. 삼성 Note7 업그레이드 프로그램 <span style="color:red">기간 연장 신청</span> 안내</h2>
+	삼성전자에서 본래 2016년 11월 30일을 기점으로 <삼성 Note7 업그레이드 프로그램>을 종료하기로 되었었으나, 금일 해당 혜택의 기일을 연장할 수 있는 방법을 제시하였습니다. 
+	11월 이내 교품 처리가 어려워 피해와 불편이 예상되시는 모든 고객님께서는 해당 사이트에 방문하셔서 피해 없도록 만전을 기해주시기 바랍니다.
+	<Br/><Br/>
+	<h4>◎ <삼성 Note7 업그레이드 프로그램> 연장 신청하기 <a href="http://local.sec.samsung.com/comLocal/bbs/notice/NoticeView.do?seq=228" target="_blank" class="btn-filled-sub-dense">신청하기</a></h4>
+	<Br/><Br/>
+	<h2 class="tit-sub">2. 노트7 처리 전담 <span style="color:red">Hot-Line</span> 개설(02-2636-8882)</h2>
+	노트7 문제가 장기화 되고, 답보상태로 유지되는 상황에서 티플에서는 특단의 조치를 취하기로 했습니다.
+	노트7 전담 Hot-line을 개설하기로 한 것입니다. 앞으로 노트7 관련 된 문의는 다음의 연락처를 통해 진행해 주시기를 권해드립니다.
+	<h3 class="txt-highlight"> ◎ <티플 Note7 문의 Hot-Line> 연락처 <span style="color:red">▶ 02-2636-8882</span></h3>
+	<h3 class="txt-highlight"> ◎ 운영시간 : 오후 4시 ~ 오후 7시 <span style="color:red">▶ 해당 시간 외의 문의는 받을 수 없습니다.</span></h3>
+	(관련 이슈를 처리하는데 필요한 시간이오니, 다소 답답하시더라도 양해 부탁드립니다. 대신 정기적으로 문자를 통해 상황에 대한 안내를 꾸준히 드리겠습니다.)
+	<Br/><Br/><Br/><Br/>
+	<h2 class="tit-sub">3. <삼성 Note7 업그레이드 프로그램> 가입 확인 페이지 안내</h2>
+	<span style="color:red">삼성의 노트5, S7, S7edge로 교환 하신 고객님</span>께서는 <삼성 Note7 업그레이드 프로그램> 가입여부를 확인 해주세요.
+	만일 가입이 되어 있지 않으시다면 반드시 티플로 반드시 문의를 주셔야 합니다!
+	<Br/><Br/>
+	<h4>◎ <삼성 Note7 업그레이드 프로그램> 가입 확인하기 <a href="https://www.galaxyupgrade.co.kr/up/noteCareMain.do" target="_blank" class="btn-filled-sub-dense">신청하기</a></h4>
+	<Br/>
+	<hr/>
+	<span style="color:red">핫라인을 개설</span>했습니다. 오후4시부터 오후7시까지 문의를 받는 핫라인을 통해 궁금증을 해결하시되, 반드시 그 시간 안에만 문의를 부탁드립니다. 그 외의 시간에는 실무적으로 저희가 처리를 해드릴 시간이 필요합니다. 방문 고객님도 응대를 해야 하고요.
+	<br/><br/>
+	노트7 이슈로 인해 많은 직원이 퇴사를 결행했고, 현재 남은 인력은 얼마되지 않습니다.(지속적으로 충원은 하고 있습니다만, 응대 강도를 잘 견디지 못하고 있네요 ^^;;) 축소 된 인원으로 고객님들의 고충을 처리 해드리는데에는 프로세스의 효율화가 중요하다고 생각했습니다. 고객님들의 소중한 의견을 귀기울여 듣고 소통에 애를 써야 하는 것이 정말 좋겠지만, 저희가 고객님들의 고충을 해결해드릴 시간도 꼭 필요합니다!!
+	<br/><br/>
+	이런 부탁을 드려 정말 송구합니다. 거듭 죄송한 말씀만 드리는터라 입이 열개라도 드릴 말씀이 없습니다만, 고객님들께서 한 마음으로 도와주신다면 반드시 이 문제를 해결하여 고객님들의 상한 마음이 치유되시는데 조금이라도 도움이 되도록 애를 쓰겠습니다. 
+	<br/><br/>
+	티플과 함께 해주셔서 진심으로 감사드립니다.
+	추운 겨울 건강 항상 유의하시고, 행복하고 즐거운 일들이 가득하시기를 진심을 담아 기원드리겠습니다.
+	<br/><br/>
+	</section>	
 	티플에서 갤럭시노트7을 구매하신 고객님들께 삼성전자 갤럭시노트7의 배터리소손사건으로 인한 교환 및 환불 처리안내를 드립니다.
 	<i class="ico-calendar-small"></i> 교환 및 취소 가능 기간 : 2016.10.20 ~ 2016.12.31
 	<Br/>
@@ -16,7 +50,7 @@
 	<br/>
 	교환 취소 상담 및 문의량이 많아 통화연결이 힘드실 수 있습니다.
 	교환 신청 해주시면 저희가 다 해드립니다. 고객님 마음 충분히 이해하지만 전화를 많이 주시면 저희가 아무것도 못합니다ㅠㅠ
-	<br/><br/>
+	<br/><br/><br/>
 	<section class="section txt-left">
 		<h2 class="tit-sub center">교환을 원하시는 고객님</h2>
 		<h3 class="tit-inside">교환신청 방법</h3>
@@ -125,3 +159,9 @@
 	</section>
 
 </div>
+
+<script>
+	$('.js-reservation').click(function(){
+    alert("월요일부터 신청이 가능합니다");
+	});
+</script>
