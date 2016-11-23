@@ -75,11 +75,6 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		||($isSelectedDisocuntType == false && $isRequiredDisocuntType == true)
 	) return false;
 
-	if($('.js-id').val() == 'galaxys7edge' && $capacity == '64G') {
-		alert('갤럭시S7엣지 64G는 현재 판매하지 않습니다.');
-		$('[name=capacity][value=32G]').prop('checked', true);
-	}
-
 	$data = {
 		carrier : $carrier,
 		capacity : $capacity,
