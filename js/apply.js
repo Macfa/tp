@@ -1,9 +1,9 @@
-toggleContactBtn();
+
 var $arrPlanData = [];
 var $isLoadedData = [];
 
 $(function(){
-	setCalcHeight();
+	
 	$('.inp-txt, .inp-num').each(function(index,item){
 		setLabel(item);
 	});
@@ -18,11 +18,11 @@ $('.js-goGiftSelect').click(function(){
 });
 
 $(window).resize(function(){
-	toggleContactBtn();
+	
 });
 
 $(window).scroll(function(){
-	toggleContactBtn();
+	
 });
 
 $(document).on('focus', '.js-applyCartQuantity', function(){
