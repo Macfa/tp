@@ -204,25 +204,31 @@
 		<section class="apply-cart-empty">
 			<div class="vert-wrap">
 				<div class="vert-align">
+					<?php if(isExist($defaultRewardPoint) === true) :?>
 					<span class="tit-sub">선택된 사은품이 없습니다.</span>
 					<br/><br/>
 					<a href="#select-gift" class="btn-filled-sub js-goGiftSelect">사은품 선택하기</a>
+					<?php else :?>
+					<span class="tit-sub txt-highlight">해당기기의 사은품선택은 유선으로 진행합니다</span>
+					<?php endif?>
 				</div>
 			</div>
 		</section>
 	</section>
 
-	<h2 class="cart-total-tit">총 사용 할 별 / 보유 중인 별</h2>
+	<?php if(isExist($defaultRewardPoint) === true) :?>
+	<h2 class="cart-total-tit">사용 할 별 / 사용 가능한 별</h2>
 	<div class="apply-total">
-		<span class="js-totalResult txt-highlight"><?php echo number_format($totalPoint) ?></span> / <span class="js-availablePoint"><?php echo number_format($defaultRewardPoint+$mb['mbPoint'])?></span>
+		<span class="js-totalResult txt-highlight">0</span> / <span class="js-availablePoint">
+		<?php echo number_format($totalPoint)?></span>
 	</div>
 	<div class="cart-total-tit">(보유 중인 별 <?php echo number_format($mb['mbPoint'])?> 포함)</div>
-	<input type="hidden" class="js-totalResultInp" value="<?php echo number_format($defaultRewardPoint 
-	+ $totalPoint) ?>" data-mb-point="<?php echo $mb['mbPoint'] ?>" 
+	<input type="hidden" class="js-totalResultInp" value="<?php echo number_format($totalPoint) ?>" data-mb-point="<?php echo $mb['mbPoint'] ?>" 
 	data-parsley-errors-container=".parsley-errors-apply"
-	data-parsley-min="1" data-parsley-max="<?php echo $defaultRewardPoint + $mb['mbPoint']?>"
+	data-parsley-min="1" data-parsley-max="<?php echo $totalPoint?>"
 	data-parsley-min-message="주문할 사은품을 선택해주세요."
 	data-parsley-max-message="현재 보유중인 %s 별보다 주문 별이 많습니다. "/>
+	<?php endif?>
 
 	<ul class="parsley-errors-apply"></ul>
 	
