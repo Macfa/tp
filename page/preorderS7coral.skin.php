@@ -5,7 +5,7 @@
 			국내 유일 기어S7엣지</br>
 			<b class="coral">블루코랄</b> 일반구매 실시
 			</h1>
-		<a href="<?php echo URL?>/page/galaxys7Apply.php">
+		<a href="<?php echo URL?>/device/galaxys7edge">
 			<div class="bn">
 				S7엣지 블루코랄 구매하기
 			</div>
@@ -41,9 +41,9 @@
 		S7엣지 정품 클리어 케이스, 정품5핀케이블, 필름과 함께 탬플러 보조배터리 2500mah를 기본 세트로 드립니다.
 		</h3>
 		<h3 class="add"> * 노트7 교품 대상자도 포함됩니다.  *
-<!--노트7 교품 대상자는 뭐가 제외되는지 정확히 모름.-->
+	<!--노트7 교품 대상자는 뭐가 제외되는지 정확히 모름.-->
 		</h3>
-		<a href="<?php echo URL?>/page/galaxys7Apply.php">
+		<a href="<?php echo URL?>/device/galaxys7edge">
 			<div class="bn-w">
 				S7엣지 블루코랄 구매하기
 			</div>

@@ -5,7 +5,7 @@
 	디지털 음원의 잡음을 최대 50%까지 감소시켜</br>
 	원음에 가까운 더 생생한 사운드를 경험하게 해줍니다.
 </h3>
-	<a class="btn-filled-primary" href="/page/preorderV20Apply.php">V20 신청 하기</a>
+	<a class="btn-filled-primary" href="/device/v20">V20 신청 하기</a>
 </div>
 <div class="spec">
 	<h2 class="tit-mini">전후면 광각 카메라로 더 넓게.</h2>
@@ -125,5 +125,5 @@
 <div class="end">
 	<h2 class="tit-mini">오감을 만족하는 V20 신청 구매</h1>
 	<h3 class="sub">더욱더 생생하게.</h3>
-	<div class="bn-d-w"><a href="/page/preorderV20Apply.php">V20 신청하기<img data-original="<?=PATH_IMG?>/v20-go-w.png"/></a></div>
+	<div class="bn-d-w"><a href="/device/v20">V20 신청하기<img data-original="<?=PATH_IMG?>/v20-go-w.png"/></a></div>
 </div>

@@ -23,7 +23,7 @@ KT 고객님들에 한 해 매일 오후 2시 전</br>신청해주신 분께
 			<h3 class="add">
 KT 고객 대상(기기변경,번호이동)</br>신규가입은 추후 서비스 예정
 			</h3>
-			<a href="<?php echo $cfg['url']?>/page/preorderApply.php?device=%EC%95%84%EC%9D%B4%ED%8F%B07"><div class="bn-delivery">아이폰7/7+ 신청하기</div></a>
+			<a href="<?php echo $cfg['url']?>/device/iphone7"><div class="bn-delivery">아이폰7/7+ 신청하기</div></a>
 		</div>
 	</section>
 
@@ -100,7 +100,7 @@ LTE egg+가</br><b class="yellow">있.다.면!!!</b>
 이젠 데이터 때문에 비싼 요금제 쓰지 않아도 됩니다!</br>
 <b class="yellow">태블릿PC, 노트북도 연결해서 함께 사용하세요!</B>
 			</h2>
-			<a href="<?php echo $cfg['url']?>/product/egg.php"><div class="bn-egg">에그 가입하기</div></a>
+			<a href="<?php echo $cfg['url']?>/device/lteeggplusa"><div class="bn-egg">에그 가입하기</div></a>
 		</div>
 	</section>
 </div>
