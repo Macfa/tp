@@ -252,14 +252,14 @@ class deviceInfo {
 			29 => array(
 				'name' => 'LTE Watch(단독)',
 				'description' => '데이터250MB/음성50분/문자기본제공',
-				'fee' => 12100,
+				'fee' => 11000,
 				'selectPlanDiscount' => 0,
 				'value' => 'NA00004997'
 			),
 			30 => array(
 				'name' => 'LTE Watch(공유)',
 				'description' => '데이터250MB/음성50분/문자기본제공',
-				'fee' => 12100,
+				'fee' => 11000,
 				'selectPlanDiscount' => 0,
 				'value' => 'NA00004761'
 			)
