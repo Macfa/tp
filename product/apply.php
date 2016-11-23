@@ -25,6 +25,25 @@ try{
 }
 $deviceInfo = new deviceInfo();
 
+$defaultRewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey=%i_dvKey AND rpPlan=%i_rpPlan AND rpCarrier=%s_rpCarrier AND rpApplyType=%i_rpApplyType AND rpDiscountType = %s_rpDiscountType", array(
+	'dvKey' => $_GET['dvKey'],
+	'rpPlan' => $_GET['plan'],
+	'rpCarrier' => $_GET['carrier'],
+	'rpApplyType' => (int)$_GET['applyType'],
+	'rpDiscountType' => $_GET['discountType']
+));
+
+//VAR_DUMP($defaultRewardPoint);
+$mbPoint = (isExist($mb['mbPoint'])===TRUE)?$mb['mbPoint']:0;
+if(isExist($defaultRewardPoint) === TRUE) {
+	$totalPoint = $defaultRewardPoint + $mbPoint;
+}else{
+	$totalPoint = $mbPoint;
+}
+
+
+$name = $deviceInfo->getCarrierName($_GET['carrier']);
+
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -45,5 +64,6 @@ $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/modifyInfo.js"></sc
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/calculator.js"></script>';
 
 require_once($cfg['path']."/headSimple.inc.php");			// 헤더 부분 (스킨포함)
+// var_dump($defaultRewardPoint);
 require_once("apply.skin.php");	
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
