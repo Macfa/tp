@@ -175,7 +175,7 @@ class Naver{
 			echo '
 			<script>
 			function loginNaver(){
-				var win = window.open(\''.NAVER_OAUTH_URL.'authorize?client_id='.$this->client_id.'&response_type=code&redirect_uri='.$this->returnURL.'&state='.$this->state.', \'네이버 아이디로 로그인\',\'width=320, height=480, toolbar=no, location=no\');
+				var win = window.open(\''.NAVER_OAUTH_URL.'authorize?response_type=code&client_id='.$this->client_id.'&redirect_uri='.$this->returnURL.'&state='.$this->state.', \'네이버 아이디로 로그인\',\'width=320, height=480, toolbar=no, location=no\');
 
 				var timer = setInterval(function() {
 					if(win.closed) {
@@ -426,9 +426,10 @@ class Naver{
 	}
 
   function getLoginScript() {
+  		$targetURL = NAVER_OAUTH_URL.'authorize?response_type=code&client_id='.$this->client_id.'&redirect_uri='.$this->returnURL.'&state='.$this->state;
 		echo '<script>
 			$(".js-naverLogin").click(function(){
-				var win = window.open("'.NAVER_OAUTH_URL.'authorize?client_id='.$this->client_id.'&response_type=code&redirect_uri='.$this->returnURL.'&state='.$this->state.', \'네이버 아이디로 로그인\',\'width=320, height=480, toolbar=no, location=no");
+				var win = window.open("'.$targetURL.'", "네이버 아이디로 로그인", "width=320", "height=480", "toolbar=no", "location=no");
 
 				var timer = setInterval(function() {
 					if(win.closed) {
@@ -441,9 +442,10 @@ class Naver{
 	}
 
 	function getLoginScriptForApply() {
+		$targetURL = NAVER_OAUTH_URL.'authorize?response_type=code&client_id='.$this->client_id.'&redirect_uri='.$this->returnURL.'&state='.$this->state;
 		echo '<script>
 			$(".js-naverLogin").click(function(){
-				var win = window.open("'.NAVER_OAUTH_URL.'authorize?client_id='.$this->client_id.'&response_type=code&redirect_uri='.$this->returnURL.'&state='.$this->state.', \'네이버 아이디로 로그인\',\'width=320, height=480, toolbar=no, location=no");
+				var win = window.open("'.$targetURL.'", "네이버 아이디로 로그인", "width=320", "height=480", "toolbar=no", "location=no");
 				return false;
 			});
 			</script>';
