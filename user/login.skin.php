@@ -35,6 +35,8 @@
 		
 	</section>
 	</form>
+	<br/><br/>
+	<div class="center"><i class="ico-caution-small"></i> 로그인이 안되시면 팝업차단 설정을 해제해주세요.</div>
 	<section class="row-group">
 		<button class="login-btn-kakao js-kakaoLogin">
 			<div class="login-btn-ico-kakao">
