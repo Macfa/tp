@@ -122,7 +122,6 @@ if($cntDevicePlanGraph > 1){
 }
 
 //-------------------------------------
-
 $rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType ORDER BY rpKey DESC", 
 	array(
 		'dvKey' => $device['dvKey'],
