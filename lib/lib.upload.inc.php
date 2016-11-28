@@ -1,601 +1,134 @@
-<?php
-
-function getUploadErrorMessage($code){
-	$phpFileUploadErrors = array(
-		1 => '업로드한 파일이 ini의 최대 첨부가능 용량보다 큽니다.',
-		2 => '업로드한 파일이 html의 최대 첨부가능 용량보다 큽니다.',
-		3 => '파일이 일부분만 전송되었습니다.',
-		4 => '파일이 첨부되지 않았습니다.',
-		6 => '임시 폴더가 없습니다.',
-		7 => '디스크에 파일 쓰기를 실패했습니다.',
-		8 => '확장모듈에 의해 파일 업로드가 중지되었습니다.'
-	);
-	return $phpFileUploadErrors[$code].' 에러코드 : '.$code;
-}
-
-/**
- * Simple PHP upload class
- *
- * @author Aivis Silins
- */
+<?php 
+//upload::setFile($_FILE['NAME'])->setMaxsize(12312312)->upload();
+//upload::setFile($_FILE['NAME'])->upload();
 class Upload {
+	
+	protected $maxsize = null;
+	protected $extension = null;
+	public $arrfile = '';
+	public $randomString ='';
+	public $fsId = '';
+	public $directory ='';
 
 
-	/**
-	 * Default directory persmissions (destination dir)
-	 */
-	protected $default_permissions = 750;
-
-
-	/**
-	 * File post array
-	 *
-	 * @var array
-	 */
-	protected $files_post = array();
-
-
-	/**
-	 * Destination directory
-	 *
-	 * @var string
-	 */
-	protected $destination;
-
-
-	/**
-	 * Fileinfo
-	 *
-	 * @var object
-	 */
-	protected $finfo;
-
-
-	/**
-	 * Data about file
-	 *
-	 * @var array
-	 */
-	public $file = array();
-
-
-	/**
-	 * Max. file size
-	 *
-	 * @var int
-	 */
-	protected $max_file_size;
-
-
-	/**
-	 * Allowed mime types
-	 *
-	 * @var array
-	 */
-	protected $mimes = array();
-
-
-	/**
-	 * External callback object
-	 *
-	 * @var obejct
-	 */
-	protected $external_callback_object;
-
-
-	/**
-	 * External callback methods
-	 *
-	 * @var array
-	 */
-	protected $external_callback_methods = array();
-
-
-	/**
-	 * Temp path
-	 *
-	 * @var string
-	 */
-	protected $tmp_name;
-
-
-	/**
-	 * Validation errors
-	 *
-	 * @var array
-	 */
-	protected $validation_errors = array();
-
-
-	/**
-	 * Filename (new)
-	 *
-	 * @var string
-	 */
-	protected $filename;
-
-
-	/**
-	 * Internal callbacks (filesize check, mime, etc)
-	 *
-	 * @var array
-	 */
-	private $callbacks = array();
-
-	/**
-	 * Root dir
-	 *
-	 * @var string
-	 */
-	protected $root = '';
-
-	/**
-	 * Return upload object
-	 *
-	 * $destination		= 'path/to/your/file/destination/folder';
-	 *
-	 * @param string $destination
-	 * @param string $root
-	 * @return Upload
-	 */
-	public static function factory($destination) {
-
+	static function setFile($destination) {
 		return new Upload($destination);
+	}	
 
-	}
+	public function __construct($destination){
+		$this->arrfile = $destination;
 
-
-	/**
-	 *  Define ROOT constant and set & create destination path
-	 *
-	 * @param string $destination
-	 * @param string $root
-	 */
-	public function __construct($destination) {
-
-		// set & create destination path
-		if (!$this->set_destination($destination)) {
-
-			throw new Exception('Upload: Can\'t create destination. '.$this->destination);
-
-		}
-
-
-	}
-
-	/**
-	 * Set target filename
-	 *
-	 * @param string $filename
-	 */
-	public function set_filename($filename) {
-
-		$this->filename = $filename;
-
-	}
-
-	/**
-	 * Check & Save file
-	 *
-	 * Return data about current upload
-	 *
-	 * @return array
-	 */
-	public function upload($filename = '') {
-
-		if ($this->check()) {
-
-			$this->save();
-
-		}
-		// return state data
-		return($this->get_state());
-
-	}
-
-
-	/**
-	 * Save file on server
-	 *
-	 * Return state data
-	 *
-	 * @return array
-	 */
-	public function save() {
-
-		$this->save_file();
-
-		return $this->get_state();
-
-	}
-
-
-	/**
-	 * Validate file (execute callbacks)
-	 *
-	 * Returns TRUE if validation successful
-	 *
-	 * @return bool
-	 */
-	public function check() {
-
-		//execute callbacks (check filesize, mime, also external callbacks
-		$this->validate();
-
-		//add error messages
-		$this->file['errors'] = $this->get_errors();
-
-		//change file validation status
-		$this->file['status'] = empty($this->validation_errors);
-
-		return $this->file['status'];
-
-	}
-
-
-	/**
-	 * Get current state data
-	 *
-	 * @return array
-	 */
-	public function get_state() {
-
-		return $this->file;
-
-	}
-
-	public function get_status() {
-		return $this->file['status'];
-	}
-
-
-	/**
-	 * Save file on server
-	 */
-	protected function save_file() {
-
-		//create & set new filename
-		if(empty($this->filename)){
-			$this->create_new_filename();
-		}
-
-		//set filename
-		$this->file['filename']	= $this->filename;
-
-		//set full path
-		$this->file['full_path'] = $this->destination . $this->filename;
-        $this->file['path'] = $this->destination . $this->filename;
-
-		$status = move_uploaded_file($this->tmp_name, $this->file['full_path']);
-
-		//checks whether upload successful
-		if (!$status) {
-			throw new Exception('Upload: Can\'t upload file.');
-		}
-
-		//done
-		$this->file['status']	= true;
-
-	}
-
-
-	/**
-	 * Set data about file
-	 */
-	protected function set_file_data() {
-
-		$file_size = $this->get_file_size();
-
-		$this->file = array(
-			'status'				=> false,
-			'destination'			=> $this->destination,
-			'size_in_bytes'			=> $file_size,
-			'size_in_mb'			=> $this->bytes_to_mb($file_size),
-			'mime'					=> $this->get_file_mime(),
-			'original_filename'		=> $this->file_post['name'],
-			'tmp_name'				=> $this->file_post['tmp_name'],
-			'post_data'				=> $this->file_post,
-		);
-
-	}
-
-	/**
-	 * Set validation error
-	 *
-	 * @param string $message
-	 */
-	public function set_error($message) {
-
-		$this->validation_errors[] = $message;
-
-	}
-
-
-	/**
-	 * Return validation errors
-	 *
-	 * @return array
-	 */
-	public function get_errors() {
-
-		return $this->validation_errors;
-
-	}
-
-
-	/**
-	 * Set external callback methods
-	 *
-	 * @param object $instance_of_callback_object
-	 * @param array $callback_methods
-	 */
-	public function callbacks($instance_of_callback_object, $callback_methods) {
-
-		if (empty($instance_of_callback_object)) {
-
-			throw new Exception('Upload: $instance_of_callback_object can\'t be empty.');
-
-		}
-
-		if (!is_array($callback_methods)) {
-
-			throw new Exception('Upload: $callback_methods data type need to be array.');
-
-		}
-
-		$this->external_callback_object	 = $instance_of_callback_object;
-		$this->external_callback_methods = $callback_methods;
-
-	}
-
-
-	/**
-	 * Execute callbacks
-	 */
-	protected function validate() {
-
-		//get curent errors
-		$errors = $this->get_errors();
-
-		if (empty($errors)) {
-
-			//set data about current file
-			$this->set_file_data();
-
-			//execute internal callbacks
-			$this->execute_callbacks($this->callbacks, $this);
-
-			//execute external callbacks
-			$this->execute_callbacks($this->external_callback_methods, $this->external_callback_object);
-
-		}
-
-	}
-
-
-	/**
-	 * Execute callbacks
-	 */
-	protected function execute_callbacks($callbacks, $object) {
-
-		foreach($callbacks as $method) {
-
-			$object->$method($this);
-
-		}
-
-	}
-
-
-	/**
-	 * File mime type validation callback
-	 *
-	 * @param obejct $object
-	 */
-	protected function check_mime_type($object) {
-		if (!empty($object->mimes)) {
-
-			if (!in_array($object->file['post_data']['type'], $object->mimes)) {
-				
-				$object->set_error('Mime type not allowed.');
-
-			}
-
-		}
-
-	}
-
-
-	/**
-	 * Set allowed mime types
-	 *
-	 * @param array $mimes
-	 */
-	public function set_allowed_mime_types($mimes) {
-
-		$this->mimes		= $mimes;
-
-		//if mime types is set -> set callback
-		$this->callbacks[]	= 'check_mime_type';
-
-	}
-
-
-	/**
-	 * File size validation callback
-	 *
-	 * @param object $object
-	 */
-	protected function check_file_size($object) {
-
-		if (!empty($object->max_file_size)) {
-
-			$file_size_in_mb = $this->bytes_to_mb($object->file['size_in_bytes']);
-
-			if ($object->max_file_size <= $file_size_in_mb) {
-
-				$object->set_error('File is too big.');
-
-			}
-
-		}
-
-	}
-
-
-	/**
-	 * Set max. file size
-	 *
-	 * @param int $size
-	 */
-	public function set_max_file_size($size) {
-
-		$this->max_file_size	= $size;
-
-		//if max file size is set -> set callback
-		$this->callbacks[]	= 'check_file_size';
-
-	}
-
-
-	/**
-	 * Set File array to object
-	 *
-	 * @param array $file
-	 */
-	public function file($file) {
-
-		$this->set_file_array($file);
-
-	}
-
-
-	/**
-	 * Set file array
-	 *
-	 * @param array $file
-	 */
-	protected function set_file_array($file) {
-
-		//checks whether file array is valid
-		if (!$this->check_file_array($file)) {
-
-			//file not selected or some bigger problems (broken files array)
-			$this->set_error('Please select file.');
-
-		}
-		//set file data
-		$this->file_post = $file;
-
-		//set tmp path
-		$this->tmp_name  = $file['tmp_name'];
-
-	}
-
-
-	/**
-	 * Checks whether Files post array is valid
-	 *
-	 * @return bool
-	 */
-	protected function check_file_array($file) {
-
-		return isset($file['error'])
-			&& !empty($file['name'])
-			&& !empty($file['type'])
-			&& !empty($file['tmp_name'])
-			&& !empty($file['size']);
-
-	}
-
-
-	/**
-	 * Get file mime type
-	 *
-	 * @return string
-	 */
-	protected function get_file_mime() {
+		$this->checkError();
 
 		return $this;
+	}
+	public function checkError(){
+		if($this->arrfile['error'] > 0){
 
+			try{
+				switch ($this->arrfile['error']) {					
+					case '1': throw new Exception('업로드한 파일크기가 설정된 값보다 큽니다. 티플에 문의해주세요. ', 1);
+						break;
+					case '2': throw new Exception('업로드한 파일크기가 HTML 폼에 명시한 값보다 큽니다. 티플에 문의해주세요 ', 2);
+						break;
+					case '3': throw new Exception('파일의 일부분만 업로드 되었습니다. 티플에 문의해주세요 ', 3);
+						break;
+					case '4': throw new Exception('파일이 업로드되지 않았습니다. 티플에 문의해주세요', 4);
+						break;
+					case '6': throw new Exception('임시 디렉터리가 지정되지 않았습니다. 티플에 문의해주세요', 5);
+						break;
+					case '7': throw new Exception('디스크에 파일을 쓰지 못했습니다. 티플에 문의해주세요 ', 6);
+						break;
+				}
+
+			}catch (Exception $e) {
+
+				alert($e->getMessage()."errorCode : ".$e->getCode());			
+			}
+		}
 	}
 
+	public function setMaxsize($maxsize) {
+		if ( $maxsize >= 0 && $maxsize <= 1024000) {
+			$this->maxsize = $maxsize / 1024;	
+		} else {
+			return false;		
+		}
+		return $this;
+	} 	
 
-	/**
-	 * Get file size
-	 *
-	 * @return int
-	 */
-	protected function get_file_size() {
+	public function checkMaxsize() {
 
-		return filesize($this->tmp_name);
-
+		$checkFilesize = $this->arrfile['size'] / 1024;
+		if ( $checkFilesize <= $this->maxsize ) {
+			$this->arrfile['size'] = $checkFilesize;			
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	
+	public function setAllowedExtension($extension) {		
+		$this->extension = $extension;
+		return $this;
 	}
 
-
-	/**
-	 * Set destination path (return TRUE on success)
-	 *
-	 * @param string $destination
-	 * @return bool
-	 */
-	protected function set_destination($destination) {
-
-		$this->destination = $destination . DIRECTORY_SEPARATOR;
-
-		return $this->destination_exist() ? TRUE : $this->create_destination();
-
+	public function checkAllowedExtension(){
+		
+		return isValidExt($this->arrfile,$this->extension);	
+	
 	}
 
-
-	/**
-	 * Checks whether destination folder exists
-	 *
-	 * @return bool
-	 */
-	protected function destination_exist() {
-
-		return is_writable($this->destination);
-
+	public function setDirectory($dir) {		
+		$this->directory = $dir;
+		return $this;
 	}
 
+	public function upload (){	
 
-	/**
-	 * Create path to destination
-	 *
-	 * @param string $dir
-	 * @return bool
-	 */
-	protected function create_destination() {
+		if($this->validate() === false){
 
-		return mkdir($this->destination, $this->default_permissions, true);
+			return false;
 
+		}else{
+			$this->randomString = encrypt(getRandomString(30).time());	
+			$this->fsId = getRandomString(15).time();
+			
+
+			if (move_uploaded_file($this->arrfile['tmp_name'], $this->directory.$this->randomString)) {		
+
+				$this->insertData();
+			
+			}
+
+			
+		}
+		return $this;
 	}
 
+	public function insertData(){
+		
+		global $cfg;
 
-	/**
-	 * Set unique filename
-	 *
-	 * @return string
-	 */
-	protected function create_new_filename() {
-		$filename = $this->file['post_data']['name'];
-		$this->set_filename($filename);
+		$originalFileName = $this->arrfile['name'];			
 
+		DB::insert('tmFileStorage', 
+			array(
+				'fsId' => $this->fsId,
+				'fsFileName' => $this->randomString,
+				'fsOriginalName' => $originalFileName, 
+				'fsDatetime' => $cfg['time_ymdhis']
+			)
+		);
+		return $this;
 	}
 
-
-	/**
-	 * Convert bytes to mb.
-	 *
-	 * @param int $bytes
-	 * @return int
-	 */
-	protected function bytes_to_mb($bytes) {
-
-		return round(($bytes / 1048576), 2);
-
+	private function validate(){
+		if(isExist($this->arrfile) === false) return false;
+		if(isExist($this->maxsize) === true && $this->checkMaxsize() === false) return false;
+		if(isExist($this->extension) === true && $this->checkAllowedExtension() === false) return false;
 	}
 
+}
 
-} // end of Upload
+?>
