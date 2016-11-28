@@ -50,6 +50,7 @@ $cfg['lib_dir'] = "lib";
 $cfg['js_dir'] = "js";
 $cfg['css_dir'] = "css";
 $cfg['user_dir'] = "user";
+$cfg['personalTest'] = "personalTest";
 
 //경로 설정
 $cfg['prd_path'] = $cfg['path']."/".$cfg['prd_dir'];
@@ -59,6 +60,8 @@ $cfg['common_path'] = $cfg['path']."/".$cfg['common_dir'];
 $cfg['lib_path'] = $cfg['path']."/".$cfg['lib_dir'];
 $cfg['js_path'] =	$cfg['path']."/".$cfg['js_dir'];
 $cfg['css_path'] =	$cfg['path']."/".$cfg['css_dir']."/compiled";
+$cfg['img_storage'] =	"/home/www/tplanit/img-storage/";
+
 
 define("META_CHARSET", "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">");
 define("PATH_PRD", $cfg['prd_path']);
@@ -73,6 +76,7 @@ define("PATH_CSS", $cfg['css_path']);
 define("PATH", $cfg['path']);
 define("URL", $cfg['url']);
 define("ABSOLUTE_PATH", $_SERVER['DOCUMENT_ROOT']);
+define("PATH_IMG_STORAGE", $cfg['img_storage']);
 
 
 
