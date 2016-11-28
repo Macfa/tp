@@ -17,7 +17,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	};
 
 	if($arrPad[$carrier] == undefined) {
-		console.log($data);
+		//console.log($data);
 		$.ajax({
 			url:'/product/getPlanCalculatorPad.php',
 			type:'post',

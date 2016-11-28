@@ -138,9 +138,6 @@ $calcResult['rewardPoint'] = (isExist($rpPoint))?(int)$rpPoint:'미정';
 
 //-------------------------------------
 
-
-//-------------------------------------
-
 $output = $calcResult;
 //$output['calculator'] = $calculator;
 
