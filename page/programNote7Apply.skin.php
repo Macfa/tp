@@ -111,28 +111,16 @@
 					$('.js-applyTypeWrap').hide().find('input').attr('disabled', 'disabled').prop('checked', false);	
 
 					$('.js-notice').hide();	
-					if($buyVal == '1' && $currentCarrier == 'sk'){						
-						$('.js-applyTypeWrap').show().find('input').attr('disabled', 'disabled').prop('checked', true);
-						$('[name=tnApplyType]').prop('checked',false);						
-						$('[name=tnApplyType]').removeAttr('disabled');
+					$('.js-applyTypeWrap').show().find('input').removeAttr('disabled').prop('checked', true);
+					$('[name=tnApplyType]').prop('checked',false);						
+					$('[name=tnApplyType]').removeAttr('disabled');
+					$('.js-submit').show();	
+					if($currentCarrier == 'kt')	{
+						$('[name=tnApplyType][value=02]').parent('.inp-chk').hide();
+						$('[name=tnApplyType][value=06]').parent('.inp-chk').show();
+					}else {
+						$('[name=tnApplyType][value=02]').parent('.inp-chk').show();
 						$('[name=tnApplyType][value=06]').parent('.inp-chk').hide();
-						$('.js-submit').show();		
-					}else if($buyVal == '1' && $currentCarrier == 'kt'){	
-						$('.js-notice').show();			
-						$('.js-submit').hide();		
-					}else if($buyVal == '0' ){	
-						$('.js-applyTypeWrap').show().find('input').attr('disabled', 'disabled').prop('checked', true);
-						$('[name=tnApplyType]').prop('checked',false);						
-						$('[name=tnApplyType]').removeAttr('disabled');
-						$('.js-submit').show();	
-						if($currentCarrier == 'kt')	{
-							$('[name=tnApplyType][value=02]').parent('.inp-chk').hide();
-							$('[name=tnApplyType][value=06]').parent('.inp-chk').show();
-						}else {
-							$('[name=tnApplyType][value=02]').parent('.inp-chk').show();
-							$('[name=tnApplyType][value=06]').parent('.inp-chk').hide();
-
-						}
 					}
 				}); 		
 			</script>
@@ -141,9 +129,6 @@
 
 		<div class="js-submit" style="display:none">			
 			<input type="submit" class="btn-filled" value="신청하기"/>	
-		</div>
-		<div class="js-notice" style="display:none">		
-			<span class="sub"><i class="ico-caution-small"></i> 신청이 불가능합니다. 유선상으로 상담바랍니다.</span>			
 		</div>
 
 	</form>
