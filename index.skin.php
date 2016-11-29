@@ -169,7 +169,7 @@
 <div class="layer-banner-wrap js-layerBanner">
 	<div class="layer-banner center">
 		<div class="tit-sub">갤럭시노트7 교환&환불 안내</div>
-		<div class="tit-sub txt-highlight">(2016.10.27 업데이트)</div>
+		<div class="tit-sub txt-highlight">(2016-11-29 업데이트)</div>
 		갤럭시노트7 교환&환불 절차를 안내드립니다. 
 		<br/>
 		<i class="ico-caution-small"></i> <span class="txt-highlight">공지사항을 반드시 읽어주시길 바랍니다.</span>
@@ -202,14 +202,14 @@ $(function(){
 		$('.main-slider').bxSlider($bxSliderOption);
 	});
 
-	<?php if(isNotExist(get_cookie('isLayerBannerHide2016-10-27'))) :?>
+	<?php if(isNotExist(get_cookie('isLayerBannerHide2016-11-29'))) :?>
 	$('.js-layerBanner').show();
 	<?php endif?>
 });
 
 $('.js-layerBannerClose').click(function(){
 	if($('[name=isHide]:checked').val() == 1) {
-		setCookie('isLayerBannerHide2016-10-27','yes',1);
+		setCookie('isLayerBannerHide2016-11-29','yes',1);
 	}
 	
 	$('.js-layerBanner').hide();
