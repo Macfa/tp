@@ -530,7 +530,7 @@ class planCalculator {
 		unset($data);
 
 		$data['content'] = $this->calculatorResult.$this->calculatorPad;
-		$data['dvId'] = $this->dvKey;
+		$data['dvKey'] = $this->dvKey;
 		$data['dvId'] = $this->dvId;
 		$data['token'] = createToken();
 		$calculator = getResultTemplate($data, $this->htmlCalculatorTemplate);
