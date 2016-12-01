@@ -193,7 +193,7 @@ class planParsing{
 	}
 	
 	public function getArrPlan(){
-		return $this->deviceInfo->setCarrier($this->carrier)->setMode($this->mode)->getArrPlan();
+		return $this->deviceInfo->setCarrier($this->carrier)->setMode($this->mode)->getArrPlanBasedCategory();
 	}
 
 	public function setPlan($input){
