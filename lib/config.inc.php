@@ -27,7 +27,8 @@ $cfg['url'] = "http://".$cfg['subURL'];
 $cfg['full_url'] = $cfg['url'].$_SERVER['PHP_SELF'];
 $cfg['ip'] = $_SERVER['REMOTE_ADDR'];
 $cfg['login_url'] = $cfg['url']."/user/login.php?returnURL=".urlencode($cfg['full_url']);
-
+define("ABSOLUTE_PATH", $_SERVER['DOCUMENT_ROOT']);
+define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']);
 
 //테이블 명 설정
 
@@ -53,13 +54,13 @@ $cfg['user_dir'] = "user";
 $cfg['personalTest'] = "personalTest";
 
 //경로 설정
-$cfg['prd_path'] = $cfg['path']."/".$cfg['prd_dir'];
-$cfg['user_path'] = $cfg['path']."/".$cfg['user_dir'];
-$cfg['img_path'] = $cfg['url']."/".$cfg['img_dir'];
-$cfg['common_path'] = $cfg['path']."/".$cfg['common_dir'];
-$cfg['lib_path'] = $cfg['path']."/".$cfg['lib_dir'];
-$cfg['js_path'] =	$cfg['path']."/".$cfg['js_dir'];
-$cfg['css_path'] =	$cfg['path']."/".$cfg['css_dir']."/compiled";
+$cfg['prd_path'] = $_SERVER['DOCUMENT_ROOT']."/".$cfg['prd_dir'];
+$cfg['user_path'] = $_SERVER['DOCUMENT_ROOT']."/".$cfg['user_dir'];
+$cfg['img_path'] = "/".$cfg['img_dir'];
+$cfg['common_path'] = $_SERVER['DOCUMENT_ROOT']."/".$cfg['common_dir'];
+$cfg['lib_path'] = $_SERVER['DOCUMENT_ROOT']."/".$cfg['lib_dir'];
+$cfg['js_path'] =	"/".$cfg['js_dir'];
+$cfg['css_path'] =	"/".$cfg['css_dir']."/compiled";
 $cfg['img_storage'] =	"/home/www/tplanit/img-storage/";
 
 
@@ -73,10 +74,11 @@ define("PATH_LIB", $cfg['lib_path']);
 define("PATH_JS", $cfg['js_path']);
 define("PATH_JS_LIB", $cfg['js_path']."/lib");
 define("PATH_CSS", $cfg['css_path']);
-define("PATH", $cfg['path']);
+define("PATH", $_SERVER['DOCUMENT_ROOT']);
 define("URL", $cfg['url']);
-define("ABSOLUTE_PATH", $_SERVER['DOCUMENT_ROOT']);
 define("PATH_IMG_STORAGE", $cfg['img_storage']);
+
+//echo dirname(__FILE__);
 
 
 
