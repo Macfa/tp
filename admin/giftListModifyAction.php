@@ -50,21 +50,6 @@ foreach ($detailImage as $key => $fileName) {
 
 //=============== 썸네일 수정
 
-try{
-		if($fileNameCheck > 0)
-			throw new Exception("파일명을 변경해주세요", 1);
-		
-		if(isExist($_POST['gfDisplayModify']) === false)
-			throw new Exception("진열상태를 선택해주세요", 1);
-		
-} catch (Exception $e) {	
-		
-		alert($e->getMessage(),"./giftListModify.php?gfKey=".$_POST['gfKey']);
-
-}
-
-//=============== 썸네일 기존
-
 $fileName = $_POST['gfThumb'];
 
 if(isExist($_FILES['gfThumbModify']['name']) === true){
@@ -85,7 +70,7 @@ if(isExist($_FILES['gfThumbModify']['name']) === true){
 
 	}
 
-	$fileName = $upload->fsId."_".$upload->arrfile['name'];
+	$fileName = $upload->fsId;
 }
 
 
