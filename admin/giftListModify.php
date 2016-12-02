@@ -25,7 +25,7 @@ $result = substr($tmp, 0, 4);
 if($result === 'gift'){		
 	$gfThumbPath= PATH_IMG."/";
 }else{
-	$gfThumbPath = PATH."/image.index.php?name=";	
+	$gfThumbPath = "/image.index.php?name=";	
 }
 if(isExist($giftInfo['gfThumb']) === false){		
 		$gfThumb = PATH_IMG.'/noimage.jpg';

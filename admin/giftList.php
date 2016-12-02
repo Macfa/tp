@@ -50,7 +50,7 @@ foreach ($giftInfo as $val){
 	if($result[$val['gfKey']] === 'gift'){		
 		$gfThumbPath[$val['gfKey']] = PATH_IMG."/";
 	}else{
-		$gfThumbPath[$val['gfKey']] = PATH."/image.index.php?name=";
+		$gfThumbPath[$val['gfKey']] = "/image.index.php?name=";
 	}
 	if(isExist($val['gfThumb']) === false){		
 		$gfThumb[$val['gfKey']]	= PATH_IMG.'/noimage.jpg';

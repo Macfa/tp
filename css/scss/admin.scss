@@ -1,8 +1,8 @@
 @import 'common.scss';
 @import '_list.scss';
 @import '_row.scss';
-//@import 'jquery-ui.min.css';
-//@import 'jquery-ui.theme.min.css';
+@import 'jquery-ui.min.css';
+@import 'jquery-ui.theme.min.css';
 
 //메인기기 기기정렬 css
 .sortable-grid { list-style-type: none; margin: 0; padding: 0; width: 900px;}
