@@ -193,12 +193,12 @@ class planParsing{
 	}
 	
 	public function getArrPlan(){
-		return $this->deviceInfo->setCarrier($this->carrier)->setMode($this->mode)->getArrPlanBasedCategory();
+		return $this->deviceInfo->setCarrier($this->carrier)->setMode($this->mode)->getArrPlanBasedMode();
 	}
 
 	public function setPlan($input){
 		$this->plan = $input;
-		$planValue = $this->deviceInfo->arrPlan[$this->carrier][$this->mode][$input]['value'];
+		$planValue = $this->deviceInfo->getPlanValue($input);
 		$this->arrCarrierPostSubmitVal['sk']['PROD_ID'] = $planValue;
 		$this->arrCarrierPostSubmitVal['kt']['prdcCd'] = $planValue;
 		return $this;
@@ -219,6 +219,7 @@ class planParsing{
 		}else if($this->arrCarrierPostSubmitVal['kt']['prodType'] !== 'ETC' && $this->carrier === 'kt') { 
 			// 기타단말기가 아닐때
 			$result = jsonToArray($data->results);
+			//var_dump(http_build_query($this->arrCarrierPostSubmitVal[$this->carrier]));
 			$max = $result['pageInfoBean']['totalPageCount'];
 			$this->page = $result['LIST_DATA'];
 			for($i=2;$i<=$max;$i++){
@@ -227,6 +228,7 @@ class planParsing{
 				$result = jsonToArray($data->results);
 				$this->page = array_merge($this->page, $result['LIST_DATA']);
 			}
+
 		}else if($this->arrCarrierPostSubmitVal['kt']['prodType'] === 'ETC' && $this->carrier === 'kt'){	
 			//기타 단말기 일때
 			$this->page = $this->getETCSupportForKT($data->results);
@@ -369,6 +371,7 @@ class planParsing{
 			return $this;
 
 		$arrPlan = $this->getArrPlan();
+		//var_dump($arrPlan);
 		foreach($arrPlan as $key => $val){
 			$this->setPlan($val)->getPage()->getTable()->getCont()->checkHTMLChanged()->insertUpdate();
 		}
@@ -395,7 +398,7 @@ class planParsing{
 
 			//하위 16g 32g 같은 용량 분류가 있을때
 			if ($isRequireParent === true) {
-				$parentKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvModelCode = %s AND dvParent = 0", $row['commonModel']);
+				$parentKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE (dvModelCode = %s OR dvId = %s) AND dvParent = 0", $row['commonModel'], $row['dvCommonId']);
 				if (isNotExist($parentKey) === true) {
 					DB::insert('tmDevice', array(
 						'dvId' => $row['dvCommonId'],
@@ -415,7 +418,7 @@ class planParsing{
 				$row['dvTit'] = $row['capacity'];
 			}
 			
-			$dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvModelCode = %s", $row['model']);
+			$dvKey = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE (dvModelCode = %s OR dvId = %s)", $row['model'], $row['dvId']);
 			if (isNotExist($dvKey) === true) {
 				DB::insert('tmDevice', array(
 					'dvId'				=> $row['dvId'],
@@ -451,7 +454,7 @@ class planParsing{
 					'spDate' => $row['spDate']
 				)
 			);
-			if($isNotUpdated == 0) {
+			if($isNotUpdated == 0 && isExist($row['spSupport']) === true) {
 				DB::insert('tmSupport', array(
 					'dvKey' => $dvKey,
 					'spPlan' => $this->plan,
