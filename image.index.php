@@ -5,11 +5,9 @@ $fileExtension = explode(".", $_GET['name']);
 
 header("Content-type: image/".$fileExtension[1]);
 
-$fileName = explode("_", $_GET['name']);
 
-$fsFileName = DB::queryFirstField("SELECT fsFileName FROM tmFileStorage where fsId=%s_fsId AND fsOriginalName=%s_fsOriginalName",array(
-	'fsId' => $fileName[0],
-	'fsOriginalName' => $fileName[1]
+$fsFileName = DB::queryFirstField("SELECT fsFileName FROM tmFileStorage where fsId=%s_fsId",array(
+	'fsId' => $_GET['name']
 	));
 
 $url = PATH_IMG_STORAGE.$fsFileName;

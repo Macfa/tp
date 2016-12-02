@@ -5,6 +5,7 @@
 			<ul class="admin-list-sub-group">
 				<li><a href="addDevice.php" class="admin-list-sub">기기 추가</a></li>
 				<li><a href="addGift.php" class="admin-list-sub">사은품 추가</a></li>
+				<li><a href="giftList.php" class="admin-list-sub">사은품 목록/수정</a></li>
 				<li><a href="orderList.php" class="admin-list-sub">사은품 주문목록</a></li>
 				<li><a href="orderModify.php" class="admin-list-sub">기기/사은품 정렬수정</a></li>
 				<li><a href="insertDeviceCode.php" class="admin-list-sub">실가입 URL 입력/수정</a></li>				
