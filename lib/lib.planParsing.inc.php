@@ -70,10 +70,10 @@ class planParsing{
 											'apple'=>'Apple'
 										),
 										'kt' => array(
-											'samsung'=>13, 
-											'lg'=>07, 
-											'apple'=>15,
-											'etc'=>99
+											'samsung'=>	'13', 
+											'lg'=>		'07', 
+											'apple'=>	'15',
+											'etc'=>		'99'
 										)
 									);
 
@@ -139,7 +139,7 @@ class planParsing{
 		$this->arrManuf['sk']['samsung'] = iconv("UTF-8", "EUC-KR", '삼성전자(주)');
 		$this->arrManuf['sk']['lg'] = iconv("UTF-8", "EUC-KR", 'LG전자(주)');
 		$this->arrCarrierPostSubmitVal['sk']['COMPANY_NM'] = '';
-		$this->arrCarrierPostSubmitVal['kt']['makrCd'] = '';
+		//$this->arrCarrierPostSubmitVal['kt']['makrCd'] = '';
 		$this->deviceInfo = new deviceInfo();
 		return $this;
 	}
