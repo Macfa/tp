@@ -341,6 +341,11 @@ class deviceInfo {
 		return $this->arrPlanValue;
 	}
 
+	public function getArrPlanBasedMode(){
+		return $this->arrPlanCategory[$this->carrier][$this->mode];
+
+	}
+
 	public function getArrPlan($dvKey){
 		//var_dump($this->arrPlan[$this->carrier][$this->mode]);
 		//var_dump($this->carrier);

@@ -24,7 +24,7 @@ class import {
 	public function importCSS() {
 		foreach($this->css as $value) {
 			$value_css = PATH_CSS."/".$value;
-			$data['csspath'] = $value_css.'?v='.filemtime($value_css);
+			$data['csspath'] = $value_css.'?v='.filemtime(PATH_ROOT."/".$value_css);
 			echo getResultTemplate($data, $this->templateCSS);
 		}
 	}
@@ -37,7 +37,7 @@ class import {
 				$path = PATH_JS;
 
 			$value_js = $path."/".$value['file'];
-			$data['js'] = $value_js.'?v='.filemtime($value_js);
+			$data['js'] = $value_js.'?v='.filemtime(PATH_ROOT."/".$value_js);
 			echo getResultTemplate($data, $this->templateJS);
 		}
 	}

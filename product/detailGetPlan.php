@@ -122,8 +122,7 @@ if($cntDevicePlanGraph > 1){
 }
 
 //-------------------------------------
-
-$rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
+$rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType ORDER BY rpKey DESC", 
 	array(
 		'dvKey' => $device['dvKey'],
 		'rpPlan' => $_POST['plan'],
@@ -134,10 +133,7 @@ $rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = 
 );
 
 $calcResult['dvKey'] = $device['dvKey'];
-$calcResult['rewardPoint'] = (isExist($calcResult['rewardPoint']))?(int)$rpPoint:'미정';
-
-//-------------------------------------
-
+$calcResult['rewardPoint'] = (isExist($rpPoint))?(int)$rpPoint:'미정';
 
 //-------------------------------------
 
