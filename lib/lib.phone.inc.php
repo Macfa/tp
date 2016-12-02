@@ -341,8 +341,8 @@ class deviceInfo {
 		return $this->arrPlanValue;
 	}
 
-	public function getArrPlanBasedCategory(){
-		return $this->arrPlan[$this->carrier][$this->mode];
+	public function getArrPlanBasedMode(){
+		return $this->arrPlanCategory[$this->carrier][$this->mode];
 
 	}
 
