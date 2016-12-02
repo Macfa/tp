@@ -25,15 +25,15 @@ if (isExist($_FILES['gfCont'])) {
     $file_ary = reArrayFiles($_FILES['gfCont']);
 
     foreach ($file_ary as $val) {
+    	    	
     	$arrUpload[] = Upload::setFile($val)->setMaxsize(1024000)->setAllowedExtension($allowedExtension)->setDirectory($img_dir)->upload();
 		foreach ($arrUpload as $value) {
 
 
 		} 
-		$arrfileNewName[] = "<img data-original=".$path_dir."/image.index.php?name=".$value->fsId."_".$value->arrfile['name'].">";
-		htmlentities($arrfileNewName);
+		$arrfileNewName[] = '<img data-original="'.$path_dir.'/image.index.php?name='.$value->fsId.'">';		
 		$gfCont = implode(" ", $arrfileNewName);
-		html_entity_decode($arrfileNewName);
+		
     }
 }
 
@@ -52,7 +52,7 @@ try{
 
 }
 
-$fileNewName = $upload->fsId."_".$upload->arrfile['name'];
+$fileNewName = $upload->fsId;
 
 
 DB::insert('tmGift', 
@@ -68,7 +68,6 @@ DB::insert('tmGift',
 
 
 if(isExist($upload) === true){
-	echo "완료";
 
 	alert('완료되었습니다.', "/admin/addGift.php");
 

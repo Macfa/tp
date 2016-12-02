@@ -1,6 +1,36 @@
 @import 'common.scss';
 @import '_list.scss';
 @import '_row.scss';
+//@import 'jquery-ui.min.css';
+//@import 'jquery-ui.theme.min.css';
+
+//메인기기 기기정렬 css
+.sortable-grid { list-style-type: none; margin: 0; padding: 0; width: 900px;}
+.sortable-grid li {@include inlineBlock; padding: 1px;width: 18%; height: 150px; font-size: 1.5em; text-align: center; vertical-align:top;}
+.sortable-main li:not(.ui-sortable-placeholder){
+	@include nthChildSelector(1, 10){
+		background: lighten($mainYellow, 30);
+	}
+	&:nth-child(10){
+		margin-bottom:100px;
+	}
+}
+#sortable {
+	width: 1200px;
+	margin:0;
+	padding:0;
+	list-style:none;
+	li{
+		@include inlineBlock;
+		width:100px;
+		height:100px;
+		vertical-align:top;
+		padding-top:30px;
+		text-align:center;
+	}
+}
+//==========메인기기 기기정렬 css==========
+
 .contact-pc-wrap {display:none;}
 .contact-ico {
 	background:url('../img/ico-contact-btn.png') no-repeat center center;
@@ -184,11 +214,77 @@
 	}
 }
 
+.giftList {
+	font-size: 14px;
+	.gfThumb img {width:60px;}
+	.gfKey a{color:$mainBlack;}
+	tr td {text-align: center; padding:15px 35px;}	
+}
+
+.giftListModify{
+	.inp-group {
+		margin-top: 0;
+		border-bottom: 0;
+	}
+	.gfThumb img {width:250px;}
+	tr td {text-align: center; padding:15px 35px;}	
+}
+// 사은품 수정 상세페이지 css 
+.detailImageArea {
+	.sortable-main li:not(.ui-sortable-placeholder){		
+		&:nth-child(10){
+			margin-bottom:0px;
+		}
+	}
+
+	width:100%;
+	background: #fff;
+	.sortable-grid{
+		width: 100%;
+	}
+	.sortable-grid li{
+		text-align: left;
+		width:100%;
+		height:auto;
+		//width:18%;
+		//height:400px;
+		margin-bottom: 5px;
+		padding-bottom:30px;
+		border:2px solid #2e333a;
+		position: relative;
+		font-size: 1em;
+		img {
+			max-height:400px;
+			//width:250px;
+			//height: 100%;
+		}
+	}
+	.sortable-main li:not(.ui-sortable-placeholder){
+		background: none;
+	}
+	.img-delete {
+		position: absolute;
+		right: 5px;
+		width:45px;
+		height:40px;
+		font-size: 15px;
+		text-align: center;
+		line-height: 40px;
+		display: block;
+		background: $mainYellow;
+		color:$mainBlack;
+		cursor: pointer;
+		z-index: 5;
+	}	
+}
+
+
+
 @media all and (min-width:640px){
 	.admin-wrap{
 		width:280px;
 	}
 	.admin-list-sub-group{
 		padding-left:25px;
-	}
+	}	
 }

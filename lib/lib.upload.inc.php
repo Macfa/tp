@@ -1,6 +1,6 @@
 <?php 
-//upload::setFile($_FILE['NAME'])->setMaxsize(12312312)->upload();
-//upload::setFile($_FILE['NAME'])->upload();
+include_once(PATH_LIB.'/lib.meekrodb.inc.php');
+
 class Upload {
 	
 	protected $maxsize = null;
@@ -91,9 +91,16 @@ class Upload {
 			return false;
 
 		}else{
-			$this->randomString = encrypt(getRandomString(30).time());	
-			$this->fsId = getRandomString(15).time();
-			
+			$this->randomString = encrypt(getRandomString(30).time());
+
+			$temp = explode('.', $this->arrfile['name']);
+			$ext = $temp[count($temp)-1];
+
+			$this->fsId = getRandomString(15).".".$ext;	
+			$checkFsId = DB::queryFirstField("SELECT fsId FROM tmFileStorage WHERE fsId=%s", $this->fsId); 
+			if(isExist($checkFsId)){
+				$this->fsId = getRandomString(15).".".$ext;	
+			}		
 
 			if (move_uploaded_file($this->arrfile['tmp_name'], $this->directory.$this->randomString)) {		
 
