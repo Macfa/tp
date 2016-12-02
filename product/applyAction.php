@@ -67,7 +67,7 @@ try
 	if(isNullVal($_POST['plan']))
 		throw new Exception('요금제를 선택해주세요 ', 3);
 
-	if(isNullVal($_POST['color']))
+	if(isNullVal($_POST['apColor']))
 		throw new Exception('색상을 선택해주세요 ', 3);
 
 	$dvKeyWhere = "SELECT COUNT(*) FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s_dvKey";
@@ -224,6 +224,16 @@ $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey 
 			'cdCarrier' => $_POST['carrier']
 	)
 );
+
+DB::insert('tmApplyTmp', array(
+    'mbEmail' => $mb['mbEmail'],
+    'dvKey' => $_POST['dvKey'],
+    'apCurrentCarrier' => $_POST['apCurrentCarrier'],
+    'apChangeCarrier' => $_POST['carrier'],
+    'apColor' => $_POST['apColor'],
+    'apPlan' => $_POST['plan'],
+    'apApplyType' => $_POST['applyType'],
+    'apDatetime' => $cfg['time_ymdhis']));
 
 $deviceInfo = new deviceInfo();
 $deviceInfo->setCarrier($_POST['carrier']);

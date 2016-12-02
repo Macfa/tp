@@ -63,28 +63,28 @@
 		<br>
 		<label class="inp-wrap">
 			<i class="ico-color-small"></i> 
-			<input type="text" class="inp-txt" name="color" value="" />
+			<input type="text" class="inp-txt" name="apColor" value="" />
 			<div class="inp-label">색상</div>
 		</label>
 		<fieldset class="inp-group">
 			<i class="ico-carrier-small"></i> 현재 이용중인 통신사 <br/>
 			<label class="inp-chk">
-				<input type="radio" name="current" value="sk"/>
+				<input type="radio" name="apCurrentCarrier" value="sk"/>
 				<div class="inp-chk-box"></div>
 				SKT
 			</label>
 			<label class="inp-chk">
-				<input type="radio" name="current" value="kt"/>
+				<input type="radio" name="apCurrentCarrier" value="kt"/>
 				<div class="inp-chk-box"></div>
 				KT olleh
 			</label>
 			<label class="inp-chk">
-				<input type="radio" name="current" value="lg"/>
+				<input type="radio" name="apCurrentCarrier" value="lg"/>
 				<div class="inp-chk-box"></div>
 				LG U+
 			</label>
 			<label class="inp-chk">
-				<input type="radio" name="current" value="etc"/>
+				<input type="radio" name="apCurrentCarrier" value="etc"/>
 				<div class="inp-chk-box"></div>
 				알뜰폰
 			</label>
