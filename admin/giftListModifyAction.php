@@ -30,11 +30,7 @@ $k = 0;
 foreach ($detailImage as $key => $fileName) {	
 
 	if(isExist($fileName) === false){
-
-		$fileNameCheck = substr_count($file_ary[$k]['name'],"_");
-		if($fileNameCheck > 0){
-			alert("파일명을 변경해주세요","./giftListModify.php?gfKey=".$_POST['gfKey']);
-		}
+			
 		$arrUpload = Upload::setFile($file_ary[$k])->setMaxsize(1024000)->setAllowedExtension($allowedExtension)->setDirectory($img_dir)->upload();
 		$arrfileNewName[$key] = '<img data-original="/image.index.php?name='.$arrUpload->fsId.'">';		
 		
