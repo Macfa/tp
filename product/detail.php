@@ -147,6 +147,15 @@ if ($supportCount == 1 && $arrApplyTypeCnt == 1) {
 	$defAvailablePoint = '선택사항을 모두 선택해주세요';
 }
 
+$tmp = $device['dvDetailThumb'];
+$strTmp = substr($tmp, 0, 6);
+
+if($strTmp === 'device'){		
+	$imgPath = PATH_IMG.'/';
+}else{
+	$imgPath = "/image.index.php?name=";
+}
+
 //---------------------------------------------------------------------------------------
 
 $planCalculator = new planCalculator();
