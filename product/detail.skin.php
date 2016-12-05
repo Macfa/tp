@@ -12,7 +12,7 @@
 	<button class="btn-flat-primary-dense"><i class="detailSpec-ico"></i><span class="detailSpec-txt">상세</span></button>
 	</a>
 	<div class="detail-intro-img-wrap <?php echo $device['dvId']?>">
-		<img class="detail-intro-img" src="<?php echo PATH_IMG?>/<?php echo $device['dvDetailThumb']?>"/>
+		<img class="detail-intro-img" src="<?php echo $imgPath.$device['dvDetailThumb']?>"/>
 	</div>
 	<section class="detail-intro">
 		<!--div class="intro-device">
