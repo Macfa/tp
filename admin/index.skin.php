@@ -4,6 +4,7 @@
 			기기및사은품관리
 			<ul class="admin-list-sub-group">
 				<li><a href="addDevice.php" class="admin-list-sub">기기 추가</a></li>
+				<li><a href="deviceList.php" class="admin-list-sub">기기 목록/수정</a></li>
 				<li><a href="addGift.php" class="admin-list-sub">사은품 추가</a></li>
 				<li><a href="giftList.php" class="admin-list-sub">사은품 목록/수정</a></li>
 				<li><a href="orderList.php" class="admin-list-sub">사은품 주문목록</a></li>
