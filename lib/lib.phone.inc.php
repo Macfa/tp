@@ -37,7 +37,7 @@ class deviceInfo {
 		array(
 			'sk' => array(
 				'phone' => array(0,1,2,3,4,5,6,7,8),
-				'kids'=>array(9),
+				'kids'=>array(9,31),
 				'watch'=>array(11,12,29,30),
 				'pocketfi'=>array(13,14)
 			),
@@ -262,6 +262,13 @@ class deviceInfo {
 				'fee' => 11000,
 				'selectPlanDiscount' => 0,
 				'value' => 'NA00004761'
+			),
+			31 => array(
+				'name' => '쿠키즈 18',
+				'description' => '데이터100MB/음성30분',
+				'fee' => 18000,
+				'selectPlanDiscount' => 0,
+				'value' => 'NA00004891'
 			)
 		);	
 	private $arrPlanName =	
