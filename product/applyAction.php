@@ -77,15 +77,23 @@ try
 	if($isExistDevice === FALSE)
 		throw new Exception('존재하지 않는 기기입니다.', 3);
 
+	$rewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
+			array(
+				'dvKey' => $_POST['dvKey'],
+				'rpPlan' => $_POST['plan'],
+				'rpCarrier' => $_POST['carrier'],
+				'rpApplyType' => $_POST['applyType'],
+				'rpDiscountType' => $_POST['discountType']
+			)
+	);
+
 	//주문 값 검사
 
 	if($_POST['oiQuantity'] || $_POST['gfKey']) {
 		$isOrderGift = true;
 
 		if (count($_POST['gfKey']) != count($_POST['oiQuantity']))
-			throw new Exception('사은품 매개변수가 쌍이 맞지 않습니다.', 3);
-
-		
+			throw new Exception('사은품 매개변수가 쌍이 맞지 않습니다.', 3);		
 
 		foreach($_POST['oiQuantity'] as $val) {
 			if(isNum($val) == false)
@@ -104,31 +112,53 @@ try
 			$totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
 		}
 
-		$rewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
-			array(
-				'dvKey' => $_POST['dvKey'],
-				'rpPlan' => $_POST['plan'],
-				'rpCarrier' => 'sk',
-				'rpApplyType' => $_POST['applyType'],
-				'rpDiscountType' => $_POST['discountType']
-			)
-		);
+
 		if ($totalPoint > ($mb['mbPoint'] + $rewardPoint))
 			throw new Exception('총 결제 별이 사용가능한 별보다 많습니다.', 3);
 
 		if ($totalPoint < 0)
 			throw new Exception('총 결제 별이 0보다 작을 수 없습니다.', 3);	
-
 	}
 
-	
+	if(isExist($_POST['recommedID'])){
+
+		$myMbKey = $mb['mbKey'];
+
+		// 추천인 정보 조회
+		list($isMemberExist, $targetMbKey, $targetMbEmail, $targetMbPoint) = DB::queryFirstList("SELECT COUNT(*), mbKey, mbEmail, mbPoint FROM tmMember WHERE mbEmail=%s", $_POST['recommedID']);	
+		$isMemberExist = (int)$isMemberExist;
+
+		if($isMemberExist === 0)
+			throw new Exception("멤버가 존재하지 않습니다");	
+		if($targetMbKey === $myMbKey)
+			throw new Exception("본인추천은 불가능합니다");
+
+		//본인이 mbkey 일때 parent,grand 정보
+		//$isRelationExist : 본인이 mbkey 일때의 행이 존재하는 count
+		list($isRelationExist, $isMyKey, $prParent,  $prGrand )= DB::queryFirstList("SELECT COUNT(*), mbKey, prParent, prGrand FROM tmPointRelationship WHERE mbKey=%i",$myMbKey);	
+
+		//본인이 parent 일때 mbkey,grand 정보
+		// $isExistRowWhenParent : 내가 부모인 행이 존재하는 행의 count
+		// $prGrandWhenParent : 내가 부모인 행에서 prGrand 값		
+		list($isExistRowWhenParent, $prGrandWhenParent, $childKey)= DB::queryFirstList("SELECT COUNT(*), prGrand, mbKey FROM tmPointRelationship WHERE prParent=%i",$myMbKey);
+
+		if($prParent === $targetMbKey) $targetIsAlreadyParents = true;
+		if($targetIsAlreadyParents === false && $isRelationExist >= 1)  
+			throw new Exception("이미 다른 추천인이 등록되어있습니다"); 
+
+		if($myMbKey === $isMyKey && $prParent !== $targetMbKey) // 다른 추천인을 넣었을때
+			throw new Exception("이미 다른 추천인이 등록되어있습니다"); 
+
+		if($childKey === $targetMbKey)
+			throw new Exception("추천해준 사람을 추천할 수 없습니다");
+
+	}
 
 }
 catch(Exception $e)
 {
     alert($e->getMessage());
 }
-
 
 if ($isOrderGift) {
 	$countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
@@ -225,6 +255,8 @@ $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey 
 	)
 );
 
+///////////////// 신청서 DB insert
+
 DB::insert('tmApplyTmp', array(
     'mbEmail' => $mb['mbEmail'],
     'dvKey' => $_POST['dvKey'],
@@ -234,6 +266,73 @@ DB::insert('tmApplyTmp', array(
     'apPlan' => $_POST['plan'],
     'apApplyType' => $_POST['applyType'],
     'apDatetime' => $cfg['time_ymdhis']));
+
+
+
+//////////////////추천포인트 지급
+
+if(isExist($_POST['recommedID'])){//추천포인트 지급
+
+	// ID - parent 관계 인서트 - 포인트지급
+	$isRelationExist = (int)$isRelationExist;
+	if($isRelationExist === 0){
+		DB::insert('tmPointRelationship', array(
+		  'mbKey' => $myMbKey, 
+		  'prParent' => $targetMbKey,
+		  'prDate' => $cfg['time_ymdhis']
+		));	
+	}
+
+	DB::update('tmMember', 
+		array(
+			'mbPoint' => DB::sqleval("mbPoint+($rewardPoint * 0.1)")
+		),	'mbKey = %i', $targetMbKey
+	);
+
+	DB::insert('tmPointHistory', array(
+		'mbEmail' => $targetMbEmail,
+		'phCont' => $cfg['time_ymdhis'].' 추천포인트지급',
+		'phAmount' => $rewardPoint*0.1,
+		'phResult' => $targetMbPoint + ($rewardPoint*0.1) ,
+		'phDate' => $cfg['time_ymdhis']
+	));
+
+
+	// B | A | 0 에서
+	// A 가 C를 추천인으로 임명했을때
+
+	// B | A | C
+	// A | C | 0
+	// 이 구조가 되게 해주는 코드
+	// parent - grand 관계 인서트
+	$prGrandWhenParent = (int)$prGrandWhenParent;
+	if($isExistRowWhenParent >= 1){
+		if($prGrandWhenParent === 0){		
+			DB::update('tmPointRelationship', array(
+			  'prGrand' => $targetMbKey 
+			), "prParent=%i", $myMbKey);
+		}
+	}else if ($isRelationExist === 1 && isExist($prGrand) === true ) { // 3단계 관계가 성립할때 3단계 포인트 지급 
+
+		list($grandMbEmail, $grandMbPoint) = DB::queryFirstList("SELECT mbEmail, mbPoint FROM tmMember WHERE mbKey=%i", $prGrand); //grand 추천인 정보
+
+		DB::update('tmMember', 
+			array(
+				'mbPoint' => DB::sqleval("mbPoint+($rewardPoint*0.05)")
+			),	'mbKey = %i', $prGrand
+		);
+
+		DB::insert('tmPointHistory', array(
+			'mbEmail' => $grandMbEmail,
+			'phCont' => $cfg['time_ymdhis'].' 3단계추천포인트지급',
+			'phAmount' => $rewardPoint*0.05,
+			'phResult' => $grandMbPoint + ($rewardPoint*0.05) ,
+			'phDate' => $cfg['time_ymdhis']
+		));
+
+	}
+}
+
 
 $deviceInfo = new deviceInfo();
 $deviceInfo->setCarrier($_POST['carrier']);
