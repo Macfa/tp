@@ -1,6 +1,7 @@
 <?
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 
+
 class givePoint{
 	private $givePoint = '';
 	private $member = '';
@@ -21,7 +22,7 @@ class givePoint{
 	public function give(){
 		global $cfg;
 		$currentPoint = DB::queryFirstField("SELECT mbPoint FROM tmMember WHERE mbEmail=%s", $this->member);
-		($_POST['gpCont'])?$this->cont = ' '.$_POST['gpCont']:$this->cont = ' 포인트 지급';
+		($this->cont)?$cont = ' '.$this->cont:$cont= ' 포인트 지급';
 		DB::update('tmMember', 
 			array(
 				'mbPoint' => DB::sqleval($currentPoint+$this->givePoint)
@@ -30,7 +31,7 @@ class givePoint{
 
 		DB::insert('tmPointHistory', array(
 			'mbEmail' => $this->member,
-			'phCont' => $cfg['time_ymd'].$this->cont,
+			'phCont' => $cfg['time_ymd'].$cont,
 			'phAmount' => $this->givePoint,
 			'phResult' => $currentPoint+$this->givePoint,
 			'phDate' => $cfg['time_ymdhis']
@@ -59,6 +60,14 @@ try{
 
 $givePoint = new givePoint();
 $givePoint->setPoint($_POST['gpPoint'])->setMember($_POST['gpEmail'])->setCont($_POST['gpCont'])->give();
+if(isExist($_POST['prParentEmail'])){
+	$givePoint->setPoint($_POST['prParentPoint'])->setMember($_POST['prParentEmail'])->setCont($_POST['prParentCont'])->give();
+}
+if(isExist($_POST['prGrandEmail'])){
+	$givePoint->setPoint($_POST['prGrandPoint'])->setMember($_POST['prGrandEmail'])->setCont($_POST['prGrandCont'])->give();
+}
+
+
 
 
 alert('지급완료되었습니다.', "/admin/memberList.php?search=".$_POST['gpEmail']);

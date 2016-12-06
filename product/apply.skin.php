@@ -180,6 +180,26 @@
 			<button class="btn-filled-sub-dense js-addressDetailAction js-otherAddress active">다른 주소</button>
 			<button class="btn-filled-sub-dense js-addressListAction js-newAddress">새 주소</button>
 		</div>
+		<?php if(isExist($defaultRewardPoint) === true) :?>
+			<section class="section">
+				<h2 class="tit-sub">추천인 아이디 입력</h2>	
+				티플에서 핸드폰 구매 시 추천인 또한 본인이 받는 포인트의 10%를 받습니다.<br>			
+				<label class="inp-wrap">	
+					<?php if(isExist($isRecommedId) === false) :?>		 
+						<input type="text" class="inp-txt" name="recommedID" value="" />
+						<div class="inp-label">추천인ID</div>	
+					<?else : ?>
+						추천인 ID : <span class="txt-highlight"><?php echo $recommedMbEmail?></span>
+						<input type="hidden" class="inp-txt" name="recommedID" value="<?php echo $recommedMbEmail?>" />
+					<?php endif?>								
+				</label>			
+				<br>	
+				<i class="ico-caution-small"></i>친구 개통 시 본인 또한 그 고객 포인트의 10%를 받습니다.<br>
+				<i class="ico-caution-small"></i>그 친구가 친구를 데려오면 그 친구의 포인트 5%를 받습니다.<br>		
+				<i class="ico-caution-small"></i>추천인 아이디는 단1회 적용 가능 하오니 신중히 결정해주시기 바랍니다.<br>
+				<i class="ico-caution-small"></i>기타문의는 고객센터를 통해 해주시기 바랍니다.<br><br>
+			</section>
+		<? endif ?>
 	</section>
 
 	<section class="js-showContactBtn apply-cart-list js-applyCartList">
@@ -216,7 +236,7 @@
 		</section>
 	</section>
 
-	<?php if(isExist($defaultRewardPoint) === true) :?>
+	<?php if(isExist($defaultRewardPoint) === true) :?>		
 	<h2 class="cart-total-tit">사용 할 별 / 사용 가능한 별</h2>
 	<div class="apply-total">
 		<span class="js-totalResult txt-highlight">0</span> / <span class="js-availablePoint">
