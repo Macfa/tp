@@ -41,6 +41,9 @@ if(isExist($defaultRewardPoint) === TRUE) {
 	$totalPoint = $mbPoint;
 }
 
+$isRecommedId = DB::queryFirstField("SELECT prParent FROM tmPointRelationship WHERE mbKey=%i", $mb['mbKey']);
+$recommedMbEmail = DB::queryFirstField("SELECT mbEmail FROM tmMember WHERE mbKey=%i", $isRecommedId);
+
 
 $name = $deviceInfo->getCarrierName($_GET['carrier']);
 
