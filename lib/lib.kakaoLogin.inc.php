@@ -323,7 +323,7 @@ class Kakao{
   	$url = KAKAO_OAUTH_URL.'?client_id='.$this->client_id.'&response_type=code&redirect_uri='.$this->returnURL.'&state='.$this->state;
 	  echo '<script>
 			$(".js-kakaoLogin").click(function(){
-				var win = window.open("'.$url.'", "카카오 아이디로 로그인"," width=320", "height=480", "toolbar=no", "location=no");
+				var win = window.open("'.$url.'", "카카오_아이디로_로그인","width=320", "height=480", "toolbar=no", "location=no");
 
 				var timer = setInterval(function() {
 					if(win.closed) {
@@ -339,7 +339,7 @@ class Kakao{
 		$url = KAKAO_OAUTH_URL.'?client_id='.$this->client_id.'&response_type=code&redirect_uri='.$this->returnURL.'&state='.$this->state;
 	  echo '<script>
 			$(".js-kakaoLogin").click(function(){
-				var win = window.open("'.$url.'", "카카오 아이디로 로그인"," width=320", "height=480", "toolbar=no", "location=no");
+				var win = window.open("'.$url.'", "카카오_아이디로_로그인","width=320", "height=480", "toolbar=no", "location=no");
 				return false;
 			});
 			</script>';
