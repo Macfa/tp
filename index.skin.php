@@ -6,111 +6,15 @@
 		<li class="slide-item banner-note7program">
 			<a href="/page/programNote7.php"></a>
 		</li>
-		<li class="slide-item banner-s7edgecoral">
-			<a href="/page/preorderS7coral.php"></a>
-		</li>
 		<li class="slide-item banner-preorder-iphone7">
 			<a href="/page/iphone7Event.php"></a>
 		</li>	
 		<li class="slide-item banner-v20">
 			<a href="/page/preorderV20.php"></a>
 		</li>
-
-		
-		<!--li class="slide-item banner-note7-noitem">				
-					<div class="vert-wrap">
-					<div class="note7-noitem-btn">
-								<a href="http://tplanit.co.kr/page/note7Notice.php#cancel" class="btn-filled-primary">노트7 예약취소</a>
-								<a href="http://tplanit.co.kr/page/note7Notice.php#note7" class="btn-filled-primary">노트7 교품안내</a>
-								<a href="http://tplanit.co.kr/page/note7Notice.php#gift" class="btn-filled-primary">노트7 사은품안내</a>
-								<a target="_blank" href="http://blog.naver.com/traumplanit" class="btn-filled-primary">공지사항</a>
-					</div>
-					</div>
-		</li-->
-		<!--li class="slide-item banner-bey">
-			<a href="/page/bey.php"></a>
-		</li-->
-		<!--li class="slide-item banner-note7-noitem">				
-					<div class="vert-wrap">
-					<div class="note7-noitem-btn">
-								<a href="http://tplanit.co.kr/page/note7Notice.php#cancel" class="btn-filled-primary">노트7 예약취소</a>
-								<a href="http://tplanit.co.kr/page/note7Notice.php#note7" class="btn-filled-primary">노트7 교품안내</a>
-								<a href="http://tplanit.co.kr/page/note7Notice.php#gift" class="btn-filled-primary">노트7 사은품안내</a>
-								<a target="_blank" href="http://blog.naver.com/traumplanit" class="btn-filled-primary">공지사항</a>
-					</div>
-					</div>
-		</li-->
-		
-		<!--li class="slide-item banner-preordernote7-qna">
-			<a target="_blank" href="http://blog.naver.com/traumplanit/220799290509"></a>
-		</li-->
 		<li class="slide-item banner-pointmall">
 			<a href="/gifts"></a>
 		</li>	
-		<!--li class="slide-item banner-sorry">
-			<a href="http://blog.naver.com/traumplanit/220797892098">
-				<div class="wrap banner-sorry-wrap">					
-					<div class="vert-wrap">
-					<div class="vert-align">
-							<div class="banner-sub" >[티플 노트 서류접수 마감공지]</div>
-							<div class="banner-tit"style="font-weight:bold;margin-top:20px;">27일 저녁 9시, 서류 접수 마감</div>
-							<div class="banner-sub">
-									SKT, KT 둘다 마감하며 이 이후에 접수를 해주신 분들은 안타깝게도 사전예약취소처리를 하도록 하겠습니다.<br/>
-									많은 분께서 서류를 잘 접수해주셨고 추가 서류건들에 저희가 할 수 있는 최대한 노력을 통해 각 통신사와 함께 진행하고 있는 중입니다. 
-									혹시 아직 서류를 접수해주시지 않았거나 저희측으로부터 부족한 서류를 요청 받으신 분들은 조속히 진행해주시면 감사하겠습니다.<br/><br/>
-									고객님의 편의를 위해서 mobile@traum.asia로 메일로 접수를 진행하오니 진행해주시면 감사하겠습니다.</div>
-							<button class="btn">상세 내용 보기</button>						
-					</div></div>
-				</div>
-			</a>
-		</li-->
-		<!--<li class="slide-item banner-galaxynote7">
-			<a href="/page/note7.php"></a>
-		</li>
-		<li class="slide-item banner-iphone6">
-			<a href="/device/iphone6">
-				<div class="wrap banner-iphone6-wrap">					
-					<div class="vert-wrap">
-							<div class="banner-sub">지금 아이폰6 사면</div>
-							<div class="banner-tit iphone6">다 준 다</div>
-							<button class="btn">구매하러하기</button>						
-					</div>
-				</div>
-			</a>
-		</li>
-		<li class="slide-item banner-vacance">
-			<div class="wrap banner-vacance-wrap">
-					<div class="vert-wrap txt_vacance">
-						<div class="banner-tit vacance">핸드폰 구매하고 <br/><span class="setcolor">티플바캉스세트</span> 받자!</div>
-						<div class="banner-sub vacance">티플에서 핸드폰을 구매하는 고객님께 
-							티플 바캉스 세트를 드립니다. <br/>
-							( 7월 23일 ~ 8월 25일까지 각 상세페이지 참조, 소진 시 마감)
-						</div>						
-					</div>
-				<div class="vacance_gift">
-						<ul class="vacance_list">
-						<a class="js-layerViewToggle" href="http://tplanit.co.kr/gift/30" target="layerView" id="link-giftList-26">
-							<li class="vacance_gift_list">
-								<span class="gift_list_name">루나폴리 방수팩</span>
-								<img src="<?=PATH_IMG?>/gift_02.png">
-							</li>							
-						</a>
-						<a class="js-layerViewToggle" href="http://tplanit.co.kr/gift/28" target="layerView">
-							<li class="vacance_gift_list">
-								<span class="gift_list_name">돌고래 손잡이튜브</span>
-								<img src="<?=PATH_IMG?>/gift_01.png">
-							</li>							
-						</a>
-						<a class="js-layerViewToggle" href="http://tplanit.co.kr/gift/29" target="layerView">
-							<li class="vacance_gift_list">
-								<span class="gift_list_name">자동 에어 펌프</span>
-								<img src="<?=PATH_IMG?>/gift_03.png">
-							</li>							
-						</a>
-					</ul>				
-			</div>
-		</li>-->
-
 	</ul>
 </main>
 <div class="wrap">
@@ -138,16 +42,6 @@
 				<div class="vert-align"></div>
 				</a>
 			</li>
-			<!--<li class="main-event-item-wrap">
-				<a href="http://traumshop.co.kr" target="_blank" class="main-small-banner-traumguard vert-wrap">
-					<div class="vert-align">
-						<span class="main-small-banner-sub">
-							함께하면 더 빛나는
-						</span><br/>
-						<span class="main-small-banner-tit">트라움가드<br/>방탄필름</span>
-					</div>
-				</a>
-			</li>-->
 		</ul>
 	</section>
 	<section>
