@@ -51,7 +51,6 @@
 			대한민국</br>
 			Galaxy Note7</br>
 			구매고객 전체</br>
-			<span class="very-s-txt">(티플 KT 기변고객 제외)</span>
 		</div>
 
 		<ul class="progress">
@@ -122,7 +121,7 @@
 			노트8 나오기 전 쓰실 기기와</br>
 			BeY폰과 비교해보고</br>신청해주세요!!</h1>
 		<h1 class="tit vs">BeY &nbsp;&nbsp;<span class="w">VS</span>&nbsp;&nbsp; S6+</h1>
-		<a  class="bey-add"  href="#">자세히 보기</a>
+		<a  class="bey-add"  href="http://shop.olleh.com/smart/productView.do?prodNo=WL00040655&pplGroupDivCd=&pplId=&supportType=01&cmpid=Shop_SK_LTEPH_Ext_BEY_BeYPh_160929&gclid=CjwKEAiAvZTCBRDvnoOaoa2j3xISJABxPjN9xR_kNCfqR-CLKt6BAHe1zkjuhDCLLotNnPWVE9dW-BoCurnw_wcB>자세히 보기</a>
 		<ul class="pricevs">
 			<li><ul class="pricein">
 				<li class="price">3GB</li>
