@@ -3,7 +3,6 @@
 <h1 class="tit">기어S3 신청</h1>
 <BR/><BR/><BR/>
 <div class="preorder-wrap">
-	<?php echo $planCalculator->create();?>
 	<Br/><br/>
 	<?php if($isLogged == false) :?>
 	<section class="section">
@@ -37,7 +36,7 @@
 		</section>
 	</form>
 	<?php if($isLogged === true) :?>
-	<a href="http://online.olleh.com/index.jsp?prdcID=A75A0356-FF52-466D-AA88-796E0693E0F9" target="_blank" class="btn-filled-primary-dense">신청하기</a>
+	<a href="http://online.olleh.com/index.jsp?prdcID=5581B6D4-EAE7-402F-BCC1-FF2882003C4F" target="_blank" class="btn-filled-primary-dense">KT 기기변경 신청</a>
 	<?php endif?>
 
 </div>
