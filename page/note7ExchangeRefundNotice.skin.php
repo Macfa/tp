@@ -15,6 +15,11 @@
 	삼성전자에서 본래 2016년 11월 30일을 기점으로 <삼성 Note7 업그레이드 프로그램>을 종료하기로 되었었으나, 금일 해당 혜택의 기일을 연장할 수 있는 방법을 제시하였습니다. 
 	11월 이내 교품 처리가 어려워 피해와 불편이 예상되시는 모든 고객님께서는 해당 사이트에 방문하셔서 피해 없도록 만전을 기해주시기 바랍니다.
 	<Br/><Br/>
+	<div style="color:red">
+		또한 갤럭시클럽S 또는 업그레이드 프로그램은 처리 후 7일 이내만 가능해야함으로 혹시나 <span style="color:red">미신청하신 분들은 속히 요청</span>해주시기 바랍니다. 
+		<br/>
+		<Br/><span style="color:red">미요청 된 고객님들은 저희가 신청해드리지 않습니다.</span>
+	</div>
 	<h4>◎ <삼성 Note7 업그레이드 프로그램> 연장 신청하기 <a href="http://local.sec.samsung.com/comLocal/bbs/notice/NoticeView.do?seq=228" target="_blank" class="btn-filled-sub-dense">신청하기</a></h4>
 	<Br/><Br/>
 	<h2 class="tit-sub">2. 노트7 처리 전담 <span style="color:red">Hot-Line</span> 개설(02-2636-8882)</h2>
