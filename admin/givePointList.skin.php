@@ -16,7 +16,8 @@
 					</div>
 				</label>
 			</td>
-			<td class="table-item-str">회원이메일</td>
+			<td class="table-item-str">회원이름</td>
+			<td class="table-item-str">전화번호</td>
 			<td class="table-item-str">컨텐츠</td>
 			<td class="table-item-str">포인트지급</td>
 			<td class="table-item-str">포인트결과</td>
@@ -33,7 +34,8 @@
 					<div class="inp-chk-box"></div>
 				</label>
 			</td>			
-			<td class="table-item-str"><?php echo $row['mbEmail'] ?></td>
+			<td class="table-item-str"><?php echo $row['mbName'] ?></td>
+			<td class="table-item-str"><?php echo $row['mbPhone'] ?></td>
 			<td class="table-item-str"><?php echo $row['phCont'] ?></td>
 			<td class="table-item-str"><?php echo $row['phAmount'] ?></td>
 			<td class="table-item-str"><?php echo number_format($row['phResult']) ?></td>		

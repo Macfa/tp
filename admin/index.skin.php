@@ -22,6 +22,7 @@
 		</li><li class="admin-list-wrap">회원관리
 			<ul class="admin-list-sub-group">
 				<li><a href="givePoint.php" class="admin-list-sub">포인트지급</a></li>
+				<li><a href="givePointList.php" class="admin-list-sub">포인트지급리스트</a></li>
 				<li><a href="memberList.php" class="admin-list-sub">회원리스트검색</a></li>
 			</ul>			
 		</li>
