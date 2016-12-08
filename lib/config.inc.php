@@ -63,7 +63,6 @@ $cfg['js_path'] =	"/".$cfg['js_dir'];
 $cfg['css_path'] =	"/".$cfg['css_dir']."/compiled";
 $cfg['img_storage'] =	"/home/www/tplanit/img-storage/";
 
-
 define("META_CHARSET", "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">");
 define("PATH_PRD", $cfg['prd_path']);
 define("PATH_USER", $cfg['user_path']);
