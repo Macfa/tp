@@ -51,7 +51,8 @@ body {
 		padding:0 !important;
 	}
 }
-.simplehead-logo {color:inherit;text-decoration:none;}
+.simplehead-logo {color:inherit;text-decoration:none; display:inline-block; margin-top:15px;}
+
 img{display:block;max-width:100%;height:auto;margin:0 auto;text-align:center}
 .wrap{margin:0 auto;padding:0 1%;position:relative;}
 .wrap-dense{margin:0 auto;text-align:center;}
@@ -176,6 +177,7 @@ nav{
 		margin-top:200px;
 	}
 }
+
 .center{text-align:center;}
 
 #logo {
@@ -805,7 +807,7 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 		line-height:$navHeight;
 	}
 
-	.container{padding-top:$navHeight;}
+	.container{padding-top:$navHeight;}	
 	#logo{
 		width:8%;
 		line-height:inherit;
