@@ -163,9 +163,15 @@ $planCalculator->setDevice($_GET['id'])->setCarrier('sk');
 
 
 $cfg['subTitle'] = $device['dvTit'].' 상세 페이지';
-require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
+if($_GET['mode'] === 'embed'){
+	require_once($cfg['path']."/headSimple.inc.php");			// 헤더 부분 (스킨포함) - 오픈마켓
+}else{
+	require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
+}
 if($device['dvRefer'] > 0) print_r($device);
-require_once($includePrefix."detail.skin.php");	
+
+require_once($includePrefix."detail.skin.php");
+
 //echo $deviceInfo->setCarrier('sk')->setMonth(24)->calcInterest()->test()->getRepayment();
 //print_r($arrSelectPlan);
 //print_r($graphMinValue);

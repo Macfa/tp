@@ -6,6 +6,7 @@ RewriteRule ^(.*) http://tplanit.co.kr/$1 [R=301,L]
 RewriteRule ^(sk|kt|lguplus)\/?(all|samsung|apple|lg|etc)?$ ./product/devices.php?carrier=$1&manuf=$2
 RewriteRule ^(samsung|apple|lg|etc)\/?(all|sk|kt|lguplus)?$ ./product/devices.php?manuf=$1&carrier=$2
 RewriteRule ^(pocketfi|watch|kids)$ ./product/devices.php?device=$1
+RewriteRule ^device\/embed\/(.*)$ ./product/detail.php?id=$1&mode=embed
 RewriteRule ^device\/(.*)$ ./product/detail.php?id=$1
 RewriteRule ^gift\/(.*)$ ./product/giftDetail.php?id=$1
 
