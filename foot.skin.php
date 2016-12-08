@@ -4,7 +4,7 @@
 </footer>
 <?php if (!$noContact) :?>
 <div class="contact-pc-wrap">
-	<a href="https://docs.google.com/forms/d/14hlR5OtjqfDXIkwz52_vDh_9yNWbCi4G3-boCf0PCpQ/viewform" class="btn-contact js-telReserve" target="layerView">
+	<a href="https://docs.google.com/forms/d/e/1FAIpQLSc_Xq1HCTJ3HupneLRVXEm7tNyIiClMoxAOW_0XO1GTYw4GNA/viewform?c=0&w=1" class="btn-contact js-telReserve" target="layerView">
 	<i class="contact-ico-consult"></i>
 	<div class="btn-contact-tit">상담예약</div>
 	</a>
@@ -21,7 +21,7 @@
 	<div class="contact-mobile-inner">
 		<div class="contact-consult-mobile js-telReserve" >	
 			<div class="mobile-contact-tit">상담예약</div>
-			<a href="https://docs.google.com/forms/d/14hlR5OtjqfDXIkwz52_vDh_9yNWbCi4G3-boCf0PCpQ/viewform"  class="mobile-ico-consult"><i class="contact-mobile-ico-consult" target="layerView"></i></a>
+			<a href="https://docs.google.com/forms/d/e/1FAIpQLSc_Xq1HCTJ3HupneLRVXEm7tNyIiClMoxAOW_0XO1GTYw4GNA/viewform?c=0&w=1"  class="mobile-ico-consult"><i class="contact-mobile-ico-consult" target="layerView"></i></a>
 		</div>
 		<div class="contact-tel-mobile">	
 			<div class="mobile-contact-tit">전화상담</div>
