@@ -66,8 +66,8 @@
 	</form>
 
 	<h2 class="tit center">		
-		<div class="tit-affix">하늘에서 내려온 호갱구세주!</div>
-		티플이 드리는 미친 사은품
+		<div class="tit-affix" >★포인트 : <span class="js-point">0</span></div>
+		선택할 수 있는 사은품
 	</h2>
 	<?php 	require_once(PATH_PRD."/gifts.inc.php");	?>
 	<?php
