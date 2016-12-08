@@ -61,10 +61,13 @@
 	</li>
 	</ul-->
 	<form class="js-plan-calc-arg" method="GET" action="/apply/">
-	<?php echo $planCalculator->create();?>
-	<button class="detail-apply-submit btn-filled js-trackLink" id="link-detail-plan-apply">신청하기</button>
+		<?php echo $planCalculator->create();?>
+		<?php if(isContain('lteeggplus',$device['dvId']) === true) :?>
+		<Br/><br/>
+		<div class="detail-banner-egg"></div>
+		<?php endif?>
+		<button class="detail-apply-submit btn-filled js-trackLink" id="link-detail-plan-apply">신청하기</button>
 	</form>
-
 	<h2 class="tit center">		
 		<div class="tit-affix" >★포인트 : <span class="js-point">0</span></div>
 		선택할 수 있는 사은품
