@@ -66,6 +66,9 @@ $detailHeadHeight : 60px;
 	display:none;
 }
 .detail-contain{color:#1266FF}
+
+.detail-banner-egg{height:150px;margin:0 auto; background:url('../img/ktegg_22ggift-mobile.jpg') no-repeat center center}
+
 .intro-device{width:150px;height:100%;}
 .intro-device-img{width:100px;}
 .intro-device-info{width:130px;margin-left:3%;padding-top:15%;}
@@ -454,7 +457,8 @@ h3.sub {
 
   .katalk-friend-ico {
     background: url(/css/img/icon-gift-notice.png) no-repeat -120px 4px;
-    margin-top: 5px; }
+    margin-top: 5px; 
+}
 
 
 
@@ -578,6 +582,7 @@ h3.sub {
 		padding:5px 0 5px 45px;
 	}
 
+	.detail-banner-egg{margin:0 auto; background:url('../img/ktegg_22ggift-landscape.jpg') no-repeat center center}
 
 }
 
