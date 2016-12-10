@@ -1,0 +1,24 @@
+github
+1. make a dir to use github site and function
+2. use fetch of git then, the dir just share with own github
+3. save a site on ex)origin
+
+
+   50  git status
+   51  git add test.txt
+   52  git status
+   53  git commit -m "Test file to upload github"
+   54  git status
+   55  git remote add origin https://github.com/Macfa/Refactoring.git
+   56  git push -u origin master
+   57  git status
+   58  git commit
+   59  git push -u origin https://github.com/Macfa/Refactoring.git
+   60  git push -u origin master
+   61  lr
+   62  ll
+   63  git clone git://github.com/Macfa/Refactoring.git
+   64  pwd
+   65  ll
+   66  cd Refactoring/
+can't use push....;;

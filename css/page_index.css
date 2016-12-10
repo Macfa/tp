@@ -1,0 +1,19 @@
+.wrap {
+    background-color: gray;
+    color: white;
+}
+
+.wrap li {
+    list-style-type: none;
+    display: inline;
+}
+
+#wrap_header_page a{
+    font-size: 3em;
+}
+
+.wrap_header button {
+    position: relative;
+    top: 20;
+    right: 40;
+}

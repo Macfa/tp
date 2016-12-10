@@ -1,0 +1,62 @@
+obj 데이터 인설트
+	<form method="post" action="/Test_sample/order.php" id="order-form">
+
+웹 서버  계정
+
+와스 서버 계정
+
+
+결제 진행 시 동일하게 오류가 발생한다면,
+pp_cli가 위치한 경로를 찾지 못해 pp_cli 를 실행시키지 못하는 것으로
+site_conf_inc.php파일에서 $g_conf_home_dir 변수를 pp_cli파일이
+있는 bin 디렉토리까지의 절대경로를 확인
+
+php.ini 파일의 내용 중 safe_mod 값이 On으로 되어 있다면 off로 셋팅
+
+
+apm
+
+
+$g_conf_gw_url    = "testpaygw.kcp.co.kr";
+
+
+페이코
+사이트코드	A7DO8
+사이트키	0sK23ILkgyI14vvIG4422HS__
+
+1. 주문요청 페이지 작성
+2. 통합 결제창 호출 주소 설정
+3. 결과처리 (pp_cli_hub) 페이지 작성
+4. 자체 DB처리 구현 ( 양아치 -- kcp ) 
+
+설정된 사이트코드로 테스트 진행
+결제 결과 확인
+DB처피 부분 확인 ( 귀찮은건 남주는 마인드, ㅗㅗㅗ ) ( 테스트 결제는 실결제 X 휴대폰 결제 제외 )
+
+실제 결제 진행해랑
+
+1. 결재로그???, TCP 소켓통신을 한다, 연동매뉴얼 업데이트 및 관리, 사이트등 키값들은 보안유지, 자동취소기능 구현
+ ** 위 사항을 지키지 않아 발생하는 문제에 대하여 KCP는 책임지지 않습니다.  <--- 절대 쓰지말아야지 ㅗㅗㅗ
+ 
+ 
+ 		<form method="post" action="/product/orderAction.php" id="order-form"> 으로 이동
+		<input type="submit" class="btn-filled" value="결제하기"/> 정보를...
+		
+		
+		caQuantity 수량   oiQuantity[]
+		
+		echo number_format($val['gfPoint']
+		
+		
+		
+		
+		<!-- 					echo number_format($mb['mbPoint']);	// 보유
+					echo "<br/>";
+					echo number_format($value['gfPoint']);	// 값
+ -->
+ 
+ 
+own = 10,-
+orig = 2,-
+sub = ?
+
