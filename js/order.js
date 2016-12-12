@@ -51,4 +51,97 @@ function setOrderTotalResult(){
 	});
 	$('.js-totalResult').text(setNumComma($totalResult));
 	$('.js-totalResultInp').val($totalResult);
+	var $resultCash = parseInt($('.js-totalResultCash').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
+	var $resultPoint = $totalResult - $resultCash;
+	$('.js-totalResultPoint').val($resultPoint);
+	// $('.js-totalResultCash').val(0);
 };
+
+$('.js-totalResultCash').focus(function(event){
+	this.select();
+});
+
+$('.js-totalResultPoint').focus(function(event){
+	this.select();
+});
+
+
+
+$('.js-totalResultCash').on('change keyup', function(event){
+	var $resultCash = parseInt($('.js-totalResultCash').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
+	var $resultInp = parseInt($('.js-totalResultInp').val());		// 해당 변수의 값을 가져와 형변환 후 대입
+	var $mbPoint = parseInt($('.js-mbPoint').val());
+	var $subPoint = $resultInp-$mbPoint;
+	if ($resultInp > $mbPoint) {
+		if (!$resultCash || $resultCash < 0) {
+		// if ($resultCash < 0) {
+			$('.js-totalResultCash').val($resultInp-$mbPoint);
+			$resultCash = $resultInp-$mbPoint;
+		} else if($resultCash < $resultInp-$mbPoint) {
+			// if (getTextLength($('.js-totalResultCash').val())>=getTextLength($('.js-totalResultInp').val())) {
+				console.log('asdasdasdasd');
+			console.log($resultInp.length);
+			// }
+			$('.js-totalResultCash').val($resultInp-$mbPoint);
+			$resultCash = $resultInp-$mbPoint;		
+		} else if($resultCash > $resultInp) {
+			$('.js-totalResultCash').val($resultInp);
+			$resultCash = $resultInp;
+		}
+
+		var $resultPoint = $resultInp-$resultCash;
+
+
+		$('.js-totalResultPoint').val($resultPoint);
+		$('.js-goodMny').val($resultCash);
+	} else {
+		if (!$resultCash || $resultCash < 0) {
+		// if ($resultCash < 0) {
+			$('.js-totalResultCash').val(0);
+			$resultCash = 0;
+		} else if($resultCash > $resultInp) {
+			$('.js-totalResultCash').val($resultInp);
+			$resultCash = $resultInp;
+		}
+
+		var $resultPoint = $resultInp-$resultCash;
+		$('.js-totalResultPoint').val($resultPoint);
+		$('.js-goodMny').val($resultCash);
+	}
+});
+
+$('.js-totalResultPoint').on('change keyup', function(event) {
+	var $chPoint = parseInt($('.js-totalResultPoint').val());
+	var $chInp = parseInt($('.js-totalResultInp').val());
+	var $chmbPoint = parseInt($('.js-mbPoint').val());
+	if ($chInp > $chmbPoint) {
+		if (!$chPoint || $chPoint < 0) {
+		// if ($chPoint < 0) {
+			$('.js-totalResultPoint').val(0);
+			$chPoint = 0;
+		} else if($chPoint > $chmbPoint) {
+			$('.js-totalResultPoint').val($chmbPoint);
+			$chPoint = $chmbPoint;		
+		}
+
+		$chCash = $chInp - $chPoint;
+		$('.js-totalResultCash').val($chCash);
+		$('.js-goodMny').val($chCash);
+	} else {
+
+		if (!$chPoint || $chPoint < 0) {
+		// if ($chPoint < 0) {
+			$('.js-totalResultPoint').val(0);
+			$chPoint = 0;
+		} else if($chPoint > $chInp) {
+			$('.js-totalResultPoint').val($chInp);
+			$chPoint = $chInp;		
+		}
+
+		$chCash = $chInp - $chPoint;
+		$('.js-totalResultCash').val($chCash);
+		$('.js-goodMny').val($chCash);
+	}
+});
+
+

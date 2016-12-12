@@ -55,9 +55,8 @@
 		<span class="js-totalResult txt-highlight">0</span> / <?php echo number_format($mb['mbPoint'])?>
 	</div>
 	<input type="hidden" class="js-totalResultInp" value="0" 
-	data-parsley-min="1" data-parsley-max="<?php echo $mb['mbPoint']?>"
-	data-parsley-min-message="주문할 사은품을 선택해주세요."
-	data-parsley-max-message="현재 보유중인 %s 별보다 주문 별이 많습니다. "/>
+	data-parsley-min="1" 
+	data-parsley-min-message="주문할 사은품을 선택해주세요."/>
 	<input type="submit" class="btn-filled" value="주문하기"/>
 	</form>
 </div>

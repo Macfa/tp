@@ -1,6 +1,7 @@
 <?
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 
+
 try
 {
 	//배송지 값 검사
@@ -24,7 +25,7 @@ try
 	if (isKorEng($_POST['arName']) === false)
 		throw new Exception('수취인 명은 한글,영어만 가능합니다.', 3);
 
-	if (isNullVal($_POST['arPhone']))
+	if (isNullVal($_POST['arTel']))
 		throw new Exception('연락처를 입력해주세요.', 3);
 
 	$_POST['arPhone'] = parsingNum($_POST['arPhone']);
@@ -52,6 +53,9 @@ try
 	if (isNullVal($_POST['arSubAddress'])) 
 		throw new Exception('상세주소를 입력해주세요', 3);
 
+	if (isNullVal($_POST['pay_method'])) 
+		throw new Exception('결제방법을 선택해주세요', 3);
+
 	//주문 값 검사
 	if (count($_POST['gfKey']) != count($_POST['oiQuantity']))
 		throw new Exception('사은품 매개변수가 쌍이 맞지 않습니다.', 3);
@@ -72,7 +76,7 @@ try
 
 		$totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
 	}
-
+		$totalPoint -= $_POST['good_mny'];
 	if ($totalPoint > $mb['mbPoint'])
 		throw new Exception('총 결제 별이 현재 보유 중인 별보다 많습니다.', 3);
 
@@ -87,6 +91,10 @@ catch(Exception $e)
     alert($e->getMessage());
 }
 
+if ((int)$_POST['good_mny'] > 0) {
+	require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
+}
+
 $countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
 $isShippingFree = ($countOrder>0)?FALSE:TRUE;
 $shipping = ($isShippingFree===true)?0:2500;
@@ -99,9 +107,12 @@ DB::insert('tmOrder', array(
 	'orPostcode' => $_POST['arPostcode'],
 	'orAddress' => $_POST['arAddress'],
 	'orSubAddress' => $_POST['arSubAddress'],
+	'orPoint' => $totalPoint,
+	'orCash' => $_POST['good_mny'],
 	'orShipping' => $shipping,
 	'orDate' => $cfg['time_ymdhis']
 ));
+
 $orKey = DB::insertId();
 
 foreach($_POST['gfKey'] as $key => $val) {
@@ -109,7 +120,7 @@ foreach($_POST['gfKey'] as $key => $val) {
 		'mbEmail' => $mb['mbEmail'],
 		'orKey' => $orKey,
 		'gfKey' => $val,
-		'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key],
+		'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key]-$_POST['good_mny'],
 		'oiQuantity' => $_POST['oiQuantity'][$key]
 	));
 
@@ -135,7 +146,7 @@ if ($isSetDefAddr) {
 $isEditAddr = (isExist($_POST['arKey']) && isExist($_POST['saveAddress']))?TRUE:FALSE;
 $isNewAddr = (isExist($_POST['arKey']) === false && isExist($_POST['saveAddress']))?TRUE:FALSE;
 
-$_POST['arTit'] = (isExist($_POST['arTit']))?$_POST['arTit']:$_POST['arName'];
+$_POST['arTit'] = (isExist($_POST['arTit']))?$_POST['arTit']:$_POST['arPhone'];
 
 if ($isAlreadyDef === false) {
 	DB::update('tmAddress', array(
@@ -153,32 +164,65 @@ if ($isEditAddr) {
 	DB::update('tmAddress', $sqlSetAddr, 'arKey = %i and mbEmail = %s', $_POST['arKey'], $mb['mbEmail']);
 }
 
-if ($isNewAddr){
+if ($isNewAddr) {
 	$sqlSetAddr['mbEmail'] = $mb['mbEmail'];
 	DB::insert('tmAddress', $sqlSetAddr);
 }
 
-DB::insert('tmPointHistory', array(
-	'mbEmail' => $mb['mbEmail'],
-	'phCont' => $cfg['time_ymdhis'].' 사은품 결제',
-	'phAmount' => $totalPoint*-1,
-	'phResult' => $mb['mbPoint']-$totalPoint,
-	'phDate' => $cfg['time_ymdhis']
-));
+if((int)$_POST['resultPoint'] > 0) {
+	DB::insert('tmPointHistory', array(
+		'mbEmail' => $mb['mbEmail'],
+		'phCont' => $cfg['time_ymdhis'].' 사은품 결제',
+		'phAmount' => $totalPoint*-1,
+		'phResult' => $mb['mbPoint']-$totalPoint,
+		'phDate' => $cfg['time_ymdhis']
+	));
 
-DB::update('tmMember', array(
-	'mbPoint' => $mb['mbPoint']-$totalPoint
-),'mbEmail = %s', $mb['mbEmail']);
+	DB::update('tmMember', array(
+		'mbPoint' => $mb['mbPoint']-$totalPoint
+	),'mbEmail = %s', $mb['mbEmail']);
+}
 
-alert('주문이 완료되었습니다.', '/user/orderList.php');
-/*
-'arTit' => $_POST['arTit'],
-		'arName' => $_POST['arName'],
-		'arPhone' => $_POST['arPhone'],
-		'arTel' => $_POST['arTel'],
-		'arPostcode' => $_POST['arPostcode'],
-		'arAddress' => $_POST['arAddress'],
-		'arSubAddress' => $_POST['arSubAddress'],
-		*/
+
+if((int)$_POST['resultCash'] === 0) {
+	require_once("./orderResult.php");  	// 결재 결과를 처리하는 과정 
+}
+
+// 'arTit' => $_POST['arTit'],
+// 		'arName' => $_POST['arName'],
+// 		'arPhone' => $_POST['arPhone'],
+// 		'arTel' => $_POST['arTel'],
+// 		'arPostcode' => $_POST['arPostcode'],
+// 		'arAddress' => $_POST['arAddress'],
+// 		'arSubAddress' => $_POST['arSubAddress'],
+		
+
+
+// DB::insert('OrderTest', array(										// test
+// 	'mbEmail' => $mb['mbEmail'],
+// 	'orName' => $_POST['arName'],
+// 	'orPhone' => $_POST['arPhone'],
+// 	'orTel' => $_POST['arTel'],
+// 	'orPostcode' => $_POST['arPostcode'],
+// 	'orAddress' => $_POST['arAddress'],
+// 	'orSubAddress' => $_POST['arSubAddress'],
+// 	'orShipping' => $shipping,
+// 	'orPoint' => $totalPoint,
+// 	'orCash' => $_POST['good_mny'],
+// 	'orDate' => $cfg['time_ymdhis']
+// ));
+
+// $orKey = DB::insertId();
+
+// foreach($_POST['gfKey'] as $key => $val) {
+// 	DB::insert('OrderTestItem', array(
+// 		'mbEmail' => $mb['mbEmail'],
+// 		'orKey' => $orKey,
+// 		'gfKey' => $val,
+// 		'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key]-$_POST['good_mny'],
+// 		'oiQuantity' => $_POST['oiQuantity'][$key]
+// 	));
+// }
+
 ?>
 
