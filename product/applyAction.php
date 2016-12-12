@@ -111,7 +111,7 @@ try
 
 			$totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
 		}
-
+		$totalPoint -= $_POST['good_mny'];
 
 		if ($totalPoint > ($mb['mbPoint'] + $rewardPoint))
 			throw new Exception('총 결제 별이 사용가능한 별보다 많습니다.', 3);
@@ -160,6 +160,12 @@ catch(Exception $e)
     alert($e->getMessage());
 }
 
+
+
+// if ((int)$_POST['good_mny'] > 0) {
+// 	require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
+// }
+
 if ($isOrderGift) {
 	$countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
 	//첫 주문일시 무료 배송
@@ -168,15 +174,28 @@ if ($isOrderGift) {
 
 	DB::insert('tmOrder', array(
 		'mbEmail' => $mb['mbEmail'],
-		'orName' => $mb['mbName'],
-		'orPhone' => $mb['mbPhone'],
+		'orName' => $_POST['arName'],
+		'orPhone' => $_POST['arPhone'],
 		'orTel' => $_POST['arTel'],
 		'orPostcode' => $_POST['arPostcode'],
 		'orAddress' => $_POST['arAddress'],
 		'orSubAddress' => $_POST['arSubAddress'],
+		'orPoint' => $totalPoint,
+		'orCash' => $_POST['good_mny'],
 		'orShipping' => $shipping,
 		'orDate' => $cfg['time_ymdhis']
 	));
+	// DB::insert('tmOrder', array(
+	// 	'mbEmail' => $mb['mbEmail'],
+	// 	'orName' => $mb['mbName'],
+	// 	'orPhone' => $mb['mbPhone'],
+	// 	'orTel' => $_POST['arTel'],
+	// 	'orPostcode' => $_POST['arPostcode'],
+	// 	'orAddress' => $_POST['arAddress'],
+	// 	'orSubAddress' => $_POST['arSubAddress'],
+	// 	'orShipping' => $shipping,
+	// 	'orDate' => $cfg['time_ymdhis']
+	// ));
 	$orKey = DB::insertId();
 
 	foreach($_POST['gfKey'] as $key => $val) {
@@ -184,7 +203,7 @@ if ($isOrderGift) {
 			'mbEmail' => $mb['mbEmail'],
 			'orKey' => $orKey,
 			'gfKey' => $val,
-			'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key],
+			'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key]-$_POST['good_mny'],
 			'oiQuantity' => $_POST['oiQuantity'][$key]
 		));
 	}
@@ -213,6 +232,8 @@ $isEditAddr = (isExist($_POST['arKey']) && isExist($_POST['saveAddress']))?TRUE:
 $isNewAddr = (isExist($_POST['arKey']) === false && isExist($_POST['saveAddress']))?TRUE:FALSE;
 
 $_POST['arTit'] = (isExist($_POST['arTit']))?$_POST['arTit']:$_POST['arName'];
+
+
 
 if ($isAlreadyDef === false) {
 	DB::update('tmAddress', array(
@@ -339,4 +360,8 @@ $deviceInfo->setCarrier($_POST['carrier']);
 //consoleLog($cdCode);
 goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));
 
+
+if((int)$_POST['resultCash'] === 0) {
+	require_once("./orderResult.php");  	// 결재 결과를 처리하는 과정 
+}
 ?>
