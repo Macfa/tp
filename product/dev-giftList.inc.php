@@ -24,7 +24,7 @@ foreach ($giftResults as $giftRow){
 	if($result[$giftRow['gfKey']] === 'gift'){		
 		$gfThumbPath[$giftRow['gfKey']] = PATH_IMG."/";
 	}else{
-		$gfThumbPath[$giftRow['gfKey']] = PATH."/image.index.php?name=";
+		$gfThumbPath[$giftRow['gfKey']] = "/image.index.php?name=";
 	}
 	
 }
