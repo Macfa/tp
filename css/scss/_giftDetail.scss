@@ -143,6 +143,11 @@
 	font-size:3em;
 }
 
+.gift-number {
+	@extend .inp-num-dense;
+	color:#fff;
+}
+
 @media all and (min-width:640px){
 	.gift-close-btn{
 		font-size:4em;

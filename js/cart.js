@@ -29,8 +29,8 @@ $('.js-tableAllChk').change(function(){
 });
 
 $('.js-cartQuantity').on('change keyup', function(event){
-	var $key = $(this).attr('data-key');
-	var $quantity = $(this).val();
+	var $key = $(this).attr('data-key');	
+	var $quantity = $(this).val();	
 	if ($quantity < 1) {
 		$quantity = 1;
 		$(this).val(1);
