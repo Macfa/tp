@@ -70,11 +70,12 @@ $(window).resize(function(){
 
 $(document).on('click', '.js-doCart', function(){
 	var $giftId = $(this).attr('data-key');
+	var $giftQuantity = $('[name=gift-number]').val();
 	$.ajax({
 		url:'/product/giftDoCart.php',
 		type:'post',
 		async:false,
-		data:{'gfKey' : $giftId},
+		data:{'gfKey' : $giftId, 'caQuantity' : $giftQuantity},
 		success:function(data){
 			setTimeout(function(){$('.js-doCart').addClass('active')}, 80);
 			setTimeout(function(){$('.js-doCart').removeClass('active')}, 2000);
@@ -82,6 +83,23 @@ $(document).on('click', '.js-doCart', function(){
 	});
 
 });
+
+$(document).on('click', '.js-buyCart', function(){
+	var $giftId = $(this).attr('data-key');
+	var $giftQuantity = $('[name=gift-number]').val();
+	$.ajax({
+		url:'/product/giftDoCart.php',
+		type:'post',
+		async:false,
+		data:{'gfKey' : $giftId, 'caQuantity' : $giftQuantity},
+		success:function(data){
+			setTimeout(function(){$('.js-buyCart').addClass('active')}, 80);
+			setTimeout(function(){$('.js-buyCart').removeClass('active')}, 2000);
+		}
+	});
+
+});
+
 
 function getGiftList(){
 	var $searchCategory = '';
@@ -139,3 +157,13 @@ function followScrolling(){
 	}
 }
 
+
+$(document).on('change keyup', 'input[data-type=price]', function(){
+
+	var $quantity = $(this).val();
+
+	if ($quantity < 1) {
+		$quantity = 1;
+		$(this).val(1);
+	}
+});

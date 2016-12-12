@@ -7,6 +7,7 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
  
 $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/gifts.css" type="text/css">';
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
+
 $isShowGiftDetail = false;
 
 if ($_GET['giftId']) {
