@@ -1,6 +1,13 @@
 <?
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 
+//바로구매하기 버튼으로 들어온 경우
+if(isExist($_POST['gift-number'])){
+	$_POST['chk'] = array(
+		0 => $_POST['gift-key']
+		);
+}
+/////////////////////
 try
 {
 	if ($_POST['chk'] == array())
@@ -35,7 +42,14 @@ if(count($_POST['chk']) > 1)
 $arrOrder = DB::query("SELECT * FROM tmCart c LEFT JOIN tmGift g ON c.gfKey = g.gfKey WHERE ".$sqlGiftWhere." and mbEmail = %s", $mb['mbEmail']);
 
 foreach($arrOrder as $val){
-	$totalPoint = $totalPoint + ($val['gfPoint'] * $val['caQuantity']);
+	if(isExist($_POST['gift-number'])){
+		$caQuantity = $_POST['gift-number'];
+	}else{	
+		$caQuantity = $val['caQuantity'];
+	}
+
+
+	$totalPoint = $totalPoint + ($val['gfPoint'] * $caQuantity);
 }
 
 $defAddress = DB::queryFirstRow("SELECT * FROM tmAddress WHERE mbEmail = %s and arIsDefault = 1", $mb['mbEmail']);
