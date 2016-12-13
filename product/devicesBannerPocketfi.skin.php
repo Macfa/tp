@@ -1,5 +1,5 @@
 <main class="list-banner-pocketfi">
-	<a href="/product/egg.php" class="list-banner-inner-pocketfi" id="link-banner-pocketfi">
+	<a href="/device/lteeggplusa" class="list-banner-inner-pocketfi" id="link-banner-pocketfi">
 		<!--<h1 class="list-banner-tit">
 			데이터를 언제 어디든지<br/>꺼내쓰는 현명한 방법
 			<br/>
