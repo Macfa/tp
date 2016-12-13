@@ -603,7 +603,7 @@
                 <tr>
 
                 <div class="btnset">
-                <a href="" class="home">처음으로</a>
+                <a href="/user/orderList.php" class="home">처음으로</a>
                 </div>
                 </tr>
               </tr>

@@ -27,6 +27,7 @@ $('.js-orderDelete').click(function(){
 	var $key = $(this).attr('data-key');
 	$('.js-orderRow'+$key).addClass('removing').children('td').wrapInner('<div />').children().slideUp();
 	setTimeout(function(){$('.js-orderRow'+$key).remove();},500);
+	setOrderTotalResult();
 	return false;
 });
 
@@ -49,7 +50,9 @@ function initAddress(){
 function setOrderTotalResult(){
 	var $totalResult = 0;
 	$('.js-orderRowResult').each(function(index,item){
-		$totalResult = $totalResult +  parseInt($(item).attr('data-result'));
+		console.log(item);
+		if ($(item).parents('tr.removing').size() == 0)
+			$totalResult = $totalResult +  parseInt($(item).attr('data-result'));
 	});
 	$('.js-totalResult').text(setNumComma($totalResult));
 	$('.js-totalResultInp').val($totalResult);
@@ -72,7 +75,7 @@ $('.js-totalResultPoint').focus(function(event){
 
 $('.js-totalResultCash').on('change keyup', function(event){
 	// if($('.js-totalResultCash').val().length >= $('.js-totalResultInp').val().length) {
-	if($('.js-totalResultCash').val().length >= 3) {
+	// if($('.js-totalResultCash').val().length >= 3) {
 		var $resultCash = parseInt($('.js-totalResultCash').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
 		var $resultInp = parseInt($('.js-totalResultInp').val());		// 해당 변수의 값을 가져와 형변환 후 대입
 		var $mbPoint = parseInt($('.js-mbPoint').val());
@@ -109,7 +112,7 @@ $('.js-totalResultCash').on('change keyup', function(event){
 			$('.js-totalResultPoint').val($resultPoint);
 			$('.js-goodMny').val($resultCash);
 		}
-	}
+	// }
 });
 
 $('.js-totalResultPoint').on('change keyup', function(event) {

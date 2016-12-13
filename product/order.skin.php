@@ -161,8 +161,6 @@
 					echo "<br/>";
 					echo number_format($value['gfPoint']);	// °ª
  -->
-		<?php foreach($arrOrder as $value) :?>
-
 			<section class="section cash">
 				<label class="inp-wrap">
 					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?0:$totalPoint-$mb['mbPoint'] ?>" class="js-totalResultPoint inp-txt" name="resultPoint">
@@ -172,7 +170,6 @@
 				<br/>
 			</section>
 	
-		<?php endforeach ?>
 
 		<h2 class="cart-total-tit">총 사용 할 별 / 보유 중인 별</h2>
 		<div class="cart-total">

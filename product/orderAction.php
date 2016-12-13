@@ -186,7 +186,7 @@ if((int)$_POST['resultPoint'] > 0) {
 
 
 if((int)$_POST['resultCash'] === 0) {
-	require_once("./result.php");  	// 결재 결과를 처리하는 과정 
+	require_once("/home/www/tplanit/develop/_chy/user/orderList.php");  	// 결재 결과를 처리하는 과정 
 }
 
 // 'arTit' => $_POST['arTit'],

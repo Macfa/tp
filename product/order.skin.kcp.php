@@ -146,8 +146,12 @@
             }
 
             if( $('.js-goodMny').val() == 0 ) {
-                form.submit();
-                return true;
+                if(confirm($('.js-totalResultPoint').val() + " Point 를 결제") == true ) {
+                    form.submit();
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             var RetVal = false;
