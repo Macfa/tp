@@ -162,11 +162,11 @@
 					echo number_format($value['gfPoint']);	// °ª
  -->
 		<?php foreach($arrOrder as $value) :?>
-		
+
 			<section class="section cash">
 				<label class="inp-wrap">
-					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?$totalPoint:$mb['mbPoint'] ?>" class="js-totalResultPoint inp-txt" name="resultPoint">
-					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?0:$totalPoint-$mb['mbPoint'] ?>" class="js-totalResultCash inp-txt" name="resultCash">
+					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?0:$totalPoint-$mb['mbPoint'] ?>" class="js-totalResultPoint inp-txt" name="resultPoint">
+					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?$totalPoint:$mb['mbPoint'] ?>" class="js-totalResultCash inp-txt" name="resultCash">
 					<div class="inp-label">Point / Cash<span class="inp-required">필수</span></div>
 				</label>
 				<br/>

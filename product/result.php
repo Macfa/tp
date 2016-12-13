@@ -1,115 +1,115 @@
 <?
     /* ============================================================================== */
-    /* =   PAGE : °á°ú Ã³¸® PAGE                                                    = */
+    /* =   PAGE : ê²°ê³¼ ì²˜ë¦¬ PAGE                                                    = */
     /* = -------------------------------------------------------------------------- = */
-    /* =   pp_cli_hub.php ÆÄÀÏ¿¡¼­ Ã³¸®µÈ °á°ú°ªÀ» Ãâ·ÂÇÏ´Â ÆäÀÌÁöÀÔ´Ï´Ù.           = */
+    /* =   pp_cli_hub.php íŒŒì¼ì—ì„œ ì²˜ë¦¬ëœ ê²°ê³¼ê°’ì„ ì¶œë ¥í•˜ëŠ” íŽ˜ì´ì§€ìž…ë‹ˆë‹¤.           = */
     /* = -------------------------------------------------------------------------- = */
-    /* =   ¿¬µ¿½Ã ¿À·ù°¡ ¹ß»ýÇÏ´Â °æ¿ì ¾Æ·¡ÀÇ ÁÖ¼Ò·Î Á¢¼ÓÇÏ¼Å¼­ È®ÀÎÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.= */
-    /* =   Á¢¼Ó ÁÖ¼Ò : http://kcp.co.kr/technique.requestcode.do                    = */
+    /* =   ì—°ë™ì‹œ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ëŠ” ê²½ìš° ì•„ëž˜ì˜ ì£¼ì†Œë¡œ ì ‘ì†í•˜ì…”ì„œ í™•ì¸í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.= */
+    /* =   ì ‘ì† ì£¼ì†Œ : http://kcp.co.kr/technique.requestcode.do                    = */
     /* = -------------------------------------------------------------------------- = */
     /* =   Copyright (c)  2016  NHN KCP Inc.   All Rights Reserverd.                = */
     /* ============================================================================== */
 ?>
 <?
     /* ============================================================================== */
-    /* =   ÁöºÒ °á°ú                                                                = */
+    /* =   ì§€ë¶ˆ ê²°ê³¼                                                                = */
     /* = -------------------------------------------------------------------------- = */
-    $site_cd          = $_POST[ "site_cd"        ];      // »çÀÌÆ®ÄÚµå
-    $req_tx           = $_POST[ "req_tx"         ];      // ¿äÃ» ±¸ºÐ(½ÂÀÎ/Ãë¼Ò)
-    $use_pay_method   = $_POST[ "use_pay_method" ];      // »ç¿ë °áÁ¦ ¼ö´Ü
-    $bSucc            = $_POST[ "bSucc"          ];      // ¾÷Ã¼ DB Á¤»óÃ³¸® ¿Ï·á ¿©ºÎ
+    $site_cd          = $_POST[ "site_cd"        ];      // ì‚¬ì´íŠ¸ì½”ë“œ
+    $req_tx           = $_POST[ "req_tx"         ];      // ìš”ì²­ êµ¬ë¶„(ìŠ¹ì¸/ì·¨ì†Œ)
+    $use_pay_method   = $_POST[ "use_pay_method" ];      // ì‚¬ìš© ê²°ì œ ìˆ˜ë‹¨
+    $bSucc            = $_POST[ "bSucc"          ];      // ì—…ì²´ DB ì •ìƒì²˜ë¦¬ ì™„ë£Œ ì—¬ë¶€
     /* = -------------------------------------------------------------------------- = */
-    $res_cd           = $_POST[ "res_cd"         ];      // °á°úÄÚµå
-    $res_msg          = $_POST[ "res_msg"        ];      // °á°ú¸Þ½ÃÁö
+    $res_cd           = $_POST[ "res_cd"         ];      // ê²°ê³¼ì½”ë“œ
+    $res_msg          = $_POST[ "res_msg"        ];      // ê²°ê³¼ë©”ì‹œì§€
     $res_msg_bsucc    = "";
     /* = -------------------------------------------------------------------------- = */
-    $amount           = $_POST[ "amount"         ];      // ±Ý¾×
-    $ordr_idxx        = $_POST[ "ordr_idxx"      ];      // ÁÖ¹®¹øÈ£
-    $tno              = $_POST[ "tno"            ];      // KCP °Å·¡¹øÈ£
-    $good_mny         = $_POST[ "good_mny"       ];      // °áÁ¦±Ý¾×
-    $good_name        = $_POST[ "good_name"      ];      // »óÇ°¸í
-    $buyr_name        = $_POST[ "buyr_name"      ];      // ±¸¸ÅÀÚ¸í
-    $buyr_tel1        = $_POST[ "buyr_tel1"      ];      // ±¸¸ÅÀÚ ÀüÈ­¹øÈ£
-    $buyr_tel2        = $_POST[ "buyr_tel2"      ];      // ±¸¸ÅÀÚ ÈÞ´ëÆù¹øÈ£
-    $buyr_mail        = $_POST[ "buyr_mail"      ];      // ±¸¸ÅÀÚ E-Mail
+    $amount           = $_POST[ "amount"         ];      // ê¸ˆì•¡
+    $ordr_idxx        = $_POST[ "ordr_idxx"      ];      // ì£¼ë¬¸ë²ˆí˜¸
+    $tno              = $_POST[ "tno"            ];      // KCP ê±°ëž˜ë²ˆí˜¸
+    $good_mny         = $_POST[ "good_mny"       ];      // ê²°ì œê¸ˆì•¡
+    $good_name        = $_POST[ "good_name"      ];      // ìƒí’ˆëª…
+    $buyr_name        = $_POST[ "buyr_name"      ];      // êµ¬ë§¤ìžëª…
+    $buyr_tel1        = $_POST[ "buyr_tel1"      ];      // êµ¬ë§¤ìž ì „í™”ë²ˆí˜¸
+    $buyr_tel2        = $_POST[ "buyr_tel2"      ];      // êµ¬ë§¤ìž íœ´ëŒ€í°ë²ˆí˜¸
+    $buyr_mail        = $_POST[ "buyr_mail"      ];      // êµ¬ë§¤ìž E-Mail
     /* = -------------------------------------------------------------------------- = */
-    // °øÅë
-    $pnt_issue        = $_POST[ "pnt_issue"      ];      // Æ÷ÀÎÆ® ¼­ºñ½º»ç
-    $app_time         = $_POST[ "app_time"       ];      // ½ÂÀÎ½Ã°£ (°øÅë)
+    // Â°Ã¸Ã…Ã«
+    $pnt_issue        = $_POST[ "pnt_issue"      ];      // í¬ì¸íŠ¸ ì„œë¹„ìŠ¤ì‚¬
+    $app_time         = $_POST[ "app_time"       ];      // ìŠ¹ì¸ì‹œê°„ (ê³µí†µ)
     /* = -------------------------------------------------------------------------- = */
-    // ½Å¿ëÄ«µå
-    $card_cd          = $_POST[ "card_cd"        ];      // Ä«µåÄÚµå
-    $card_name        = $_POST[ "card_name"      ];      // Ä«µå¸í
-    $noinf            = $_POST[ "noinf"          ];      // ¹«ÀÌÀÚ ¿©ºÎ
-    $quota            = $_POST[ "quota"          ];      // ÇÒºÎ°³¿ù
-    $app_no           = $_POST[ "app_no"         ];      // ½ÂÀÎ¹øÈ£
+    // Â½Ã…Â¿Ã«Ã„Â«ÂµÃ¥
+    $card_cd          = $_POST[ "card_cd"        ];      // ì¹´ë“œì½”ë“œ
+    $card_name        = $_POST[ "card_name"      ];      // ì¹´ë“œëª…
+    $noinf            = $_POST[ "noinf"          ];      // ë¬´ì´ìž ì—¬ë¶€
+    $quota            = $_POST[ "quota"          ];      // í• ë¶€ê°œì›”
+    $app_no           = $_POST[ "app_no"         ];      // ìŠ¹ì¸ë²ˆí˜¸
     /* = -------------------------------------------------------------------------- = */
-    // °èÁÂÀÌÃ¼
-    $bank_name        = $_POST[ "bank_name"      ];      // ÀºÇà¸í
-    $bank_code        = $_POST[ "bank_code"      ];      // ÀºÇàÄÚµå
+    // Â°Ã¨ÃÃ‚Ã€ÃŒÃƒÂ¼
+    $bank_name        = $_POST[ "bank_name"      ];      // ì€í–‰ëª…
+    $bank_code        = $_POST[ "bank_code"      ];      // ì€í–‰ì½”ë“œ
     /* = -------------------------------------------------------------------------- = */
-    // °¡»ó°èÁÂ
-    $bankname         = $_POST[ "bankname"       ];      // ÀÔ±ÝÇÒ ÀºÇà
-    $depositor        = $_POST[ "depositor"      ];      // ÀÔ±ÝÇÒ °èÁÂ ¿¹±ÝÁÖ
-    $account          = $_POST[ "account"        ];      // ÀÔ±ÝÇÒ °èÁÂ ¹øÈ£
-    $va_date          = $_POST[ "va_date"        ];      // °¡»ó°èÁÂ ÀÔ±Ý¸¶°¨½Ã°£
+    // Â°Â¡Â»Ã³Â°Ã¨ÃÃ‚
+    $bankname         = $_POST[ "bankname"       ];      // ìž…ê¸ˆí•  ì€í–‰
+    $depositor        = $_POST[ "depositor"      ];      // ìž…ê¸ˆí•  ê³„ì¢Œ ì˜ˆê¸ˆì£¼
+    $account          = $_POST[ "account"        ];      // ìž…ê¸ˆí•  ê³„ì¢Œ ë²ˆí˜¸
+    $va_date          = $_POST[ "va_date"        ];      // ê°€ìƒê³„ì¢Œ ìž…ê¸ˆë§ˆê°ì‹œê°„
     /* = -------------------------------------------------------------------------- = */
-    // Æ÷ÀÎÆ®
-    $add_pnt          = $_POST[ "add_pnt"        ];      // ¹ß»ý Æ÷ÀÎÆ®
-    $use_pnt          = $_POST[ "use_pnt"        ];      // »ç¿ë°¡´É Æ÷ÀÎÆ®
-    $rsv_pnt          = $_POST[ "rsv_pnt"        ];      // ÃÑ ´©Àû Æ÷ÀÎÆ®
-    $pnt_app_time     = $_POST[ "pnt_app_time"   ];      // ½ÂÀÎ½Ã°£
-    $pnt_app_no       = $_POST[ "pnt_app_no"     ];      // ½ÂÀÎ¹øÈ£
-    $pnt_amount       = $_POST[ "pnt_amount"     ];      // Àû¸³±Ý¾× or »ç¿ë±Ý¾×
+    // Ã†Ã·Ã€ÃŽÃ†Â®
+    $add_pnt          = $_POST[ "add_pnt"        ];      // ë°œìƒ í¬ì¸íŠ¸
+    $use_pnt          = $_POST[ "use_pnt"        ];      // ì‚¬ìš©ê°€ëŠ¥ í¬ì¸íŠ¸
+    $rsv_pnt          = $_POST[ "rsv_pnt"        ];      // ì´ ëˆ„ì  í¬ì¸íŠ¸
+    $pnt_app_time     = $_POST[ "pnt_app_time"   ];      // ìŠ¹ì¸ì‹œê°„
+    $pnt_app_no       = $_POST[ "pnt_app_no"     ];      // ìŠ¹ì¸ë²ˆí˜¸
+    $pnt_amount       = $_POST[ "pnt_amount"     ];      // ì ë¦½ê¸ˆì•¡ or ì‚¬ìš©ê¸ˆì•¡
     /* = -------------------------------------------------------------------------- = */
-    //»óÇ°±Ç
-    $tk_van_code      = $_POST[ "tk_van_code"    ];      // ¹ß±Þ»ç ÄÚµå
-    $tk_app_no        = $_POST[ "tk_app_no"      ];      // ½ÂÀÎ ¹øÈ£
+    //Â»Ã³Ã‡Â°Â±Ã‡
+    $tk_van_code      = $_POST[ "tk_van_code"    ];      // ë°œê¸‰ì‚¬ ì½”ë“œ
+    $tk_app_no        = $_POST[ "tk_app_no"      ];      // ìŠ¹ì¸ ë²ˆí˜¸
     /* = -------------------------------------------------------------------------- = */
-    //ÈÞ´ëÆù
-    $commid           = $_POST[ "commid"         ];      // Åë½Å»ç ÄÚµå
-    $mobile_no        = $_POST[ "mobile_no"      ];      // ÈÞ´ëÆù ¹øÈ£
+    //ÃˆÃžÂ´Ã«Ã†Ã¹
+    $commid           = $_POST[ "commid"         ];      // í†µì‹ ì‚¬ ì½”ë“œ
+    $mobile_no        = $_POST[ "mobile_no"      ];      // íœ´ëŒ€í° ë²ˆí˜¸
     /* = -------------------------------------------------------------------------- = */
-    // Çö±Ý¿µ¼öÁõ
-    $cash_yn          = $_POST[ "cash_yn"        ];      //Çö±Ý¿µ¼öÁõ µî·Ï ¿©ºÎ
-    $cash_authno      = $_POST[ "cash_authno"    ];      //Çö±Ý¿µ¼öÁõ ½ÂÀÎ ¹øÈ£
-    $cash_tr_code     = $_POST[ "cash_tr_code"   ];      //Çö±Ý¿µ¼öÁõ ¹ßÇà ±¸ºÐ
-    $cash_id_info     = $_POST[ "cash_id_info"   ];      //Çö±Ý¿µ¼öÁõ µî·Ï ¹øÈ£
+    // Ã‡Ã¶Â±ÃÂ¿ÂµÂ¼Ã¶ÃÃµ
+    $cash_yn          = $_POST[ "cash_yn"        ];      //í˜„ê¸ˆì˜ìˆ˜ì¦ ë“±ë¡ ì—¬ë¶€
+    $cash_authno      = $_POST[ "cash_authno"    ];      //í˜„ê¸ˆì˜ìˆ˜ì¦ ìŠ¹ì¸ ë²ˆí˜¸
+    $cash_tr_code     = $_POST[ "cash_tr_code"   ];      //í˜„ê¸ˆì˜ìˆ˜ì¦ ë°œí–‰ êµ¬ë¶„
+    $cash_id_info     = $_POST[ "cash_id_info"   ];      //í˜„ê¸ˆì˜ìˆ˜ì¦ ë“±ë¡ ë²ˆí˜¸
     /* = -------------------------------------------------------------------------- = */
 
     $req_tx_name = "";
 
     if( $req_tx == "pay" )
     {
-        $req_tx_name = "ÁöºÒ";
+        $req_tx_name = "ì§€ë¶ˆ";
     }
     else if( $req_tx == "mod" )
     {
-        $req_tx_name = "¸ÅÀÔ/Ãë¼Ò";
+        $req_tx_name = "ë§¤ìž…/ì·¨ì†Œ";
     }
 
     /* ============================================================================== */
-    /* =   °¡¸ÍÁ¡ Ãø DB Ã³¸® ½ÇÆÐ½Ã »ó¼¼ °á°ú ¸Þ½ÃÁö ¼³Á¤                           = */
+    /* =   ê°€ë§¹ì  ì¸¡ DB ì²˜ë¦¬ ì‹¤íŒ¨ì‹œ ìƒì„¸ ê²°ê³¼ ë©”ì‹œì§€ ì„¤ì •                           = */
     /* = -------------------------------------------------------------------------- = */
 
     if($req_tx == "pay")
     {
-        //¾÷Ã¼ DB Ã³¸® ½ÇÆÐ
+        //ì—…ì²´ DB ì²˜ë¦¬ ì‹¤íŒ¨
         if($bSucc == "false")
         {
             if ($res_cd == "0000")
             {
-                $res_msg_bsucc = "°áÁ¦´Â Á¤»óÀûÀ¸·Î ÀÌ·ç¾îÁ³Áö¸¸ ¾÷Ã¼¿¡¼­ °áÁ¦ °á°ú¸¦ Ã³¸®ÇÏ´Â Áß ¿À·ù°¡ ¹ß»ýÇÏ¿© ½Ã½ºÅÛ¿¡¼­ ÀÚµ¿À¸·Î Ãë¼Ò ¿äÃ»À» ÇÏ¿´½À´Ï´Ù. <br> ¾÷Ã¼·Î ¹®ÀÇÇÏ¿© È®ÀÎÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.";
+                $res_msg_bsucc = "ê²°ì œëŠ” ì •ìƒì ìœ¼ë¡œ ì´ë£¨ì–´ì¡Œì§€ë§Œ ì—…ì²´ì—ì„œ ê²°ì œ ê²°ê³¼ë¥¼ ì²˜ë¦¬í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì—¬ ì‹œìŠ¤í…œì—ì„œ ìžë™ìœ¼ë¡œ ì·¨ì†Œ ìš”ì²­ì„ í•˜ì˜€ìŠµë‹ˆë‹¤. <br> ì—…ì²´ë¡œ ë¬¸ì˜í•˜ì—¬ í™•ì¸í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.";
             }
             else
             {
-                $res_msg_bsucc = "°áÁ¦´Â Á¤»óÀûÀ¸·Î ÀÌ·ç¾îÁ³Áö¸¸ ¾÷Ã¼¿¡¼­ °áÁ¦ °á°ú¸¦ Ã³¸®ÇÏ´Â Áß ¿À·ù°¡ ¹ß»ýÇÏ¿© ½Ã½ºÅÛ¿¡¼­ ÀÚµ¿À¸·Î Ãë¼Ò ¿äÃ»À» ÇÏ¿´À¸³ª, <br> <b>Ãë¼Ò°¡ ½ÇÆÐ µÇ¾ú½À´Ï´Ù.</b><br> ¾÷Ã¼·Î ¹®ÀÇÇÏ¿© È®ÀÎÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.";
+                $res_msg_bsucc = "ê²°ì œëŠ” ì •ìƒì ìœ¼ë¡œ ì´ë£¨ì–´ì¡Œì§€ë§Œ ì—…ì²´ì—ì„œ ê²°ì œ ê²°ê³¼ë¥¼ ì²˜ë¦¬í•˜ëŠ” ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì—¬ ì‹œìŠ¤í…œì—ì„œ ìžë™ìœ¼ë¡œ ì·¨ì†Œ ìš”ì²­ì„ í•˜ì˜€ìœ¼ë‚˜, <br> <b>ì·¨ì†Œê°€ ì‹¤íŒ¨ ë˜ì—ˆìŠµë‹ˆë‹¤.</b><br> ì—…ì²´ë¡œ ë¬¸ì˜í•˜ì—¬ í™•ì¸í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.";
             }
         }
     }
 
     /* = -------------------------------------------------------------------------- = */
-    /* =   °¡¸ÍÁ¡ Ãø DB Ã³¸® ½ÇÆÐ½Ã »ó¼¼ °á°ú ¸Þ½ÃÁö ¼³Á¤ ³¡                        = */
+    /* =   ê°€ë§¹ì  ì¸¡ DB ì²˜ë¦¬ ì‹¤íŒ¨ì‹œ ìƒì„¸ ê²°ê³¼ ë©”ì‹œì§€ ì„¤ì • ë                        = */
     /* ============================================================================== */
 ?>
     
@@ -122,9 +122,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
     <link href="css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
     <script type="text/javascript">
-        /* ½Å¿ëÄ«µå ¿µ¼öÁõ */ 
-        /* ½Ç°áÁ¦½Ã : "https://admin8.kcp.co.kr/assist/bill.BillAction.do?cmd=card_bill&tno=" */
-        /* Å×½ºÆ®½Ã : "https://testadmin8.kcp.co.kr/assist/bill.BillAction.do?cmd=card_bill&tno=" */
+        /* ì‹ ìš©ì¹´ë“œ ì˜ìˆ˜ì¦ */ 
+        /* ì‹¤ê²°ì œì‹œ : "https://admin8.kcp.co.kr/assist/bill.BillAction.do?cmd=card_bill&tno=" */
+        /* í…ŒìŠ¤íŠ¸ì‹œ : "https://testadmin8.kcp.co.kr/assist/bill.BillAction.do?cmd=card_bill&tno=" */
          function receiptView( tno, ordr_idxx, amount )
         {
             receiptWin = "https://admin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=card_bill&tno=";
@@ -135,9 +135,9 @@
             window.open(receiptWin, "", "width=455, height=815"); 
         }
          
-        /* Çö±Ý ¿µ¼öÁõ */ 
-        /* ½Ç°áÁ¦½Ã : "https://admin.kcp.co.kr/Modules/Service/Cash/Cash_Bill_Common_View.jsp" */ 
-        /* Å×½ºÆ®½Ã : "https://testadmin8.kcp.co.kr/Modules/Service/Cash/Cash_Bill_Common_View.jsp" */
+        /* í˜„ê¸ˆ ì˜ìˆ˜ì¦ */ 
+        /* ì‹¤ê²°ì œì‹œ : "https://admin.kcp.co.kr/Modules/Service/Cash/Cash_Bill_Common_View.jsp" */ 
+        /* í…ŒìŠ¤íŠ¸ì‹œ : "https://testadmin8.kcp.co.kr/Modules/Service/Cash/Cash_Bill_Common_View.jsp" */
         function receiptView2( site_cd, order_id, bill_yn, auth_no )
         {
             receiptWin2 = "https://testadmin8.kcp.co.kr/Modules/Service/Cash/Cash_Bill_Common_View.jsp";
@@ -149,9 +149,9 @@
 
             window.open(receiptWin2, "", "width=370, height=625");
         }
-        /* °¡»ó °èÁÂ ¸ðÀÇÀÔ±Ý ÆäÀÌÁö È£Ãâ */
-        /* Å×½ºÆ®½Ã¿¡¸¸ »ç¿ë°¡´É */
-        /* ½Ç°áÁ¦½Ã ÇØ´ç ½ºÅ©¸³Æ® ÁÖ¼®Ã³¸® */
+        /* ê°€ìƒ ê³„ì¢Œ ëª¨ì˜ìž…ê¸ˆ íŽ˜ì´ì§€ í˜¸ì¶œ */
+        /* í…ŒìŠ¤íŠ¸ì‹œì—ë§Œ ì‚¬ìš©ê°€ëŠ¥ */
+        /* ì‹¤ê²°ì œì‹œ í•´ë‹¹ ìŠ¤í¬ë¦½íŠ¸ ì£¼ì„ì²˜ë¦¬ */
         function receiptView3()
         {
             receiptWin3 = "http://devadmin.kcp.co.kr/Modules/Noti/TEST_Vcnt_Noti.jsp";
@@ -163,40 +163,40 @@
 <body>
     <form name="cancel" method="post">
     <div id="sample_wrap">
-        <h1>[°á°úÃâ·Â]<span> ÀÌ ÆäÀÌÁö´Â °áÁ¦ °á°ú¸¦ Ãâ·ÂÇÏ´Â »ùÇÃ(¿¹½Ã) ÆäÀÌÁöÀÔ´Ï´Ù.</span></h1>
+        <h1>[ê²°ê³¼ì¶œë ¥]<span> ì´ íŽ˜ì´ì§€ëŠ” ê²°ì œ ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” ìƒ˜í”Œ(ì˜ˆì‹œ) íŽ˜ì´ì§€ìž…ë‹ˆë‹¤.</span></h1>
     <div class="sample">
         <p>
-          ¿äÃ» °á°ú¸¦ Ãâ·ÂÇÏ´Â ÆäÀÌÁö ÀÔ´Ï´Ù.<br />
-          ¿äÃ»ÀÌ Á¤»óÀûÀ¸·Î Ã³¸®µÈ °æ¿ì °á°úÄÚµå(res_cd)°ªÀÌ 0000À¸·Î Ç¥½ÃµË´Ï´Ù.
+          ìš”ì²­ ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” íŽ˜ì´ì§€ ìž…ë‹ˆë‹¤.<br />
+          ìš”ì²­ì´ ì •ìƒì ìœ¼ë¡œ ì²˜ë¦¬ëœ ê²½ìš° ê²°ê³¼ì½”ë“œ(res_cd)ê°’ì´ 0000ìœ¼ë¡œ í‘œì‹œë©ë‹ˆë‹¤.
         </p>
 
 <?
     /* ============================================================================== */
-    /* =   °áÁ¦ °á°ú ÄÚµå ¹× ¸Þ½ÃÁö Ãâ·Â(°á°úÆäÀÌÁö¿¡ ¹Ýµå½Ã Ãâ·ÂÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.)= */
+    /* =   ê²°ì œ ê²°ê³¼ ì½”ë“œ ë° ë©”ì‹œì§€ ì¶œë ¥(ê²°ê³¼íŽ˜ì´ì§€ì— ë°˜ë“œì‹œ ì¶œë ¥í•´ì£¼ì‹œê¸° ë°”ëžë‹ˆë‹¤.)= */
     /* = -------------------------------------------------------------------------- = */
-    /* =   °áÁ¦ Á¤»ó : res_cd°ªÀÌ 0000À¸·Î ¼³Á¤µË´Ï´Ù.                              = */
-    /* =   °áÁ¦ ½ÇÆÐ : res_cd°ªÀÌ 0000ÀÌ¿ÜÀÇ °ªÀ¸·Î ¼³Á¤µË´Ï´Ù.                     = */
+    /* =   ê²°ì œ ì •ìƒ : res_cdê°’ì´ 0000ìœ¼ë¡œ ì„¤ì •ë©ë‹ˆë‹¤.                              = */
+    /* =   ê²°ì œ ì‹¤íŒ¨ : res_cdê°’ì´ 0000ì´ì™¸ì˜ ê°’ìœ¼ë¡œ ì„¤ì •ë©ë‹ˆë‹¤.                     = */
     /* = -------------------------------------------------------------------------- = */
 ?>
-                    <h2>&sdot; Ã³¸® °á°ú</h2>
+                    <h2>&sdot; ì²˜ë¦¬ ê²°ê³¼</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                        <!-- °á°ú ÄÚµå -->
+                        <!-- ê²°ê³¼ ì½”ë“œ -->
                         <tr>
-                          <th>°á°ú ÄÚµå</th>
+                          <th>ê²°ê³¼ ì½”ë“œ</th>
                           <td><?=$res_cd?></td>
                         </tr>
-                              <!-- °á°ú ¸Þ½ÃÁö -->
+                              <!-- ê²°ê³¼ ë©”ì‹œì§€ -->
                         <tr>
-                          <th>°á°ú ¸Þ¼¼Áö</th>
+                          <th>ê²°ê³¼ ë©”ì„¸ì§€</th>
                           <td><?=$res_msg?></td>
                         </tr>
 <?
-    // Ã³¸® ÆäÀÌÁö(pp_cli_hub.php)¿¡¼­ °¡¸ÍÁ¡ DBÃ³¸® ÀÛ¾÷ÀÌ ½ÇÆÐÇÑ °æ¿ì »ó¼¼¸Þ½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+    // ì²˜ë¦¬ íŽ˜ì´ì§€(pp_cli_hub.php)ì—ì„œ ê°€ë§¹ì  DBì²˜ë¦¬ ìž‘ì—…ì´ ì‹¤íŒ¨í•œ ê²½ìš° ìƒì„¸ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.
     if( !$res_msg_bsucc == "")
     {
 ?>
                          <tr>
-                           <th>°á°ú »ó¼¼ ¸Þ¼¼Áö</th>
+                           <th>ê²°ê³¼ ìƒì„¸ ë©”ì„¸ì§€</th>
                            <td><?=$res_msg_bsucc?></td>
                          </tr>
 <?
@@ -206,378 +206,378 @@
 
 <?
     /* = -------------------------------------------------------------------------- = */
-    /* =   °áÁ¦ °á°ú ÄÚµå ¹× ¸Þ½ÃÁö Ãâ·Â ³¡                                         = */
+    /* =   ê²°ì œ ê²°ê³¼ ì½”ë“œ ë° ë©”ì‹œì§€ ì¶œë ¥ ë                                         = */
     /* ============================================================================== */
 
     /* ============================================================================== */
-    /* =  01. °áÁ¦ °á°ú Ãâ·Â                                                        = */
+    /* =  01. ê²°ì œ ê²°ê³¼ ì¶œë ¥                                                        = */
     /* = -------------------------------------------------------------------------- = */
-    if ( $req_tx == "pay" )                           // °Å·¡ ±¸ºÐ : ½ÂÀÎ
+    if ( $req_tx == "pay" )                           // ê±°ëž˜ êµ¬ë¶„ : ìŠ¹ì¸
     {
         /* ============================================================================== */
-        /* =  01-1. ¾÷Ã¼ DB Ã³¸® Á¤»ó (bSucc°ªÀÌ false°¡ ¾Æ´Ñ °æ¿ì)                     = */
+        /* =  01-1. ì—…ì²´ DB ì²˜ë¦¬ ì •ìƒ (bSuccê°’ì´ falseê°€ ì•„ë‹Œ ê²½ìš°)                     = */
         /* = -------------------------------------------------------------------------- = */
-        if ( $bSucc != "false" )                      // ¾÷Ã¼ DB Ã³¸® Á¤»ó
+        if ( $bSucc != "false" )                      // ì—…ì²´ DB ì²˜ë¦¬ ì •ìƒ
         {
             /* ============================================================================== */
-            /* =  01-1-1. Á¤»ó °áÁ¦½Ã °áÁ¦ °á°ú Ãâ·Â (res_cd°ªÀÌ 0000ÀÎ °æ¿ì)               = */
+            /* =  01-1-1. ì •ìƒ ê²°ì œì‹œ ê²°ì œ ê²°ê³¼ ì¶œë ¥ (res_cdê°’ì´ 0000ì¸ ê²½ìš°)               = */
             /* = -------------------------------------------------------------------------- = */
-            if ( $res_cd == "0000" )                  // Á¤»ó ½ÂÀÎ
+            if ( $res_cd == "0000" )                  // ì •ìƒ ìŠ¹ì¸
             {
 ?>
-                    <h2>&sdot; ÁÖ¹® Á¤º¸</h2>
+                    <h2>&sdot; ì£¼ë¬¸ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                        <!-- ÁÖ¹®¹øÈ£ -->
+                        <!-- ì£¼ë¬¸ë²ˆí˜¸ -->
                         <tr>
-                          <th>ÁÖ¹® ¹øÈ£</th>
+                          <th>ì£¼ë¬¸ ë²ˆí˜¸</th>
                           <td><?=$ordr_idxx ?></td>
                         </tr>
-                        <!-- KCP °Å·¡¹øÈ£ -->
+                        <!-- KCP ê±°ëž˜ë²ˆí˜¸ -->
                         <tr>
-                          <th>KCP °Å·¡¹øÈ£</th>
+                          <th>KCP ê±°ëž˜ë²ˆí˜¸</th>
                           <td><?=$tno ?></td>
                         </tr>
-                        <!-- °áÁ¦±Ý¾× -->
+                        <!-- ê²°ì œê¸ˆì•¡ -->
                         <tr>
-                          <th>°áÁ¦ ±Ý¾×</th>
-                          <td><?=$good_mny ?>¿ø</td>
+                          <th>ê²°ì œ ê¸ˆì•¡</th>
+                          <td><?=$good_mny ?>ì›</td>
                         </tr>
-                        <!-- »óÇ°¸í(good_name) -->
+                        <!-- ìƒí’ˆëª…(good_name) -->
                         <tr>
-                          <th>»ó Ç° ¸í</th>
+                          <th>ìƒ í’ˆ ëª…</th>
                           <td><?=$good_name ?></td>
                         </tr>
-                        <!-- ÁÖ¹®ÀÚ¸í -->
+                        <!-- ì£¼ë¬¸ìžëª… -->
                         <tr>
-                          <th>ÁÖ¹®ÀÚ¸í</th>
+                          <th>ì£¼ë¬¸ìžëª…</th>
                           <td><?=$buyr_name ?></td>
                         </tr>
-                        <!-- ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£ -->
+                        <!-- ì£¼ë¬¸ìž ì „í™”ë²ˆí˜¸ -->
                         <tr>
-                          <th>ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£</th>
+                          <th>ì£¼ë¬¸ìž ì „í™”ë²ˆí˜¸</th>
                           <td><?=$buyr_tel1 ?></td>
                         </tr>
-                        <!-- ÁÖ¹®ÀÚ ÈÞ´ëÆù¹øÈ£ -->
+                        <!-- ì£¼ë¬¸ìž íœ´ëŒ€í°ë²ˆí˜¸ -->
                         <tr>
-                          <th>ÁÖ¹®ÀÚ ÈÞ´ëÆù¹øÈ£</th>
+                          <th>ì£¼ë¬¸ìž íœ´ëŒ€í°ë²ˆí˜¸</th>
                           <td><?=$buyr_tel2 ?></td>
                         </tr>
-                        <!-- ÁÖ¹®ÀÚ E-mail -->
+                        <!-- ì£¼ë¬¸ìž E-mail -->
                         <tr>
-                          <th>ÁÖ¹®ÀÚ E-mail</th>
+                          <th>ì£¼ë¬¸ìž E-mail</th>
                           <td><?=$buyr_mail ?></td>
                         </tr>
                     </table>
 <?
                 /* ============================================================================== */
-                /* =  ½Å¿ëÄ«µå °áÁ¦°á°ú Ãâ·Â                                                    = */
+                /* =  ì‹ ìš©ì¹´ë“œ ê²°ì œê²°ê³¼ ì¶œë ¥                                                    = */
                 /* = -------------------------------------------------------------------------- = */
-                if ( $use_pay_method == "100000000000" )       // ½Å¿ëÄ«µå
+                if ( $use_pay_method == "100000000000" )       // ì‹ ìš©ì¹´ë“œ
                 {
 ?>
-                    <h2>&sdot; ½Å¿ëÄ«µå Á¤º¸</h2>
+                    <h2>&sdot; ì‹ ìš©ì¹´ë“œ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                        <!-- °áÁ¦¼ö´Ü : ½Å¿ëÄ«µå -->
+                        <!-- ê²°ì œìˆ˜ë‹¨ : ì‹ ìš©ì¹´ë“œ -->
                         <tr>
-                          <th>°áÁ¦ ¼ö´Ü</th>
-                          <td>½Å¿ë Ä«µå</td>
+                          <th>ê²°ì œ ìˆ˜ë‹¨</th>
+                          <td>ì‹ ìš© ì¹´ë“œ</td>
                         </tr>
-                        <!-- °áÁ¦ Ä«µå -->
+                        <!-- ê²°ì œ ì¹´ë“œ -->
                         <tr>
-                          <th>°áÁ¦ Ä«µå</th>
+                          <th>ê²°ì œ ì¹´ë“œ</th>
                           <td><?=$card_cd ?> / <?=$card_name ?></td>
                         </tr>
-                        <!-- ½ÂÀÎ½Ã°£ -->
+                        <!-- ìŠ¹ì¸ì‹œê°„ -->
                         <tr>
-                          <th>½ÂÀÎ ½Ã°£</th>
+                          <th>ìŠ¹ì¸ ì‹œê°„</th>
                           <td><?=$app_time ?></td>
                         </tr>
-                        <!-- ½ÂÀÎ¹øÈ£ -->
+                        <!-- ìŠ¹ì¸ë²ˆí˜¸ -->
                         <tr>
-                          <th>½ÂÀÎ ¹øÈ£</th>
+                          <th>ìŠ¹ì¸ ë²ˆí˜¸</th>
                           <td><?=$app_no ?></td>
                         </tr>
-                        <!-- ÇÒºÎ°³¿ù -->
+                        <!-- í• ë¶€ê°œì›” -->
                         <tr>
-                          <th>ÇÒºÎ °³¿ù</th>
+                          <th>í• ë¶€ ê°œì›”</th>
                           <td><?=$quota ?></td>
                         </tr>
-                        <!-- ¹«ÀÌÀÚ ¿©ºÎ -->
+                        <!-- ë¬´ì´ìž ì—¬ë¶€ -->
                         <tr>
-                          <th>¹«ÀÌÀÚ ¿©ºÎ</th>
+                          <th>ë¬´ì´ìž ì—¬ë¶€</th>
                           <td><?=$noinf ?></td>
                         </tr>
 <?
                     /* ============================================================================== */
-                    /* =  º¹ÇÕ°áÁ¦ (Æ÷ÀÎÆ® + ½Å¿ëÄ«µå) ½ÂÀÎ °á°ú Ã³¸®                                 = */
+                    /* =  ë³µí•©ê²°ì œ (í¬ì¸íŠ¸ + ì‹ ìš©ì¹´ë“œ) ìŠ¹ì¸ ê²°ê³¼ ì²˜ë¦¬                                 = */
                     /* = -------------------------------------------------------------------------- = */
                     if ( $pnt_issue == "SCSK" || $pnt_issue == "SCWB" )
                     {
 ?>
                     </table>
-                    <h2>&sdot; Æ÷ÀÎÆ® Á¤º¸</h2>
+                    <h2>&sdot; í¬ì¸íŠ¸ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                    <!-- Æ÷ÀÎÆ®»ç -->
+                    <!-- í¬ì¸íŠ¸ì‚¬ -->
                         <tr>
-                          <th>Æ÷ÀÎÆ®»ç</th>
+                          <th>í¬ì¸íŠ¸ì‚¬</th>
                           <td><?=$pnt_issue ?></td>
                         </tr>
-                    <!-- Æ÷ÀÎÆ® ½ÂÀÎ ½Ã°£ -->
+                    <!-- í¬ì¸íŠ¸ ìŠ¹ì¸ ì‹œê°„ -->
                         <tr>
-                          <th>Æ÷ÀÎÆ® ½ÂÀÎ½Ã°£</th>
+                          <th>í¬ì¸íŠ¸ ìŠ¹ì¸ì‹œê°„</th>
                           <td><?=$pnt_app_time ?></td>
                         </tr>
-                    <!-- Æ÷ÀÎÆ® ½ÂÀÎ¹øÈ£ -->
+                    <!-- í¬ì¸íŠ¸ ìŠ¹ì¸ë²ˆí˜¸ -->
                         <tr>
-                          <th>Æ÷ÀÎÆ® ½ÂÀÎ¹øÈ£</th>
+                          <th>í¬ì¸íŠ¸ ìŠ¹ì¸ë²ˆí˜¸</th>
                           <td><?=$pnt_app_no ?></td>
                         </tr>
-                    <!-- Àû¸³±Ý¾× or »ç¿ë±Ý¾× -->
+                    <!-- ì ë¦½ê¸ˆì•¡ or ì‚¬ìš©ê¸ˆì•¡ -->
                         <tr>
-                          <th>Àû¸³±Ý¾× or »ç¿ë±Ý¾×</th>
+                          <th>ì ë¦½ê¸ˆì•¡ or ì‚¬ìš©ê¸ˆì•¡</th>
                           <td><?=$pnt_amount ?></td>
                         </tr>
-                    <!-- ¹ß»ý Æ÷ÀÎÆ® -->
+                    <!-- ë°œìƒ í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>¹ß»ý Æ÷ÀÎÆ®</th>
+                          <th>ë°œìƒ í¬ì¸íŠ¸</th>
                           <td><?=$add_pnt ?></td>
                         </tr>
-                    <!-- »ç¿ë°¡´É Æ÷ÀÎÆ® -->
+                    <!-- ì‚¬ìš©ê°€ëŠ¥ í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>»ç¿ë°¡´É Æ÷ÀÎÆ®</th>
+                          <th>ì‚¬ìš©ê°€ëŠ¥ í¬ì¸íŠ¸</th>
                           <td><?=$use_pnt ?></td>
                         </tr>
-                    <!-- ÃÑ ´©Àû Æ÷ÀÎÆ® -->
+                    <!-- ì´ ëˆ„ì  í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>ÃÑ ´©Àû Æ÷ÀÎÆ®</th>
+                          <th>ì´ ëˆ„ì  í¬ì¸íŠ¸</th>
                           <td><?=$rsv_pnt ?></td>
                         </tr>
 <?
                     }
                     /* ============================================================================== */
-                    /* =  ½Å¿ëÄ«µå ¿µ¼öÁõ Ãâ·Â                                                      = */
+                    /* =  ì‹ ìš©ì¹´ë“œ ì˜ìˆ˜ì¦ ì¶œë ¥                                                      = */
                     /* = -------------------------------------------------------------------------- = */
-                    /*    ½ÇÁ¦ °Å·¡°Ç¿¡ ´ëÇØ¼­ ¿µ¼öÁõÀ» Ãâ·Â ÇÒ ¼ö ÀÖ½À´Ï´Ù.                        = */
+                    /*    ì‹¤ì œ ê±°ëž˜ê±´ì— ëŒ€í•´ì„œ ì˜ìˆ˜ì¦ì„ ì¶œë ¥ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.                        = */
                     /* = -------------------------------------------------------------------------- = */
 ?>
                     <tr>
-                    <th>¿µ¼öÁõ È®ÀÎ</th>
-                        <td class="sub_content1"><a href="javascript:receiptView('<?=$tno?>','<?=$ordr_idxx?>','<?=$amount?>')"><img src="./img/btn_receipt.png" alt="¿µ¼öÁõÀ» È®ÀÎÇÕ´Ï´Ù." />
+                    <th>ì˜ìˆ˜ì¦ í™•ì¸</th>
+                        <td class="sub_content1"><a href="javascript:receiptView('<?=$tno?>','<?=$ordr_idxx?>','<?=$amount?>')"><img src="./img/btn_receipt.png" alt="ì˜ìˆ˜ì¦ì„ í™•ì¸í•©ë‹ˆë‹¤." />
                     </td>
                 </table>
 <?
                 }
                 /* ============================================================================== */
-                /* =   °èÁÂÀÌÃ¼ °áÁ¦ °á°ú Ãâ·Â                                                  = */
+                /* =   ê³„ì¢Œì´ì²´ ê²°ì œ ê²°ê³¼ ì¶œë ¥                                                  = */
                 /* = -------------------------------------------------------------------------- = */
-                else if ( $use_pay_method == "010000000000" )       // °èÁÂÀÌÃ¼
+                else if ( $use_pay_method == "010000000000" )       // ê³„ì¢Œì´ì²´
                 {
 ?>
-                    <h2>&sdot; °èÁÂÀÌÃ¼ Á¤º¸</h2>
+                    <h2>&sdot; ê³„ì¢Œì´ì²´ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                    <!-- °áÁ¦¼ö´Ü : °èÁÂÀÌÃ¼ -->
+                    <!-- ê²°ì œìˆ˜ë‹¨ : ê³„ì¢Œì´ì²´ -->
                         <tr>
-                          <th>°áÁ¦ ¼ö´Ü</th>
-                          <td>°èÁÂÀÌÃ¼</td>
+                          <th>ê²°ì œ ìˆ˜ë‹¨</th>
+                          <td>ê³„ì¢Œì´ì²´</td>
                         </tr>
-                    <!-- ÀÌÃ¼ ÀºÇà -->
+                    <!-- ì´ì²´ ì€í–‰ -->
                         <tr>
-                          <th>ÀÌÃ¼ ÀºÇà</th>
+                          <th>ì´ì²´ ì€í–‰</th>
                           <td><?=$bank_name ?></td>
                         </tr>
-                    <!-- ÀÌÃ¼ ÀºÇà ÄÚµå -->
+                    <!-- ì´ì²´ ì€í–‰ ì½”ë“œ -->
                         <tr>
-                          <th>ÀÌÃ¼ ÀºÇàÄÚµå</th>
+                          <th>ì´ì²´ ì€í–‰ì½”ë“œ</th>
                           <td><?=$bank_code ?></td>
                         </tr>
-                    <!-- ½ÂÀÎ½Ã°£ -->
+                    <!-- ìŠ¹ì¸ì‹œê°„ -->
                         <tr>
-                          <th>½ÂÀÎ ½Ã°£</th>
+                          <th>ìŠ¹ì¸ ì‹œê°„</th>
                           <td><?=$app_time ?></td>
                         </tr>
                     </table>
 <?
                 }
                 /* ============================================================================== */
-                /* =   °¡»ó°èÁÂ °áÁ¦ °á°ú Ãâ·Â                                                  = */
+                /* =   ê°€ìƒê³„ì¢Œ ê²°ì œ ê²°ê³¼ ì¶œë ¥                                                  = */
                 /* = -------------------------------------------------------------------------- = */
-                else if ( $use_pay_method == "001000000000" )       // °¡»ó°èÁÂ
+                else if ( $use_pay_method == "001000000000" )       // ê°€ìƒê³„ì¢Œ
                 {
 ?>
-                    <h2>&sdot; °¡»ó°èÁÂ Á¤º¸</h2>
+                    <h2>&sdot; ê°€ìƒê³„ì¢Œ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                    <!-- °áÁ¦¼ö´Ü : °¡»ó°èÁÂ -->
+                    <!-- ê²°ì œìˆ˜ë‹¨ : ê°€ìƒê³„ì¢Œ -->
                         <tr>
-                          <th>°áÁ¦ ¼ö´Ü</th>
-                          <td>°¡»ó°èÁÂ</td>
+                          <th>ê²°ì œ ìˆ˜ë‹¨</th>
+                          <td>ê°€ìƒê³„ì¢Œ</td>
                         </tr>
-                    <!-- ÀÔ±ÝÀºÇà -->
+                    <!-- ìž…ê¸ˆì€í–‰ -->
                         <tr>
-                          <th>ÀÔ±Ý ÀºÇà</th>
+                          <th>ìž…ê¸ˆ ì€í–‰</th>
                           <td><?=$bankname ?></td>
                         </tr>
-                    <!-- ÀÔ±Ý°èÁÂ ¿¹±ÝÁÖ -->
+                    <!-- ìž…ê¸ˆê³„ì¢Œ ì˜ˆê¸ˆì£¼ -->
                         <tr>
-                          <th>ÀÔ±ÝÇÒ °èÁÂ ¿¹±ÝÁÖ</th>
+                          <th>ìž…ê¸ˆí•  ê³„ì¢Œ ì˜ˆê¸ˆì£¼</th>
                           <td><?=$depositor ?></td>
                         </tr>
-                    <!-- ÀÔ±Ý°èÁÂ ¹øÈ£ -->
+                    <!-- ìž…ê¸ˆê³„ì¢Œ ë²ˆí˜¸ -->
                         <tr>
-                          <th>ÀÔ±ÝÇÒ °èÁÂ ¹øÈ£</th>
+                          <th>ìž…ê¸ˆí•  ê³„ì¢Œ ë²ˆí˜¸</th>
                           <td><?=$account ?></td>
                         </tr>
-                    <!-- °¡»ó°èÁÂ ÀÔ±Ý¸¶°¨½Ã°£ -->
+                    <!-- ê°€ìƒê³„ì¢Œ ìž…ê¸ˆë§ˆê°ì‹œê°„ -->
                         <tr>
-                          <th>°¡»ó°èÁÂ ÀÔ±Ý¸¶°¨½Ã°£</th>
+                          <th>ê°€ìƒê³„ì¢Œ ìž…ê¸ˆë§ˆê°ì‹œê°„</th>
                           <td><?=$va_date ?></td>
                         </tr>
-                    <!-- °¡»ó°èÁÂ ¸ðÀÇÀÔ±Ý(Å×½ºÆ®½Ã) -->
+                    <!-- ê°€ìƒê³„ì¢Œ ëª¨ì˜ìž…ê¸ˆ(í…ŒìŠ¤íŠ¸ì‹œ) -->
                         <tr>
-                          <th>°¡»ó°èÁÂ ¸ðÀÇÀÔ±Ý</br>(Å×½ºÆ®½Ã »ç¿ë)</th>
-                          <td class="sub_content1"><a href="javascript:receiptView3()"><img src="./img/btn_vcn.png" alt="¸ðÀÇÀÔ±Ý ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù." />
+                          <th>ê°€ìƒê³„ì¢Œ ëª¨ì˜ìž…ê¸ˆ</br>(í…ŒìŠ¤íŠ¸ì‹œ ì‚¬ìš©)</th>
+                          <td class="sub_content1"><a href="javascript:receiptView3()"><img src="./img/btn_vcn.png" alt="ëª¨ì˜ìž…ê¸ˆ íŽ˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤." />
                         </tr>
                     </table>
 <?
                 }
                 /* ============================================================================== */
-                /* =   Æ÷ÀÎÆ® °áÁ¦ °á°ú Ãâ·Â                                                    = */
+                /* =   í¬ì¸íŠ¸ ê²°ì œ ê²°ê³¼ ì¶œë ¥                                                    = */
                 /* = -------------------------------------------------------------------------- = */
-                else if ( $use_pay_method == "000100000000" )         // Æ÷ÀÎÆ®
+                else if ( $use_pay_method == "000100000000" )         // í¬ì¸íŠ¸
                 {
 ?>
-                    <h2>&sdot; Æ÷ÀÎÆ® Á¤º¸</h2>
+                    <h2>&sdot; í¬ì¸íŠ¸ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                    <!-- °áÁ¦¼ö´Ü : Æ÷ÀÎÆ® -->
+                    <!-- ê²°ì œìˆ˜ë‹¨ : í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>°áÁ¦¼ö´Ü</th>
-                          <td>Æ÷ ÀÎ Æ®</td>
+                          <th>ê²°ì œìˆ˜ë‹¨</th>
+                          <td>í¬ ì¸ íŠ¸</td>
                         </tr>
-                    <!-- Æ÷ÀÎÆ®»ç -->
+                    <!-- í¬ì¸íŠ¸ì‚¬ -->
                         <tr>
-                          <th>Æ÷ÀÎÆ®»ç</th>
+                          <th>í¬ì¸íŠ¸ì‚¬</th>
                           <td><?=$pnt_issue ?></td>
                         </tr>
-                    <!-- Æ÷ÀÎÆ® ½ÂÀÎ½Ã°£ -->
+                    <!-- í¬ì¸íŠ¸ ìŠ¹ì¸ì‹œê°„ -->
                         <tr>
-                          <th>Æ÷ÀÎÆ® ½ÂÀÎ½Ã°£</th>
+                          <th>í¬ì¸íŠ¸ ìŠ¹ì¸ì‹œê°„</th>
                           <td><?=$pnt_app_time ?></td>
                         </tr>
-                    <!-- Æ÷ÀÎÆ® ½ÂÀÎ¹øÈ£ -->
+                    <!-- í¬ì¸íŠ¸ ìŠ¹ì¸ë²ˆí˜¸ -->
                         <tr>
-                          <th>Æ÷ÀÎÆ® ½ÂÀÎ¹øÈ£</th>
+                          <th>í¬ì¸íŠ¸ ìŠ¹ì¸ë²ˆí˜¸</th>
                           <td><?=$pnt_app_no ?></td>
                         </tr>
-                    <!-- Àû¸³±Ý¾× or »ç¿ë±Ý¾× -->
+                    <!-- ì ë¦½ê¸ˆì•¡ or ì‚¬ìš©ê¸ˆì•¡ -->
                         <tr>
-                          <th>Àû¸³±Ý¾× or »ç¿ë±Ý¾×</th>
+                          <th>ì ë¦½ê¸ˆì•¡ or ì‚¬ìš©ê¸ˆì•¡</th>
                           <td><?=$pnt_amount ?></td>
                         </tr>
-                    <!-- ¹ß»ý Æ÷ÀÎÆ® -->
+                    <!-- ë°œìƒ í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>¹ß»ý Æ÷ÀÎÆ®</th>
+                          <th>ë°œìƒ í¬ì¸íŠ¸</th>
                           <td><?=$add_pnt ?></td>
                         </tr>
-                    <!-- »ç¿ë°¡´É Æ÷ÀÎÆ® -->
+                    <!-- ì‚¬ìš©ê°€ëŠ¥ í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>»ç¿ë°¡´É Æ÷ÀÎÆ®</th>
+                          <th>ì‚¬ìš©ê°€ëŠ¥ í¬ì¸íŠ¸</th>
                           <td><?=$use_pnt ?></td>
                         </tr>
-                    <!-- ÃÑ ´©Àû Æ÷ÀÎÆ® -->
+                    <!-- ì´ ëˆ„ì  í¬ì¸íŠ¸ -->
                         <tr>
-                          <th>ÃÑ ´©Àû Æ÷ÀÎÆ®</th>
+                          <th>ì´ ëˆ„ì  í¬ì¸íŠ¸</th>
                           <td><?=$rsv_pnt ?></td>
                         </tr>
                 </table>
 <?
                 }
                 /* ============================================================================== */
-                /* =   ÈÞ´ëÆù °áÁ¦ °á°ú Ãâ·Â                                                  = */
+                /* =   íœ´ëŒ€í° ê²°ì œ ê²°ê³¼ ì¶œë ¥                                                  = */
                 /* = -------------------------------------------------------------------------- = */
-                else if ( $use_pay_method == "000010000000" )       // ÈÞ´ëÆù
+                else if ( $use_pay_method == "000010000000" )       // íœ´ëŒ€í°
                 {
 ?>
-                    <h2>&sdot; ÈÞ´ëÆù Á¤º¸</h2>
+                    <h2>&sdot; íœ´ëŒ€í° ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                    <!-- °áÁ¦¼ö´Ü : ÈÞ´ëÆù -->
+                    <!-- ê²°ì œìˆ˜ë‹¨ : íœ´ëŒ€í° -->
                         <tr>
-                          <th>°áÁ¦ ¼ö´Ü</th>
-                          <td>ÈÞ ´ë Æù</td>
+                          <th>ê²°ì œ ìˆ˜ë‹¨</th>
+                          <td>íœ´ ëŒ€ í°</td>
                         </tr>
-                    <!-- ½ÂÀÎ½Ã°£ -->
+                    <!-- ìŠ¹ì¸ì‹œê°„ -->
                         <tr>
-                          <th>½ÂÀÎ ½Ã°£</th>
+                          <th>ìŠ¹ì¸ ì‹œê°„</th>
                           <td><?=$app_time ?></td>
                         </tr>
-                    <!-- Åë½Å»çÄÚµå -->
+                    <!-- í†µì‹ ì‚¬ì½”ë“œ -->
                         <tr>
-                          <th>Åë½Å»ç ÄÚµå</th>
+                          <th>í†µì‹ ì‚¬ ì½”ë“œ</th>
                           <td><?=$commid ?></td>
                         </tr>
-                    <!-- ½ÂÀÎ½Ã°£ -->
+                    <!-- ìŠ¹ì¸ì‹œê°„ -->
                         <tr>
-                          <th>ÈÞ´ëÆù ¹øÈ£</th>
+                          <th>íœ´ëŒ€í° ë²ˆí˜¸</th>
                           <td><?=$mobile_no ?></td>
                         </tr>
                 </table>
 <?
                 }
                 /* ============================================================================== */
-                /* =   »óÇ°±Ç °áÁ¦ °á°ú Ãâ·Â                                                  = */
+                /* =   ìƒí’ˆê¶Œ ê²°ì œ ê²°ê³¼ ì¶œë ¥                                                  = */
                 /* = -------------------------------------------------------------------------- = */
-                else if ( $use_pay_method == "000000001000" )       // »óÇ°±Ç
+                else if ( $use_pay_method == "000000001000" )       // ìƒí’ˆê¶Œ
                 {
 ?>
-                    <h2>&sdot; »óÇ°±Ç Á¤º¸</h2>
+                    <h2>&sdot; ìƒí’ˆê¶Œ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
-                    <!-- °áÁ¦¼ö´Ü : »óÇ°±Ç -->
+                    <!-- ê²°ì œìˆ˜ë‹¨ : ìƒí’ˆê¶Œ -->
                         <tr>
-                          <th>°áÁ¦ ¼ö´Ü</th>
-                          <td>»ó Ç° ±Ç</td>
+                          <th>ê²°ì œ ìˆ˜ë‹¨</th>
+                          <td>ìƒ í’ˆ ê¶Œ</td>
                         </tr>
-                    <!-- ¹ß±Þ»ç ÄÚµå -->
+                    <!-- ë°œê¸‰ì‚¬ ì½”ë“œ -->
                         <tr>
-                          <th>¹ß±Þ»ç ÄÚµå</th>
+                          <th>ë°œê¸‰ì‚¬ ì½”ë“œ</th>
                           <td><?=$tk_van_code ?></td>
                         </tr>
-                    <!-- ½ÂÀÎ½Ã°£ -->
+                    <!-- ìŠ¹ì¸ì‹œê°„ -->
                         <tr>
-                          <th>½ÂÀÎ ½Ã°£</th>
+                          <th>ìŠ¹ì¸ ì‹œê°„</th>
                           <td><?=$app_time ?></td>
                         </tr>
-                    <!-- ½ÂÀÎ¹øÈ£ -->
+                    <!-- ìŠ¹ì¸ë²ˆí˜¸ -->
                         <tr>
-                          <th>½ÂÀÎ ¹øÈ£</th>
+                          <th>ìŠ¹ì¸ ë²ˆí˜¸</th>
                           <td><?=$tk_app_no ?></td>
                         </tr>
                 </table>
 <?
                 }
                 /* ============================================================================== */
-                /* =  Çö±Ý¿µ¼öÁõ Á¤º¸ Ãâ·Â                                                      = */
+                /* =  í˜„ê¸ˆì˜ìˆ˜ì¦ ì •ë³´ ì¶œë ¥                                                      = */
                 /* = -------------------------------------------------------------------------- = */
                 if ( $cash_yn != "" )
                 {
 
 ?>
-                <!-- Çö±Ý¿µ¼öÁõ Á¤º¸ Ãâ·Â-->
-                    <h2>&sdot; Çö±Ý¿µ¼öÁõ Á¤º¸</h2>
+                <!-- í˜„ê¸ˆì˜ìˆ˜ì¦ ì •ë³´ ì¶œë ¥-->
+                    <h2>&sdot; í˜„ê¸ˆì˜ìˆ˜ì¦ ì •ë³´</h2>
                     <table class="tbl" cellpadding="0" cellspacing="0">
                         <tr>
-                          <th>Çö±Ý¿µ¼öÁõ µî·Ï¿©ºÎ</th>
+                          <th>í˜„ê¸ˆì˜ìˆ˜ì¦ ë“±ë¡ì—¬ë¶€</th>
                           <td><?=$cash_yn ?></td>
                         </tr>
 <?
-                    // Çö±Ý¿µ¼öÁõÀÌ µî·ÏµÈ °æ¿ì ½ÂÀÎ¹øÈ£ °ªÀÌ Á¸Àç
+                    // í˜„ê¸ˆì˜ìˆ˜ì¦ì´ ë“±ë¡ëœ ê²½ìš° ìŠ¹ì¸ë²ˆí˜¸ ê°’ì´ ì¡´ìž¬
                         if ($cash_authno != "")
                         {
 ?>
                         <tr>
-                          <th>Çö±Ý¿µ¼öÁõ ½ÂÀÎ¹øÈ£</th>
+                          <th>í˜„ê¸ˆì˜ìˆ˜ì¦ ìŠ¹ì¸ë²ˆí˜¸</th>
                           <td><?=$cash_authno ?></td>
                         </tr>
                     <tr>
-                        <th>¿µ¼öÁõ È®ÀÎ</th>
-                        <td class="sub_content1"><a href="javascript:receiptView2('<?=$site_cd?>','<?=$ordr_idxx?>', '<?=$cash_yn?>', '<?=$cash_authno?>')"><img src="./img/btn_receipt.png" alt="Çö±Ý¿µ¼öÁõÀ»  È®ÀÎÇÕ´Ï´Ù." />
+                        <th>ì˜ìˆ˜ì¦ í™•ì¸</th>
+                        <td class="sub_content1"><a href="javascript:receiptView2('<?=$site_cd?>','<?=$ordr_idxx?>', '<?=$cash_yn?>', '<?=$cash_authno?>')"><img src="./img/btn_receipt.png" alt="í˜„ê¸ˆì˜ìˆ˜ì¦ì„  í™•ì¸í•©ë‹ˆë‹¤." />
                         </td>
 <?
 
@@ -589,21 +589,21 @@
                 }
             }
             /* = -------------------------------------------------------------------------- = */
-            /* =   01-1-1. Á¤»ó °áÁ¦½Ã °áÁ¦ °á°ú Ãâ·Â END                                   = */
+            /* =   01-1-1. ì •ìƒ ê²°ì œì‹œ ê²°ì œ ê²°ê³¼ ì¶œë ¥ END                                   = */
             /* ============================================================================== */
         }
         /* = -------------------------------------------------------------------------- = */
-        /* =   01-1. ¾÷Ã¼ DB Ã³¸® Á¤»ó END                                              = */
+        /* =   01-1. ì—…ì²´ DB ì²˜ë¦¬ ì •ìƒ END                                              = */
         /* ============================================================================== */
     /* = -------------------------------------------------------------------------- = */
-    /* =   01. °áÁ¦ °á°ú Ãâ·Â END                                                   = */
+    /* =   01. ê²°ì œ ê²°ê³¼ ì¶œë ¥ END                                                   = */
     /* ============================================================================== */
 ?>
-                    <!-- ¸ÅÀÔ ¿äÃ»/Ã³À½À¸·Î ÀÌ¹ÌÁö ¹öÆ° -->
+                    <!-- ë§¤ìž… ìš”ì²­/ì²˜ìŒìœ¼ë¡œ ì´ë¯¸ì§€ ë²„íŠ¼ -->
                 <tr>
 
                 <div class="btnset">
-                <a href="../index.html" class="home">Ã³À½À¸·Î</a>
+                <a href="../index.html" class="home">ì²˜ìŒìœ¼ë¡œ</a>
                 </div>
                 </tr>
               </tr>

@@ -9,6 +9,8 @@ $(function(){
 
 });
 
+$('.js-goodMny').val($('.js-totalResultCash').val());
+
 $('.js-orderQuantity').on('change keyup', function(event){
 	var $key = $(this).attr('data-key');
 	var $quantity = $(this).val();
@@ -51,9 +53,10 @@ function setOrderTotalResult(){
 	});
 	$('.js-totalResult').text(setNumComma($totalResult));
 	$('.js-totalResultInp').val($totalResult);
-	var $resultCash = parseInt($('.js-totalResultCash').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
-	var $resultPoint = $totalResult - $resultCash;
-	$('.js-totalResultPoint').val($resultPoint);
+	var $resultPoint = parseInt($('.js-totalResultPoint').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
+	var $resultCash = $totalResult - $resultPoint;
+	$('.js-totalResultCash').val($resultCash);
+	$('.js-goodMny').val($resultCash);
 	// $('.js-totalResultCash').val(0);
 };
 
@@ -68,11 +71,11 @@ $('.js-totalResultPoint').focus(function(event){
 
 
 $('.js-totalResultCash').on('change keyup', function(event){
-	if($('.js-totalResultCash').val().length >= $('.js-totalResultInp').val().length) {
+	// if($('.js-totalResultCash').val().length >= $('.js-totalResultInp').val().length) {
+	if($('.js-totalResultCash').val().length >= 3) {
 		var $resultCash = parseInt($('.js-totalResultCash').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
 		var $resultInp = parseInt($('.js-totalResultInp').val());		// 해당 변수의 값을 가져와 형변환 후 대입
 		var $mbPoint = parseInt($('.js-mbPoint').val());
-		var $subPoint = $resultInp-$mbPoint;
 
 		if ($resultInp > $mbPoint) {
 			if (!$resultCash || $resultCash < 0) {
