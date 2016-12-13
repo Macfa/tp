@@ -28,33 +28,33 @@
     $tno              = $_POST[ "tno"            ];      // KCP 거래번호
     $good_mny         = $_POST[ "good_mny"       ];      // 결제금액
     $good_name        = $_POST[ "good_name"      ];      // 상품명
-    $buyr_name        = $_POST[ "arName"      ];      // 구매자명
-    $buyr_tel1        = $_POST[ "arTel"      ];      // 구매자 전화번호
-    $buyr_tel2        = $_POST[ "arPhone"      ];      // 구매자 휴대폰번호
+    $buyr_name        = $_POST[ "buyr_name"      ];      // 구매자명
+    $buyr_tel1        = $_POST[ "buyr_tel1"      ];      // 구매자 전화번호
+    $buyr_tel2        = $_POST[ "buyr_tel2"      ];      // 구매자 휴대폰번호
     $buyr_mail        = $_POST[ "buyr_mail"      ];      // 구매자 E-Mail
     /* = -------------------------------------------------------------------------- = */
-    // 공통
+    // °øÅë
     $pnt_issue        = $_POST[ "pnt_issue"      ];      // 포인트 서비스사
     $app_time         = $_POST[ "app_time"       ];      // 승인시간 (공통)
     /* = -------------------------------------------------------------------------- = */
-    // 신용카드
+    // ½Å¿ëÄ«µå
     $card_cd          = $_POST[ "card_cd"        ];      // 카드코드
     $card_name        = $_POST[ "card_name"      ];      // 카드명
     $noinf            = $_POST[ "noinf"          ];      // 무이자 여부
     $quota            = $_POST[ "quota"          ];      // 할부개월
     $app_no           = $_POST[ "app_no"         ];      // 승인번호
     /* = -------------------------------------------------------------------------- = */
-    // 계좌이체
+    // °èÁÂÀÌÃ¼
     $bank_name        = $_POST[ "bank_name"      ];      // 은행명
     $bank_code        = $_POST[ "bank_code"      ];      // 은행코드
     /* = -------------------------------------------------------------------------- = */
-    // 가상계좌
+    // °¡»ó°èÁÂ
     $bankname         = $_POST[ "bankname"       ];      // 입금할 은행
     $depositor        = $_POST[ "depositor"      ];      // 입금할 계좌 예금주
     $account          = $_POST[ "account"        ];      // 입금할 계좌 번호
     $va_date          = $_POST[ "va_date"        ];      // 가상계좌 입금마감시간
     /* = -------------------------------------------------------------------------- = */
-    // 포인트
+    // Æ÷ÀÎÆ®
     $add_pnt          = $_POST[ "add_pnt"        ];      // 발생 포인트
     $use_pnt          = $_POST[ "use_pnt"        ];      // 사용가능 포인트
     $rsv_pnt          = $_POST[ "rsv_pnt"        ];      // 총 누적 포인트
@@ -62,15 +62,15 @@
     $pnt_app_no       = $_POST[ "pnt_app_no"     ];      // 승인번호
     $pnt_amount       = $_POST[ "pnt_amount"     ];      // 적립금액 or 사용금액
     /* = -------------------------------------------------------------------------- = */
-    //상품권
+    //»óÇ°±Ç
     $tk_van_code      = $_POST[ "tk_van_code"    ];      // 발급사 코드
     $tk_app_no        = $_POST[ "tk_app_no"      ];      // 승인 번호
     /* = -------------------------------------------------------------------------- = */
-    //휴대폰
+    //ÈÞ´ëÆù
     $commid           = $_POST[ "commid"         ];      // 통신사 코드
     $mobile_no        = $_POST[ "mobile_no"      ];      // 휴대폰 번호
     /* = -------------------------------------------------------------------------- = */
-    // 현금영수증
+    // Çö±Ý¿µ¼öÁõ
     $cash_yn          = $_POST[ "cash_yn"        ];      //현금영수증 등록 여부
     $cash_authno      = $_POST[ "cash_authno"    ];      //현금영수증 승인 번호
     $cash_tr_code     = $_POST[ "cash_tr_code"   ];      //현금영수증 발행 구분
@@ -120,7 +120,7 @@
 <head>
     <title>*** NHN KCP [AX-HUB Version] ***</title>
     <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
-    <link href="/Test_sample/css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
     <script type="text/javascript">
         /* 신용카드 영수증 */ 
         /* 실결제시 : "https://admin8.kcp.co.kr/assist/bill.BillAction.do?cmd=card_bill&tno=" */
@@ -163,7 +163,7 @@
 <body>
     <form name="cancel" method="post">
     <div id="sample_wrap">
-        <h1>[결과출력]<span> 이 페이지는 결제 결과를 출력하는 샘플(예시) 페이지입니다.</span></h1>
+        <h1>[결과출력]<span> 결제 정보 출력페이지입니다.</span></h1>
     <div class="sample">
         <p>
           요청 결과를 출력하는 페이지 입니다.<br />
@@ -241,18 +241,12 @@
                         <tr>
                           <th>결제 금액</th>
                           <td><?=$good_mny ?>원</td>
-                          <!-- <td><?=$good_mny ?>원</td> --> 
-                        <!-- 결제포인트 -->
-                        <tr>
-                          <th>결제 포인트</th>
-                          <td><?=$resultPoint ?>원</td>
-                          <!-- <td><?=$resultPoint ?>원</td> --> 
                         </tr>
                         <!-- 상품명(good_name) -->
                         <tr>
                           <th>상 품 명</th>
-                           <td><?=$good_name ?></td>
-                         </tr>
+                          <td><?=$good_name ?></td>
+                        </tr>
                         <!-- 주문자명 -->
                         <tr>
                           <th>주문자명</th>
@@ -609,7 +603,7 @@
                 <tr>
 
                 <div class="btnset">
-                <a href="/product/order.skin.php" class="home">주문리스트</a>
+                <a href="/user/orderList.php" class="home">처음으로</a>
                 </div>
                 </tr>
               </tr>

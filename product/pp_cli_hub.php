@@ -1,4 +1,5 @@
 <?
+
     /* ============================================================================== */
     /* =   PAGE : 지불 요청 및 결과 처리 PAGE                                       = */
     /* = -------------------------------------------------------------------------- = */
@@ -16,7 +17,9 @@
     /* =   테스트 및 실결제 연동시 site_conf_inc.php파일을 수정하시기 바랍니다.     = */
     /* = -------------------------------------------------------------------------- = */
 
-    include "/home/www/tplanit/kcp/cfg/site_conf_inc.php";       // 환경설정 파일 include
+
+    // include "../cfg/site_conf_inc.php";       // 환경설정 파일 include
+    include "/home/www/tplanit/kcp/cfg/site_conf_inc.php";
     require "pp_cli_hub_lib.php";              // library [수정불가]
 
     /* = -------------------------------------------------------------------------- = */
@@ -42,30 +45,30 @@
     /* = -------------------------------------------------------------------------- = */
     $req_tx         = $_POST[ "req_tx"         ]; // 요청 종류
     $tran_cd        = $_POST[ "tran_cd"        ]; // 처리 종류
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $cust_ip        = getenv( "REMOTE_ADDR"    ); // 요청 IP
     $ordr_idxx      = $_POST[ "ordr_idxx"      ]; // 쇼핑몰 주문번호
     $good_name      = $_POST[ "good_name"      ]; // 상품명
     $good_mny       = $_POST[ "good_mny"       ]; // 결제 총금액
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $res_cd         = "";                         // 응답코드
     $res_msg        = "";                         // 응답메시지
     $res_en_msg     = "";                         // 응답 영문 메세지
     $tno            = $_POST[ "tno"            ]; // KCP 거래 고유 번호
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $buyr_name      = $_POST[ "arName"      ]; // 주문자명
     $buyr_tel1      = $_POST[ "arTel"      ]; // 주문자 전화번호
     $buyr_tel2      = $_POST[ "arPhone"      ]; // 주문자 핸드폰 번호
     $buyr_mail      = $_POST[ "buyr_mail"      ]; // 주문자 E-mail 주소
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $use_pay_method = $_POST[ "use_pay_method" ]; // 결제 방법
     $bSucc          = "";                         // 업체 DB 처리 성공 여부
-    /* = -------------------------------------------------------------------------- = */
-    $app_time       = "";                         // 승인시간 (모든 결제 수단 공통)
+    /* = ----------------------------------------------------------------- = */
+    $app_time       = "";                         // 승인시간 (모든 결제 수단 공)
     $amount         = "";                         // KCP 실제 거래 금액
     $total_amount   = 0;                          // 복합결제시 총 거래금액
     $coupon_mny     = "";                         // 쿠폰금액
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $card_cd        = "";                         // 신용카드 코드
     $card_name      = "";                         // 신용카드 명
     $app_no         = "";                         // 신용카드 승인번호
@@ -75,16 +78,16 @@
     $card_bin_type_01 = "";                       // 카드구분1
     $card_bin_type_02 = "";                       // 카드구분2
     $card_mny       = "";                         // 카드결제금액
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $bank_name      = "";                         // 은행명
     $bank_code      = "";                         // 은행코드
     $bk_mny         = "";                         // 계좌이체결제금액
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $bankname       = "";                         // 입금할 은행명
     $depositor      = "";                         // 입금할 계좌 예금주 성명
     $account        = "";                         // 입금할 계좌 번호
     $va_date        = "";                         // 가상계좌 입금마감시간
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $pnt_issue      = "";                         // 결제 포인트사 코드
     $pnt_amount     = "";                         // 적립금액 or 사용금액
     $pnt_app_time   = "";                         // 승인시간
@@ -92,18 +95,19 @@
     $add_pnt        = "";                         // 발생 포인트
     $use_pnt        = "";                         // 사용가능 포인트
     $rsv_pnt        = "";                         // 총 누적 포인트
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $commid         = "";                         // 통신사 코드
     $mobile_no      = "";                         // 휴대폰 번호
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $shop_user_id   = $_POST[ "shop_user_id"   ]; // 가맹점 고객 아이디
     $tk_van_code    = "";                         // 발급사 코드
     $tk_app_no      = "";                         // 상품권 승인 번호
-    /* = -------------------------------------------------------------------------- = */
+    /* = ----------------------------------------------------------------- = */
     $cash_yn        = $_POST[ "cash_yn"        ]; // 현금영수증 등록 여부
     $cash_authno    = "";                         // 현금 영수증 승인 번호
     $cash_tr_code   = $_POST[ "cash_tr_code"   ]; // 현금 영수증 발행 구분
     $cash_id_info   = $_POST[ "cash_id_info"   ]; // 현금 영수증 등록 번호
+
     /* ============================================================================== */
 
     /* ============================================================================== */
@@ -126,26 +130,25 @@
     /* = -------------------------------------------------------------------------- = */
     /* =   03-1. 승인 요청                                                          = */
     /* = -------------------------------------------------------------------------- = */
+    if($_POST['good_mny'])
     if ( $req_tx == "pay" )
     {
 
-            // foreach($_POST['gfKey'] as $key => $val) {
+            foreach($_POST['gfKey'] as $key => $val) {
 
-            //     list($isValidGift,$arrGfPoint[$key]) = DB::queryFirstList('SELECT COUNT(*), gfPoint FROM tmGift WHERE gfKey = %i', $val);
-            //     $gfName = DB::queryFirstList('SELECT gfTit FROM tmGift WHERE gfKey = %i', $val);
-            //     $isValidGift = ($isValidGift>0)?TRUE:FALSE;
+                list($isValidGift,$arrGfPoint[$key]) = DB::queryFirstList('SELECT COUNT(*), gfPoint FROM tmGift WHERE gfKey = %i', $val);
+                $gfName = DB::queryFirstList('SELECT gfTit FROM tmGift WHERE gfKey = %i', $val);
+                $isValidGift = ($isValidGift>0)?TRUE:FALSE;
 
-            //     $totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
+                $totalValue += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
                 
-            //     foreach ($gfName as $key => $gfName_value) {
-            //         $gifts .= $gfName_value.', ';
-            //     }
-            // }
-
-
+                foreach ($gfName as $key => $gfName_value) {
+                    $gifts .= $gfName_value.', ';
+                }
+            }
 
             /* 1 원은 실제로 업체에서 결제하셔야 될 원 금액을 넣어주셔야 합니다. 결제금액 유효성 검증 */
-            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalPoint );   
+            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalValue-number_format($_POST['resultPoint']) );
             $c_PayPlus->mf_set_encx_data( $_POST[ "enc_data" ], $_POST[ "enc_info" ] );
     }
     /* ------------------------------------------------------------------------------ */
@@ -160,7 +163,7 @@
     {
         $c_PayPlus->mf_do_tx( $trace_no, $g_conf_home_dir, $g_conf_site_cd, $g_conf_site_key, $tran_cd, "",
                               $g_conf_gw_url, $g_conf_gw_port, "payplus_cli_slib", $ordr_idxx,
-                              $cust_ip, $g_conf_log_level, 0, 0, $g_conf_log_path ); // 응답 전문 처리
+                              $cust_ip, $g_conf_log_level, 0, 0, $g_conf_log_path ); // ÀÀ´ä Àü¹® Ã³¸®
 
         $res_cd  = $c_PayPlus->m_res_cd;  // 결과 코드
         $res_msg = $c_PayPlus->m_res_msg; // 결과 메시지
@@ -283,6 +286,7 @@
        
         }
     }
+    
     /* = -------------------------------------------------------------------------- = */
     /* =   05. 승인 결과 처리 END                                                   = */
     /* ============================================================================== */
@@ -414,66 +418,63 @@
         </script>
     </head>
 
-    <body>
-    
+    <body onload="goResult()">
+    <form name="pay_info" method="post" action="./result.php">
+        <input type="hidden" name="site_cd"           value="<?=$g_conf_site_cd ?>">    <!-- 사이트코드 -->
+        <input type="hidden" name="req_tx"            value="<?=$req_tx         ?>">    <!-- 요청 구분 -->
+        <input type="hidden" name="use_pay_method"    value="<?=$use_pay_method ?>">    <!-- 사용한 결제 수단 -->
+        <input type="hidden" name="bSucc"             value="<?=$bSucc          ?>">    <!-- 쇼핑몰 DB 처리 성공 여부 -->
 
-<body onload="goResult()">
-        <form name="pay_info" method="post" action="result.php">
-            <input type="hidden" name="site_cd"           value="<?=$g_conf_site_cd ?>">    <!-- 사이트코드 -->
-            <input type="hidden" name="req_tx"            value="<?=$req_tx         ?>">    <!-- 요청 구분 -->
-            <input type="hidden" name="use_pay_method"    value="<?=$use_pay_method ?>">    <!-- 사용한 결제 수단 -->
-            <input type="hidden" name="bSucc"             value="<?=$bSucc          ?>">    <!-- 쇼핑몰 DB 처리 성공 여부 -->
-        
-            <input type="hidden" name="amount"            value="<?=$amount         ?>">    <!-- 금액 -->
-            <input type="hidden" name="res_cd"            value="<?=$res_cd         ?>">    <!-- 결과 코드 -->
-            <input type="hidden" name="res_msg"           value="<?=$res_msg        ?>">    <!-- 결과 메세지 -->
-            <input type="hidden" name="res_en_msg"        value="<?=$res_en_msg     ?>">    <!-- 결과 영문 메세지 -->
-            <input type="hidden" name="ordr_idxx"         value="<?=$ordr_idxx      ?>">    <!-- 주문번호 -->
-            <input type="hidden" name="tno"               value="<?=$tno            ?>">    <!-- KCP 거래번호 -->
-            <input type="hidden" name="good_mny"          value="<?=$good_mny       ?>">    <!-- 결제금액 -->
-            <input type="hidden" name="good_name"       value="<?=implode(',', $good_name)?>">    <!-- 상품명 -->
-            <input type="hidden" name="arName"         value="<?=$arName      ?>">    <!-- 주문자명 -->
-            <input type="hidden" name="arTel"         value="<?=$arTel      ?>">    <!-- 주문자 전화번호 -->
-            <input type="hidden" name="arPhone"         value="<?=$arPhone      ?>">    <!-- 주문자 휴대폰번호 -->
-            <input type="hidden" name="buyr_mail"         value="<?=$buyr_mail      ?>">    <!-- 주문자 E-mail -->
-        
-            <input type="hidden" name="card_cd"           value="<?=$card_cd        ?>">    <!-- 카드코드 -->
-            <input type="hidden" name="card_name"         value="<?=$card_name      ?>">    <!-- 카드명 -->
-            <input type="hidden" name="app_time"          value="<?=$app_time       ?>">    <!-- 승인시간 -->
-            <input type="hidden" name="app_no"            value="<?=$app_no         ?>">    <!-- 승인번호 -->
-            <input type="hidden" name="quota"             value="<?=$quota          ?>">    <!-- 할부개월 -->
-            <input type="hidden" name="noinf"             value="<?=$noinf          ?>">    <!-- 무이자여부 -->
-            <input type="hidden" name="partcanc_yn"       value="<?=$partcanc_yn    ?>">    <!-- 부분취소가능유무 -->
-            <input type="hidden" name="card_bin_type_01"  value="<?=$card_bin_type_01 ?>">  <!-- 카드구분1 -->
-            <input type="hidden" name="card_bin_type_02"  value="<?=$card_bin_type_02 ?>">  <!-- 카드구분2 -->
-        
-            <input type="hidden" name="bank_name"         value="<?=$bank_name      ?>">    <!-- 은행명 -->
-            <input type="hidden" name="bank_code"         value="<?=$bank_code      ?>">    <!-- 은행코드 -->
-        
-            <input type="hidden" name="bankname"          value="<?=$bankname       ?>">    <!-- 입금할 은행 -->
-            <input type="hidden" name="depositor"         value="<?=$depositor      ?>">    <!-- 입금할 계좌 예금주 -->
-            <input type="hidden" name="account"           value="<?=$account        ?>">    <!-- 입금할 계좌 번호 -->
-            <input type="hidden" name="va_date"           value="<?=$va_date        ?>">    <!-- 가상계좌 입금마감시간 -->
-        
-            <input type="hidden" name="pnt_issue"         value="<?=$pnt_issue      ?>">    <!-- 포인트 서비스사 -->
-            <input type="hidden" name="pnt_app_time"      value="<?=$pnt_app_time   ?>">    <!-- 승인시간 -->
-            <input type="hidden" name="pnt_app_no"        value="<?=$pnt_app_no     ?>">    <!-- 승인번호 -->
-            <input type="hidden" name="pnt_amount"        value="<?=$pnt_amount     ?>">    <!-- 적립금액 or 사용금액 -->
-            <input type="hidden" name="add_pnt"           value="<?=$add_pnt        ?>">    <!-- 발생 포인트 -->
-            <input type="hidden" name="use_pnt"           value="<?=$use_pnt        ?>">    <!-- 사용가능 포인트 -->
-            <input type="hidden" name="rsv_pnt"           value="<?=$rsv_pnt        ?>">    <!-- 적립 포인트 -->
-        
-            <input type="hidden" name="commid"            value="<?=$commid         ?>">    <!-- 통신사 코드 -->
-            <input type="hidden" name="mobile_no"         value="<?=$mobile_no      ?>">    <!-- 휴대폰 번호 -->
-        
-            <input type="hidden" name="tk_van_code"       value="<?=$tk_van_code    ?>">    <!-- 발급사 코드 -->
-            <input type="hidden" name="tk_app_time"       value="<?=$tk_app_time    ?>">    <!-- 승인 시간 -->
-            <input type="hidden" name="tk_app_no"         value="<?=$tk_app_no      ?>">    <!-- 승인 번호 -->
-        
-            <input type="hidden" name="cash_yn"           value="<?=$cash_yn        ?>">    <!-- 현금영수증 등록 여부 -->
-            <input type="hidden" name="cash_authno"       value="<?=$cash_authno    ?>">    <!-- 현금 영수증 승인 번호 -->
-            <input type="hidden" name="cash_tr_code"      value="<?=$cash_tr_code   ?>">    <!-- 현금 영수증 발행 구분 -->
-            <input type="hidden" name="cash_id_info"      value="<?=$cash_id_info   ?>">    <!-- 현금 영수증 등록 번호 -->
-            <input type="hidden" name="buyr_mail"           value="<?=$_POST['mbemail'] ?>">
-        </form>    </body>
+        <input type="hidden" name="amount"            value="<?=$amount         ?>">    <!-- 금액 -->
+        <input type="hidden" name="res_cd"            value="<?=$res_cd         ?>">    <!-- 결과 코드 -->
+        <input type="hidden" name="res_msg"           value="<?=$res_msg        ?>">    <!-- 결과 메세지 -->
+        <input type="hidden" name="res_en_msg"        value="<?=$res_en_msg     ?>">    <!-- 결과 영문 메세지 -->
+        <input type="hidden" name="ordr_idxx"         value="<?=$ordr_idxx      ?>">    <!-- 주문번호 -->
+        <input type="hidden" name="tno"               value="<?=$tno            ?>">    <!-- KCP 거래번호 -->
+        <input type="hidden" name="good_mny"          value="<?=$good_mny       ?>">    <!-- 결제금액 -->
+        <input type="hidden" name="good_name"         value="<?=$good_name      ?>">    <!-- 상품명 -->
+        <input type="hidden" name="buyr_name"         value="<?=$buyr_name      ?>">    <!-- 주문자명 -->
+        <input type="hidden" name="buyr_tel1"         value="<?=$buyr_tel1      ?>">    <!-- 주문자 전화번호 -->
+        <input type="hidden" name="buyr_tel2"         value="<?=$buyr_tel2      ?>">    <!-- 주문자 휴대폰번호 -->
+        <input type="hidden" name="buyr_mail"         value="<?=$buyr_mail      ?>">    <!-- 주문자 E-mail -->
+
+        <input type="hidden" name="card_cd"           value="<?=$card_cd        ?>">    <!-- 카드코드 -->
+        <input type="hidden" name="card_name"         value="<?=$card_name      ?>">    <!-- 카드명 -->
+        <input type="hidden" name="app_time"          value="<?=$app_time       ?>">    <!-- 승인시간 -->
+        <input type="hidden" name="app_no"            value="<?=$app_no         ?>">    <!-- 승인번호 -->
+        <input type="hidden" name="quota"             value="<?=$quota          ?>">    <!-- 할부개월 -->
+        <input type="hidden" name="noinf"             value="<?=$noinf          ?>">    <!-- 무이자여부 -->
+        <input type="hidden" name="partcanc_yn"       value="<?=$partcanc_yn    ?>">    <!-- 부분취소가능유무 -->
+        <input type="hidden" name="card_bin_type_01"  value="<?=$card_bin_type_01 ?>">  <!-- 카드구분1 -->
+        <input type="hidden" name="card_bin_type_02"  value="<?=$card_bin_type_02 ?>">  <!-- 카드구분2 -->
+
+        <input type="hidden" name="bank_name"         value="<?=$bank_name      ?>">    <!-- 은행명 -->
+        <input type="hidden" name="bank_code"         value="<?=$bank_code      ?>">    <!-- 은행코드 -->
+
+        <input type="hidden" name="bankname"          value="<?=$bankname       ?>">    <!-- 입금할 은행 -->
+        <input type="hidden" name="depositor"         value="<?=$depositor      ?>">    <!-- 입금할 계좌 예금주 -->
+        <input type="hidden" name="account"           value="<?=$account        ?>">    <!-- 입금할 계좌 번호 -->
+        <input type="hidden" name="va_date"           value="<?=$va_date        ?>">    <!-- 가상계좌 입금마감시간 -->
+
+        <input type="hidden" name="pnt_issue"         value="<?=$pnt_issue      ?>">    <!-- 포인트 서비스사 -->
+        <input type="hidden" name="pnt_app_time"      value="<?=$pnt_app_time   ?>">    <!-- 승인시간 -->
+        <input type="hidden" name="pnt_app_no"        value="<?=$pnt_app_no     ?>">    <!-- 승인번호 -->
+        <input type="hidden" name="pnt_amount"        value="<?=$pnt_amount     ?>">    <!-- 적립금액 or 사용금액 -->
+        <input type="hidden" name="add_pnt"           value="<?=$add_pnt        ?>">    <!-- 발생 포인트 -->
+        <input type="hidden" name="use_pnt"           value="<?=$use_pnt        ?>">    <!-- 사용가능 포인트 -->
+        <input type="hidden" name="rsv_pnt"           value="<?=$rsv_pnt        ?>">    <!-- 적립 포인트 -->
+
+        <input type="hidden" name="commid"            value="<?=$commid         ?>">    <!-- 통신사 코드 -->
+        <input type="hidden" name="mobile_no"         value="<?=$mobile_no      ?>">    <!-- 휴대폰 번호 -->
+
+        <input type="hidden" name="tk_van_code"       value="<?=$tk_van_code    ?>">    <!-- 발급사 코드 -->
+        <input type="hidden" name="tk_app_time"       value="<?=$tk_app_time    ?>">    <!-- 승인 시간 -->
+        <input type="hidden" name="tk_app_no"         value="<?=$tk_app_no      ?>">    <!-- 승인 번호 -->
+
+        <input type="hidden" name="cash_yn"           value="<?=$cash_yn        ?>">    <!-- 현금영수증 등록 여부 -->
+        <input type="hidden" name="cash_authno"       value="<?=$cash_authno    ?>">    <!-- 현금 영수증 승인 번호 -->
+        <input type="hidden" name="cash_tr_code"      value="<?=$cash_tr_code   ?>">    <!-- 현금 영수증 발행 구분 -->
+        <input type="hidden" name="cash_id_info"      value="<?=$cash_id_info   ?>">    <!-- 현금 영수증 등록 번호 -->
+    </form>
+    </body>
     </html>

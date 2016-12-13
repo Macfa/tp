@@ -59,7 +59,6 @@ $naver->setReturnURL('http://tplanit.co.kr/user/snsLoginForApply.php');
 $kakao->setReturnURL('http://tplanit.co.kr/user/snsLoginForApply.php');
 
 //----------------------------------------------------------------------------------------------------------
-
 $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/apply.css" type="text/css">';
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/apply.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
