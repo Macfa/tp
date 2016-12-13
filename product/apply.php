@@ -33,6 +33,10 @@ $defaultRewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHE
 	'rpDiscountType' => $_GET['discountType']
 ));
 
+
+if((int)$_GET['plan'] === 21 && isContain('egg', $_GET['dvId']) === true)
+	$defaultRewardPoint = $defaultRewardPoint * 2.5;
+
 //VAR_DUMP($defaultRewardPoint);
 $mbPoint = (isExist($mb['mbPoint'])===TRUE)?$mb['mbPoint']:0;
 if(isExist($defaultRewardPoint) === TRUE) {
