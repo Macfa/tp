@@ -163,7 +163,7 @@
 <body>
     <form name="cancel" method="post">
     <div id="sample_wrap">
-        <h1>[결과출력]<span> 이 페이지는 결제 결과를 출력하는 샘플(예시) 페이지입니다.</span></h1>
+        <h1>[결과출력]<span> 결제 정보 출력페이지입니다.</span></h1>
     <div class="sample">
         <p>
           요청 결과를 출력하는 페이지 입니다.<br />
@@ -603,7 +603,7 @@
                 <tr>
 
                 <div class="btnset">
-                <a href="../index.html" class="home">처음으로</a>
+                <a href="" class="home">처음으로</a>
                 </div>
                 </tr>
               </tr>

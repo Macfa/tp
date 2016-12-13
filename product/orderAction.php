@@ -83,7 +83,11 @@ try
 	if ($totalPoint < 0)
 		throw new Exception('총 결제 별이 0보다 작을 수 없습니다.', 3);	
 
-	
+	if ((int)$_POST['good_mny'] > 0) {
+		require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
+		if($res_cd != "0000") 
+			throw new Exception('설정한 금액이 검증에 실패했습니다.', 3);	
+	}
 
 }
 catch(Exception $e)
@@ -91,9 +95,6 @@ catch(Exception $e)
     alert($e->getMessage());
 }
 
-if ((int)$_POST['good_mny'] > 0) {
-	require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
-}
 
 $countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
 $isShippingFree = ($countOrder>0)?FALSE:TRUE;
@@ -185,7 +186,7 @@ if((int)$_POST['resultPoint'] > 0) {
 
 
 if((int)$_POST['resultCash'] === 0) {
-	require_once("./orderResult.php");  	// 결재 결과를 처리하는 과정 
+	require_once("./result.php");  	// 결재 결과를 처리하는 과정 
 }
 
 // 'arTit' => $_POST['arTit'],

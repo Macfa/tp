@@ -74,6 +74,7 @@ if ($naver->getConnectState()){
 if ($kakao->getConnectState()){
 	$isKakaoLogin = TRUE;
 	$isSnsLogin = TRUE;
+	var_dump($kakao->getUserProfile());
 }
 DB::$usenull = false;
 if (getSession('tmLoggedId')){
