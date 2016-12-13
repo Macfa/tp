@@ -58,8 +58,16 @@ function setOrderTotalResult(){
 	$('.js-totalResultInp').val($totalResult);
 	var $resultPoint = parseInt($('.js-totalResultPoint').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
 	var $resultCash = $totalResult - $resultPoint;
-	$('.js-totalResultCash').val($resultCash);
-	$('.js-goodMny').val($resultCash);
+	// if($resultCash >= 0) {
+	if($resultCash >= 0) {
+		$('.js-totalResultCash').val($resultCash);
+		$('.js-goodMny').val($resultCash);
+	} else {
+		var $resultCash = parseInt($('.js-totalResultCash').val());
+		var $resultPoint = $totalResult - $resultCash;
+		$('.js-totalResultPoint').val($resultPoint);
+
+	}
 	// $('.js-totalResultCash').val(0);
 };
 
