@@ -132,6 +132,10 @@ $rpPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = 
 	)
 );
 
+if((int)$_POST['plan'] === 21 && isContain('egg', $device['dvId']) === true)
+	$rpPoint = $rpPoint * 2.5;
+
+
 $calcResult['dvKey'] = $device['dvKey'];
 $calcResult['rewardPoint'] = (isExist($rpPoint))?(int)$rpPoint:'미정';
 

@@ -200,6 +200,11 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		$('.js-VATWrap, .js-interestWrap').removeClass('active');
 	}
 
+	if($plan == 21)
+		$('.js-egg11gEvent').show();
+	else
+		$('.js-egg11gEvent').hide();
+
 	if($availablePoint > 0) {
 		$('.js-availablePointRow').show();
 		$('.js-availablePointCalc').text(setNumComma($availablePoint));
