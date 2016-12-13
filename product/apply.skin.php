@@ -181,6 +181,7 @@
 			<button class="btn-filled-sub-dense js-addressDetailAction js-otherAddress active">다른 주소</button>
 			<button class="btn-filled-sub-dense js-addressListAction js-newAddress">새 주소</button>
 		</div>
+
 		<?php if(isExist($defaultRewardPoint) === true) :?>
 			<section class="section">
 				<h2 class="tit-sub">추천인 아이디 입력</h2>	
@@ -271,12 +272,13 @@
        Copyright (c) NHN KCP INC. All Rights reserved.
      </div>
 	 </section>
-	     
-
+	 
+	<input type="hidden" value="<?php echo $val['gfTit']?>" name="good_name[]"/>		<!-- made by hy , use to Arname-->
+	<input type="hidden" class="js-totalResultInp" value="<?php echo $totalPoint ?>" />
+	<input type="hidden" class="js-mbPoint" value="<?php echo $mb['mbPoint'] ?>">
 	<ul class="parsley-errors-apply"></ul>
-	<input type="submit" class="apply-submit btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
-	<?php include "./order.skin.kcp.php" ?>
-	</form>
+	<input type="submit" class="apply-submit btn-filled js-trackLink btn-filled" target="_blank" id="link-detail-plan-apply" value="가입 신청" onclick="return jsf__pay(this.form);"/>
+	<?php require_once(PATH_PRD.'/order.skin.kcp.php');?>
 	<br/><br/>
 </div>
 <div class="wrap center">
@@ -301,6 +303,7 @@
 			</label>
 		</td>
 	</tr>
+	</form>
 </script>
 
 <?php $naver->getLoginScriptForApply();?>

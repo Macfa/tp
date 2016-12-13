@@ -18,7 +18,8 @@
     /* = -------------------------------------------------------------------------- = */
 
 
-    include "../cfg/site_conf_inc.php";       // 환경설정 파일 include
+    // include "../cfg/site_conf_inc.php";       // 환경설정 파일 include
+    include "/home/www/tplanit/kcp/cfg/site_conf_inc.php";
     require "pp_cli_hub_lib.php";              // library [수정불가]
 
     /* = -------------------------------------------------------------------------- = */
@@ -138,7 +139,7 @@
                 $gfName = DB::queryFirstList('SELECT gfTit FROM tmGift WHERE gfKey = %i', $val);
                 $isValidGift = ($isValidGift>0)?TRUE:FALSE;
 
-                $totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
+                $totalPoint += $_POST['resultPoint'] + $_POST['good_mny'];
                 
                 foreach ($gfName as $key => $gfName_value) {
                     $gifts .= $gfName_value.', ';
@@ -148,7 +149,7 @@
 
 
             /* 1 원은 실제로 업체에서 결제하셔야 될 원 금액을 넣어주셔야 합니다. 결제금액 유효성 검증 */
-            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalPoint );   
+            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalPoint );
             $c_PayPlus->mf_set_encx_data( $_POST[ "enc_data" ], $_POST[ "enc_info" ] );
     }
     /* ------------------------------------------------------------------------------ */
@@ -296,7 +297,7 @@
     /* = -------------------------------------------------------------------------- = */
     /* =       결과를 업체 자체적으로 DB처리 작업하시는 부분입니다.                 = */
     /* = -------------------------------------------------------------------------- = */
-
+echo "Hellohihallo";
     if ( $req_tx == "pay" )
     {
         if( $res_cd == "0000" )

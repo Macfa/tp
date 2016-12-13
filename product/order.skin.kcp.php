@@ -1,7 +1,7 @@
 <?//
 
 
-// require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
+// require_once("./_common.inc.php");   // 공용부분 (모든 페이지에 쓰이는 php로직)
 
     /* ============================================================================== */
     /* =   PAGE : 결제 요청 PAGE                                                    = */
@@ -15,9 +15,7 @@
     /* = -------------------------------------------------------------------------- = */
     /* =   Copyright (c)  2016  NHN KCP Inc.   All Rights Reserverd.                = */
     /* ============================================================================== */
-?>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<?
+
     /* ============================================================================== */
     /* =   환경 설정 파일 Include                                                   = */
     /* = -------------------------------------------------------------------------- = */
@@ -142,21 +140,21 @@
         /* Payplus Plug-in 실행 */
         function  jsf__pay( form )
         {
-        	if($('.js-goodMny').val() == 0 && $('.js-totalResultPoint').val() == 0) {
-        		alert('금액을 다시 설정해주세요 !');
-        		return false;
-        	}
+            if($('.js-goodMny').val() == 0 && $('.js-totalResultPoint').val() == 0) {
+                alert('금액을 다시 설정해주세요 !');
+                return false;
+            }
 
-        	if( $('.js-goodMny').val() == 0 ) {
-				form.submit();
-				return false;
-        	}
+            if( $('.js-goodMny').val() == 0 ) {
+                form.submit();
+                return false;
+            }
 
             var RetVal = false;
             /* Payplus Plugin 실행 */
             if ( MakePayMessage( form ) == true )
             {
-			    alert("결제 승인 요청 전,\n\n반드시 결제창에서 고객님이 결제 인증 완료 후\n\n리턴 받은 ordr_chk 와 업체 측 주문정보를\n\n다시 한번 검증 후 결제 승인 요청하시기 바랍니다."); //업체 연동 시 필수 확인 사항.
+                alert("결제 승인 요청 전,\n\n반드시 결제창에서 고객님이 결제 인증 완료 후\n\n리턴 받은 ordr_chk 와 업체 측 주문정보를\n\n다시 한번 검증 후 결제 승인 요청하시기 바랍니다."); //업체 연동 시 필수 확인 사항.
 
                 openwin = window.open( "proc_win.html", "proc_win", "width=449, height=209, top=300, left=300" );
                 RetVal = true ;
@@ -261,6 +259,28 @@
 
 
 
+
+
+    
+
+        <!-- Payplus Plug-in 설치 안내 -->
+        <section>
+            <div id="display_setup_message" style="display:none "> 
+               <p class="txt">
+               결제를 계속 하시려면 상단의 노란색 표시줄을 클릭 하시거나 <a href="https://pay.kcp.co.kr/plugin_new/file/KCPPayUXSetup.exe"><span>[수동설치]</span></a>를 눌러
+               Payplus Plug-in을 설치하시기 바랍니다.
+               [수동설치]를 눌러 설치하신 경우 새로고침(F5)키를 눌러 진행하시기 바랍니다.
+               </p>
+               Copyright (c) NHN KCP INC. All Rights reserved.
+             </div>
+         </section>
+       </div>
+
+      
+
+
+
+
     <?
         /* = -------------------------------------------------------------------------- = */
         /* =   1. 주문 정보 입력 END                                                    = */
@@ -276,6 +296,19 @@
         /* = -------------------------------------------------------------------------- = */
         // 요청종류 : 승인(pay)/취소,매입(mod) 요청시 사용
     ?>
+        <label class="inp-wrap-full">
+                    <select class="inp-txt js-subAddress" name="pay_method">
+                        <option value="111000000000" selected="selected">신용카드/계좌이체/가상계좌</option>
+                        <option value="100000000000">신용카드</option>
+                        <option value="010000000000">계좌이체</option>
+                        <option value="001000000000">가상계좌</option>
+                        <option value="000100000000">포인트</option>
+                        <option value="000010000000">휴대폰</option>
+                        <option value="000000001000">상품권</option>
+                        <option value="000000000010">ARS</option>
+                        </select>
+                    <div class="inp-label">결제방법<span class="inp-required">필수</span></div>
+                </label>
         <input type="hidden" name="req_tx"          value="pay" />
         <input type="hidden" name="site_cd"         value="<?=$g_conf_site_cd   ?>" />
         <input type="hidden" name="site_name"       value="<?=$g_conf_site_name ?>" />
@@ -335,6 +368,3 @@
         <!-- 2012년 8월 18일 전자상거래법 개정 관련 설정 부분 -->
         <!-- 제공 기간 설정 0:일회성 1:기간설정(ex 1:2012010120120131)  -->
         <input type="hidden" name="good_expr" value="0">
-
-
-    

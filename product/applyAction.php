@@ -162,9 +162,9 @@ catch(Exception $e)
 
 
 
-// if ((int)$_POST['good_mny'] > 0) {
-// 	require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
-// }
+if ((int)$_POST['good_mny'] > 0) {
+	require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
+}
 
 if ($isOrderGift) {
 	$countOrder = DB::queryFirstField("SELECT count(*) FROM tmOrder WHERE mbEmail = %s", $mb['mbEmail']);
@@ -267,7 +267,10 @@ DB::insert('tmPointHistory', array(
 
 DB::update('tmMember', array(
 	'mbPoint' => $mb['mbPoint']+($rewardPoint-$totalPoint)
-),'mbEmail = %s', $mb['mbEmail']);
+	),
+	'mbEmail = %s', $mb['mbEmail']
+);
+
 $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey and spPlan = %i_spPlan and cdType = %i_cdType and cdCarrier = %s_cdCarrier", 
 	array('dvKey'=> $_POST['dvKey'], 
 			'spPlan' => $_POST['plan'], 
@@ -358,10 +361,10 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 $deviceInfo = new deviceInfo();
 $deviceInfo->setCarrier($_POST['carrier']);
 //consoleLog($cdCode);
-goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));
+// goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));
 
 
-if((int)$_POST['resultCash'] === 0) {
+if((int)$_POST['good_mny'] === 0) {
 	require_once("./orderResult.php");  	// 결재 결과를 처리하는 과정 
 }
 ?>
