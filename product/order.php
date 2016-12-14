@@ -1,6 +1,13 @@
 <?
 require_once("./_common.inc.php");	// °ø¿ëºÎºÐ (¸ðµç ÆäÀÌÁö¿¡ ¾²ÀÌ´Â php·ÎÁ÷)
 
+//ë°”ë¡œêµ¬ë§¤í•˜ê¸° ë²„íŠ¼ìœ¼ë¡œ ë“¤ì–´ì˜¨ ê²½ìš°
+if(isExist($_POST['gift-number'])){
+	$_POST['chk'] = array(
+		0 => $_POST['gift-key']
+		);
+}
+/////////////////////
 try
 {
 	if ($_POST['chk'] == array())
@@ -35,7 +42,14 @@ if(count($_POST['chk']) > 1)
 $arrOrder = DB::query("SELECT * FROM tmCart c LEFT JOIN tmGift g ON c.gfKey = g.gfKey WHERE ".$sqlGiftWhere." and mbEmail = %s", $mb['mbEmail']);
 
 foreach($arrOrder as $val){
-	$totalPoint = $totalPoint + ($val['gfPoint'] * $val['caQuantity']);
+	if(isExist($_POST['gift-number'])){
+		$caQuantity = $_POST['gift-number'];
+	}else{	
+		$caQuantity = $val['caQuantity'];
+	}
+
+
+	$totalPoint = $totalPoint + ($val['gfPoint'] * $caQuantity);
 }
 
 $defAddress = DB::queryFirstRow("SELECT * FROM tmAddress WHERE mbEmail = %s and arIsDefault = 1", $mb['mbEmail']);

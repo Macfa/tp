@@ -28,6 +28,29 @@
 				완료
 			</div>
 		</button>
+		<form method="post" action="/order">
+			<div class="gift-view-info">
+				수량(클릭하여수정가능)
+				<input type="number" name="gift-number" class="gift-number" value="1" data-type="price">
+				<input type="hidden" name="gift-key" value="<?php echo $gift['gfKey'];?>">
+			</div>
+			<?php if($isLogged == true) :?>
+				<button type="submit" class="gift-btn-cart js-buyCart" data-key="<?php echo $gift['gfKey'];?>">
+					<i class="gift-view-ico"></i>바로구매하기
+					<div class="btn-success">
+						<i class="gift-view-ico"></i>
+						완료
+					</div>
+				</button>
+			<?php endif?>		
+			<button class="gift-btn-select js-doSelect" data-key="<?php echo $gift['gfKey'];?>">
+				<i class="gift-view-ico"></i>선택
+				<div class="btn-success">
+					<i class="gift-view-ico"></i>
+					완료
+				</div>
+			</button>
+		</form>
 		<button class="gift-close-btn js-closeGiftDetail">
 			X
 		</button>

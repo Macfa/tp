@@ -128,7 +128,7 @@ class planCalculator {
 			</div>
 			<div class="calc-total-wrap">
 				<div class="calc-total-inner">
-					<div class="calc-point">★포인트 <span class="js-point">{point}</span></div>
+					<div class="calc-point">★포인트 <span class="js-point">{point}</span> <span class="js-egg11gEvent" style="display:none">(2.5배 이벤트)</span></div>
 					<span class="calc-total-label">월</span>
 					<span class="calc-total-price js-result">{totalCost}</span>
 				</div>

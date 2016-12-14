@@ -39,6 +39,12 @@ BANNER BACKGROUND AREA - MOBILE
 	text-align:center;
 }
 
+.gift-number {
+	@extend .inp-num-dense;	
+	color:#fff;
+	
+}
+
 
 @media all and (min-width:640px){
 	$bannerHeight:400px;

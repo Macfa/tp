@@ -56,7 +56,7 @@ $bannerHeight : 350px;
 
 .list-banner-pocketfi{
 	@extend .list-banner;
-	background:white url('../img/banner-pocketfi-mobile.jpg') no-repeat center 10px;
+	background:#313f4c url('../img/main_ktegg-tabletgifrPr.5-mobile.jpg') no-repeat center ;
 
 }
 .list-banner-gear{
@@ -117,8 +117,7 @@ $bannerHeight : 350px;
 		background:white url('../img/banner-g5.jpg') no-repeat 10% center;
 	}
 	.list-banner-pocketfi{
-		background-image:url('../img/banner-pocketfi.jpg');
-		background-position:10% center;
+		background:#313f4c url('../img/main_ktegg-tabletgifrPr.5-landscape.jpg')no-repeat center center;
 	}
 	.list-banner-kt{
 		background:white url('../img/banner-kt-landscape.jpg') no-repeat center center;
@@ -172,8 +171,7 @@ $bannerHeight : 350px;
 	}
 
 	.list-banner-pocketfi{
-		background-image:url('../img/banner-pocketfi.jpg');
-		background-position:20% center;
+		background:#313f4c url('../img/main_ktegg-tabletgifrPr.5-tablet.jpg')no-repeat center center;
 	}
 	.list-banner-gear{
 		background-image:url('../img/banner-gear-tablet.jpg');
@@ -216,7 +214,7 @@ $bannerHeight : 350px;
 		background-position: 25% center;
 	}
 	.list-banner-pocketfi{
-		background-position:25% center;
+		background:#313f4c url('../img/main_ktegg-tabletgifrPr.5-pc.jpg')no-repeat center center;
 	}
 	.list-banner-kt{
 		background:white url('../img/banner-kt-pc.jpg') no-repeat center center;
@@ -245,7 +243,7 @@ $bannerHeight : 350px;
 		background-position: 35% center;
 	}
 	.list-banner-pocketfi{
-		background-position:35% center;
+		background:#313f4c url('../img/main_ktegg-tabletgifrPr.5-wide.jpg')no-repeat center center;
 	}
 	.list-banner-kt{
 		background:white url('../img/banner-kt-wide.jpg') no-repeat center center;

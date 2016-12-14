@@ -4,6 +4,7 @@
 	<div class="tit-sub center">이제 티플 오프라인 매장에서 노트7 교환 및 환불을 진행하실 수 있습니다.</div>
 	<a href="http://map.naver.com/?pinId=21856769&pinType=site&dlevel=14&y=663407fedd97dc94907fa2eee72107d4&x=b171587510c40b7fb698c7d998d63728&enc=b64" target="_blank"><img src="<?php echo PATH_IMG?>/offline-map.jpg?V=11123" /></a>
 	<div class="tit-sub txt-highlight center">서울시 영등포구 당산동2가 37 영등포유통상가 다열 15호<Br/>02-2636-8882</div>
+	<div class="tit-sub center" style="color:red"> 배송지 : 서울 영등포구 영등포로 103 하나비즈타워 304호 <Br/></div>
 	<div class="center">(오픈 시간 평일 10시 ~ 19시, 연락가능시간 평일 16 시 ~ 19시)</div>
 	<a class="btn-filled-primary" href="http://booking.naver.com/12/booking/svc/35125" target="_blank">노트7 교환/환불 내방 예약</a>
 	<!--

@@ -148,11 +148,14 @@
 		<tr>
 			<td class="table-item-str">착불 배송비</td>
 			<td class="no-padding">
+				<input type="hidden" value="<?php echo $val['gfKey']?>" name="gfKey[]"/>
+				<input type="number" class="inp-num-dense js-orderQuantity" value="<?php echo $caQuantity?>" name="oiQuantity[]" data-point="<?php echo $val['gfPoint']?>" data-key="<?php echo $val['caKey']?>"/>
 			</td>
 			<td class="table-separator"></td>
 			<td>착불</td>
 			<td class="table-separator">=</td>
 			<td class="js-cartShipping table-value"><?php echo($isShippingFree)?'1회 무료':'2,500';?></td>
+			<td class="js-orderRowResult js-orderRowResult<?php echo $val['caKey']?> table-value" data-result="<?php echo $caQuantity*$val['gfPoint']?>"><?php echo number_format($caQuantity*$val['gfPoint'])?></td>
 			<td class="action-wrap">
 			</td>
 		</tbody>
