@@ -128,7 +128,7 @@ class planCalculator {
 			</div>
 			<div class="calc-total-wrap">
 				<div class="calc-total-inner">
-					<div class="calc-point">★포인트 <span class="js-point">{point}</span> <span class="js-egg11gEvent" style="display:none">(2.5배 이벤트)</span></div>
+					<div class="calc-point">★포인트 <span class="js-point">{point}</span> <span class="js-egg11gEvent" {eventDisplay}>(2.5배 이벤트)</span></div>
 					<span class="calc-total-label">월</span>
 					<span class="calc-total-price js-result">{totalCost}</span>
 				</div>
@@ -456,7 +456,7 @@ class planCalculator {
 	public function setPlanSelect(){
 		$tmpDeviceInfo = new deviceInfo();
 		$tmpDeviceInfo->setCarrier($this->carrier)->setMode($this->dvCate);
-		$this->selectedPlan = (isExist($this->plan))?$this->plan:getFirstArrKey($this->arrPlan);
+		$this->selectedPlan = (isExist($this->plan))?$this->plan:$this->arrPlan[getFirstArrKey($this->arrPlan)];
 		//var_dump($this->arrPlan);
 		//var_dump($this->selectedPlan);
 		$planSelected[$this->selectedPlan] = 'selected';
@@ -492,6 +492,12 @@ class planCalculator {
 	private function getCalculator() {
 		$this->getDefaultInfo();
 		$resultDevicePricePerMonth = $this->defaultInfo['dvRetailPrice'] - $this->defaultInfo['spSupport'] - $this->defaultInfo['spAddSupport'];
+
+		if($this->selectedPlan === 21 && isContain('egg', $this->dvId) === true)
+			$eventDisplay = 'style="display:none"';
+		else
+			$eventDisplay = '';
+
 		$data = array(
 			'dvRetailPrice' => number_format($this->defaultInfo['dvRetailPrice']),
 			'isSupportRowActive' => ($this->selectedDiscountType === 'support')?'active':'',
@@ -503,7 +509,8 @@ class planCalculator {
 			'selectPlanDiscount' => number_format($this->defaultInfo['selectPlanDiscount']),
 			'planFeeResult' => number_format($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount']),
 			'point' => number_format($this->defaultInfo['rewardPoint']),
-			'totalCost' => number_format((int)$resultDevicePricePerMonth/24 + (int)($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount']))
+			'totalCost' => number_format((int)$resultDevicePricePerMonth/24 + (int)($this->defaultInfo['planFee']-$this->defaultInfo['selectPlanDiscount'])),
+			'eventDisplay' => $eventDisplay
 		);
 		$this->calculatorResult = getResultTemplate($data, $this->htmlResultWrapTemplate);
 		unset($data);
