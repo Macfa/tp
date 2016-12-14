@@ -3,12 +3,14 @@ include_once(PATH_LIB.'/lib.snoopy.inc.php');
 include_once(PATH_LIB.'/lib.parsing.inc.php');
 
 function getPlanInfo($data){
+	global $cfg;
 	$snoopy=new snoopy;
 	$snoopy->httpmethod = "POST";
 	$data['authentication'] = $cfg['authentication'];
 	$snoopy->submit(URL.'/product/detailGetPlan.php', $data);
 	$page=$snoopy->results;
 	if ($page == FALSE) return false;
+	//var_dump($page);
 	return json_decode($page, true);
 }
 
