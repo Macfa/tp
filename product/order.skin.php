@@ -1,9 +1,8 @@
-<div class="wrap order-wrap center">
+<div class="wrap order-wrap">
 	<form method="post" action="/product/orderAction.php" id="order-form" name="order_info">
 			<!-- <form method="post" action="/Test/tt.php" id="order-form" name="order_info"> -->
 			<!-- <form method="post" action="/Test/tt.php" id="order-form"> -->
 		<h1 class="center tit">주문하기</h1>
-
 		<section class="section-no-padding txt-left js-addressWrap">
 			<section class="js-addressDetail address-detail active">
 				<h2 class="tit-sub">배송지 주소</h2>
@@ -141,46 +140,84 @@
 			<?php endforeach?>
 			</tbody>
 			</table>
+			<table class="table cart-additial-wrap">
+			<tbody>
+			<tr>
+				<td class="table-item-str">착불 배송비</td>
+				<td class="no-padding">
+				</td>
+				<td class="table-separator"></td>
+				<td>착불</td>
+				<td class="table-separator">=</td>
+				<td class="js-cartShipping table-value"><?php echo($isShippingFree)?'1회 무료':'2,500';?></td>
+				<td class="action-wrap">
+				</td>
+			</tbody>
+			</table>
 		</section>
-
-		<table class="table cart-additial-wrap">
-		<tbody>
-		<tr>
-			<td class="table-item-str">착불 배송비</td>
-			<td class="no-padding">
-			</td>
-			<td class="table-separator"></td>
-			<td>착불</td>
-			<td class="table-separator">=</td>
-			<td class="js-cartShipping table-value"><?php echo($isShippingFree)?'1회 무료':'2,500';?></td>
-			<td class="action-wrap">
-			</td>
-		</tbody>
-		</table>
 		<!-- 					echo number_format($mb['mbPoint']);	// º¸À¯
 					echo "<br/>";
 					echo number_format($value['gfPoint']);	// °ª
  -->
-			<section class="section cash">
-				<label class="inp-wrap">
-					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?0:$totalPoint-$mb['mbPoint'] ?>" class="js-totalResultPoint inp-txt" name="resultPoint">
-					<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?$totalPoint:$mb['mbPoint'] ?>" class="js-totalResultCash inp-txt" name="resultCash">
-					<div class="inp-label">Point / Cash<span class="inp-required">필수</span></div>
+		<section class="section cash">
+			<h2 class="tit-sub">결제방법</h2>
+
+	       	 <label class="inp-wrap-full">
+	       	 	<select class="inp-txt js-subAddress" name="pay_method">
+	            	<option value="111000000000" selected="selected">선택해주세요</option>
+	                <option value="100000000000">신용카드</option>
+	                <option value="010000000000">계좌이체</option>
+	                <option value="001000000000">가상계좌</option>
+	                <option value="000100000000">포인트</option>
+	                <option value="000010000000">휴대폰</option>
+	                <option value="000000001000">상품권</option>
+	                <option value="000000000010">ARS</option>
+	                </select>
+	            <div class="inp-label">결제방법<span class="inp-required">필수</span></div>
+	        </label>
+	    
+		    <fieldset class="inp-group">		
+				<label class="inp-chk">
+					<input type="radio" name="onlyPay" value="pointOnlyPay"/>
+					<div class="inp-chk-box"></div>
+					별포인트로 결제
 				</label>
-				<br/>
-			</section>
-	
+				<label class="inp-chk">
+					<input type="radio" name="onlyPay" value="cashOnlyPay"/>
+					<div class="inp-chk-box"></div>
+					현금으로만 결제
+				</label>
+			</fieldset>
+			<br/>
+	    	<label class="inp-wrap">
+	    		<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?$totalPoint:$mb['mbPoint'] ?>" class="js-totalResultPoint inp-txt" name="resultPoint">
+	    		<div class="inp-label">사용할 포인트<span class="inp-required">필수</span></div>
+	    	</label>
+	    	<label class="totalPoint">
+	    		<span> / </span>	    		
+	    		<span class="totalPoint-txt"><?php echo number_format($mb['mbPoint'])?> (보유한 포인트)</span>	    		
+	    	</label>	    	
+	    	<br/>
 
-		<h2 class="cart-total-tit">총 사용 할 별 / 보유 중인 별</h2>
+	    	<label class="inp-wrap">
+				<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?0:$totalPoint-$mb['mbPoint'] ?>" class="js-totalResultCash inp-txt" name="resultCash">
+				<div class="inp-label">결제할 현금<span class="inp-required">필수</span></div>
+			</label>
+			
+		<br/>
+		</section>	
+		<h2 class="cart-total-tit center">사은품 총 결제 금액</h2>
 		<div class="cart-total">
-
-			<span class="js-totalResult txt-highlight"><?php echo number_format($totalPoint) ?></span> / <?php echo number_format($mb['mbPoint'])?>
+			<span class="js-totalResult txt-highlight"><?php echo number_format($totalPoint) ?></span> 
 		</div>
-		<input type="hidden" class="js-totalResultInp" value="<?php echo $totalPoint ?>" />
-		<input type="hidden" class="js-mbPoint" value="<?php echo $mb['mbPoint'] ?>">
-		<input type="submit" class="btn-filled" value="결제하기" onclick="return jsf__pay(this.form);"/>
-
-		<?php require_once(PATH_PRD.'/order.skin.kcp.php');?>
+		<div class="center">
+			<input type="hidden" class="js-totalResultInp" value="<?php echo $totalPoint ?>" />
+			<input type="hidden" class="js-mbPoint" value="<?php echo $mb['mbPoint'] ?>">
+			<input type="submit" class="btn-filled" value="결제하기" onclick="return jsf__pay(this.form);"/>
+			<Br/><Br/>
+		<?php require_once(PATH_PRD.'/order.kcp.inc.php');?>
+		</div>
 
 	</form>
 </div>
+

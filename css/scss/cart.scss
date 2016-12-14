@@ -34,7 +34,8 @@
 	font-size:2.5em;
 	text-align:right;
 	color:rgba(0,0,0,0.5);
-	margin-bottom:40px;
+	margin-bottom:15px;
+	text-align: center;
 }
 
 .parsley-errors-cart{
@@ -56,6 +57,39 @@
 }
 
 
+.cash{
+
+	.inp-group {
+		margin-top:0;
+		border-bottom: 0;
+	}
+
+}
+
+.totalPoint {
+	@extend .inp-wrap;
+	width:auto;
+	vertical-align:top;
+	margin-top:20px;
+}
+.totalPoint-txt {
+	@extend .cart-total;
+	padding: 10px;
+	margin: 0;
+	border-bottom: 0;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.totalPoint-label{
+	@extend .inp-label;
+	font-size: 0.8em;
+}
+
+.kcpPlugin-info{
+	font-size: 0.85em;
+}
+
+
 @media all and (min-width:640px){
 	.order-wrap{
 		width:700px;
@@ -67,7 +101,14 @@
 		padding-right:25px;
 		padding-top:15px;
 	}
+
+	.cash{
+		.half {		
+			width: 40%;
+			}
+	}
 }
+
  
 @media all and (min-width:900px){
 	.cart-wrap{

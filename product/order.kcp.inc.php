@@ -268,7 +268,7 @@
     
 
         <!-- Payplus Plug-in 설치 안내 -->
-        <section>
+        <section class="kcpPlugin-info">
             <div id="display_setup_message" style="display:none "> 
                <p class="txt">
                결제를 계속 하시려면 상단의 노란색 표시줄을 클릭 하시거나 <a href="https://pay.kcp.co.kr/plugin_new/file/KCPPayUXSetup.exe"><span>[수동설치]</span></a>를 눌러
@@ -300,39 +300,25 @@
         /* = -------------------------------------------------------------------------- = */
         // 요청종류 : 승인(pay)/취소,매입(mod) 요청시 사용
     ?>
-        <label class="inp-wrap-full">
-                    <select class="inp-txt js-subAddress" name="pay_method">
-                        <option value="111000000000" selected="selected">신용카드/계좌이체/가상계좌</option>
-                        <option value="100000000000">신용카드</option>
-                        <option value="010000000000">계좌이체</option>
-                        <option value="001000000000">가상계좌</option>
-                        <option value="000100000000">포인트</option>
-                        <option value="000010000000">휴대폰</option>
-                        <option value="000000001000">상품권</option>
-                        <option value="000000000010">ARS</option>
-                        </select>
-                    <div class="inp-label">결제방법<span class="inp-required">필수</span></div>
-                </label>
-        <input type="hidden" name="req_tx"          value="pay" />
-        <input type="hidden" name="site_cd"         value="<?=$g_conf_site_cd   ?>" />
-        <input type="hidden" name="site_name"       value="<?=$g_conf_site_name ?>" />
 
-    <?
-        /*
-        할부옵션 : Payplus Plug-in에서 카드결제시 최대로 표시할 할부개월 수를 설정합니다.(0 ~ 18 까지 설정 가능)
-        ※ 주의  - 할부 선택은 결제금액이 50,000원 이상일 경우에만 가능, 50000원 미만의 금액은 일시불로만 표기됩니다
-                   예) value 값을 "5" 로 설정했을 경우 => 카드결제시 결제창에 일시불부터 5개월까지 선택가능
-        */
-    ?>
-        <input type="hidden" name="quotaopt"        value="12"/>
-        
-        <!-- 필수 항목 : 결제 금액/화폐단위 -->
-        <input type="hidden" name="currency"        value="WON"/>
-    <?
-        /* = -------------------------------------------------------------------------- = */
-        /* =   2. 가맹점 필수 정보 설정 END                                             = */
-        /* ============================================================================== */
-    ?>
+            <input type="hidden" name="req_tx"          value="pay" />
+            <input type="hidden" name="site_cd"         value="<?=$g_conf_site_cd   ?>" />
+            <input type="hidden" name="site_name"       value="<?=$g_conf_site_name ?>" />
+        <?
+            /*
+            할부옵션 : Payplus Plug-in에서 카드결제시 최대로 표시할 할부개월 수를 설정합니다.(0 ~ 18 까지 설정 가능)
+            ※ 주의  - 할부 선택은 결제금액이 50,000원 이상일 경우에만 가능, 50000원 미만의 금액은 일시불로만 표기됩니다
+                       예) value 값을 "5" 로 설정했을 경우 => 카드결제시 결제창에 일시불부터 5개월까지 선택가능
+            */
+        ?>
+            <input type="hidden" name="quotaopt"        value="12"/>        
+            <!-- 필수 항목 : 결제 금액/화폐단위 -->
+            <input type="hidden" name="currency"        value="WON"/>
+        <?
+            /* = -------------------------------------------------------------------------- = */
+            /* =   2. 가맹점 필수 정보 설정 END                                             = */
+            /* ============================================================================== */
+        ?>
 
     <?
         /* ============================================================================== */
@@ -345,7 +331,7 @@
         <input type="hidden" name="module_type"     value="<?=$module_type ?>"/>
         <input type="hidden" name="ordr_idxx" class="w200" value="" maxlength="40"/>
 
-        <input type="text" name="good_mny" class="w100 js-goodMny" value="0" maxlength="9"/>
+        <input type="hidden" name="good_mny" class="w100 js-goodMny" value="0" maxlength="9"/>
 
 
     <!--
