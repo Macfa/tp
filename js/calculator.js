@@ -7,6 +7,10 @@ $(window).resize(function(){
 	setCalcHeight();
 });
 
+$(function(){
+	syncronizePoint();
+});
+
 $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	var $carrier = $('[name=carrier]:checked').val();
 
@@ -200,11 +204,6 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 		$('.js-VATWrap, .js-interestWrap').removeClass('active');
 	}
 
-	if($plan == 21)
-		$('.js-egg11gEvent').show();
-	else
-		$('.js-egg11gEvent').hide();
-
 	if($availablePoint > 0) {
 		$('.js-availablePointRow').show();
 		$('.js-availablePointCalc').text(setNumComma($availablePoint));
@@ -213,11 +212,24 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 	}
 
 	//-------------------------------------------------
+
+	togglePointEvent();
 });
 
 $('.js-calculatorDetailToggle').click(function(){
 	$('.js-calculatorResult').toggleClass('active');
 });
+
+
+function syncronizePoint() {
+	if($('[name=plan]').val() == 21)
+		$('.js-egg11gEvent').show();
+	else
+		$('.js-egg11gEvent').hide();
+
+	$('.js-point').text(setNumComma($('.js-point:eq(0)').text()));
+
+}
 
 
 function setCalcHeight(){
