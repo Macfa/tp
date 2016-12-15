@@ -133,10 +133,11 @@
 			</li>
 		</ul>
 	</section>	
-
-	<?php
-	include('./detailCaution.skin.php');
-	?>
+	<section class="detail-guide-wrap">
+		<?php
+		include('./detailCaution.skin.php');
+		?>
+	</section>
 	</div>
 </div>
 
