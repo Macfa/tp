@@ -119,7 +119,7 @@
 
 <head>
     <title>*** NHN KCP [AX-HUB Version] ***</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
     <link href="css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
     <script type="text/javascript">
         /* 신용카드 영수증 */ 
