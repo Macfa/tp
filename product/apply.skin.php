@@ -9,7 +9,7 @@
 	</section>
 	<?php endif?>
 
-	<form action="/product/applyAction.php" method="post" id="apply-form" name="order_info">
+	<form action="/product/applyAction.php" method="post" id="apply-form">
 	<input type="hidden" name="dvKey" value="<?php echo $_GET['dvKey']?>">
 	<?php if (isExist($_GET['capacity'])) :?>
 	<input type="hidden" name="capacity" value="<?php echo $_GET['capacity']?>">
@@ -98,7 +98,6 @@
 	<section class="section-no-padding txt-left js-addressWrap js-showContactBtn">
 		<section class="js-addressDetail address-detail active">
 			<h2 class="tit-sub">사은품 받을 주소</h2>
-
 			<input type="hidden" class="js-arKey" name="arKey" value="<?php echo $defAddress['arKey']?>" />
 			<label class="inp-wrap">
 				<input type="text" class="inp-txt js-tit" name="arTit" value="<?php echo $defAddress['arTit']?>" />
@@ -181,7 +180,6 @@
 			<button class="btn-filled-sub-dense js-addressDetailAction js-otherAddress active">다른 주소</button>
 			<button class="btn-filled-sub-dense js-addressListAction js-newAddress">새 주소</button>
 		</div>
-
 		<?php if(isExist($defaultRewardPoint) === true) :?>
 			<section class="section">
 				<h2 class="tit-sub">추천인 아이디 입력</h2>	
@@ -238,16 +236,6 @@
 		</section>
 	</section>
 
-	<section class="section cash">
-		<label class="inp-wrap">
-			<input type="hidden" class="js-mbPoint" value="<?php echo $totalPoint ?>">
-			<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?$totalPoint:$mb['mbPoint'] ?>" class="js-totalResultPoint inp-txt" name="resultPoint">
-			<input type="number" value="<?php echo ($totalPoint<$mb['mbPoint'])?0:$totalPoint-$mb['mbPoint'] ?>" class="js-totalResultCash inp-txt" name="resultCash">
-			<div class="inp-label">Point / Cash<span class="inp-required">필수</span></div>
-		</label>
-		<br/>
-	</section>
-
 	<?php if(isExist($defaultRewardPoint) === true) :?>		
 	<h2 class="cart-total-tit">사용 할 별 / 사용 가능한 별</h2>
 	<div class="apply-total">
@@ -262,23 +250,11 @@
 	data-parsley-max-message="현재 보유중인 %s 별보다 주문 별이 많습니다. "/>
 	<?php endif?>
 
-    <section>
-    <div id="display_setup_message" style="display:none "> 
-       <p class="txt">
-       결제를 계속 하시려면 상단의 노란색 표시줄을 클릭 하시거나 <a href="https://pay.kcp.co.kr/plugin_new/file/KCPPayUXSetup.exe"><span>[수동설치]</span></a>를 눌러
-       Payplus Plug-in을 설치하시기 바랍니다.
-       [수동설치]를 눌러 설치하신 경우 새로고침(F5)키를 눌러 진행하시기 바랍니다.
-       </p>
-       Copyright (c) NHN KCP INC. All Rights reserved.
-     </div>
-	 </section>
-	 
-	<input type="hidden" value="<?php echo $val['gfTit']?>" name="good_name[]"/>		<!-- made by hy , use to Arname-->
-	<input type="hidden" class="js-totalResultInp" value="<?php echo $totalPoint ?>" />
-	<input type="hidden" class="js-mbPoint" value="<?php echo $mb['mbPoint'] ?>">
 	<ul class="parsley-errors-apply"></ul>
-	<input type="submit" class="apply-submit btn-filled js-trackLink btn-filled" target="_blank" id="link-detail-plan-apply" value="가입 신청" onclick="return jsf__pay(this.form);"/>
-	<?php require_once(PATH_PRD.'/order.skin.kcp.php');?>
+	
+	<input type="submit" class="apply-submit btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
+
+	</form>
 	<br/><br/>
 </div>
 <div class="wrap center">
@@ -303,7 +279,6 @@
 			</label>
 		</td>
 	</tr>
-	</form>
 </script>
 
 <?php $naver->getLoginScriptForApply();?>

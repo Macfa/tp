@@ -24,7 +24,7 @@ $osClass = $userAgent->getOS();
 <head>
 <title>티플 : 호갱구세주<?php echo $cfg['subTitle']?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="content-type" content="text/html; charset=<?php echo ($isEucKr===true)?'euc-kr':'utf-8'?>">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0" />
 <meta name="description" content="티플 : 노트7사전예약,갤S7,G5,아이폰,스마트워치,포켓파이,준2">
 <meta name="google-site-verification" content="KFJq5d9FeHWP2VkwbIAdlpRMO3kb6ayo2l6vDQmqIgc" />
