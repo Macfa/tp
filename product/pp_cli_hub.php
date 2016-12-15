@@ -148,7 +148,7 @@
             }
 
             /* 1 원은 실제로 업체에서 결제하셔야 될 원 금액을 넣어주셔야 합니다. 결제금액 유효성 검증 */
-            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalValue-number_format($_POST['resultPoint']) );
+            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalValue-$_POST['resultPoint'] );
             $c_PayPlus->mf_set_encx_data( $_POST[ "enc_data" ], $_POST[ "enc_info" ] );
     }
     /* ------------------------------------------------------------------------------ */
