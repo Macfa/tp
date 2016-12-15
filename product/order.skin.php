@@ -164,7 +164,7 @@
 
 	       	 <label class="inp-wrap-full">
 	       	 	<select class="inp-txt js-subAddress" name="pay_method">
-	            	<option value="111000000000" selected="selected">선택해주세요</option>
+	            	<option value="111000000000" selected="selected">신용카드/계좌이체/가상계좌</option>
 	                <option value="100000000000">신용카드</option>
 	                <option value="010000000000">계좌이체</option>
 	                <option value="001000000000">가상계좌</option>

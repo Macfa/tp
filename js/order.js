@@ -206,6 +206,7 @@ $('[name=onlyPay]').change(function(){
 	}else if($val == 'cashOnlyPay'){ // 캐쉬로만 결제
 		$('[name=resultPoint]').val(0);
 		$('[name=resultCash]').val($totalPoint);
+		$('.js-goodMny').val($totalPoint);
 
 	}
 
