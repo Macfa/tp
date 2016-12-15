@@ -19,8 +19,9 @@
 		<input type="hidden" name="carrier" value="<?php echo $_GET['carrier']?>">
 		<input type="hidden" name="plan" value="<?php echo $_GET['plan']?>">
 
-		<section class="section txt-left">
-			<h2 class="tit-sub">신청정보</h2>
+		<section class="section-no-padding txt-left">
+			<br>
+			<h2 class="tit-sub">&nbsp;&nbsp;&nbsp;신청정보</h2>
 
 			<ul class="inlinelist">
 				<li> 
@@ -30,13 +31,13 @@
 				</li><li>
 					<span class="label"><i class="ico-change-device-small"></i> 가입유형</span><span class="cont"><?php echo $deviceInfo->getApplyTypeName($_GET['applyType'])?></span>		
 				</li><li>
-					<span class="label"><i class="ico-person-small"></i> 할인유형</span><span class="cont"><?php echo $deviceInfo->getDiscountTypeName($_GET['discountType'])?></span>	
+					<span class="label"><i class="ico-sale-small"></i> 할인유형</span><span class="cont"><?php echo $deviceInfo->getDiscountTypeName($_GET['discountType'])?></span>	
 				</li><?php if (isExist($_GET['capacity'])) :?><li>
-					<span class="label"><i class="ico-person-small"></i> 용량</span><span class="cont"><?php echo $_GET['capacity']?></span>	
+					<span class="label"><i class="ico-capacity-small"></i> 용량</span><span class="cont"><?php echo $_GET['capacity']?></span>	
 				</li><?php endif?><li>
-					<span class="label"><i class="ico-person-small"></i> 요금제</span><span class="cont"><?php echo $deviceInfo->getPlanName($_GET['plan'])?></span></span>		
+					<span class="label"><i class="ico-plan-small"></i> 요금제</span><span class="cont"><?php echo $deviceInfo->getPlanName($_GET['plan'])?></span></span>		
 				</li><li>
-					<span class="label"><i class="ico-person-small"></i> 지급포인트</span><span class="cont"><?php echo number_format($totalPoint) ?></span></span>		
+					<span class="label"><i class="ico-plan-small"></i> 지급포인트</span><span class="cont"><?php echo number_format($totalPoint) ?></span></span>		
 				</li>
 			</ul>
 		</section>
@@ -90,6 +91,32 @@
 				<div class="inp-label">기타사항 & 요구사항</div>
 			</label-->
 		</section>
+		<?php if(isExist($defaultRewardPoint) === true) :?>
+			<section class="section txt-left">
+				<h2 class="tit-sub">추천인 아이디 입력</h2>	
+				티플에서 핸드폰 구매 시 추천인 또한 본인이 받는 포인트의 10%를 받습니다.<br>			
+				<label class="inp-wrap">	
+					<?php if(isExist($isRecommedId) === false) :?>		 
+						<input type="text" class="inp-txt" name="recommedID" value="" />
+						<div class="inp-label">추천인ID</div>	
+					<?else : ?>
+						추천인 ID : <span class="txt-highlight"><?php echo $recommedMbEmail?></span>
+						<input type="hidden" class="inp-txt" name="recommedID" value="<?php echo $recommedMbEmail?>" />
+					<?php endif?>								
+				</label>			
+				<br>	
+				<i class="ico-caution-small"></i>친구 개통 시 본인 또한 그 고객 포인트의 5%를 받습니다.<br>
+				<i class="ico-caution-small"></i>그 친구가 친구를 데려오면 그 친구의 포인트 5%를 받습니다.<br>		
+				<i class="ico-caution-small"></i>추천인 아이디는 단1회 적용 가능 하오니 신중히 결정해주시기 바랍니다.<br>
+				<i class="ico-caution-small"></i>기타문의는 고객센터를 통해 해주시기 바랍니다.<br><br>
+			</section>
+		<? endif ?>
+		<section class="section txt-left">
+			<?php
+			include('./detailCaution.skin.php');
+			?>
+		</section>
+
 		<section class="apply-cart-empty section">
 			<div class="vert-wrap">
 				<div class="vert-align">				
