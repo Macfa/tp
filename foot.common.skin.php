@@ -48,8 +48,8 @@
         baseUrl: '<?=PATH_JS_LIB?>'
     };
 </script>
-<?php $import->importJS(); ?>
 <script type="text/javascript" src="<?=PATH_JS_LIB?>/require.js"></script>
+<?php $import->importJS(); ?>
 <?=$js_file?>
 </body>
 </html>
