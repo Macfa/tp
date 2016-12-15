@@ -25,7 +25,7 @@ try
 	if (isKorEng($_POST['arName']) === false)
 		throw new Exception('수취인 명은 한글,영어만 가능합니다.', 3);
 
-	if (isNullVal($_POST['arTel']))
+	if (isNullVal($_POST['arPhone']))
 		throw new Exception('연락처를 입력해주세요.', 3);
 
 	$_POST['arPhone'] = parsingNum($_POST['arPhone']);
@@ -186,7 +186,7 @@ if((int)$_POST['resultPoint'] > 0) {
 
 
 if((int)$_POST['resultCash'] === 0) {
-	require_once("/home/www/tplanit/develop/_chy/user/orderList.php");  	// 결재 결과를 처리하는 과정 
+	require_once("/user/orderList.php");  	// 결재 결과를 처리하는 과정 
 }
 
 // 'arTit' => $_POST['arTit'],

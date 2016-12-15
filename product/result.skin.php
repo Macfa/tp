@@ -4,7 +4,7 @@
 
 <head>
     <title>*** NHN KCP [AX-HUB Version] ***</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
     <script type="text/javascript">
         /* 신용카드 영수증 */ 
@@ -46,8 +46,7 @@
 </head>
 
 <body>    
-<div class="wrap result">
-     <h1 class="center">결과 메세지 : <?=$res_msg?></h1>
+<div class="wrap-dense">
     <section class="section">
     <form name="cancel" method="post">        
            

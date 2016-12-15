@@ -331,7 +331,7 @@
         <input type="hidden" name="module_type"     value="<?=$module_type ?>"/>
         <input type="hidden" name="ordr_idxx" class="w200" value="" maxlength="40"/>
 
-        <input type="hidden" name="good_mny" class="w100 js-goodMny" value="0" maxlength="9"/>
+        <input type="text" name="good_mny" class="w100 js-goodMny" value="0" maxlength="9"/>
 
 
     <!--

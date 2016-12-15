@@ -65,7 +65,7 @@ function setOrderTotalResult(){
 	var $mbPoint = parseInt($('.js-mbPoint').val());
 	var $resultPoint= parseInt($('.js-totalResultPoint').val());
 	
-	console.log($totalResult < $mbPoint);
+	// console.log($totalResult < $mbPoint);
 	// if($resultCash >= 0) {
 	if($totalResult <= $mbPoint ){ // 포인트로만 살수 있을때
 		var $resultCash = $totalResult - $resultPoint;
@@ -85,17 +85,8 @@ function setOrderTotalResult(){
 	}	
 };
 
-$('.js-totalResultCash').focus(function(event){
-	this.select();
-});
 
-$('.js-totalResultPoint').focus(function(event){
-	this.select();
-});
-
-
-
-$('.js-totalResultCash').on('change keyup', function(event){
+$('.js-totalResultCash').on('change', function(event){
 	// if($('.js-totalResultCash').val().length >= $('.js-totalResultInp').val().length) {
 	// if($('.js-totalResultCash').val().length >= 3) {
 		var $resultCash = parseInt($('.js-totalResultCash').val());		// 현금값이 입력되면 숫자로 형변환 후에 대입
@@ -115,11 +106,7 @@ $('.js-totalResultCash').on('change keyup', function(event){
 				$resultCash = $resultInp;
 			}
 
-			var $resultPoint = $resultInp-$resultCash;
-
-
-			$('.js-totalResultPoint').val($resultPoint);
-			$('.js-goodMny').val($resultCash);
+			
 		} else {
 			if (!$resultCash || $resultCash < 0) {
 			// if ($resultCash < 0) {
@@ -130,15 +117,17 @@ $('.js-totalResultCash').on('change keyup', function(event){
 				$resultCash = $resultInp;
 			}
 
-			var $resultPoint = $resultInp-$resultCash;
-			$('.js-totalResultPoint').val($resultPoint);
-			$('.js-goodMny').val($resultCash);
+
 		}
+		var $resultPoint = $resultInp-$resultCash;
+		if($resultPoint > 0) $('[name=onlyPay][value=pointOnlyPay]').prop('checked',true);
+		$('.js-totalResultPoint').val($resultPoint);
+		$('.js-goodMny').val($resultCash);
 		//$('[name=onlyPay][value=cashOnlyPay]').prop('checked',false);
 	// }
 });
 
-$('.js-totalResultPoint').on('change keyup', function(event) {
+$('.js-totalResultPoint').on('change', function(event) {
 	// if($('.js-totalResultPoint').val().length >= $('.js-totalResultInp').val().length) {
 		var $chPoint = parseInt($('.js-totalResultPoint').val());
 		var $chInp = parseInt($('.js-totalResultInp').val());
@@ -171,10 +160,10 @@ $('.js-totalResultPoint').on('change keyup', function(event) {
 			$('.js-totalResultCash').val($chCash);
 			$('.js-goodMny').val($chCash);
 		}
-	$('[name=onlyPay][value=cashOnlyPay]').prop('checked',false);
+	$('[name=onlyPay][value=cashOnlyPay]').prop('checked',true);
 	// }
 });
-$('.js-defaultPoint').on('change keyup', function(event) {
+$('.js-defaultPoint').on('change', function(event) {
 	var $mbPoint = parseInt($('.js-mbPoint').val());	
 
 	$(this).val($mbPoint);
@@ -182,7 +171,7 @@ $('.js-defaultPoint').on('change keyup', function(event) {
 
 });
 
-$('[name=onlyPay][value=pointOnlyPay]').prop('checked',true);
+
 $('[name=onlyPay]').change(function(){
 	var $val = $(this).val();
 	var $totalPoint = parseInt($('.js-totalResultInp').val());
@@ -199,7 +188,7 @@ $('[name=onlyPay]').change(function(){
 		}else if($totalPoint >= $mbPoint){ // 본인포인트로만 결제 할수 없을때 	
 			
 			$('[name=resultPoint]').val($mbPoint); // 한계를 본인 포인트까지			
-			$('[name=resultCash]').val($totalPoint-$mbPoint); // 그외에는 캐쉬로		
+			$('[name=resultCash], .js-goodMny').val($totalPoint-$mbPoint); // 그외에는 캐쉬로		
 
 		}
 

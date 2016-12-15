@@ -370,7 +370,7 @@ function setLabel(item){
 	else 
 		var $value = $(item).text();
 
-	console.log($(item)[0].nodeName);
+	//console.log($(item)[0].nodeName);
 
 	if($target.size() && $value) {
 		$target.addClass('active');

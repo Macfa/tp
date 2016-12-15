@@ -163,7 +163,7 @@
 			<h2 class="tit-sub">결제방법</h2>
 
 	       	 <label class="inp-wrap-full">
-	       	 	<select class="inp-txt js-subAddress" name="pay_method">
+	       	 	<select class="inp-txt" name="pay_method">
 	            	<option value="111000000000" selected="selected">신용카드/계좌이체/가상계좌</option>
 	                <option value="100000000000">신용카드</option>
 	                <option value="010000000000">계좌이체</option>
@@ -172,7 +172,7 @@
 	                <option value="000010000000">휴대폰</option>
 	                <option value="000000001000">상품권</option>
 	                <option value="000000000010">ARS</option>
-	                </select>
+	            </select>
 	            <div class="inp-label">결제방법<span class="inp-required">필수</span></div>
 	        </label>
 	    
