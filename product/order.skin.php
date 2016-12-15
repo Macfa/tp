@@ -128,7 +128,6 @@
 			<td class="table-separator">=</td>
 			<td class="js-cartShipping table-value"><?php echo($isShippingFree)?'1회 무료':'2,500';?></td>
 			<td class="js-orderRowResult js-orderRowResult<?php echo $val['caKey']?> table-value" data-result="<?php echo $val['caQuantity']*$val['gfPoint']?>"><?php echo number_format($val['caQuantity']*$val['gfPoint'])?></td>
->>>>>>> parent of 8a761bb... 기존 파일 커밋
 			<td class="action-wrap">
 				<label class="inp-label">
 					<button class="btn-delete js-orderDelete" data-key="<?php echo $val['caKey']?>" formnovalidate><i></i></button>
