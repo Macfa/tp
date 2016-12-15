@@ -43,12 +43,12 @@
 	 <script src="<?=PATH_JS_LIB?>/outdatedbrowser.js"></script>
 	<![endif]-->
 <?php endif?>
-<script type="text/javascript" src="<?=PATH_JS_LIB?>/require.js"></script>
 <script>
    var require = {
         baseUrl: '<?=PATH_JS_LIB?>'
     };
 </script>
+<script type="text/javascript" src="<?=PATH_JS_LIB?>/require.js"></script>
 <?php $import->importJS(); ?>
 <?=$js_file?>
 </body>
