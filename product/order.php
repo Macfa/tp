@@ -23,10 +23,7 @@ catch(Exception $e)
     alert($e->getMessage());
 }
 
-$add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/cart.css" type="text/css">';
-$js_file = '<script type="text/javascript" src="'.PATH_JS.'/order.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/modifyInfo.js"></script>';
+$import->addCSS('cart.css')->addJS('order.js')->addJS('gifts.js')->addJS('modifyInfo.js');
 $totalPoint = 0;
 $sqlGiftWhere = '';
 
