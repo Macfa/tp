@@ -121,12 +121,13 @@
 			<td class="table-item-str gift-tit"><a href="" class="btn-flat-primary-dense js-giftViewToggle" data-key="<?php echo $val['gfKey']?>"><?php echo $val['gfTit']?></a></td>
 			<td class="no-padding">
 				<input type="hidden" value="<?php echo $val['gfKey']?>" name="gfKey[]"/>
-				<input type="number" class="inp-num-dense js-orderQuantity" value="<?php echo $caQuantity?>" name="oiQuantity[]" data-point="<?php echo $val['gfPoint']?>" data-key="<?php echo $val['caKey']?>"/>
+				<input type="number" class="inp-num-dense js-orderQuantity" value="<?php echo $val['caQuantity']?>" name="oiQuantity[]" data-point="<?php echo $val['gfPoint']?>" data-key="<?php echo $val['caKey']?>"/>
 			</td>
 			<td class="table-separator">x</td>
 			<td><?php echo number_format($val['gfPoint'])?></td>
 			<td class="table-separator">=</td>
-			<td class="js-orderRowResult js-orderRowResult<?php echo $val['caKey']?> table-value" data-result="<?php echo $caQuantity*$val['gfPoint']?>"><?php echo number_format($caQuantity*$val['gfPoint'])?></td>
+			<td class="js-cartShipping table-value"><?php echo($isShippingFree)?'1회 무료':'2,500';?></td>
+			<td class="js-orderRowResult js-orderRowResult<?php echo $val['caKey']?> table-value" data-result="<?php echo $val['caQuantity']*$val['gfPoint']?>"><?php echo number_format($val['caQuantity']*$val['gfPoint'])?></td>
 			<td class="action-wrap">
 				<label class="inp-label">
 					<button class="btn-delete js-orderDelete" data-key="<?php echo $val['caKey']?>" formnovalidate><i></i></button>
