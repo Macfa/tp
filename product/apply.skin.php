@@ -36,7 +36,7 @@
 			</li><?php endif?><li>
 				<span class="label"><i class="ico-plan-small"></i> 요금제</span><span class="cont"><?php echo $deviceInfo->getPlanName($_GET['plan'])?></span>		
 			</li><li>
-				<span class="label"><i class="ico-plan-small"></i> 지급포인트</span><span class="cont"><?php echo number_format($totalPoint) ?></span>		
+				<span class="label"><i class="ico-plan-small"></i> 지급포인트</span><span class="cont"><?php echo $totalPoint ?></span>		
 			</li>
 		</ul>			
 		
@@ -121,7 +121,7 @@
 				<div class="vert-align">					
 					<span class="tit-sub">가입신청후 포인트몰에서 사은품을 구매해주세요.</span>
 					<br/><br/>
-					<a href="/gifts" target="_blank" class="btn-filled-sub">사은품 선택하기</a>					
+					<a href="/gifts" target="_blank" class="btn-filled-sub">사은품 보기</a>					
 				</div>
 			</div>
 		</section>
