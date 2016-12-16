@@ -4,6 +4,7 @@
 @import '_giftDetail.scss';
 @import '_userInfo.scss';
 @import '_calculator.scss';
+@import 'detail.scss';
 
 html .gift-btn-select{display:block;}
 html .gift-btn-cart,
@@ -86,6 +87,7 @@ html .btn-cart-list {display:none;}
 	}
 }
 
+.inlinelist li .label {padding:20px;}
 
 @media all and (min-width:400px){
 }
