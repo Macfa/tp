@@ -69,12 +69,13 @@ try
 		if(isNum($val) == false)
 			throw new Exception('사은품 키가 숫자가 아닙니다.', 3);
 
-		list($isValidGift,$arrGfPoint[$key]) = DB::queryFirstList('SELECT COUNT(*), gfPoint FROM tmGift WHERE gfKey = %i', $val);
+		list($isValidGift,$arrGfPoint[$key], $gfName) = DB::queryFirstList('SELECT COUNT(*), gfPoint, gfTit FROM tmGift WHERE gfKey = %i', $val);
 		$isValidGift = ($isValidGift>0)?TRUE:FALSE;
 		if($isValidGift == false)
 			throw new Exception('사은품이 존재하지 않습니다.', 3);
 
 		$totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
+		$gifts .= ','.$gfName;
 	}
 		$totalPoint -= $_POST['good_mny'];
 	if ($totalPoint > $mb['mbPoint'])
@@ -184,46 +185,107 @@ if((int)$_POST['resultPoint'] > 0) {
 	),'mbEmail = %s', $mb['mbEmail']);
 }
 
-
-if((int)$_POST['resultCash'] === 0) {
-	require_once("/user/orderList.php");  	// 결재 결과를 처리하는 과정 
+if((int)$_POST['resultPoint'] > 0 && (int)$_POST['resultCash'] === 0){
+	$req_tx = 'pay';
+	$bSucc = true;
+	$res_cd = "0000";
 }
 
-// 'arTit' => $_POST['arTit'],
-// 		'arName' => $_POST['arName'],
-// 		'arPhone' => $_POST['arPhone'],
-// 		'arTel' => $_POST['arTel'],
-// 		'arPostcode' => $_POST['arPostcode'],
-// 		'arAddress' => $_POST['arAddress'],
-// 		'arSubAddress' => $_POST['arSubAddress'],
-		
-
-
-// DB::insert('OrderTest', array(										// test
-// 	'mbEmail' => $mb['mbEmail'],
-// 	'orName' => $_POST['arName'],
-// 	'orPhone' => $_POST['arPhone'],
-// 	'orTel' => $_POST['arTel'],
-// 	'orPostcode' => $_POST['arPostcode'],
-// 	'orAddress' => $_POST['arAddress'],
-// 	'orSubAddress' => $_POST['arSubAddress'],
-// 	'orShipping' => $shipping,
-// 	'orPoint' => $totalPoint,
-// 	'orCash' => $_POST['good_mny'],
-// 	'orDate' => $cfg['time_ymdhis']
-// ));
-
-// $orKey = DB::insertId();
-
-// foreach($_POST['gfKey'] as $key => $val) {
-// 	DB::insert('OrderTestItem', array(
-// 		'mbEmail' => $mb['mbEmail'],
-// 		'orKey' => $orKey,
-// 		'gfKey' => $val,
-// 		'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key]-$_POST['good_mny'],
-// 		'oiQuantity' => $_POST['oiQuantity'][$key]
-// 	));
-// }
-
 ?>
+    <html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>티플 사은품 결제 중입니다.</title>
+        <script type="text/javascript">
+            function goResult()
+            {
+                //var openwin = window.open( 'proc_win.html', 'proc_win', '' )
+                document.pay_info.submit();
+                // openwin.close();
+            }
 
+            // °áÁ¦ Áß »õ·Î°íÄ§ ¹æÁö »ùÇÃ ½ºÅ©¸³Æ® (Áßº¹°áÁ¦ ¹æÁö)
+            function noRefresh()
+            {
+                /* CTRL + NÅ° ¸·À½. */
+                if ((event.keyCode == 78) && (event.ctrlKey == true))
+                {
+                    event.keyCode = 0;
+                    return false;
+                }
+                /* F5 ¹øÅ° ¸·À½. */
+                if(event.keyCode == 116)
+                {
+                    event.keyCode = 0;
+                    return false;
+                }
+            }
+            document.onkeydown = noRefresh ;
+        </script>
+    </head>
+
+    <body onload="goResult()">
+    <form name="pay_info" method="post" action="./result.php">
+        <input type="hidden" name="site_cd"           value="<?=$g_conf_site_cd ?>">    <!-- »çÀÌÆ®ÄÚµå -->
+        <input type="hidden" name="req_tx"            value="<?=$req_tx         ?>">    <!-- ¿äÃ» ±¸ºÐ -->
+        <input type="hidden" name="use_pay_method"    value="<?=$use_pay_method ?>">    <!-- »ç¿ëÇÑ °áÁ¦ ¼ö´Ü -->
+        <input type="hidden" name="bSucc"             value="<?=$bSucc          ?>">    <!-- ¼îÇÎ¸ô DB Ã³¸® ¼º°ø ¿©ºÎ -->
+
+        <input type="hidden" name="amount"            value="<?=$amount         ?>">    <!-- ±Ý¾× -->
+        <input type="hidden" name="res_cd"            value="<?=$res_cd         ?>">    <!-- °á°ú ÄÚµå -->
+        <input type="hidden" name="res_msg"           value="<?=$res_msg        ?>">    <!-- °á°ú ¸Þ¼¼Áö -->
+        <input type="hidden" name="res_en_msg"        value="<?=$res_en_msg     ?>">    <!-- °á°ú ¿µ¹® ¸Þ¼¼Áö -->
+        <input type="hidden" name="ordr_idxx"         value="<?=$ordr_idxx      ?>">    <!-- ÁÖ¹®¹øÈ£ -->
+        <input type="hidden" name="tno"               value="<?=$tno            ?>">    <!-- KCP °Å·¡¹øÈ£ -->
+        <input type="hidden" name="good_mny"          value="<?=$good_mny       ?>">    <!-- °áÁ¦±Ý¾× -->
+        <input type="hidden" name="usePoint"			  value="<?=$_POST['resultPoint']?>">
+        <input type="hidden" name="good_name"         value="<?=$gifts      ?>">    <!-- »óÇ°¸í -->
+        <input type="hidden" name="buyr_name"         value="<?=$_POST["arName"]?>">    <!-- ÁÖ¹®ÀÚ¸í -->
+        <input type="hidden" name="buyr_tel1"         value="<?=$_POST["arPhone"]?>">    <!-- ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£ -->
+        <input type="hidden" name="buyr_tel2"         value="<?=$_POST["arTel"] ?>">    <!-- ÁÖ¹®ÀÚ ÈÞ´ëÆù¹øÈ£ -->
+        <input type="hidden" name="buyr_mail"         value="<?=$buyr_mail      ?>">    <!-- ÁÖ¹®ÀÚ E-mail -->
+
+        <input type="hidden" name="card_cd"           value="<?=$card_cd        ?>">    <!-- Ä«µåÄÚµå -->
+        <input type="hidden" name="card_name"         value="<?=$card_name      ?>">    <!-- Ä«µå¸í -->
+        <input type="hidden" name="app_time"          value="<?=$app_time       ?>">    <!-- ½ÂÀÎ½Ã°£ -->
+        <input type="hidden" name="app_no"            value="<?=$app_no         ?>">    <!-- ½ÂÀÎ¹øÈ£ -->
+        <input type="hidden" name="quota"             value="<?=$quota          ?>">    <!-- ÇÒºÎ°³¿ù -->
+        <input type="hidden" name="noinf"             value="<?=$noinf          ?>">    <!-- ¹«ÀÌÀÚ¿©ºÎ -->
+        <input type="hidden" name="partcanc_yn"       value="<?=$partcanc_yn    ?>">    <!-- ºÎºÐÃë¼Ò°¡´ÉÀ¯¹« -->
+        <input type="hidden" name="card_bin_type_01"  value="<?=$card_bin_type_01 ?>">  <!-- Ä«µå±¸ºÐ1 -->
+        <input type="hidden" name="card_bin_type_02"  value="<?=$card_bin_type_02 ?>">  <!-- Ä«µå±¸ºÐ2 -->
+
+        <input type="hidden" name="bank_name"         value="<?=$bank_name      ?>">    <!-- ÀºÇà¸í -->
+        <input type="hidden" name="bank_code"         value="<?=$bank_code      ?>">    <!-- ÀºÇàÄÚµå -->
+
+        <input type="hidden" name="bankname"          value="<?=$bankname       ?>">    <!-- ÀÔ±ÝÇÒ ÀºÇà -->
+        <input type="hidden" name="depositor"         value="<?=$depositor      ?>">    <!-- ÀÔ±ÝÇÒ °èÁÂ ¿¹±ÝÁÖ -->
+        <input type="hidden" name="account"           value="<?=$account        ?>">    <!-- ÀÔ±ÝÇÒ °èÁÂ ¹øÈ£ -->
+        <input type="hidden" name="va_date"           value="<?=$va_date        ?>">    <!-- °¡»ó°èÁÂ ÀÔ±Ý¸¶°¨½Ã°£ -->
+
+        <input type="hidden" name="pnt_issue"         value="<?=$pnt_issue      ?>">    <!-- Æ÷ÀÎÆ® ¼­ºñ½º»ç -->
+        <input type="hidden" name="pnt_app_time"      value="<?=$pnt_app_time   ?>">    <!-- ½ÂÀÎ½Ã°£ -->
+        <input type="hidden" name="pnt_app_no"        value="<?=$pnt_app_no     ?>">    <!-- ½ÂÀÎ¹øÈ£ -->
+        <input type="hidden" name="pnt_amount"        value="<?=$pnt_amount     ?>">    <!-- Àû¸³±Ý¾× or »ç¿ë±Ý¾× -->
+        <input type="hidden" name="add_pnt"           value="<?=$add_pnt        ?>">    <!-- ¹ß»ý Æ÷ÀÎÆ® -->
+        <input type="hidden" name="use_pnt"           value="<?=$use_pnt        ?>">    <!-- »ç¿ë°¡´É Æ÷ÀÎÆ® -->
+        <input type="hidden" name="rsv_pnt"           value="<?=$rsv_pnt        ?>">    <!-- Àû¸³ Æ÷ÀÎÆ® -->
+
+        <input type="hidden" name="commid"            value="<?=$commid         ?>">    <!-- Åë½Å»ç ÄÚµå -->
+        <input type="hidden" name="mobile_no"         value="<?=$mobile_no      ?>">    <!-- ÈÞ´ëÆù ¹øÈ£ -->
+
+        <input type="hidden" name="tk_van_code"       value="<?=$tk_van_code    ?>">    <!-- ¹ß±Þ»ç ÄÚµå -->
+        <input type="hidden" name="tk_app_time"       value="<?=$tk_app_time    ?>">    <!-- ½ÂÀÎ ½Ã°£ -->
+        <input type="hidden" name="tk_app_no"         value="<?=$tk_app_no      ?>">    <!-- ½ÂÀÎ ¹øÈ£ -->
+
+        <input type="hidden" name="cash_yn"           value="<?=$cash_yn        ?>">    <!-- Çö±Ý¿µ¼öÁõ µî·Ï ¿©ºÎ -->
+        <input type="hidden" name="cash_authno"       value="<?=$cash_authno    ?>">    <!-- Çö±Ý ¿µ¼öÁõ ½ÂÀÎ ¹øÈ£ -->
+        <input type="hidden" name="cash_tr_code"      value="<?=$cash_tr_code   ?>">    <!-- Çö±Ý ¿µ¼öÁõ ¹ßÇà ±¸ºÐ -->
+        <input type="hidden" name="cash_id_info"      value="<?=$cash_id_info   ?>">    <!-- Çö±Ý ¿µ¼öÁõ µî·Ï ¹øÈ£ -->
+    </form>
+    </body>
+    </html>
+
+    $_POST[ "arName"      ]; // 주문자명
+    $buyr_tel1      = $_POST["arPhone"]; // 주문자 전화번호
+    $buyr_tel2      = $_POST[ "arTel"      ];

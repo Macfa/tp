@@ -30,11 +30,6 @@
     /* ============================================================================== */
 ?>
 
-
-<link href="css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
-
-
-
 <?
     /* ============================================================================== */
     /* =   Javascript source Include                                                = */
@@ -148,8 +143,6 @@
             if( $('.js-goodMny').val() == 0 ) {
                 if(confirm($('.js-totalResultPoint').val() + " Point 를 결제") == true ) {
                     form.submit();
-                    return true;
-                } else {
                     return false;
                 }
             }
@@ -160,7 +153,7 @@
             {
                 alert("결제 승인 요청 전,\n\n반드시 결제창에서 고객님이 결제 인증 완료 후\n\n리턴 받은 ordr_chk 와 업체 측 주문정보를\n\n다시 한번 검증 후 결제 승인 요청하시기 바랍니다."); //업체 연동 시 필수 확인 사항.
 
-                openwin = window.open( "proc_win.html", "proc_win", "width=449, height=209, top=300, left=300" );
+                //openwin = window.open( "proc_win.html", "proc_win", "width=449, height=209, top=300, left=300" );
                 RetVal = true ;
             }
             
