@@ -13,7 +13,8 @@
 			</ul>			
 		</li><li class="admin-list-wrap">사전예약관리
 			<ul class="admin-list-sub-group">
-				<li><a href="preorderApplyList.php" class="admin-list-sub">V20 사전예약</a></li>
+				<li><a href="productOrderList.php" class="admin-list-sub">일반신청리스트</a></li>
+				<!--<li><a href="preorderApplyList.php" class="admin-list-sub">V20 사전예약</a></li>-->
 				<li><a href="preorder.php" class="admin-list-sub">사전예약리스트</a></li>				
 				<li><a href="exchangeRefundNote7List.php" class="admin-list-sub">노트7환불/교환</a></li>
 				<li><a href="programNote7List.php" class="admin-list-sub">노트7 프로그램 신청</a></li>
