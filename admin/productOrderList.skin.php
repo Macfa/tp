@@ -53,9 +53,11 @@
 					<td class="table-item-str">연락처</td>						
 					<td class="table-item-str">신청한 통신사</td>
 					<td class="table-item-str">가입유형</td>
+					<td class="table-item-str">할인유형</td>
 					<td class="table-item-str">현재통신사</td>
 					<td class="table-item-str">요금제</td>
 					<td class="table-item-str">색 상</td>
+					<td class="table-item-str">지급포인트</td>
 					<td class="table-item-str">취소상태</td>
 					<td class="table-item-str table-dense">타임스탬프</td>
 				</tr>
@@ -83,11 +85,13 @@
 						
 
 						<td class="table-item-str"><?php echo $row['apChangeCarrier'] ?></td>	
-						<td class="table-item-str"><?php echo $type[$row['apApplyType']] ?></td>						
+						<td class="table-item-str"><?php echo $type[$row['apApplyType']] ?></td>
+						<td class="table-item-str"><?php echo $discount[$row['apDiscountType']] ?></td>					
 						<td class="table-item-str"><?php echo $row['apCurrentCarrier'] ?></td>
 						<td class="table-item-str"><?php echo $arrPlan[$key] ?></td>
 
 						<td class="table-item-str"><?php echo $row['apColor'] ?></td>
+						<td class="table-item-str"><?php echo number_format($row['rpPoint']) ?></td>
 						<td class="table-item-str"><?php echo $cancel[$row['apCancel']] ?></td>
 						<td class="table-item-str"><?php echo $row['apDatetime'] ?></td>
 						

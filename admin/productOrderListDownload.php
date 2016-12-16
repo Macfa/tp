@@ -36,6 +36,10 @@ $state = array(
 	8 => '완료'	
 );
 
+$discount = array(
+	'selectPlan' => '선택약정',
+	'support' => '공시지원'
+	);
 
 /*
 $preorder = DB::query("SELECT * FROM tmPreorder WHERE poDisplay=%i", '1');
@@ -71,7 +75,7 @@ if(isExist($_POST['chk'])){
 
 
 $obj_excel = new PHPExcel();
-$row_array = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P','Q');
+$row_array = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N');
 
 $obj_excel->setActiveSheetIndex(0)
 				->setCellValueExplicit('A1', '진행상황', PHPExcel_Cell_DataType::TYPE_STRING)
@@ -81,11 +85,13 @@ $obj_excel->setActiveSheetIndex(0)
 				->setCellValueExplicit('E1', '연락처', PHPExcel_Cell_DataType::TYPE_STRING)
 				->setCellValueExplicit('F1', '신청한통신사', PHPExcel_Cell_DataType::TYPE_STRING)					
 				->setCellValueExplicit('G1', '가입유형', PHPExcel_Cell_DataType::TYPE_STRING)
-				->setCellValueExplicit('H1', '현재통신사', PHPExcel_Cell_DataType::TYPE_STRING)
-				->setCellValueExplicit('I1', '요금제', PHPExcel_Cell_DataType::TYPE_STRING)
-				->setCellValueExplicit('J1', '색상', PHPExcel_Cell_DataType::TYPE_STRING)
-				->setCellValueExplicit('K1', '취소상태', PHPExcel_Cell_DataType::TYPE_STRING)
-				->setCellValueExplicit('L1', '타임스탬프', PHPExcel_Cell_DataType::TYPE_STRING);
+				->setCellValueExplicit('H1', '할인유형', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('I1', '현재통신사', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('J1', '요금제', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('K1', '색상', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('L1', '지급포인트', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('M1', '취소상태', PHPExcel_Cell_DataType::TYPE_STRING)
+				->setCellValueExplicit('N1', '타임스탬프', PHPExcel_Cell_DataType::TYPE_STRING);
 $row = 2;
 foreach ($list as $key => $val){
 	list($mbName[$key], $mbPhone[$key]) = DB::queryFirstList("SELECT mbName, mbPhone FROM tmMember WHERE mbEmail=%s", $val['mbEmail']);
@@ -109,11 +115,13 @@ foreach ($list as $key => $val){
 					->setCellValueExplicit('E'.$row, $mbPhone[$key], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('F'.$row, $val['apChangeCarrier'], PHPExcel_Cell_DataType::TYPE_STRING)					
 					->setCellValueExplicit('G'.$row, $type[$val['apApplyType']], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('H'.$row, $val['apCurrentCarrier'], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('I'.$row, $arrPlan[$key], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('J'.$row, $val['apColor'], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('K'.$row, $cancel[$val['apCancel']], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('L'.$row, $val['apDatetime'], PHPExcel_Cell_DataType::TYPE_STRING);
+					->setCellValueExplicit('H'.$row, $discount[$val['apDiscountType']], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('I'.$row, $val['apCurrentCarrier'], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('J'.$row, $arrPlan[$key], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('K'.$row, $val['apColor'], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('L'.$row, $val['rpPoint'], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('M'.$row, $cancel[$val['apCancel']], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('N'.$row, $val['apDatetime'], PHPExcel_Cell_DataType::TYPE_STRING);
 	$row++;
 }
 

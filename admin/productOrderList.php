@@ -120,7 +120,10 @@ $state = array(
 
 $changeState = $state;
 
-
+$discount = array(
+	'selectPlan' => '선택약정',
+	'support' => '공시지원'
+	);
 
 
 
