@@ -111,7 +111,7 @@
 				<i class="ico-caution-small"></i>기타문의는 고객센터를 통해 해주시기 바랍니다.<br><br>
 			</section>
 		<? endif ?>
-		<section class="section txt-left">
+		<section class="section-no-padding txt-left">
 			<?php
 			include('./detailCaution.skin.php');
 			?>

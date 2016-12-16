@@ -1,10 +1,8 @@
-<h2 class="tit center">		
-	<i class="detail-ico-caution"></i>
-	유의사항		
-</h2>
+
 <?php if($device['dvCate'] == 'watch') :?>
 <!--<h3 class="tit-sub">T아웃도어 요금제 설명</h3>-->
-<span class="tit-sub">T아웃도어(공유) 요금제란?</span>
+<br>
+<span class="tit-sub">&nbsp;&nbsp;&nbsp;T아웃도어(공유) 요금제란?</span>
 <ul class="detail-check-list price">
 	<li>-기본 음성 통화량 소진 시 모폰의 음성통화량을 공유할 수 있는 혜택</li>
 	<li>-착신전환 서비스 270분 무료제공 혜택</li>
@@ -15,7 +13,7 @@
 	<?php endif?>
 </ul>
 <br/>
-<span class="tit-sub">T아웃도어(단독) 요금제란? </span>
+<span class="tit-sub">&nbsp;&nbsp;&nbsp;T아웃도어(단독) 요금제란? </span>
 <ul class="detail-check-list price">
 	<li>-기본 음성통화량만 가능 (사용량 초과시, 1초당 1.8원씩 과금)</li>
 	<li>-착신전환 서비스 별도신청</li>

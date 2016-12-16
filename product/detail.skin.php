@@ -134,6 +134,10 @@
 		</ul>
 	</section>	
 	<section class="detail-guide-wrap">
+		<h2 class="tit center">		
+			<i class="detail-ico-caution"></i>
+			유의사항		
+		</h2>
 		<?php
 		include('./detailCaution.skin.php');
 		?>

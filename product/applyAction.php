@@ -16,18 +16,8 @@ $rewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKe
 try
 {
 
-
 	if($isLogged == false)
 		throw new Exception('별 포인트 적립을 위해 로그인 해주세요!', 3);
-
-	if(isNullVal($_POST['applyType']))
-		throw new Exception('가입유형을 선택해주세요 ', 3);
-
-	if(isNullVal($_POST['discountType']))
-		throw new Exception('할인유형을 선택해주세요 ', 3);
-
-	if(isNullVal($_POST['plan']))
-		throw new Exception('요금제를 선택해주세요 ', 3);
 
 	if(isNullVal($_POST['apColor']))
 		throw new Exception('색상을 선택해주세요 ', 3);
@@ -37,6 +27,9 @@ try
 
 	if(isNullVal($_POST['apBirth']))
 		throw new Exception('생년월일을 적어주세요. ', 3);
+
+	if(isNullVal($_POST['apCurrentCarrier']))
+		throw new Exception('현재 이용중인통신사를 선택해주세요 ', 3);
 
 	$isExistDevice = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s", $_POST['dvKey']);
 
@@ -74,7 +67,6 @@ try
 
 		if($childKey === $targetMbKey)
 			throw new Exception("추천해준 사람을 추천할 수 없습니다");
-
 	}
 
 
@@ -95,7 +87,10 @@ DB::insert('tmApplyTmp', array(
     'apColor' => $_POST['apColor'],
     'apPlan' => $_POST['plan'],
     'apApplyType' => $_POST['applyType'],
-    'apDatetime' => $cfg['time_ymdhis']));
+    'apDatetime' => $cfg['time_ymdhis'],
+    'apDiscountType' => $_POST['discountType'],
+    'rpPoint' => $rewardPoint
+    ));
 
 
 DB::insert('tmPointHistory', array(
