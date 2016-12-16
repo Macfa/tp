@@ -49,7 +49,7 @@ if((int)$_GET['plan'] === 21 && isContain('egg', $_GET['dvId']) === true)
 //VAR_DUMP($defaultRewardPoint);
 $mbPoint = (isExist($mb['mbPoint'])===TRUE)?$mb['mbPoint']:0;
 if(isExist($defaultRewardPoint) === TRUE) {
-	$totalPoint = $defaultRewardPoint;
+	$totalPoint = number_format($defaultRewardPoint);
 }else{
 	$totalPoint = "미정";
 }
