@@ -42,6 +42,7 @@ $defaultRewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHE
 ));
 
 
+
 if((int)$_GET['plan'] === 21 && isContain('egg', $_GET['dvId']) === true)
 	$defaultRewardPoint = $defaultRewardPoint * 2.5;
 
@@ -78,7 +79,6 @@ $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/modifyInfo.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/calculator.js"></script>';
 
-require_once($cfg['path']."/headSimple.inc.php");			// 헤더 부분 (스킨포함)
-// var_dump($defaultRewardPoint);
+require_once($cfg['path']."/headSimple.inc.php");		// 헤더 부분 (스킨포함)
 require_once("apply.skin.php");	
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
