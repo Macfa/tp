@@ -86,3 +86,17 @@ if (getSession('tmLoggedId')){
 
 $import = new import();
 $userAgent = new parseUserAgent();
+
+$_useragent = $userAgent->parse()->get();
+
+$_isChrome = false;
+$_isIE = false;
+switch($_useragent['name']) {
+	case 'Internet Explorer' :
+		$_isIE = TRUE;
+		break;
+	case 'Google Chrome' :
+		$_isChrome = true;
+		break;
+}
+

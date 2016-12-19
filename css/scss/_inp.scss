@@ -217,6 +217,7 @@
 .btn-filled-sub-dense{
 	@extend .btn-default-dense;
 	background:#37474F;
+	font-weight:normal;
 	color:white;
 	&:active{
 		background:#455A64;
@@ -226,6 +227,7 @@
 .btn-filled-sub{
 	@extend .btn-default;
 	background:#37474F;
+	font-weight:normal;
 	color:white;
 	&:active{
 		background:#455A64;
