@@ -27,6 +27,7 @@ $('.js-addressRow').click(function(){
 			$('.js-address').val($addressData['arAddress']);
 			$('.js-subAddress').val($addressData['arSubAddress']);
 			setLabel('.js-addressWrap input[type=text]');
+			console.log(1);
 			$('.js-addressDetail, .js-addressDetailAction').addClass('active');
 			$('.js-addressList, .js-addressListAction').removeClass('active');
 		}

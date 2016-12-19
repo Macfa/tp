@@ -1,0 +1,164 @@
+<div class="wrap order-wrap center">
+	<form method="post" action="/personalTest/kcp/Test/index.html" id="order-form">
+	<h1 class="center tit">주문하기</h1>
+
+	<section class="section-no-padding txt-left js-addressWrap">
+		<section class="js-addressDetail address-detail active">
+			<h2 class="tit-sub">배송지 주소</h2>
+			<input type="hidden" class="js-arKey" name="arKey" value="<?php echo $defAddress['arKey']?>" />
+			<label class="inp-wrap">
+				<input type="text" class="inp-txt js-tit" name="arTit" value="<?php echo $defAddress['arTit']?>" />
+				<div class="inp-label">주소지 명</div>
+				<span class="inp-hint">집, 회사, 아들집 등</span>
+			</label>
+			<br/>
+			<label class="inp-wrap">
+				<input type="text" class="inp-txt js-name" name="arName" value="<?php echo $defAddress['arName']?>" />
+				<div class="inp-label">주문자 명 <span class="inp-required">필수</span></div>
+			</label>
+			<br/>
+			<label class="inp-wrap">
+				<input type="text" class="inp-txt js-phone" name="arPhone" value="<?php echo $defAddress['arPhone']?>" />
+				<div class="inp-label">연락처 <span class="inp-required">필수</span></div>
+			</label>
+			<label class="inp-wrap">
+				<input type="text" class="inp-txt js-tel" name="arTel" value="<?php echo $defAddress['arTel']?>" />
+				<div class="inp-label">추가 연락처</div>
+			</label>
+			<br/>
+			<label class="inp-wrap">
+				<input type="text" class="inp-txt js-postcode" name="arPostcode" value="<?php echo $defAddress['arPostcode']?>" />
+				<div class="inp-label">우편번호 <span class="inp-required">필수</span></div>
+			</label>
+			<br/>
+			<label class="inp-wrap-full">
+				<input type="text" class="inp-txt js-address" name="arAddress" value="<?php echo $defAddress['arAddress']?>" />
+				<div class="inp-label">주소 <span class="inp-required">필수</span></div>
+			</label>
+			<label class="inp-wrap-full">
+				<input type="text" class="inp-txt js-subAddress" name="arSubAddress" value="<?php echo $defAddress['arSubAddress']?>" />
+				<div class="inp-label">상세주소 <span class="inp-required">필수</span></div>
+			</label>
+			<div class="js-postcodeSearchWrap" id="postcode-search-wrap"></div>
+		</section>
+		<section class="js-addresslist address-list">
+			<table class="table-clickable no-border">
+			<caption>주소선택</caption>
+			<thead>
+			<tr class="table-item-str">
+				<td>주소지 명</td>
+				<td>수령자 명</td>
+				<td>연락처</td>
+				<td>추가 연락처</td>
+				<td></td>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach($arrAddress as $val) :?>
+			<tr class="table-item-str address js-addressRow js-addressRow<?php echo $val['arKey']?>" data-key="<?php echo $val['arKey']?>">
+				<td>
+					<?php echo $val['arTit']?>
+					<div class="address-list-addr">[<?php echo $val['arPostcode']?>] <?php echo $val['arAddress'].' '.$val['arSubAddress']?></div>
+					<span class="address-default"><?php echo ($val['arIsDefault'])?'기본':'';?></span>
+				</td>
+				<td><?php echo $val['arName']?></td>
+				<td><?php echo $val['arPhone']?></td>
+				<td><?php echo $val['arTel']?></td>
+				<td class="action-wrap">
+					<label class="inp-label">
+						<button class="btn-delete js-addressDelete" data-key="<?php echo $val['arKey']?>" formnovalidate><i></i></button>
+					</label>
+				</td>
+				<!--td class="action-wrap">
+					<label class="inp-label">
+						<button class="btn-edit" data-key="<?php echo $val['caKey']?>" formnovalidate><i></i></button>
+					</label>
+									<td class="action-wrap">
+					<button class="btn-filled-white-dense">선택</button>
+				</td>
+				</td-->
+			</tr>
+			<?php endforeach?>
+			</tbody>
+			</table>
+		</section>
+		<div class="address-action">
+			<label class="inp-chk-dense js-addressDetailAction active">
+				<input type="checkbox" class="js-defaultAddress" value="1" name="setDefaultAddress"/>
+				<div class="inp-chk-box"></div>
+				<div>기본 주소 설정</div>
+			</label>
+			<label class="inp-chk-dense js-addressDetailAction active">
+				<input type="checkbox" class="js-saveAddress" value="1" name="saveAddress" />
+				<div class="inp-chk-box"></div>
+				저장
+			</label>
+			<button class="btn-filled-sub-dense js-addressDetailAction js-otherAddress active">다른 주소</button>
+			<button class="btn-filled-sub-dense js-addressListAction js-newAddress">새 주소</button>
+		</div>
+	</section>
+
+	<section class="section-no-padding">
+		<table class="table no-border">
+		<caption>주문 할 사은품</caption>
+		<thead>
+			<tr>
+				<td class="table-item-str">사은품 명</td>
+				<td>
+					수량
+					<div class="table-hint">클릭하여 수량 수정 가능</div>
+				</td>
+				<td></td>
+				<td>개당 별</td>
+				<td></td>
+				<td>구매 별</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach($arrOrder as $val) :?>
+		<tr class="js-orderRow<?php echo $val['caKey']?>">
+			<td class="table-item-str gift-tit"><a href="" class="btn-flat-primary-dense js-giftViewToggle" data-key="<?php echo $val['gfKey']?>"><?php echo $val['gfTit']?></a></td>
+			<td class="no-padding">
+				<input type="hidden" value="<?php echo $val['gfKey']?>" name="gfKey[]"/>
+				<input type="number" class="inp-num-dense js-orderQuantity" value="<?php echo $val['caQuantity']?>" name="oiQuantity[]" data-point="<?php echo $val['gfPoint']?>" data-key="<?php echo $val['caKey']?>"/>
+			</td>
+			<td class="table-separator">x</td>
+			<td><?php echo number_format($val['gfPoint'])?></td>
+			<td class="table-separator">=</td>
+			<td class="js-orderRowResult js-orderRowResult<?php echo $val['caKey']?> table-value" data-result="<?php echo $val['caQuantity']*$val['gfPoint']?>"><?php echo number_format($val['caQuantity']*$val['gfPoint'])?></td>
+			<td class="action-wrap">
+				<label class="inp-label">
+					<button class="btn-delete js-orderDelete" data-key="<?php echo $val['caKey']?>" formnovalidate><i></i></button>
+				</label>
+			</td>
+		</tr>
+		<?php endforeach?>
+		</tbody>
+		</table>
+	</section>
+
+	<table class="table cart-additial-wrap">
+	<tbody>
+	<tr>
+		<td class="table-item-str">착불 배송비</td>
+		<td class="no-padding">
+		</td>
+		<td class="table-separator"></td>
+		<td>착불</td>
+		<td class="table-separator">=</td>
+		<td class="js-cartShipping table-value"><?php echo($isShippingFree)?'1회 무료':'2,500';?></td>
+		<td class="action-wrap">
+		</td>
+	</tr>
+	</tbody>
+	</table>
+
+	<h2 class="cart-total-tit">총 사용 할 별 / 보유 중인 별</h2>
+	<div class="cart-total">
+		<span class="js-totalResult txt-highlight"><?php echo number_format($totalPoint) ?></span> / <?php echo number_format($mb['mbPoint'])?>
+	</div>
+	<input type="hidden" class="js-totalResultInp" value="<?php echo number_format($totalPoint) ?>" />
+	<input type="submit" class="btn-filled" value="결제하기"/>
+	</form>
+</div>

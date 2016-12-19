@@ -9,7 +9,7 @@
 	</section>
 	<?php endif?>
 
-	<form action="/product/applyAction.php" method="post" id="apply-form">
+	<form action="/product/applyAction.php" method="post" id="apply-form" name="order_info">
 	<input type="hidden" name="dvKey" value="<?php echo $_GET['dvKey']?>">
 	<?php if (isExist($_GET['capacity'])) :?>
 	<input type="hidden" name="capacity" value="<?php echo $_GET['capacity']?>">
@@ -91,9 +91,9 @@
 			<div class="inp-label">기타사항 & 요구사항</div>
 		</label-->
 	</section>
+
 	<section class="section-no-padding txt-left js-addressWrap js-showContactBtn">	
-		
-		<?php if(isExist($defaultRewardPoint) === true) :?>
+			<?php if(isExist($defaultRewardPoint) === true) :?>
 			<section class="section">
 				<h2 class="tit-sub">추천인 아이디 입력</h2>	
 				티플에서 핸드폰 구매 시 추천인 또한 본인이 받는 포인트의 10%를 받습니다.<br>			
@@ -126,6 +126,7 @@
 			</div>
 		</section>
 	</section>
+
 	<section class="section-no-padding txt-left">
 		<?php
 		include('./detailCaution.skin.php');
@@ -137,7 +138,6 @@
 	</form>
 	<br/><br/>
 </div>
-
 
 
 <?php $naver->getLoginScriptForApply();?>
