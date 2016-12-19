@@ -21,8 +21,9 @@ try{
 
 foreach($checked as $checkedList){	
 
-	list($cancelPoint, $cancelEmail) = DB::queryFirstList("SELECT rpPoint, mbEmail FROM tmApplyTmp WHERE apKey=%i", $checkedList);
+	list($cancelPoint, $cancelEmail, $dvKey) = DB::queryFirstList("SELECT rpPoint, mbEmail, dvKey FROM tmApplyTmp WHERE apKey=%i", $checkedList);
 	$cancelMember = DB::queryFirstRow("SELECT * FROM tmMember WHERE mbEmail=%s", $cancelEmail);
+	$cancelDevice = DB::queryFirstField("SELECT dvModelCode FROM tmDevice WHERE dvKey=%i", $dvKey);
 
 	//신청서에 취소 표시
 	DB::update('tmApplyTmp', array(
@@ -37,7 +38,7 @@ foreach($checked as $checkedList){
 	//취소자 포인트 히스토리
 	DB::insert('tmPointHistory', array(
 	'mbEmail' => $cancelEmail,
-	'phCont' => $cfg['time_ymdhis'].' 신청취소',
+	'phCont' => $cfg['time_ymdhis'].' '.$cancelDevice.' 신청취소',
 	'phAmount' => -($cancelPoint),
 	'phResult' => $cancelMember['mbPoint']-$cancelPoint,
 	'phDate' => $cfg['time_ymdhis']
@@ -69,7 +70,7 @@ foreach($checked as $checkedList){
 		));
 
 
-		if($relationship['prGrand'] !== '0'){ // 3단계 성립 되었을때
+		if((int)$relationship['prGrand'] !== 0){ // 3단계 성립 되었을때
 
 			$cancelGrand = DB::queryFirstRow("SELECT * FROM tmMember WHERE mbKey=%i", $relationship['prGrand']);	
 
