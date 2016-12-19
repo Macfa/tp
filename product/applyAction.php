@@ -138,7 +138,7 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 
 	DB::update('tmMember', 
 		array(
-			'mbPoint' => DB::sqleval("mbPoint+($rewardPoint * 0.1)")
+			'mbPoint' => DB::sqleval("mbPoint+($rewardPoint * 0.05)")
 		),	'mbKey = %i', $targetMbKey
 	);
 
