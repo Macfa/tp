@@ -131,21 +131,29 @@
     <script type="text/javascript">
         /* 플러그인 설치(확인) */
         StartSmartUpdate();
-
         /* Payplus Plug-in 실행 */
         function  jsf__pay( form )
         {
+
+    
+        	var $giftTitle = [];
             if($('.js-goodMny').val() == 0 && $('.js-totalResultPoint').val() == 0) {
                 alert('금액을 다시 설정해주세요 !');
                 return false;
             }
 
             if( $('.js-goodMny').val() == 0 ) {
-                if(confirm($('.js-totalResultPoint').val() + " Point 를 결제") == true ) {
+                if(confirm($('.js-totalResultPoint').val() + " 별 포인트 결제합니다.") == true ) {
                     form.submit();
                     return false;
                 }
             }
+
+
+            $('.js-giftTit').each(function(index,item){
+				$giftTitle[index] = $(item).attr('data-name');
+			});
+			$('[name=good_name]').val($giftTitle.join(', '));
 
             var RetVal = false;
             /* Payplus Plugin 실행 */
@@ -170,6 +178,17 @@
 
             return RetVal ;
         }
+
+     	function setOrderInfo(){
+     		$.ajax({
+				url:'/product/getOrderNumber.php',
+				type:'post',
+				async:false,
+				success:function(data){
+					$('[name=ordr_idxx]').val(data);
+				}
+			});
+     	}
 
         // Payplus Plug-in 설치 안내 
         function init_pay_button()
@@ -210,36 +229,6 @@
             }
         }
 
-        /* 주문번호 생성 예제 */
-        function init_orderid()
-        {
-            var today = new Date();
-            var year  = today.getFullYear();
-            var month = today.getMonth() + 1;
-            var date  = today.getDate();
-            var time  = today.getTime();
-
-            if(parseInt(month) < 10) {
-                month = "0" + month;
-            }
-
-            if(parseInt(date) < 10) {
-                date = "0" + date;
-            }
-
-            var order_idxx = "TEST" + year + "" + month + "" + date + "" + time;
-
-            document.order_info.ordr_idxx.value = order_idxx;
-
-            /*
-             * 인터넷 익스플로러와 파이어폭스(사파리, 크롬.. 등등)는 javascript 파싱법이 틀리기 때문에 object 가 인식 전에 실행 되는 문제
-             * 기존에는 onload 부분에 추가를 했지만 setTimeout 부분에 추가
-             * setTimeout 300의 의미는 플러그인 인식속도에 따른 여유시간 설정
-             * - 20101018 -
-             */
-            setTimeout("init_pay_button();",300);
-        }
-
         /* onLoad 이벤트 시 Payplus Plug-in이 실행되도록 구성하시려면 다음의 구문을 onLoad 이벤트에 넣어주시기 바랍니다. */
         function onload_pay()
         {
@@ -248,7 +237,8 @@
         }
 
          $(document).ready(function(){
-            init_orderid();
+         	setOrderInfo();
+            setTimeout("init_pay_button();",300);
         });
 
     </script>
@@ -263,12 +253,6 @@
         <!-- Payplus Plug-in 설치 안내 -->
         <section class="kcpPlugin-info">
             <div id="display_setup_message" style="display:none "> 
-               <p class="txt">
-               결제를 계속 하시려면 상단의 노란색 표시줄을 클릭 하시거나 <a href="https://pay.kcp.co.kr/plugin_new/file/KCPPayUXSetup.exe"><span>[수동설치]</span></a>를 눌러
-               Payplus Plug-in을 설치하시기 바랍니다.
-               [수동설치]를 눌러 설치하신 경우 새로고침(F5)키를 눌러 진행하시기 바랍니다.
-               </p>
-               Copyright (c) NHN KCP INC. All Rights reserved.
              </div>
          </section>
        </div>
@@ -284,6 +268,7 @@
         /* ============================================================================== */
     ?>
 
+
     <?
         /* ============================================================================== */
         /* =   2. 가맹점 필수 정보 설정                                                 = */
@@ -293,7 +278,7 @@
         /* = -------------------------------------------------------------------------- = */
         // 요청종류 : 승인(pay)/취소,매입(mod) 요청시 사용
     ?>
-
+            <input type="hidden" name="pay_method"		value="111000000000" />
             <input type="hidden" name="req_tx"          value="pay" />
             <input type="hidden" name="site_cd"         value="<?=$g_conf_site_cd   ?>" />
             <input type="hidden" name="site_name"       value="<?=$g_conf_site_name ?>" />
@@ -322,9 +307,15 @@
     ?>
         <!-- PLUGIN 설정 정보입니다(변경 불가) -->
         <input type="hidden" name="module_type"     value="<?=$module_type ?>"/>
-        <input type="hidden" name="ordr_idxx" class="w200" value="" maxlength="40"/>
+        <input type="hidden" name="ordr_idxx" class="w200" value="" />
 
-        <input type="text" name="good_mny" class="w100 js-goodMny" value="0" maxlength="9"/>
+        <input type="hidden" name="buyr_mail" class="w200" value="<?php echo $mb['mbEmail']?>" />
+        <input type="hidden" name="buyr_tel1" class="w200" value="<?php echo $mb['mbPhone']?>" />
+        <input type="hidden" name="buyr_tel2" class="w200" value="" />
+        <input type="hidden" name="good_name" class="w200" value="" />
+        <input type="hidden" name="buyr_name" class="w200" value="<?php echo $mb['mbName']?>" />
+
+        <input type="hidden" name="good_mny" class="w100 js-goodMny" value="0" maxlength="9"/>
 
 
     <!--

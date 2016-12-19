@@ -69,25 +69,32 @@ try
 		if(isNum($val) == false)
 			throw new Exception('사은품 키가 숫자가 아닙니다.', 3);
 
-		list($isValidGift,$arrGfPoint[$key], $gfName) = DB::queryFirstList('SELECT COUNT(*), gfPoint, gfTit FROM tmGift WHERE gfKey = %i', $val);
+		list($isValidGift,$arrGfPoint[$key], $gfName[]) = DB::queryFirstList('SELECT COUNT(*), gfPoint, gfTit FROM tmGift WHERE gfKey = %i', $val);
 		$isValidGift = ($isValidGift>0)?TRUE:FALSE;
 		if($isValidGift == false)
 			throw new Exception('사은품이 존재하지 않습니다.', 3);
 
 		$totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
-		$gifts .= ','.$gfName;
 	}
-		$totalPoint -= $_POST['good_mny'];
-	if ($totalPoint > $mb['mbPoint'])
-		throw new Exception('총 결제 별이 현재 보유 중인 별보다 많습니다.', 3);
+	$gifts .= implode(',', $gfName);
+	$cashAmount = $totalPoint - $_POST['resultPoint'];
+	$pointAmount = $totalPoint-$cashAmount;
 
 	if ($totalPoint < 0)
 		throw new Exception('총 결제 별이 0보다 작을 수 없습니다.', 3);	
 
+	if ($pointAmount > $mb['mbPoint'])
+		throw new Exception('사용 할 별이 현재 보유 중인 별보다 많습니다.', 3);
+
+	if ($pointAmount < 0)
+		throw new Exception('사용 할 별이 0보다 작을 수 없습니다.', 3);	
+
+	//==============================================================================
+
 	if ((int)$_POST['good_mny'] > 0) {
 		require_once("./pp_cli_hub.php");  	// 결재 결과를 처리하는 과정 
 		if($res_cd != "0000") 
-			throw new Exception('설정한 금액이 검증에 실패했습니다.', 3);	
+			throw new Exception('결제가 실패했습니다. 오류코드 : '.$res_cd, 3);	
 	}
 
 }
@@ -103,6 +110,7 @@ $shipping = ($isShippingFree===true)?0:2500;
 
 DB::insert('tmOrder', array(
 	'mbEmail' => $mb['mbEmail'],
+	'orOrderNumber' => $_POST['ordr_idxx'],
 	'orName' => $_POST['arName'],
 	'orPhone' => $_POST['arPhone'],
 	'orTel' => $_POST['arTel'],
@@ -121,6 +129,7 @@ foreach($_POST['gfKey'] as $key => $val) {
 	DB::insert('tmOrderItem', array(
 		'mbEmail' => $mb['mbEmail'],
 		'orKey' => $orKey,
+		'orOrderNumber' => $_POST['ordr_idxx'],
 		'gfKey' => $val,
 		'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key]-$_POST['good_mny'],
 		'oiQuantity' => $_POST['oiQuantity'][$key]
@@ -238,11 +247,11 @@ if((int)$_POST['resultPoint'] > 0 && (int)$_POST['resultCash'] === 0){
         <input type="hidden" name="ordr_idxx"         value="<?=$ordr_idxx      ?>">    <!-- ÁÖ¹®¹øÈ£ -->
         <input type="hidden" name="tno"               value="<?=$tno            ?>">    <!-- KCP °Å·¡¹øÈ£ -->
         <input type="hidden" name="good_mny"          value="<?=$good_mny       ?>">    <!-- °áÁ¦±Ý¾× -->
-        <input type="hidden" name="usePoint"			  value="<?=$_POST['resultPoint']?>">
-        <input type="hidden" name="good_name"         value="<?=$gifts      ?>">    <!-- »óÇ°¸í -->
-        <input type="hidden" name="buyr_name"         value="<?=$_POST["arName"]?>">    <!-- ÁÖ¹®ÀÚ¸í -->
-        <input type="hidden" name="buyr_tel1"         value="<?=$_POST["arPhone"]?>">    <!-- ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£ -->
-        <input type="hidden" name="buyr_tel2"         value="<?=$_POST["arTel"] ?>">    <!-- ÁÖ¹®ÀÚ ÈÞ´ëÆù¹øÈ£ -->
+        <input type="hidden" name="usePoint"		value="<?=$_POST['resultPoint']?>">
+        <input type="hidden" name="good_name"         value="<?=$good_name      ?>">    <!-- »óÇ°¸í -->
+        <input type="hidden" name="buyr_name"         value="<?=$buyr_name?>">    <!-- ÁÖ¹®ÀÚ¸í -->
+        <input type="hidden" name="buyr_tel1"         value="<?=$buyr_tel1?>">    <!-- ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£ -->
+        <input type="hidden" name="buyr_tel2"         value="<?=$buyr_tel2 ?>">    <!-- ÁÖ¹®ÀÚ ÈÞ´ëÆù¹øÈ£ -->
         <input type="hidden" name="buyr_mail"         value="<?=$buyr_mail      ?>">    <!-- ÁÖ¹®ÀÚ E-mail -->
 
         <input type="hidden" name="card_cd"           value="<?=$card_cd        ?>">    <!-- Ä«µåÄÚµå -->
@@ -285,7 +294,3 @@ if((int)$_POST['resultPoint'] > 0 && (int)$_POST['resultCash'] === 0){
     </form>
     </body>
     </html>
-
-    $_POST[ "arName"      ]; // 주문자명
-    $buyr_tel1      = $_POST["arPhone"]; // 주문자 전화번호
-    $buyr_tel2      = $_POST[ "arTel"      ];

@@ -20,8 +20,8 @@
     $tran_cd        = $_POST[ "tran_cd"        ]; // 처리 종류
     /* = -------------------------------------------------------------------------- = */
     $cust_ip        = getenv( "REMOTE_ADDR"    ); // 요청 IP
-    $ordr_idxx      = $_POST[ "ordr_idxx"      ]; // 쇼핑몰 주문번호
-    $good_name      = $_POST[ "good_name"      ]; // 상품명
+    $ordr_idxx      = $_POST['ordr_idxx']; // 쇼핑몰 주문번호
+    $good_name      = $_POST['good_name']; // 상품명
     $good_mny       = $_POST[ "good_mny"       ]; // 결제 총금액
     /* = -------------------------------------------------------------------------- = */
     $res_cd         = "";                         // 응답코드
@@ -29,9 +29,9 @@
     $res_en_msg     = "";                         // 응답 영문 메세지
     $tno            = $_POST[ "tno"            ]; // sKCP 거래 고유 번호
     /* = -------------------------------------------------------------------------- = */
-    $buyr_name      = $_POST[ "arName"      ]; // 주문자명
-    $buyr_tel1      = $_POST[ "arPhone"      ]; // 주문자 전화번호
-    $buyr_tel2      = $_POST[ "arTel"      ]; // 주문자 핸드폰 번호
+    $buyr_name      = $_POST[ "buyr_name"      ]; // 주문자명
+    $buyr_tel1      = $_POST[ "buyr_tel1"      ]; // 주문자 전화번호
+    $buyr_tel2      = ""; // 주문자 핸드폰 번호
     $buyr_mail      = $_POST[ "buyr_mail"      ]; // 주문자 E-mail 주소
     /* = -------------------------------------------------------------------------- = */
     $use_pay_method = $_POST[ "use_pay_method" ]; // 결제 방법
@@ -107,7 +107,7 @@
     if ( $req_tx == "pay" )
     {
 
-            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $totalValue-$_POST['resultPoint'] );
+            $c_PayPlus->mf_set_ordr_data( "ordr_mony", $cashAmount);
             $c_PayPlus->mf_set_encx_data( $_POST[ "enc_data" ], $_POST[ "enc_info" ] );
     }
     /* ------------------------------------------------------------------------------ */
