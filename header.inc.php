@@ -11,16 +11,13 @@ if ($cfg['subTitle'])
 	$cfg['subTitle'] = ' > '.$cfg['subTitle'];
 if ($cfg['subDesc'])
 	$cfg['subDesc'] = ' : '.$cfg['subDesc'];
-
-$browserClass = $userAgent->parse()->getBrowserClass();
-$osClass = $userAgent->getOS();
 ?>
 <!DOCTYPE html class="">
 <!--[if lt IE 7]><html class="lte-ie9 lte-ie8 lte-ie7 lt-ie7"><![endif]-->
 <!--[if IE 7]><html class="lte-ie9 lte-ie8 lte-ie7"><![endif]-->
 <!--[if IE 8]><html class="lte-ie9 lte-ie8"><![endif]-->
 <!--[if IE 9]><html class="lte-ie9"><![endif]-->
-<html class="<?=$browserClass?> <?=$osClass?>">
+<html class="<?php echo $_useragent['class'].' '.$_useragent['platform'].' '.$_useragent['device']?>">
 <head>
 <title>티플 : 호갱구세주<?php echo $cfg['subTitle']?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,7 +50,6 @@ if ($isMobileTablet == false) {
   });
 }
 
-$('html').addClass('<?=$userAgent->parse()->getBrowserClass();?>');
 </script>
 <!-- <link rel="stylesheet" href="<?=PATH_CSS?>/normalize.css" type="text/css"> -->
 <?php $import->importCSS(); ?>
