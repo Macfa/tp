@@ -197,10 +197,6 @@ $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey 
 $deviceInfo = new deviceInfo();
 $deviceInfo->setCarrier($_POST['carrier']);
 //consoleLog($cdCode);
-// goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));
+goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));
 
-
-if((int)$_POST['good_mny'] === 0) {
-	require_once("./orderResult.php");  	// 결재 결과를 처리하는 과정 
-}
 ?>
