@@ -116,18 +116,21 @@
 			</section>
 		<? endif ?>
 	</section>
-	
-	<section class="section apply-cart-empty">
-		<div class="vert-wrap">
-			<div class="vert-align">					
-				<span class="tit-sub">가입신청후 포인트몰에서 사은품을 구매해주세요.</span>
-				<br/><br/>
-				<a href="/gifts" target="_blank" class="btn-filled-sub">사은품 보기</a>					
+
+	<section class="js-showContactBtn apply-cart-list js-applyCartList">		
+		<section class="apply-cart-empty">
+			<div class="vert-wrap">
+				<div class="vert-align">					
+					<span class="tit-sub">가입신청후 포인트몰에서 사은품을 구매해주세요.</span>
+					<br/><br/>
+					<a href="/gifts" target="_blank" class="btn-filled-sub">사은품 보기</a>					
+				</div>
 			</div>
-		</div>
+		</section>
 	</section>
-	<input type="submit" class="btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
-	<br/><Br/>
+
+	<input type="submit" class="apply-submit btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
+
 	<section class="section-no-padding txt-left">
 		<?php
 		include('./detailCaution.skin.php');
