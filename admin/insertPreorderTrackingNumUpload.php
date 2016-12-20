@@ -39,7 +39,7 @@ foreach($arrayid as $key => $val){
 	), "mbEmail=%s", $val);
 
 	$sendCont = "[티플 아이폰7] 신청하신 기기가 발송되었습니다. 우체국 송장번호 ".$arrayTrackingNum[$key]." 입니다.";
-	$SMS->sendMode(0)->sendMemberPhone($arraySerchphone[$key])->sendMemberName($arraySerchName[$key])->sendCont($sendCont)->send();
+	$SMS->sendMode('SMS')->sendMemberPhone($arraySerchphone[$key])->sendMemberName($arraySerchName[$key])->sendCont($sendCont)->send();
 
 
 }
