@@ -18,6 +18,8 @@
 	<input type="hidden" name="applyType" value="<?php echo $_GET['applyType']?>">
 	<input type="hidden" name="carrier" value="<?php echo $_GET['carrier']?>">
 	<input type="hidden" name="plan" value="<?php echo $_GET['plan']?>">
+	<input type="hidden" name="applyTitle" value="<?php echo $applyTitle?>">
+
 
 	<section class="section-no-padding txt-left">
 		<br>

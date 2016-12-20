@@ -60,6 +60,10 @@ $recommedMbEmail = DB::queryFirstField("SELECT mbEmail FROM tmMember WHERE mbKey
 
 $name = $deviceInfo->getCarrierName($_GET['carrier']);
 
+if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $isLogged === TRUE){
+	$validPhone = $mb['mbPhone'];
+}
+
 
 //--------------------------------------------------------------------------------------------------------
 
