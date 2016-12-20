@@ -134,7 +134,7 @@ if($isApplyExist === 0 && $isEdit === FALSE){
 	
 	$SMS = new SMS();
 	$sendCont = "[티플 갤럭시S7엣지 블루코랄] 로그인 후 마이페이지에서 실가입을 신청해주세요.";
-	$SMS->sendMode(0)->sendMemberPhone($_POST['taPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
+	$SMS->sendMode('SMS')->sendMemberPhone($_POST['taPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 }
 
 list($myWatingNumber, $myChangeCarrier) = DB::queryFirstList("SELECT taWatingNumber,taChangeCarrier FROM tmApply WHERE mbEmail = %s AND taColor = 'blue' AND taCancel = 0", $mb['mbEmail']);
