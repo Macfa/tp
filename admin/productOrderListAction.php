@@ -39,7 +39,7 @@ foreach($checked as $checkedList){
 		);
 
 	$productOrderMember = DB::queryFirstRow("SELECT * FROM  tmApplyTmp WHERE apKey=%s", $checkedList);	
-	//$SMS->sendMode(0)->sendMemberPhone($preorderMember['mbPhone'])->sendMemberName($preorderMember['mbName'])->sendCont($sendCont)->send();
+	//$SMS->sendMode('SMS')->sendMemberPhone($preorderMember['mbPhone'])->sendMemberName($preorderMember['mbName'])->sendCont($sendCont)->send();
 }
 
 

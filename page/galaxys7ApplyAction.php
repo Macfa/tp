@@ -138,7 +138,7 @@ if($isapplyMember === 0 && $isEdit === FALSE){
 	}	
 
 	$sendCont = "[티플 ".$title."] 로그인 후 마이페이지에서 실가입을 신청해주세요.";
-	$SMS->sendMode(0)->sendMemberPhone($_POST['mbPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
+	$SMS->sendMode('SMS')->sendMemberPhone($_POST['mbPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 }
 
 

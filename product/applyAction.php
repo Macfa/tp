@@ -187,6 +187,17 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 	}
 }
 
+			
+
+$deviceInfo = new deviceInfo();
+
+
+$SMS = new SMS();
+
+$sendCont = "[티플] ".$_POST['applyTitle']."가입신청이 완료되었습니다. 화면 안내에 따라 실가입을 진행해주세요";
+$SMS->sendMode('SMS')->sendMemberPhone($_POST['apPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
+
+
 $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey and spPlan = %i_spPlan and cdType = %i_cdType and cdCarrier = %s_cdCarrier", 
 	array('dvKey'=> $_POST['dvKey'], 
 			'spPlan' => $_POST['plan'], 
@@ -194,7 +205,7 @@ $cdCode = DB::queryFirstField("SELECT cdCode FROM tmCode WHERE dvKey = %i_dvKey 
 			'cdCarrier' => $_POST['carrier']
 	)
 );
-$deviceInfo = new deviceInfo();
+
 $deviceInfo->setCarrier($_POST['carrier']);
 //consoleLog($cdCode);
 goURL($deviceInfo->getApplyURL($cdCode, $_POST['applyType']));

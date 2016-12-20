@@ -101,7 +101,7 @@ switch($changeProcess) {
 }
 foreach($checked as $checkedList){
 	$preorderMember = DB::queryFirstRow("SELECT * FROM  tmApply WHERE taKey=%s", $checkedList);	
-	$SMS->sendMode(0)->sendMemberPhone($preorderMember['mbPhone'])->sendMemberName($preorderMember['mbName'])->sendCont($sendCont)->send();
+	$SMS->sendMode('SMS')->sendMemberPhone($preorderMember['mbPhone'])->sendMemberName($preorderMember['mbName'])->sendCont($sendCont)->send();
 }
 
 
