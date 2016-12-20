@@ -129,14 +129,14 @@
 		</section>
 	</section>
 
+	<input type="submit" class="apply-submit btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
+
 	<section class="section-no-padding txt-left">
 		<?php
 		include('./detailCaution.skin.php');
 		?>
 	</section>	
 	
-	<input type="submit" class="apply-submit btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
-
 	</form>
 	<br/><br/>
 </div>
