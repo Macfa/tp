@@ -76,7 +76,7 @@ try
 
 		$totalPoint += $_POST['oiQuantity'][$key]*$arrGfPoint[$key];
 	}
-	$gifts .= implode(',', $gfName);
+	$gifts = implode(',', $gfName);
 	$cashAmount = $totalPoint - $_POST['resultPoint'];
 	$pointAmount = $totalPoint-$cashAmount;
 
