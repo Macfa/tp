@@ -180,7 +180,7 @@ if ($isNewAddr) {
 	DB::insert('tmAddress', $sqlSetAddr);
 }
 
-if((int)$_POST['resultPoint'] > 0) {
+if($pointAmount > 0) {
 	DB::insert('tmPointHistory', array(
 		'mbEmail' => $mb['mbEmail'],
 		'phCont' => $cfg['time_ymdhis'].' 사은품 결제',
@@ -247,7 +247,7 @@ if($pointAmount > 0 && $cashAmount === 0){
         <input type="hidden" name="ordr_idxx"         value="<?=$ordr_idxx      ?>">    <!-- ÁÖ¹®¹øÈ£ -->
         <input type="hidden" name="tno"               value="<?=$tno            ?>">    <!-- KCP °Å·¡¹øÈ£ -->
         <input type="hidden" name="good_mny"          value="<?=$good_mny       ?>">    <!-- °áÁ¦±Ý¾× -->
-        <input type="hidden" name="usePoint"		value="<?=$_POST['resultPoint']?>">
+        <input type="hidden" name="usePoint"		value="<?=$pointAmount?>">
         <input type="hidden" name="good_name"         value="<?=$good_name      ?>">    <!-- »óÇ°¸í -->
         <input type="hidden" name="buyr_name"         value="<?=$buyr_name?>">    <!-- ÁÖ¹®ÀÚ¸í -->
         <input type="hidden" name="buyr_tel1"         value="<?=$buyr_tel1?>">    <!-- ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£ -->
