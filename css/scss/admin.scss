@@ -290,6 +290,15 @@
 	.dvDetailThumb img {max-height:200px;}
 	tr td {text-align: center;}
 }
+.newsListModify {
+	tr td {text-align: left;}
+	.center{text-align: center;}
+}
+.listThumb img {width:100px}
+.thumbModify img {max-width: 250px;}
+.listTitLink a {color:$mainBlack;}
+.border-none {border-bottom: 0;}
+
 @media all and (min-width:640px){
 	.admin-wrap{
 		width:280px;
