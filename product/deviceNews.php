@@ -13,11 +13,9 @@ if(isExist($newsKeyList)){
 	foreach ($newsKeyList as $key => $newsKey) {		
 		$arrnews[] = DB::queryFirstRow("SELECT * FROM tmNews WHERE neKey=%i AND neDisplay = 1", $newsKey);
 		$news = array_filter($arrnews);
-		
 
 	} // neKey에 해당하는 뉴스 정보 가지고 오기
 }
-
 
 $url = URL."/image.index.php?name=";
 

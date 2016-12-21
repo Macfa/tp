@@ -1,8 +1,8 @@
 <div class="wrap">
-	<?php if(isExist($news) ===true AND isNullVal($news[$key]) ===false) :?>
+	<?php if(empty($news) === false ) :?>
 		<section>
 			<h2 class="tit-sec">리스트</h2>
-			<ul class="grid-group js-devicelist">
+			<ul class="grid-group js-devicelist newsList">
 				<?php foreach ($news as $val) :?><li class="grid-item-wrap">
 					<a class="grid-item js-telReserve" href="<?php echo $val['neUrl']?>" target="layerView">
 						<div class="grid-item-thumb-wrap">
