@@ -2,7 +2,6 @@
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 include_once(PATH_LIB.'/lib.upload.inc.php');
 
-
 $allowedExtension = 'jpg,png,gif';
 $img_dir = PATH_IMG_STORAGE;
 

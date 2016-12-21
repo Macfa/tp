@@ -41,7 +41,7 @@ $result = DB::query($sql.' ORDER BY neKey', $array);
 
 $result = DB::query("SELECT * FROM tmNews ");
 
-foreach ($result as $val){
+foreach ($result as $val){ // $val = 기사 하나의 정보
 
 	$neThumbPath[$val['neKey']] = "/image.index.php?name=";
 	
@@ -49,8 +49,7 @@ foreach ($result as $val){
 		$neThumb[$val['neKey']]	= PATH_IMG.'/noimage.jpg';
 	}else{
 		$neThumb[$val['neKey']]	= $neThumbPath[$val['neKey']].$val['neThumb'];
-	}	
-	
+	}		
 }
 
 require_once("addNewsList.skin.php");		

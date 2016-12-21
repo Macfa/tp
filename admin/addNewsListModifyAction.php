@@ -2,36 +2,6 @@
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 include_once(PATH_LIB.'/lib.upload.inc.php');
 
-
-
-function ncCategory($input){
-	if(isExist($input) === false){
-		return array();
-	} return $input;
-}
-
-$selectedCategory = ncCategory($_POST['selectedCategory']);
-$ncDevice = ncCategory($_POST['ncDeviceList']);
-$ncCategoryModify = ncCategory($_POST['ncCategoryModify']);
-
-$result = array_merge($selectedCategory, $ncDevice, $ncCategoryModify);
-
-$newsKeyList = array_unique($result);
-
-DB::delete('tmNewsCategory', "neKey=%i", $_POST['neKey']);
-
-foreach ($newsKeyList as $device) {
-		DB::insert('tmNewsCategory', 
-			array(
-				'neKey' => $neKey,
-				'ncCategory' => $device
-			)
-		);
-
-
-	}
-
- /*
 $allowedExtension = 'jpg,png,gif';
 $img_dir = PATH_IMG_STORAGE;
 
@@ -75,15 +45,46 @@ DB::update('tmNews', array(
 
   ), "neKey=%i", $_POST['neKey']);
 
-DB::update('tmNewsCategory', array(
 
-  'ncCategory' => $_POST['ncCategoryModify'],
-  'ncManuf' => $_POST['ncManufModify'],
-  'ncDevice' => $_POST['ncDeviceModify']
-  ), "neKey=%i", $_POST['neKey']);
+//=============== 카테고리 수정
+
+$deletedCategory = $_POST['deletedCategory'];
+$deviceModify = $_POST['deviceModify'];
+$categoryModify = $_POST['categoryModify'];
+
+
+//삭제한 카테고리 DB 삭제
+if(isExist($deletedCategory)){	
+	foreach ($deletedCategory as $delete) {
+		DB::delete('tmNewsCategory', "neKey=%i AND ncCategory=%s", $_POST['neKey'], $delete);
+	}
+}
+//추가한 기기 DB 추가
+if(isExist($deviceModify)){	
+	foreach ($deviceModify as $device) {
+		DB::insert('tmNewsCategory', 
+				array(
+					'neKey' => $_POST['neKey'],
+					'ncCategory' => $device
+				)
+		);
+	}
+}
+//추가한 카테고리 DB 추가
+if(isExist($categoryModify)){	
+	foreach ($categoryModify as $category) {
+		DB::insert('tmNewsCategory', 
+				array(
+					'neKey' => $_POST['neKey'],
+					'ncCategory' => $category
+				)
+		);
+	}
+}
+
 
 
 
 alert('완료되었습니다.', "./addNewsListModify.php?neKey=".$_POST['neKey']);
-*/
+
 ?>

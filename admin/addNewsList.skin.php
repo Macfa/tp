@@ -15,6 +15,7 @@
 	<form method="post">
 		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDisplay.php" value="진열함"/>
 		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListHidden.php" value="진열안함"/>	
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDelete.php" value="삭제"/>	
 		<br/><br/>
 		<table class="table deviceList">	
 			<thead>
@@ -29,8 +30,7 @@
 					<td></td>	
 					<td>썸네일</td>
 					<td>타이틀</td>
-					<td>서브타이틀</td>
-					<td>URL</td>					
+					<td>서브타이틀</td>									
 					<td>진열상태</td>					
 				</tr>
 			</thead>
@@ -46,8 +46,7 @@
 							<td ><?php echo $val['neKey'] ?></td>
 							<td class="listThumb"><img src="<?php echo $neThumb[$val['neKey']]?>"/></td>			
 							<td class="listTitLink"><a href="addNewsListModify.php?neKey=<?php echo $val['neKey']?>"><?php echo $val['neTit']?></a></td>
-							<td ><?php echo $val['neSubTit']?></td>	
-							<td ><?php echo $val['neUrl']?></td>
+							<td ><?php echo $val['neSubTit']?></td>								
 							<td ><?php echo $display[$val['neDisplay']]?></td>	
 						</tr>					
 				<?php endforeach?>
@@ -56,6 +55,7 @@
 		<br/><br/>
 		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDisplay.php" value="진열함"/>
 		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListHidden.php" value="진열안함"/>
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDelete.php" value="삭제"/>
 	</form>	
 </div>
 <script>

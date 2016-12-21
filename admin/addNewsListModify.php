@@ -9,7 +9,7 @@ require_once("./_adminhead.php");			// 헤더 부분 (스킨포함)
 
 
 $newsInfo =  DB::queryFirstRow("SELECT * FROM tmNews WHERE neKey=%i", $_GET['neKey']);
-$newsCategory =  DB::query("SELECT * FROM tmNewsCategory WHERE neKey=%i", $_GET['neKey']);
+$newsCategory =  DB::query("SELECT * FROM tmNewsCategory WHERE neKey=%i ORDER BY ncCategory", $_GET['neKey']);
 
 
 try{
@@ -61,9 +61,11 @@ if(isExist($newsInfo['dvDetail']) === true){
 	);
 }
 
+
 foreach ($newsCategory as $category){
-	$array[] = $category['ncCategory'];
+	$array[$category['ncKey']] = $category['ncCategory'];
 }
+
 if(isNullVal($array) === true){
 	$array = array(
 		0 => '선택된 카테고리 없음'
