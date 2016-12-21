@@ -117,8 +117,8 @@ DB::insert('tmOrder', array(
 	'orPostcode' => $_POST['arPostcode'],
 	'orAddress' => $_POST['arAddress'],
 	'orSubAddress' => $_POST['arSubAddress'],
-	'orPoint' => $totalPoint,
-	'orCash' => $_POST['good_mny'],
+	'orPoint' => $pointAmount,
+	'orCash' => $cashAmount,
 	'orShipping' => $shipping,
 	'orDate' => $cfg['time_ymdhis']
 ));
@@ -131,7 +131,7 @@ foreach($_POST['gfKey'] as $key => $val) {
 		'orKey' => $orKey,
 		'orOrderNumber' => $_POST['ordr_idxx'],
 		'gfKey' => $val,
-		'oiPoint' => $_POST['oiQuantity'][$key]*$arrGfPoint[$key]-$_POST['good_mny'],
+		'oiPoint' => $arrGfPoint[$key],
 		'oiQuantity' => $_POST['oiQuantity'][$key]
 	));
 
@@ -180,21 +180,21 @@ if ($isNewAddr) {
 	DB::insert('tmAddress', $sqlSetAddr);
 }
 
-if((int)$_POST['resultPoint'] > 0) {
+if($pointAmount > 0) {
 	DB::insert('tmPointHistory', array(
 		'mbEmail' => $mb['mbEmail'],
 		'phCont' => $cfg['time_ymdhis'].' 사은품 결제',
-		'phAmount' => $totalPoint*-1,
-		'phResult' => $mb['mbPoint']-$totalPoint,
+		'phAmount' => $pointAmount*-1,
+		'phResult' => $mb['mbPoint']-$pointAmount,
 		'phDate' => $cfg['time_ymdhis']
 	));
 
 	DB::update('tmMember', array(
-		'mbPoint' => $mb['mbPoint']-$totalPoint
+		'mbPoint' => $mb['mbPoint']-$pointAmount
 	),'mbEmail = %s', $mb['mbEmail']);
 }
 
-if((int)$_POST['resultPoint'] > 0 && (int)$_POST['resultCash'] === 0){
+if($pointAmount > 0 && $cashAmount === 0){
 	$req_tx = 'pay';
 	$bSucc = true;
 	$res_cd = "0000";
@@ -247,7 +247,7 @@ if((int)$_POST['resultPoint'] > 0 && (int)$_POST['resultCash'] === 0){
         <input type="hidden" name="ordr_idxx"         value="<?=$ordr_idxx      ?>">    <!-- ÁÖ¹®¹øÈ£ -->
         <input type="hidden" name="tno"               value="<?=$tno            ?>">    <!-- KCP °Å·¡¹øÈ£ -->
         <input type="hidden" name="good_mny"          value="<?=$good_mny       ?>">    <!-- °áÁ¦±Ý¾× -->
-        <input type="hidden" name="usePoint"		value="<?=$_POST['resultPoint']?>">
+        <input type="hidden" name="usePoint"		value="<?=$pointAmount?>">
         <input type="hidden" name="good_name"         value="<?=$good_name      ?>">    <!-- »óÇ°¸í -->
         <input type="hidden" name="buyr_name"         value="<?=$buyr_name?>">    <!-- ÁÖ¹®ÀÚ¸í -->
         <input type="hidden" name="buyr_tel1"         value="<?=$buyr_tel1?>">    <!-- ÁÖ¹®ÀÚ ÀüÈ­¹øÈ£ -->
