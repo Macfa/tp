@@ -25,7 +25,13 @@
 				<li><a href="givePointList.php" class="admin-list-sub">포인트지급리스트</a></li>
 				<li><a href="memberList.php" class="admin-list-sub">회원리스트검색</a></li>
 			</ul>			
-		</li>
+		</li><li class="admin-list-wrap">정보글관리
+            <ul class="admin-list-sub-group">
+                <li><a href="addNews.php" class="admin-list-sub">정보글업로드</a></li>
+                <li><a href="addNewsList.php" class="admin-list-sub">정보글리스트</a></li>                
+            </ul>            
+        </li>
+
 	</ul>
 	<div class="clear"></div>
 </div>
