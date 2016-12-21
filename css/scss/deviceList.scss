@@ -89,6 +89,18 @@ $bannerHeight : 350px;
 .list-banner-inner-samsung{padding-top:130px}
 .list-banner-inner-lg{padding-top:70px;}
 
+
+.newsList {
+	.grid-item-wrap {
+		width:50%;
+		height:270px;
+	}
+	.grid-item-tit{
+		background:rgba(255, 255, 255, 1);
+		font-size: 1.2em;
+	}
+}
+
 @include responsiveLandscape{//640	
 
 	.list-banner-sk{
@@ -136,6 +148,7 @@ $bannerHeight : 350px;
 	.list-banner-inner-gear{padding-top:60px}
 	.list-banner-inner-samsung,
 	.list-banner-inner-pocketfi{padding-left:30%;}
+	
 
 }
 
@@ -197,6 +210,15 @@ $bannerHeight : 350px;
 	.list-banner-tit{font-size:1.7em}
 	.list-banner-sub{font-size:1.2em}
 	.list-banner-inner-lg{padding-top:100px;}
+	.newsList {
+		.grid-item-wrap {
+			width:25%;
+		}
+		.vert-align{
+			vertical-align: top;
+		}
+
+	}
 }
 
 @include responsivePC{//1200
