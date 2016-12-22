@@ -5,6 +5,7 @@
 
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 require_once(PATH_LIB."/lib.calculator.inc.php");
+header("X-Frame-Options: DENY");
 
 
 $import->addJS('calculator.js')->addJS('excanvas.js', 'lib')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');

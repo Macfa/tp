@@ -40,7 +40,7 @@
 	<button class="layer-view-btn js-layerViewClose">X 닫기</button>
 	</div>
 	<div class="layer-view">
-		<iframe src="" class="js-layerViewIframe layer-view-iframe" name="layerView" scrolling="yes"></iframe>
+		<iframe src="" class="js-layerViewIframe layer-view-iframe" name="layerView" scrolling="yes" allowfullscreen="true"></iframe>
 	</div>
 </div>
 
