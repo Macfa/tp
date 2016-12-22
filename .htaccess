@@ -30,8 +30,13 @@ RewriteRule ^(google.*).html ./seo/$1.html
 RewriteRule ^product\/egg\.php$ http://tplanit.co.kr/pocketfi
 
 RewriteRule ^(.*\.jsaa).*$ ./lib/min/index.php?f=$1 [L]
+
 RewriteCond %{HTTP_HOST} ^(mo\.startgd\.com)(:80)? [NC]
 RewriteRule ^(.*) http://tplanit.co.kr/$1 [R=301,L]
+
+
+RewriteCond %{HTTP_HOST} ^(img\.tplanit\.co\.kr)(:80)? [NC]
+RewriteRule ^(.*) ./image.index.php?name=$1 [L]
 </IfModule>
 
 <ifmodule mod_deflate.c>
