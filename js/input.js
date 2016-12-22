@@ -52,3 +52,21 @@ function getFileName($val){
     
     return tmpStr;
 }
+<<<<<<< HEAD
+=======
+
+$(function() {
+	$('[data-default]').each(function(){		
+		//console.log($(this).attr('data-default'));		
+		if($(this).find('input[type=radio]').size() > 0 || $(this).find('input[type=checkbox]').size() > 0){
+			var $mutipleValue = $(this).attr('data-default').split(',');
+			var $target = $(this);
+			$.each($mutipleValue, function(index, value){
+				console.log();
+				$target.find('[value='+value+']').prop('checked', true);				
+			});
+		} else 
+			$(this).val($(this).attr('data-default'));		
+	});	
+});
+>>>>>>> feature/어드민_정보글_업로드_페이지

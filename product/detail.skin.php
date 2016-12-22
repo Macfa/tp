@@ -68,6 +68,7 @@
 		<?php endif?>
 		<button class="detail-apply-submit btn-filled js-trackLink" id="link-detail-plan-apply">신청하기</button>
 	</form>
+	<?php require_once("deviceNews.php"); // 뉴스글?>
 	<h2 class="tit center">		
 		<div class="tit-affix" >★포인트 : <span class="js-point">0</span> <span class="js-egg11gEvent txt-highlight" style="display:none">(2.5배 이벤트)</span></div>
 		선택할 수 있는 사은품
