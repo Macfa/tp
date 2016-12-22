@@ -52,8 +52,6 @@ function getFileName($val){
     
     return tmpStr;
 }
-<<<<<<< HEAD
-=======
 
 $(function() {
 	$('[data-default]').each(function(){		
@@ -69,4 +67,3 @@ $(function() {
 			$(this).val($(this).attr('data-default'));		
 	});	
 });
->>>>>>> feature/어드민_정보글_업로드_페이지
