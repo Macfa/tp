@@ -2,16 +2,16 @@
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 include_once(PATH_LIB.'/lib.upload.inc.php');
 
-$allowedExtension = 'jpg,png,gif';
+//$allowedExtension = 'jpg,png,gif';
 $img_dir = PATH_IMG_STORAGE;
 
 
-$upload = Upload::setFile($_FILES['neThumb'])->setMaxsize(1024000)->setAllowedExtension($allowedExtension)->setDirectory($img_dir)->upload();
+$upload = Upload::setFile($_FILES['neThumb'])->setMaxsize(1024000)->setDirectory($img_dir)->upload();
 
 try{
 	
 	if($upload == false)
-		throw new Exception('업로드에 실패했습니다.', 1);
+		throw new Exception('썸네일 업로드에 실패했습니다.', 1);
 
 	if(isURL($_POST['neUrl']) === false)
 		throw new Exception('유효한 URL이 아닙니다', 1);
