@@ -25,6 +25,8 @@ RewriteRule ^orderAction$ ./product/orderAction.php
 
 RewriteRule ^seo\/naver-syndication\.xml$ ./seo/naver-syndication\.php
 
+RewriteRule ^(google.*).html ./seo/$1.html
+
 RewriteRule ^product\/egg\.php$ http://tplanit.co.kr/pocketfi
 
 RewriteRule ^(.*\.jsaa).*$ ./lib/min/index.php?f=$1 [L]
