@@ -29,8 +29,7 @@
 					</td>	
 					<td></td>	
 					<td>썸네일</td>
-					<td>타이틀</td>
-					<td>서브타이틀</td>									
+					<td>타이틀</td>									
 					<td>진열상태</td>					
 				</tr>
 			</thead>
@@ -45,8 +44,7 @@
 							</td>
 							<td ><?php echo $val['neKey'] ?></td>
 							<td class="listThumb"><img src="<?php echo $neThumb[$val['neKey']]?>"/></td>			
-							<td class="listTitLink"><a href="addNewsListModify.php?neKey=<?php echo $val['neKey']?>"><?php echo $val['neTit']?></a></td>
-							<td ><?php echo $val['neSubTit']?></td>								
+							<td class="listTitLink"><a href="addNewsListModify.php?neKey=<?php echo $val['neKey']?>"><?php echo $val['neTit']?></a></td>						
 							<td ><?php echo $display[$val['neDisplay']]?></td>	
 						</tr>					
 				<?php endforeach?>

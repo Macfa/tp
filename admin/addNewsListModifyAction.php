@@ -38,7 +38,6 @@ if(isExist($_FILES['neThumbModify']['name']) === true){
 DB::update('tmNews', array(
   'neThumb' => $thumbFileName,
   'neTit' => $_POST['neTit'],
-  'neSubTit' => $_POST['neSubTit'],
   'neUrl' => $_POST['neUrl'],
   'neDisplay' => $_POST['neDisplayModify'],
   'neDatetime' => $cfg['time_ymdhis']

@@ -12,9 +12,7 @@
 							</div>
 							</div>
 						</div>
-						<div class="grid-item-tit">
-							<span class="grid-item-sub"><?php echo $val['neSubTit'] ?></span>
-							<br>			
+						<div class="grid-item-tit">										
 							<?php echo $val['neTit'] ?>
 						</div>					
 					</a>
