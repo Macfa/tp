@@ -35,8 +35,7 @@ RewriteCond %{HTTP_HOST} ^(mo\.startgd\.com)(:80)? [NC]
 RewriteRule ^(.*) http://tplanit.co.kr/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^img\.tplanit\.co\.kr [NC]
-RewriteRule ^([a-z0-9A-Z]*\.(jpg|png|gif|jpeg))$ ./image.index.php?name=$1
-RewriteRule ^.*$ "-" [F,L]
+RewriteRule ^([a-z0-9A-Z]*\.(jpg|png|gif|jpeg))$ ./image.index.php?name=$1 [L]
 </IfModule>
 
 <ifmodule mod_deflate.c>
