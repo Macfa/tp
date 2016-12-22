@@ -50,9 +50,9 @@
 	</tbody>
 	</table>
 
-	<h2 class="cart-total-tit">총 결제 별 / 현재 소유 별</h2>
+	<h2 class="cart-total-tit">총 주문 금액</h2>
 	<div class="cart-total">
-		<span class="js-totalResult txt-highlight">0</span> / <?php echo number_format($mb['mbPoint'])?>
+		<span class="js-totalResult txt-highlight">0</span>
 	</div>
 	<!--
 	<input type="hidden" class="js-totalResultInp" value="0" 
