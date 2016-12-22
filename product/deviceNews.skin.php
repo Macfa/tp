@@ -1,7 +1,7 @@
 <div class="wrap">
 	<?php if(empty($news) === false ) :?>
 		<section>
-			<h2 class="tit-sec">리스트</h2>
+			<h2 class="tit-sec">꿀팁의 전당</h2>
 			<ul class="grid-group js-devicelist newsList">
 				<?php foreach ($news as $val) :?><li class="grid-item-wrap">
 					<a class="grid-item js-telReserve" href="<?php echo $val['neUrl']?>" target="layerView">
