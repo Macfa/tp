@@ -437,8 +437,14 @@ h3.sub {
 	.grid-item-tit{
 		background:rgba(255, 255, 255, 1);
 		font-size: 1.2em;
+		height:90px;
+	}
+	img {
+		width:auto;
+		height:100%;
 	}
 }
+
 
 
 @media all and (min-width:640px){
@@ -674,10 +680,7 @@ h3.sub {
 	.newsList {
 		.grid-item-wrap {
 			width:25%;
-		}
-		.vert-align{
-			vertical-align: top;
-		}
+		}		
 
 	}
 
