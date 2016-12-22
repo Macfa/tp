@@ -32,7 +32,6 @@ $fileNewName = $upload->fsId;
 DB::insert('tmNews', 
 			array(
 				'neTit' => $_POST['neTit'],
-				'neSubTit' => $_POST['neSubTit'],
 				'neUrl' => $_POST['neUrl'], 
 				'neThumb' => $fileNewName,
 				'neDatetime' => $cfg['time_ymdhis']

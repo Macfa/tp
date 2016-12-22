@@ -14,11 +14,7 @@
 				<tr>
 					<td colspan="2" class="center">타이틀</td>
 					<td colspan="2"><input type="text" name="neTit" value="<?php echo $newsInfo['neTit']?>" size="80"></td>								
-				</tr>
-				<tr>
-					<td colspan="2" class="center">서브카피</td>
-					<td colspan="2"><input type="text" name="neSubTit" value="<?php echo $newsInfo['neSubTit']?>" size="80"></td>		
-				</tr>
+				</tr>				
 				<tr>					
 					<td colspan="2" class="center">정보URL</td>
 					<td colspan="2"><input type="text" name="neUrl" value="<?php echo $newsInfo['neUrl']?>" size="80"></td>

@@ -4,22 +4,13 @@
 		<section class="row-group">
 			<div class="row">
 				<div class="col-tit">
-					타이틀제목
+					타이틀
 				</div><div class="col-cont-wrap">
 					<label class="col-inp-txt">
 						<input type="text" name="neTit" class="inp-txt" required>
 					</label>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-tit">
-					서브카피
-				</div><div class="col-cont-wrap">
-					<label class="col-inp-txt">
-						<input type="text" name="neSubTit" class="inp-txt">
-					</label>
-				</div>
-			</div>
+			</div>			
 			<div class="row">
 				<div class="col-tit">
 					연결URL
