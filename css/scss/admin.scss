@@ -289,6 +289,10 @@
 	.dvThumb img {max-height:120px;}
 	.dvDetailThumb img {max-height:200px;}
 	tr td {text-align: center;}
+	.inp-group{
+		margin-top: 0;
+		border: 0;
+	}
 }
 @media all and (min-width:640px){
 	.admin-wrap{

@@ -27,8 +27,7 @@
 					<td></td>	
 					<td>썸네일</td>
 					<td>기기명</td>
-					<td>dvID</td>
-					<td>dvParent</td>					
+					<td>dvID</td>					
 					<td>모델코드</td>					
 					<td>제조사</td>					
 					<td>진열상태</td>					
@@ -47,8 +46,7 @@
 							<td ><?php echo $val['dvKey'] ?></td>
 							<td class="dvThumb"><img src="<?php echo $dvThumb[$val['dvKey']]?>"/></td>			
 							<td class="dvTit"><a href="deviceListModify.php?dvKey=<?php echo $val['dvKey']?>"><?php echo $val['dvTit']?></a></td>
-							<td ><?php echo $val['dvId']?></td>	
-							<td ><?php echo $val['dvParent']?></td>																						
+							<td ><?php echo $val['dvId']?></td>																					
 							<td ><?php echo $val['dvModelCode']?></td>	
 							<td ><?php echo $val['dvManuf']?></td>	
 							<td ><?php echo $display[$val['dvDisplay']]?></td>	

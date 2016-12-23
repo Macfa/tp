@@ -20,11 +20,6 @@
 				</tr>
 				<tr>
 					<td><?php echo $display[$deviceInfo['dvDisplay']]?></td>		
-					<td></td>
-					<td></td>
-					<td></td>								
-				</tr>
-				<tr>					
 					<td>
 						<fieldset class="inp-group" data-default="<?echo $deviceInfo['dvDisplay']?>">						
 							<label class="inp-chk">
@@ -40,9 +35,28 @@
 						</fieldset>
 					</td>
 					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+					<td></td>								
+				</tr>		
+				<tr>
+					<td>색상</td>
+					<fieldset class="inp-group">
+						<?php foreach ($deviceCapacityList as $val) : // 기종에 용량이 없을때 ?>
+							<td>
+								<?echo $val['dvTit'];?>
+								<input type="hidden" name="dvKeyChild[]" value="<?echo $val['dvKey']?>">								
+								<input type="hidden" name="dcOriginColor[]" value="<?echo $strList[$val['dvKey']]?>">					
+								<input type="text" name="dcColor[]" value="<?echo $strList[$val['dvKey']]?>">								
+							</td>
+						<?endforeach?>
+					</fieldset>
+					<?php if(empty($deviceCapacityList) === true): // 기종에 용량이 없을때 ?>
+						<td>
+							<input type="hidden" name="dcOriginColor" value="<?echo $str?>">					
+							<input type="text" name="dcColor" value="<?echo $str ?>">
+						</td>
+					<?endif?>
+					<td></td>															
+				</tr>					
 			</tbody>
 		</table>
 		<br><Br/>
@@ -132,8 +146,4 @@ $('.js-addImg').click(function(){
         }
 
 
-/*
-
-
-*/
 </script>
