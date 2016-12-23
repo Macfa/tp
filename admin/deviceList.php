@@ -12,13 +12,13 @@ $display = array(
 
 
 $search = $_GET['search'];
-$sql = "SELECT * FROM tmDevice";
+$sql = "SELECT * FROM tmDevice ";
 	
-if( isExist($_GET['display']) === false)
-	$sql  .= "";
+if( isExist($_GET['display']) === false and isExist($search) === false)
+	$sql  .= " WHERE dvParent=0";
 
 if(isExist($_GET['display']) || isExist($search)){
-	$sql  .= " WHERE";
+	$sql  .= " WHERE dvParent=0 AND";
 }
 
 if(isExist($search)){
