@@ -143,7 +143,7 @@ if( $isApplyExist===0 ){
 /*	
 	$SMS = new SMS();
 	$sendCont = "[티플 아이폰7 사전예약] 티플에서 아이폰7을 사전예약해주셔서 감사합니다. 사전예약이 처리되면 공지해드리겠습니다.";
-	$SMS->sendMode(0)->sendMemberPhone($_POST['paPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
+	$SMS->sendMode('SMS')->sendMemberPhone($_POST['paPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 */
 }
 

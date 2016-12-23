@@ -6,8 +6,7 @@ $add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/mypageList.css" type="text
 $js_file = '<script type="text/javascript" src="'.PATH_JS.'/cart.js"></script>';
 $js_file .= '<script type="text/javascript" src="'.PATH_JS.'/gifts.js"></script>';
 
-
-$arrOrderItemList = DB::query("SELECT * FROM tmOrderItem as oi LEFT JOIN tmGift as g ON oi.gfKey = g.gfKey WHERE oi.mbEmail = %s and oi.orKey = %i", $mb['mbEmail'], $_GET['id']);
+$arrOrderItemList = DB::query("SELECT * FROM tmOrderItem as oi LEFT JOIN tmGift as g ON oi.gfKey = g.gfKey WHERE oi.mbEmail = %s and oi.orOrderNumber = %s", $mb['mbEmail'], $_GET['id']);
 
 require_once($cfg['path']."/headBlank.inc.php");			// 헤더 부분 (스킨포함)
 require_once("orderView.skin.php");		

@@ -339,7 +339,7 @@ $gift-big-col-height : 400px;
 	.grid-item-wrap{
 		width:33%;
 		height:$gift-col-height;
-		@include widthPerChild(2,4);
+		//@include widthPerChild(2,4);
 	}
 	.grid-item-wrap-big{	
 		width:33%;

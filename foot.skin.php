@@ -8,7 +8,7 @@
 	<i class="contact-ico-consult"></i>
 	<div class="btn-contact-tit">상담예약</div>
 	</a>
-	<a href="tel:070-7775-2981" class="btn-contact">
+	<a href="tel:02-6357-0313" class="btn-contact">
 	<i class="contact-ico-tel"></i>
 	<div class="btn-contact-tit" style="margin-top:-9px;line-height:20px;">070-7775-2981<br/>02-6357-0313</div>
 	</a>
@@ -25,7 +25,7 @@
 		</div>
 		<div class="contact-tel-mobile">	
 			<div class="mobile-contact-tit">전화상담</div>
-			<a href="tel:070-7775-2981" class="mobile-ico-tel"><i class="contact-mobile-ico-tel"></i></a>
+			<a href="tel:02-6357-0313" class="mobile-ico-tel"><i class="contact-mobile-ico-tel"></i></a>
 		</div>
 		<div class="contact-kakao-mobile">
 			<div class="mobile-contact-tit">카톡상담</div>
@@ -40,7 +40,7 @@
 	<button class="layer-view-btn js-layerViewClose">X 닫기</button>
 	</div>
 	<div class="layer-view">
-		<iframe src="" class="js-layerViewIframe layer-view-iframe" name="layerView" scrolling="yes"></iframe>
+		<iframe src="" class="js-layerViewIframe layer-view-iframe" name="layerView" scrolling="yes" allowfullscreen="true"></iframe>
 	</div>
 </div>
 

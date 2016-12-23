@@ -11,9 +11,9 @@
 	<tbody>
 	<?php foreach ($arrOrderList as $val) :?>
 	<tr>
-		<td><a href="/user/orderView.php?id=<?php echo $val['orKey']?>" class="btn-flat-primary-dense js-layerViewToggle" target="layerView"><?php echo $val['orKey']?></a></td>
+		<td><a href="/user/orderView.php?id=<?php echo $val['orOrderNumber']?>" class="btn-flat-primary-dense js-layerViewToggle" target="layerView"><?php echo $val['orOrderNumber']?></a></td>
 		<td><?php echo $val['orDate']?></td>	
-		<td><a href="https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?sid1=<?php echo $val['orTrackingNum']?>&displayHeader=N" class="epost js-layerViewToggle" target='layerView'>배송추적</a></td>
+		<td><?php echo $val['deliveryTracking']?></td>
 	</tr>
 	<?php endforeach?>
 	</tbody>
