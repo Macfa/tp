@@ -119,7 +119,7 @@ foreach ($list as $key => $val){
 					->setCellValueExplicit('I'.$row, $val['apCurrentCarrier'], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('J'.$row, $arrPlan[$key], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('K'.$row, $val['apColor'], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('L'.$row, $val['rpPoint'], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('L'.$row, $val['apPoint'], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('M'.$row, $cancel[$val['apCancel']], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('N'.$row, $val['apDatetime'], PHPExcel_Cell_DataType::TYPE_STRING);
 	$row++;
