@@ -25,15 +25,17 @@ $cancel = array(
 );
 
 $state = array(
+	
 	0 => '신청완료',
-	1 => '실가입신청확인',
-	2 => '기기발송',
-	3 => '기기도착',
-	4 => '개통대기',
+	2 => '연락두절',
+	9 => '연락필요',
+	10 => '신청수단없음',
+	1 => '실가입확인',
 	5 => '개통완료',
-	6 => '사은품발송대기',
-	7 => '사은품발송',
+	3 => '이슈발생',
+	4 => '신청중',
 	8 => '완료'	
+	
 );
 
 $discount = array(
@@ -119,7 +121,7 @@ foreach ($list as $key => $val){
 					->setCellValueExplicit('I'.$row, $val['apCurrentCarrier'], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('J'.$row, $arrPlan[$key], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('K'.$row, $val['apColor'], PHPExcel_Cell_DataType::TYPE_STRING)
-					->setCellValueExplicit('L'.$row, $val['rpPoint'], PHPExcel_Cell_DataType::TYPE_STRING)
+					->setCellValueExplicit('L'.$row, $val['apPoint'], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('M'.$row, $cancel[$val['apCancel']], PHPExcel_Cell_DataType::TYPE_STRING)
 					->setCellValueExplicit('N'.$row, $val['apDatetime'], PHPExcel_Cell_DataType::TYPE_STRING);
 	$row++;

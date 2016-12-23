@@ -91,7 +91,7 @@
 						<td class="table-item-str"><?php echo $arrPlan[$key] ?></td>
 
 						<td class="table-item-str"><?php echo $row['apColor'] ?></td>
-						<td class="table-item-str"><?php echo number_format($row['rpPoint']) ?></td>
+						<td class="table-item-str"><?php echo number_format($row['apPoint']) ?></td>
 						<td class="table-item-str"><?php echo $cancel[$row['apCancel']] ?></td>
 						<td class="table-item-str"><?php echo $row['apDatetime'] ?></td>
 						

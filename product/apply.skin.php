@@ -19,6 +19,7 @@
 	<input type="hidden" name="carrier" value="<?php echo $_GET['carrier']?>">
 	<input type="hidden" name="plan" value="<?php echo $_GET['plan']?>">
 	<input type="hidden" name="applyTitle" value="<?php echo $applyTitle?>">
+	<input type="hidden" name="dvId" value="<?php echo $_GET['dvId']?>">
 
 
 	<section class="section-no-padding txt-left">
@@ -120,7 +121,10 @@
 	<section class="section apply-cart-empty">
 		<div class="vert-wrap">
 			<div class="vert-align">					
-				<span class="tit-sub">가입신청후 포인트몰에서 사은품을 구매해주세요.</span>
+				<span class="tit-sub">
+					<div class="txt-highlight">가입 신청 확인 후 포인트가 지급됩니다.</div>
+					포인트몰에서 사은품을 구매해주세요.
+				</span>
 				<br/><br/>
 				<a href="/gifts" target="_blank" class="btn-filled-sub">사은품 보기</a>					
 			</div>

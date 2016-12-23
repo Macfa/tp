@@ -20,43 +20,44 @@ try{
 }
 
 foreach($checked as $checkedList){	
+	$cancelApply = DB::queryFirstRow("SELECT * FROM tmApplyTmp WHERE apKey=%i", $checkedList);	
+	$cancelMember = DB::queryFirstRow("SELECT * FROM tmMember WHERE mbEmail=%s", $cancelApply['mbEmail']);
+	$cancelDevice = DB::queryFirstField("SELECT dvModelCode FROM tmDevice WHERE dvKey=%i", $cancelApply['dvKey']);	
 
-	list($cancelPoint, $cancelEmail) = DB::queryFirstList("SELECT rpPoint, mbEmail FROM tmApplyTmp WHERE apKey=%i", $checkedList);
-	$cancelMember = DB::queryFirstRow("SELECT * FROM tmMember WHERE mbEmail=%s", $cancelEmail);
-	$cancelDevice = DB::queryFirstField("SELECT dvModelCode FROM tmDevice WHERE dvKey=%i", $dvKey);
-
-	//신청서에 취소 복구
+	//신청서에 취소복구
 	DB::update('tmApplyTmp', array(
-  'apCancel' => '0'
-  ), "apKey=%i", $checkedList);	
+		'apCancel' => '0'
+		), "apKey=%i", $checkedList);	
 
-	//취소자 포인트 추가
+	//취소자 포인트 복구
 	DB::update('tmMember', array(
-	'mbPoint' => $cancelMember['mbPoint']+$cancelPoint
-	),'mbEmail = %s', $cancelEmail);
+		'mbPoint' => $cancelMember['mbPoint']+$cancelApply['apPoint']
+		),'mbEmail = %s', $cancelApply['mbEmail']);
 
-	//취소자 복구포인트 히스토리
+	//취소자 포인트 히스토리
 	DB::insert('tmPointHistory', array(
-	'mbEmail' => $cancelEmail,
-	'phCont' => $cfg['time_ymdhis'].' '.$cancelDevice.' 신청취소복구',
-	'phAmount' => $cancelPoint,
-	'phResult' => $cancelMember['mbPoint']+$cancelPoint,
-	'phDate' => $cfg['time_ymdhis']
-	));
+		'mbEmail' => $cancelApply['mbEmail'],
+		'phCont' => $cfg['time_ymdhis'].' '.$cancelDevice.' 신청취소복구',
+		'phAmount' => $cancelApply['apPoint'],
+		'phResult' => $cancelMember['mbPoint']+$cancelApply['apPoint'],
+		'phDate' => $cfg['time_ymdhis']
+		));
 
 
 
 	$relationship = DB::queryFirstRow("SELECT * FROM tmPointRelationship WHERE mbKey=%i", $cancelMember['mbKey']);
 	
+	
 	if(isExist($relationship) === true){ // 추천인이 있을때만 취소포인트 적용
 
 		//취소자의 부모단계 멤버
 		$cancelParent = DB::queryFirstRow("SELECT * FROM tmMember WHERE mbKey=%i", $relationship['prParent']);	
+		$cancelParentPoint = $cancelApply['apParentPoint'];
 
 		//취소자의 부모 포인트 수정
 		DB::update('tmMember', 
 			array(
-				'mbPoint' => DB::sqleval("mbPoint+($cancelPoint * 0.05)")
+				'mbPoint' => DB::sqleval("mbPoint+($cancelParentPoint)")
 			),	'mbKey = %i', $relationship['prParent']
 		);
 
@@ -64,8 +65,8 @@ foreach($checked as $checkedList){
 		DB::insert('tmPointHistory', array(
 			'mbEmail' => $cancelParent['mbEmail'],
 			'phCont' => $cfg['time_ymdhis'].' 추천포인트취소복구',
-			'phAmount' => $cancelPoint*0.05,
-			'phResult' => $cancelParent['mbPoint'] + ($cancelPoint*0.05) ,
+			'phAmount' => $cancelApply['apParentPoint'],
+			'phResult' => $cancelParent['mbPoint'] + ($cancelApply['apParentPoint']) ,
 			'phDate' => $cfg['time_ymdhis']
 		));
 
@@ -73,11 +74,12 @@ foreach($checked as $checkedList){
 		if((int)$relationship['prGrand'] !== 0){ // 3단계 성립 되었을때
 
 			$cancelGrand = DB::queryFirstRow("SELECT * FROM tmMember WHERE mbKey=%i", $relationship['prGrand']);	
+			$cancelGrandPoint = $cancelApply['apGrandPoint'];
 
 			//취소자의 grand 포인트 수정
 			DB::update('tmMember', 
 				array(
-					'mbPoint' => DB::sqleval("mbPoint+($cancelPoint * 0.05)")
+					'mbPoint' => DB::sqleval("mbPoint+($cancelGrandPoint)")
 				),	'mbKey = %i', $relationship['prGrand']
 			);
 
@@ -85,8 +87,8 @@ foreach($checked as $checkedList){
 			DB::insert('tmPointHistory', array(
 				'mbEmail' => $cancelGrand['mbEmail'],
 				'phCont' => $cfg['time_ymdhis'].' 3단계추천포인트취소복구',
-				'phAmount' => $cancelPoint*0.05,
-				'phResult' => $cancelGrand['mbPoint'] + ($cancelPoint*0.05) ,
+				'phAmount' => $cancelApply['apGrandPoint'],
+				'phResult' => $cancelGrand['mbPoint'] + ($cancelApply['apGrandPoint']) ,
 				'phDate' => $cfg['time_ymdhis']
 			));
 		}

@@ -47,7 +47,7 @@
 <script>
 function myFunction(val) {
 	var $val = val;
-	$parentPoint = $val*0.1;
+	$parentPoint = $val*0.05;
 	$grandPoint = $val*0.05;
 	$('.prParentPoint').val($parentPoint);
 	$('.prGrandPoint').val($grandPoint);

@@ -33,24 +33,25 @@ try{
 }
 $deviceInfo = new deviceInfo();
 
-$defaultRewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey=%i_dvKey AND rpPlan=%i_rpPlan AND rpCarrier=%s_rpCarrier AND rpApplyType=%i_rpApplyType AND rpDiscountType = %s_rpDiscountType", array(
-	'dvKey' => $_GET['dvKey'],
-	'rpPlan' => $_GET['plan'],
-	'rpCarrier' => $_GET['carrier'],
-	'rpApplyType' => (int)$_GET['applyType'],
-	'rpDiscountType' => $_GET['discountType']
-));
 
+$getPlanInfo = getPlanInfo(
+			array(
+				'capacity' => $_GET['capacity'],				
+				'plan' => $_GET['plan'],
+				'carrier' => $_GET['carrier'],
+				'applyType' => (int)$_GET['applyType'],
+				'discountType' => $_GET['discountType'],
+				'id' => $_GET['dvId']
+			)
+		);
 
+$defaultRewardPoint = $getPlanInfo['rewardPoint']; 
 
-if((int)$_GET['plan'] === 21 && isContain('egg', $_GET['dvId']) === true)
-	$defaultRewardPoint = $defaultRewardPoint * 2.5;
 
 //VAR_DUMP($defaultRewardPoint);
 $mbPoint = (isExist($mb['mbPoint'])===TRUE)?$mb['mbPoint']:0;
-if(isExist($defaultRewardPoint) === TRUE) {
 	$totalPoint = number_format($defaultRewardPoint);
-}else{
+if((int)$defaultRewardPoint === 0) {
 	$totalPoint = "미정";
 }
 

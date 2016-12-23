@@ -2,16 +2,8 @@
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 include_once(PATH_LIB."/lib.snoopy.inc.php");
 include_once(PATH_LIB."/lib.parsing.inc.php");
+include_once(PATH_LIB."/lib.phone.inc.php");
 
-$rewardPoint = DB::queryFirstField("SELECT rpPoint FROM tmRewardPoint WHERE dvKey = %i_dvKey and rpPlan = %i_rpPlan and rpCarrier = %s_rpCarrier and rpApplyType = %i_rpApplyType and rpDiscountType = %s_rpDiscountType", 
-			array(
-				'dvKey' => $_POST['dvKey'],
-				'rpPlan' => $_POST['plan'],
-				'rpCarrier' => $_POST['carrier'],
-				'rpApplyType' => $_POST['applyType'],
-				'rpDiscountType' => $_POST['discountType']
-			)
-	);
 
 try
 {
@@ -88,38 +80,21 @@ catch(Exception $e)
 }
 
 
+$getPlanInfo = getPlanInfo(
+			array(
+				'capacity' => $_POST['capacity'],				
+				'plan' => $_POST['plan'],
+				'carrier' => $_POST['carrier'],
+				'applyType' => $_POST['applyType'],
+				'discountType' => $_POST['discountType'],
+				'id' => $_POST['dvId']
+			)
+		);
 
-///////////////// 신청서 DB insert
+$rewardPoint = $getPlanInfo['rewardPoint']; 
 
-
-DB::insert('tmApplyTmp', array(
-    'mbEmail' => $mb['mbEmail'],
-    'dvKey' => $_POST['dvKey'],
-    'apCurrentCarrier' => $_POST['apCurrentCarrier'],
-    'apChangeCarrier' => $_POST['carrier'],
-    'apColor' => $_POST['apColor'],
-    'apPlan' => $_POST['plan'],
-    'apApplyType' => $_POST['applyType'],
-    'apDatetime' => $cfg['time_ymdhis'],
-    'apDiscountType' => $_POST['discountType'],
-    'rpPoint' => $rewardPoint
-    ));
-
-
-
-DB::insert('tmPointHistory', array(
-	'mbEmail' => $mb['mbEmail'],
-	'phCont' => $cfg['time_ymdhis'].' 리워드포인트',
-	'phAmount' => $rewardPoint,
-	'phResult' => $mb['mbPoint']+($rewardPoint),
-	'phDate' => $cfg['time_ymdhis']
-));
-
-
-DB::update('tmMember', array(
-	'mbPoint' => $mb['mbPoint']+($rewardPoint)
-),'mbEmail = %s', $mb['mbEmail']);
-
+$parentPoint = 0;
+$grandPoint = 0;
 
 
 
@@ -136,6 +111,11 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 		  'prDate' => $cfg['time_ymdhis']
 		));	
 	}
+	$parentPoint = $rewardPoint*0.05;
+
+	//추천인 포인트 자동지급 삭제
+
+	/*
 
 	DB::update('tmMember', 
 		array(
@@ -150,6 +130,8 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 		'phResult' => $targetMbPoint + ($rewardPoint*0.05) ,
 		'phDate' => $cfg['time_ymdhis']
 	));
+
+	*/
 
 
 	// B | A | 0 에서
@@ -170,6 +152,11 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 
 		list($grandMbEmail, $grandMbPoint) = DB::queryFirstList("SELECT mbEmail, mbPoint FROM tmMember WHERE mbKey=%i", $prGrand); //grand 추천인 정보
 
+		$grandPoint = $rewardPoint*0.05;
+			
+
+		//grand 추천인 포인트 자동지급 삭제
+		/*
 		DB::update('tmMember', 
 			array(
 				'mbPoint' => DB::sqleval("mbPoint+($rewardPoint*0.05)")
@@ -183,11 +170,46 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 			'phResult' => $grandMbPoint + ($rewardPoint*0.05) ,
 			'phDate' => $cfg['time_ymdhis']
 		));
+		*/
 
 	}
 }
 
-			
+
+
+///////////////// 신청서 DB insert
+
+
+DB::insert('tmApplyTmp', array(
+    'mbEmail' => $mb['mbEmail'],
+    'dvKey' => $_POST['dvKey'],
+    'apCurrentCarrier' => $_POST['apCurrentCarrier'],
+    'apChangeCarrier' => $_POST['carrier'],
+    'apColor' => $_POST['apColor'],
+    'apPlan' => $_POST['plan'],
+    'apApplyType' => $_POST['applyType'],
+    'apDatetime' => $cfg['time_ymdhis'],
+    'apDiscountType' => $_POST['discountType'],
+    'apPoint' => $rewardPoint,
+    'apParentPoint' =>$parentPoint,
+    'apGrandPoint' =>$grandPoint
+));
+
+// 포인트 자동지급 삭제
+/*
+DB::insert('tmPointHistory', array(
+	'mbEmail' => $mb['mbEmail'],
+	'phCont' => $cfg['time_ymdhis'].' 리워드포인트',
+	'phAmount' => $rewardPoint,
+	'phResult' => $mb['mbPoint']+($rewardPoint),
+	'phDate' => $cfg['time_ymdhis']
+));
+
+
+DB::update('tmMember', array(
+	'mbPoint' => $mb['mbPoint']+($rewardPoint)
+),'mbEmail = %s', $mb['mbEmail']);
+*/			
 
 $deviceInfo = new deviceInfo();
 
