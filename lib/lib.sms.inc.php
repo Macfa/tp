@@ -13,7 +13,16 @@ class SMS{
 			);
 
 	public function sendMode($input) {
+		switch ($input) {
+			case 'SMS':
+				$input = 0;
+				break;
+			case 'MMS':
+				$input = 1;
+				break;
+		}
 		$this->arrSet['MSG_TYPE']  = $input;
+
 		return $this;
 	}
 	public function sendMemberPhone($input) {

@@ -6,7 +6,7 @@
 // 파일명.skin.php 는 다른 파일의 html 부분을 담당하는 파일로 단독적으로 활용될수 없습니다.
 
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
-
+header("X-Frame-Options: DENY");
 
 if (getIndexInArr($_GET, 'carrier', 'key') < getIndexInArr($_GET, 'manuf', 'key')) $isGnbCarrier = true;
 if (getIndexInArr($_GET, 'carrier', 'key') > getIndexInArr($_GET, 'manuf', 'key')) $isGnbManuf = true;
@@ -28,7 +28,7 @@ if (($isGnbCarrier || $isGnbManuf) && $_GET['device'])
 if ($isGnbCarrier && $_GET['manuf']) $isSubNavActive = 'active';
 
 //최상단메뉴에서 통신사가 선택되었는데 
-//서브메뉴에서 제조사가 선택되지 않았다면 
+//서브메뉴에서 제조사가 선택되지 않았다면 e
 //서브메뉴에서 "전체"에 하이라이트
 if ($isGnbCarrier && !$_GET['manuf']){
 	$isSubAllActive = 'active';
@@ -151,24 +151,13 @@ require_once($cfg['path']."/head.inc.php");			// 헤더 부분 (스킨포함)
 if(file_exists("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"))
 	require_once("./".$includePrefix."devicesBanner".$bannerSuffix.".skin.php"); 
 
-if ($_GET['carrier'] == 'lguplus') 
-    require_once("devicesKt.skin.php");
-else if ($_GET['device'] == 'pocketfi')
-    require("reviewpocketfi.skin.php");    
-else if ($_GET['device'] == 'watch')
-    require("reviewSmart.skin.php");    
-else if ($_GET['device'] == 'kids')
-    require("reviewKiz.skin.php");    
-else if ($_GET['carrier'] == 'sk')
-    require("reviewSKT.skin.php");
-else if ($_GET['manuf'] == 'samsung')
-    require("reviewSamsung.skin.php");
-else if ($_GET['manuf'] == 'apple')
-    require("reviewapple.skin.php");
-else if ($_GET['manuf'] == 'lg')
-    require("reviewLG.skin.php");
-else 
-    require("devices.skin.php");    
+if($_GET['carrier'] === 'lguplus'){
+	require_once("devicesKt.skin.php");
+}else{
+	
+	require_once("deviceNews.php"); // 뉴스글	    
+	require_once("deviceList.php"); // 최신기기   
+}
 
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 ?>

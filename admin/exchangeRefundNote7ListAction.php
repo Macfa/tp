@@ -36,7 +36,7 @@ foreach($checked as $checkedList){
 $SMS = new SMS();
 foreach($checked as $checkedList){
 	$preorderMember = DB::queryFirstRow("SELECT * FROM tmPreorderApplyList WHERE paKey=%s", $checkedList);
-	$SMS->sendMode(0)->sendMemberPhone($preorderMember['paPhone'])->sendMemberName($preorderMember['paName'])->sendCont($sendCont)->send();
+	$SMS->sendMode('SMS')->sendMemberPhone($preorderMember['paPhone'])->sendMemberName($preorderMember['paName'])->sendCont($sendCont)->send();
 }
 */
 

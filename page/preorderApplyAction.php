@@ -234,7 +234,7 @@ if($isApplyExist===0 && $isEdit === FALSE && isExist($_POST['mbEmail']) === FALS
 	$arrApplyMember['mbEmail'] = $mb['mbEmail'];
 	DB::insert('tmPreorderApplyList', $arrApplyMember);
 	
-	$SMS->sendMode(0)->sendMemberPhone($_POST['paPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
+	$SMS->sendMode('SMS')->sendMemberPhone($_POST['paPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 
 }
 
