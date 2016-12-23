@@ -103,9 +103,7 @@ DB::insert('tmApplyTmp', array(
     'apDatetime' => $cfg['time_ymdhis'],
     'apDiscountType' => $_POST['discountType'],
     'rpPoint' => $rewardPoint
-    ));
-
-
+));
 
 DB::insert('tmPointHistory', array(
 	'mbEmail' => $mb['mbEmail'],
