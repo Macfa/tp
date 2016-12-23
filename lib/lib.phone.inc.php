@@ -1,7 +1,14 @@
 <?
 include_once(PATH_LIB.'/lib.snoopy.inc.php');
 include_once(PATH_LIB.'/lib.parsing.inc.php');
-
+/*
+$data['carrier']
+$data['capacity']
+$data['discountType']
+$data['applyType'] 
+$data['plan']
+$data['id']
+*/
 function getPlanInfo($data){
 	global $cfg;
 	$snoopy=new snoopy;
