@@ -27,8 +27,10 @@ $cfg['url'] = "http://".$cfg['subURL'];
 $cfg['full_url'] = $cfg['url'].$_SERVER['PHP_SELF'];
 $cfg['ip'] = $_SERVER['REMOTE_ADDR'];
 $cfg['login_url'] = $cfg['url']."/user/login.php?returnURL=".urlencode($cfg['full_url']);
-if($_SERVER["HTTP_HOST"] !== 'tplanit.co.kr')
+
+if($_SERVER["HTTP_HOST"] !== 'tplanit.co.kr' || $cfg['ip'] === '222.108.18.132')
 	$cfg['isDev'] = true;
+
 define("ABSOLUTE_PATH", $_SERVER['DOCUMENT_ROOT']);
 define("PATH_ROOT", $_SERVER['DOCUMENT_ROOT']);
 
