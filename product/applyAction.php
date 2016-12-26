@@ -23,8 +23,10 @@ try
 	if(isNullVal($_POST['apPhone']))
 		throw new Exception('추가 전화번호를 적어주세요 ', 3);
 
-	if(isNullVal($_POST['apBirth']))
-		throw new Exception('생년월일을 적어주세요 ', 3);
+	$apBirth = parsingNum($_POST['apBirth']);
+	$apBirthLen = strlen($apBirth);
+	if(isNullVal($apBirth) || isDate($apBirth) === false || $apBirthLen != '8' && $apBirthLen !='6') 
+		throw new Exception('생년월일을 0000-00-00 형식으로 입력해주세요 ', 3);
 
 	if(isNullVal($_POST['apColor']))
 		throw new Exception('색상을 선택해주세요 ', 3);
@@ -175,6 +177,10 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 	}
 }
 
+if($apBirthLen == '8')
+$date = date("Y-m-d", strtotime($apBirth));
+if($apBirthLen == '6')
+$date = date("y-m-d", strtotime("00".$apBirth));
 
 
 ///////////////// 신청서 DB insert
@@ -186,6 +192,7 @@ DB::insert('tmApplyTmp', array(
     'apCurrentCarrier' => $_POST['apCurrentCarrier'],
     'apChangeCarrier' => $_POST['carrier'],
     'apColor' => $_POST['apColor'],
+    'apBirth' => $date,
     'apPlan' => $_POST['plan'],
     'apApplyType' => $_POST['applyType'],
     'apDatetime' => $cfg['time_ymdhis'],
