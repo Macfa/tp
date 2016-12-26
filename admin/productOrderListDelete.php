@@ -28,7 +28,7 @@ foreach($checked as $checkedList){
 	DB::update('tmApplyTmp', array(
 		'apCancel' => '1'
 		), "apKey=%i", $checkedList);	
-
+/*
 	//취소자 포인트 제거
 	DB::update('tmMember', array(
 		'mbPoint' => $cancelMember['mbPoint']-$cancelApply['apPoint']
@@ -93,7 +93,7 @@ foreach($checked as $checkedList){
 			));
 		}
 	}
-
+*/
 }
 
 
