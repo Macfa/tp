@@ -77,7 +77,7 @@
 						<input type="hidden" name="applyType" value="<?echo $row['dvKey']?>">
 						<input type="hidden" name="discountType" value="<?echo $row['dvKey']?>">
 						<input type="hidden" name="apType" value="<?echo $row['dvKey']?>">
-						<td class="table-item-str"><?php echo $state[$row['apProcess']] ?></td>
+						<td class="table-item-str"><?php echo $changeState[$row['apProcess']] ?></td>
 						<td class="table-item-str"><?php echo $dvTitList[$key] ?></td>
 						<td class="table-item-str"><?php echo $dvModelCode[$key] ?></td>							
 						<td class="table-item-str"><?php echo $mbName[$key] ?></td>
