@@ -1,9 +1,6 @@
 <?php 
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
 
 try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 검출하기 위함. */
 
@@ -63,7 +60,8 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 }
 
 $serial = count($_POST['serialNumber']); /*일련번호 ( 즉 댓수가 몇개나 들어왔는지 ? )*/
-$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);	/*해당 모델의 수량*/
+$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
+$each_ware = DB::queryOneField('stEach', "SELECT * FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s and stColor=%s", $_POST['modelCode'], $_POST['goodreceipt'], $_POST['color']);
 
 /*출고란에 인설트 하는 부분*/
 foreach($_POST['serialNumber'] as $key => $value) {
@@ -76,15 +74,18 @@ foreach($_POST['serialNumber'] as $key => $value) {
 DB::insert('tmInventoryOut', $input);
 
 /* 확인 부분 */
-echo "<pre>";
-print_r($check);
-echo "</pre>";
+// echo "<pre>";
+// print_r($check);
+// echo "</pre>";
 
 /*재고 란에 값 수정*/
 DB::update('tmInventoryStock', array(
 	'stEach' => $each-$serial
 ), 'stModelCode=%s and stCarrier=%s and stColor=%s', $_POST['modelCode'], $_POST['carrier'], $_POST['color']);	/* tmInventoryStock 갯수 수정 */
 
+DB::update('tmInventoryWare', array(
+	'stEach' => $each_ware-$serial
+), 'stModelCode=%s and stGoodReceipt=%s and stColor=%s', $_POST['modelCode'], $_POST['goodreceipt'], $_POST['color']);	/* tmInventoryStock 갯수 수정 */
 
-alert('업데이트 되었습니다', 'tplDeviceView.php?check=checkbox_model');
+alert('업데이트 되었습니다', 'tplDeviceView.php?view=model');
  ?>

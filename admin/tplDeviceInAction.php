@@ -77,23 +77,30 @@ if($model == 0) {	/*모델의 수량이 없다면 ( 처음 인설트 하는 거�
 		'stEach' => $serial /* 입고된 기기의 총 수량을 대입한다 */
 		);
 	DB::insert('tmInventoryStock', $insert);
-	$insert_ware = array(
-		'iwModelCode' => $_POST['modelCode'],
-		'iwColor' => $_POST['color'],
-		'iwGoodReceipt' => $_POST['goodReceipt'],
-		'iwEach' => $serial /* 입고된 기기의 총 수량을 대입한다 */
-		);
-	DB::insert('tmInventoryWare', $insert_ware);	
 } else {	/* 모델의 수량이 기존에 있다면 .. */
 	$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
 	DB::update('tmInventoryStock', array(	/*일련번호 수에 따른 수량 조절*/
 		'stEach' => $each+$serial
 	), 'stModelCode=%s and stCarrier=%s and stColor=%s', $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
 
-	DB::update('tmInventoryWare', array(
-		'iwEach' => $each+$serial
-		),	'iwModelCode=%s and iwColor=%s and iwGoodReceipt', $_POST['modelCode'], $_POST['color'], $_POST['goodReceipt']);
+
 }
 
-alert('인설트 되었습니다', 'tplDeviceView.php?check=checkbox_model');
+if($model_ware == 0) {
+	$insert_ware = array(
+		'stModelCode' => $_POST['modelCode'],
+		'stColor' => $_POST['color'],
+		'stGoodReceipt' => $_POST['goodReceipt'],
+		'stEach' => $serial /* 입고된 기기의 총 수량을 대입한다 */
+		);
+	DB::insert('tmInventoryWare', $insert_ware);
+} else {
+	$each_ware = DB::queryOneField('stEach', "SELECT * FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s and stColor=%s", $_POST['modelCode'], $_POST['goodReceipt'], $_POST['color']);
+
+	DB::update('tmInventoryWare', array(
+		'stEach' => $each_ware+$serial
+		),	'stModelCode=%s and stColor=%s and stGoodReceipt=%s', $_POST['modelCode'], $_POST['color'], $_POST['goodReceipt']);
+}
+
+alert('인설트 되었습니다', 'tplDeviceView.php?view=model');
  ?>

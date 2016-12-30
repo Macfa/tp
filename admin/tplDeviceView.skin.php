@@ -16,26 +16,43 @@
 
 <!-- tplDeviceView.php 에서 arr 불러와 출력 -->
 	<div>
-			<?php foreach($arr as $carrier => $value_manuf) :?>
-				<b><h1><?php echo strtoupper($carrier) ?></h1><br/></b>
-				<?php foreach($value_manuf as $manuf => $value_none) :?>
-					<h2><?php echo strtoupper($manuf) ?></h2><br/>
-					<!-- 데이터 정렬 부분 -->
-					<table style="border: solid 1px black">
-						<tr>
-							<th style="width:130">기종</th>
-							<th style="width:60">색상</th>
-							<th style="width:40">수량</th>
-						</tr>
-						<?php foreach($value_none as $key => $value_info) :?> <!-- 4  -->
-								<tr>
-							<?php foreach($value_info as $keys => $value) :?>
-		 						<td><?php echo "<a href=tplDeviceViewDetail.php?model=".$value_info['dvModelCode']."&color=".$value_info['stColor']."&carrier=".$carrier.">".$value."</a>" ?></td>
-							<?php endforeach ?>
-								</tr>
-						<?php endforeach ?>
-					</table>
+	<?php foreach($arr as $carrier => $value_manuf) :?>
+		<b><h1><?php echo strtoupper($carrier) ?></h1><br/></b>
+		<?php foreach($value_manuf as $manuf => $value_none) :?>
+			<h2><?php echo strtoupper($manuf) ?></h2><br/>
+			<!-- 데이터 정렬 부분 -->
+			<table style="border: solid 1px black">
+				<tr>
+					<th style="width:130">기종</th>
+					<th style="width:60">색상</th>
+					<th style="width:40">수량</th>
+				</tr>
+				<?php foreach($value_none as $key => $value_info) :?> <!-- 4  -->
+					<tr>
+					<?php foreach($value_info as $keys => $value) :?>
+ 						<td><?php echo "<a href=tplDeviceViewDetail.php?model=".$value_info['dvModelCode']."&color=".$value_info['stColor']."&carrier=".$carrier.">".$value."</a>" ?></td>
+					<?php endforeach ?>
+					</tr>
+				<?php endforeach ?>
+			</table>
+		<?php endforeach ?>
+	<?php endforeach ?>
+	<b><h1><?php echo strtoupper("ETC") ?></h1><br/></b>
+		<table style="border: solid 1px black">
+			<tr>
+				<th style="width:130">기종</th>
+				<th style="width:60">색상</th>
+				<th style="width:40">수량</th>
+			</tr>
+			<tr>
+			<?php foreach ($els as $one => $one_val): ?>	<!-- Index = 2 ( '', 'etc' )  -->
+				<?php foreach ($one_val as $two => $two_val): ?>	<!-- Index = 2 ( 0, 1)  -->
+					<?php foreach($two_val as $thr => $thr_val): ?>	<!-- key = 3 (dvModelCode, stColor, stEach), result = String  -->
+						<td><?php echo "<a href=tplDeviceViewDetail.php?model=".$two_val['dvModelCode']."&color=".$two_val['stColor']."&carrier=".$one.">".$thr_val."</a>" ?></td>
+					<?php endforeach ?>
+				</tr>
 				<?php endforeach ?>
 			<?php endforeach ?>
+		</table>
 	</div>
 </div>

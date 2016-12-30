@@ -6,10 +6,14 @@ require_once($cfg['path']."/adminhead.php");			// 헤더 부분 (스킨포함)
 
 /*$_GET 의 carrier 값이 skt kt lg 에 포함된다면... true / 그 외는 재고, 정보 테이블을 활용하여 해당 컬러, 제조사, 모델명에 맞는 시리얼번호를 받음 */
 if(in_array($_GET['carrier'], array('skt', 'kt', 'lg')))
-	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo WHERE inModelCode=%s and inCarrier=%s and inColor=%s", $_GET['model'], $carrier, $_GET['color']);
+	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo WHERE inModelCode=%s and inCarrier=%s and inColor=%s", $_GET['model'], $_GET['carrier'
+		], $_GET['color']);
 else
 	$serial = DB::queryOneColumn('ivSerialNumber', "SELECT * FROM tmInventoryIn as i LEFT JOIN tmInventoryInfo as f ON i.ivSerialNumber = f.inSerialNumber WHERE f.inModelCode=%s AND f.inColor=%s AND i.ivGoodReceipt=%s", $_GET['model'], $_GET['color'], $_GET['carrier']);
 
+if (in_array($_GET['carrier'], array('', 'etc'))) {
+	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo as f LEFT JOIN tmDevice as d ON f.inModelCode = d.dvModelCode WHERE f.inModelCode=%s AND f.inColor=%s AND d.dvManuf=%s", $_GET['model'], $_GET['color'], $_GET['carrier']);
+}
 ?>
 
 <div class="wrap">
