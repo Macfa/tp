@@ -8,55 +8,49 @@ $carrier_ex = array(
 	'skt' => array('미래대리점', 'PSN마케팅'),
 	 'kt' => array("KT(본사)", 'Ktis'),
 	 'lg' => array('엔트솔')
-	 );
-$category['manuf'] = array('samsung', 'apple', 'lg');
-$category1['category'] = array('phone', 'kids', 'pocketfi', 'smartwatch');
-$category_ex = array('', 'etc');
+);
+
+$category['manuf'] = array('samsung', 'apple', 'lg', 'etc');
+$category1['category'] = array('phone', 'kids', 'pocketfi', 'watch');
 $dvCategory = $category + $category1;
 
-if($_GET['view'] === 'model') {
-	foreach($carrier_val as $idx => $carrier) {
-		foreach($dvCategory as $key => $val) {
-			if($key == 'manuf')
+if($_GET['view'] == 'model') {
+	$table = 'tmInventoryStock';
+	$separatorField = 'stCarrier';
+}else if($_GET['view'] == 'receipt') {
+	$table = 'tmInventoryWare';
+	$separatorField = 'stGoodReceipt';
+}
+
+foreach ($carrier_ex as $one => $carrier) {	/*숫자인덱스 | 통신사*/
+	foreach($carrier as $two => $goodreceipt) {	/*숫자인덱스 | 대리점*/
+		
+		if($_GET['view'] == 'model') {
+			$separator = $one;
+		}else if($_GET['view'] == 'receipt') {
+			$separator = $goodreceipt;
+		}
+		
+		foreach($dvCategory as $thr => $category) {	/*카테고리종류인덱스 | 각 제조사 및 카테고리*/
+			if($thr == 'manuf')
 				$searchField = 'dvManuf';
 			else
 				$searchField = 'dvCate';
-			foreach($category_ex as $non => $check) {	/*etc, ''*/
-				/*tmInventoryStock 에 들어가 있다면 불러온다*/
-				$els[$check] = DB::query("SELECT dvModelCode, stColor, stEach FROM tmInventoryStock as s LEFT JOIN tmDevice as d ON s.stModelCode = d.dvModelCode WHERE d.dvManuf=%s", $check);
-			}
-			foreach($val as $keys => $value) {
-				if($value !== 'phone') {
-				$arr[$carrier][$value] = DB::query("SELECT dvModelCode, stColor, stEach  FROM tmInventoryStock as i LEFT JOIN tmDevice as d ON i.stModelCode = d.dvModelCode WHERE d.".$searchField." = %s AND i.stCarrier = %s AND i.stKey is not null", $value, $carrier);
+			foreach($category as $key => $value) {	/*각 제조사 및 카테고리의 값*/
+				if($value == 'etc') {
+					$arr[$separator][$value] = DB::query("SELECT dvModelCode, stColor, stEach FROM ".$table." as i LEFT JOIN tmDevice as d ON i.stModelCode = d.dvModelCode WHERE d.dvCate=%s AND (d.dvManuf=%s OR d.dvManuf=%s) AND i.".$separatorField."=%s AND i.stKey is not null", 'phone', '', $value, $separator);
+				} elseif($value !== 'phone') {
+					$arr[$separator][$value] = DB::query("SELECT dvModelCode, stColor, stEach FROM ".$table." as i LEFT JOIN tmDevice as d ON i.stModelCode = d.dvModelCode WHERE d.".$searchField."=%s AND i.".$separatorField."=%s AND i.stKey is not null", $value, $separator);
 				}
-			}
-		}
-	}
-} elseif ($_GET['view'] === 'receipt') {	/*입고처별*/
-	foreach ($carrier_ex as $one => $carrier) {	/*통신사*/
-		foreach ($carrier as $two => $goodreceipt) {	/*대리점*/
-			foreach($dvCategory as $key => $val) {	/*통신사와 카테고리*/
-				if($key == 'manuf')	/*키값이 ~ 일때*/
-					$searchField = 'dvManuf';	/*통신사*/
-				else
-					$searchField = 'dvCate';	/*카테고리*/
-				foreach($category_ex as $non => $check) {	/*etc, ''*/
-					/*tmInventoryStock 에 들어가 있다면 불러온다*/
-					$els[$goodreceipt][$check] = DB::query("SELECT dvModelCode, stColor, stEach FROM tmInventoryWare as w LEFT JOIN tmDevice as d ON w.stModelCode = d.dvModelCode WHERE d.dvManuf=%s AND w.stGoodReceipt=%s", $check, $goodreceipt);
-				}
-				foreach($val as $keys => $value) {	/*통신사/카테고리 값*/
-					if($value !== 'phone') {
-						$arr[$goodreceipt][$value] = DB::query("SELECT dvModelCode, stColor, stEach FROM tmInventoryWare as w LEFT JOIN tmDevice as d ON w.stModelCode = d.dvModelCode WHERE d.".$searchField."=%s AND w.stGoodReceipt=%s", $value, $goodreceipt);
-					}
-				}
+
 			}
 		}
 	}
 }
 
 
-
 require_once("tplDeviceView.skin.php");
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
+
 
 ?>
