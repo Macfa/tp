@@ -1,10 +1,6 @@
 <?php 
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-
 try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 검출하기 위함. */
 
 	if(isNullVal($_POST['inDate']))
@@ -26,46 +22,82 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		throw new Exception("일련번호를 재기입해주세요", 3);
 
 	/*데이터베이스 내 검증하는 부분*/
-	foreach($_POST['serialNumber'] as $key => $val) {	/*만약 입고 란에 일련번호가 중복되어 있다면 경고와 함께 종료*/
-		if(DB::queryOneField('ivSerialNumber', "SELECT * FROM tmInventoryIn WHERE ivSerialNumber=%s", $val) != null) {
+	foreach($_POST['serialNumber'] as $key => $val) {	/*입고가 출고보다 많다면...*/
+		$check_out = DB::queryFirstField("SELECT count(*) FROM tmInventoryOut WHERE inSerialNumber=%s", $val);
+		$check_in = DB::queryFirstField("SELECT count(*) FROM tmInventoryIn WHERE inSerialNumber=%s", $val);
+
+		if($check_in > $check_out) {	/*기기가 있다면(더많다면..) 값을 담고 */
 			$err_val .= $val.' ';
 			$err = true;
+			if(count($_POST['returnName']) > 0 )	/*반품체크가 되어있지만 출고가 되지 않아 에러 (ex, 2 입고 1출고 일때 )*/
+				throw new Exception($err_val."\\n위 기기는 반품할 수 없습니다", 3);
+		} elseif($check_in == 0 && $check_out == 0) {	/*입고 출고가 둘 다 0일때 */
+			if(count($_POST['returnName']) > 0 )	/*반품체크가 되었다면 에러 (ex, 0, 0 ) / 반품 대상이 없으므로*/
+				throw new Exception($err_val."\\n위 기기는 반품할 수 없습니다", 3);
+		} else {
+			if(count($_POST['returnName']) <= 0) {	/*반품 체크를 하지않으면..*/
+				$err_val .= $val.' ';
+				$err = true;
+			}
+		}
+		if($err === true) {
+			throw new Exception($err_val."\\n위는 이미 입고처리 된 SerialKey 입니다", 3);
+		}
+		/*정보테이블(tmInventoryInfo) 에서 중복기입을 막기 위함*/
+		if($check_in > 0)
+			$exist = true;
+	}
+	/*Ahull 테이블에서 입고처가 정의되어 있다면 에러 출력*/
+	$chk_carrier = DB::queryOneField('ahCarrier', "SELECT * FROM tmInventoryAhull WHERE ahGoodReceipt=%s", $_POST['goodReceipt']);
+	if(count($chk_carrier) != 0) {
+		if(strcasecmp($_POST['carrier'], $chk_carrier) != 0) {
+			throw new Exception($_POST['goodReceipt']."은\\n".$chk_carrier."로 설정되어 있습니다", 3);
 		}
 	}
-	if($err === true) {
-		throw new Exception($err_val."\\n위는 이미 입고처리 된 SerialKey 입니다", 3);
-	}
-	/*검증 종료*/
 
+	/*검증 종료*/
 } catch (Exception $e) {
     alert($e->getMessage());
 }
-
+	/*반품자가 체크되어있으면 입고처대신 반품자이름으로 대입*/
+if(isExist($_POST['returnName']) === true)
+	$goodReceipt = $_POST['returnName'];
+else
+	$goodReceipt = $_POST['goodReceipt'];
 // 입고란에 인설트 하기 위한 배열저장
 foreach($_POST['serialNumber'] as $key => $value) {
 	$input_in[] = array(
-		'ivSerialNumber' => $value,
-		'ivGoodReceipt' => $_POST['goodReceipt'],
-		'ivInDate' => $_POST['inDate']
+		'inSerialNumber' => $value,
+		'ivGoodReceipt' => $goodReceipt,
+		'ivInDate' => $_POST['inDate'],
+		'ivInTerm' => $cfg['time_ymdhis']
 		);
-
+	if($exist == false) {	/*고유값이라 중복되면 문제발생, 해결하기 위한 조건문*/
 	$input_info[] = array(
 		'inSerialNumber' => $value,
 		'inModelCode' => $_POST['modelCode'],
 		'inColor' => $_POST['color'],
 		'inCarrier' => $_POST['carrier']
 		);
+	}
 }	
 DB::insert('tmInventoryIn', $input_in);
-DB::insert('tmInventoryInfo', $input_info);
-DB::insert('tmInventoryAhull', array(
-	'ahGoodReceipt' => $_POST['goodReceipt'],
-	'ahCarrier' => $_POST['carrier']
-	));
-// 정보 테이블에 인설트 하기 위한 배열 저장
+	/*위에서 정의했던 중복기입 방지용 변수로 조건*/
+if($exist == false) 
+	DB::insert('tmInventoryInfo', $input_info);
+
+/* 입고처를 테이블에서 검색하고 그 값이 null 이라면 인설트 아니라면 고정값(미래대리점 -> skt)이 있으니 패스*/
+$chk_receipt = DB::queryOneField('ahGoodReceipt', "SELECT * FROM tmInventoryAhull WHERE ahGoodReceipt=%s", $_POST['goodReceipt']);
+if($chk_receipt == null) {
+	DB::insert('tmInventoryAhull', array(
+		'ahGoodReceipt' => $_POST['goodReceipt'],
+		'ahCarrier' => $_POST['carrier']
+		));
+}
 
 /*'재고' 란에서 모델의 수량을 센다*/
-$model = count(DB::query("SELECT stModelCode FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']));
+$model = DB::queryFirstField("SELECT count(*) FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
+$model_ware = DB::queryFirstField("SELECT count(*) FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s and stColor=%s", $_POST['modelCode'], $_POST['goodReceipt'], $_POST['color']);
 $serial = count($_POST['serialNumber']); /*일련번호 ( 즉 입고된 기기의 수량가 몇개나 들어왔는지 ? )*/
 
 if($model == 0) {	/*모델의 수량이 없다면 ( 처음 인설트 하는 거라면 )*/
@@ -82,10 +114,8 @@ if($model == 0) {	/*모델의 수량이 없다면 ( 처음 인설트 하는 거�
 	DB::update('tmInventoryStock', array(	/*일련번호 수에 따른 수량 조절*/
 		'stEach' => $each+$serial
 	), 'stModelCode=%s and stCarrier=%s and stColor=%s', $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
-
-
 }
-
+/*tmInventoryWare 용*/
 if($model_ware == 0) {
 	$insert_ware = array(
 		'stModelCode' => $_POST['modelCode'],
