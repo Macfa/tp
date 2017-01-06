@@ -37,22 +37,5 @@
 			</table>
 		<?php endforeach ?>
 	<?php endforeach ?>
-	<b><h1><?php echo strtoupper("ETC") ?></h1><br/></b>
-		<table style="border: solid 1px black">
-			<tr>
-				<th style="width:130">기종</th>
-				<th style="width:60">색상</th>
-				<th style="width:40">수량</th>
-			</tr>
-			<tr>
-			<?php foreach ($els as $one => $one_val): ?>	<!-- Index = 2 ( '', 'etc' )  -->
-				<?php foreach ($one_val as $two => $two_val): ?>	<!-- Index = 2 ( 0, 1)  -->
-					<?php foreach($two_val as $thr => $thr_val): ?>	<!-- key = 3 (dvModelCode, stColor, stEach), result = String  -->
-						<td><?php echo "<a href=tplDeviceViewDetail.php?model=".$two_val['dvModelCode']."&color=".$two_val['stColor']."&carrier=".$one.">".$thr_val."</a>" ?></td>
-					<?php endforeach ?>
-				</tr>
-				<?php endforeach ?>
-			<?php endforeach ?>
-		</table>
 	</div>
 </div>

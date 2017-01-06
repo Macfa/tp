@@ -23,7 +23,7 @@
 </select><button type="button" class="js-goodReceipt-btn">추가</button></li>
  -->
 				<li>기기종류 / 용량<select name="modelCode" id="">	<!-- tmInventory 에서 값을 가져옴 (모델명)-->
-					<?php foreach($model as $key => $value) :?>
+					<?php foreach($modelList as $key => $value) :?>
 					<option><?php echo $value?></option>
 				<?php endforeach ?>
 				</select></li>
@@ -40,7 +40,7 @@
 						<tr>일련번호</tr>
 						<td class=buttonList_td><input type="text" class="js-SerialNumber-buttonList" name="serialNumber[]">
 						<input type="checkbox" class="js-SerialNumber-box" name="checkbox">
-						<input type="text" class="test" name="delivery" disabled></td> <!-- 클래스 네임 변경 요망  -->
+						<input type="text" class="test" name="delivery[]" disabled></td> <!-- 클래스 네임 변경 요망  -->
 					</table>
 					<button type="button" class="js-SerialNumber">추가</button>
 				</li>
