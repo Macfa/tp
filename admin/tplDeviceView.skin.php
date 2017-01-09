@@ -16,6 +16,10 @@
 
 <!-- tplDeviceView.php 에서 arr 불러와 출력 -->
 	<div>
+	<form method="get" action="tplDeviceViewDetail.php">
+		<input type="text" class="search_serialnumberVal" name="searchVal">
+		<input type="submit" value="Search" class="search_serialnumber">
+	</form>
 	<?php foreach($arr as $carrier => $value_manuf) :?>
 		<b><h1><?php echo strtoupper($carrier) ?></h1><br/></b>
 		<?php foreach($value_manuf as $manuf => $value_none) :?>
