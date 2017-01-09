@@ -16,6 +16,7 @@ else {
 if(in_array($_GET['carrier'], array('etc'))) {
 	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo as f LEFT JOIN tmDevice as d ON f.inModelCode = d.dvModelCode WHERE f.inModelCode=%s AND f.inColor=%s AND (d.dvManuf=%s OR d.dvManuf=%s) GROUP BY f.inSerialNumber", $_GET['model'], $_GET['color'], $_GET['carrier'], '');
 }
+
 foreach($serial as $ex => $value) {
 	$tmp['in'] = DB::query("SELECT * FROM tmInventoryIn WHERE inSerialNumber=%s ORDER BY ivInDate DESC", $value);
 

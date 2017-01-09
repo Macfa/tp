@@ -31,6 +31,19 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 	if($err === true) {
 		throw new Exception($err_val."\\n위는 입고처리가 안 된 SerialKey 입니다", 3);
 	}
+	
+	/*
+	배열의 원소의 갯수를 체크하고
+	그걸 돌려서 2개라면
+	에러 출력
+	*/
+	$countVal = array_count_values($_POST['serialNumber']);
+	foreach ($countVal as $key => $value) {
+		if($value > 1) {
+			$check .= $key;
+			throw new Exception($check."\\n일련번호는 중복될 수 없습니다 !", 3);
+		}
+	}
 
 	$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
 	if($each != null) {	/* 해당 기기의 수량을 가져왔다면.. */
@@ -62,9 +75,11 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
     alert($e->getMessage());
 }
 
-	/* 중요, 만약 대리점 수정시 여기 역시 수정필요... 
+	/* 
+	중요, 만약 대리점 수정시 여기 역시 수정필요... 
 	일련번호로 대리점검색 후 아래 배열의 값에 포함되어 있지않다면 기존에 넣어놓은 대리점을 다시 입력
-	이는 반품상황시 입고처란에 반품자명이 쓰이는 경우를 위한 코드 */
+	이는 반품상황시 입고처란에 반품자명이 쓰이는 경우를 위한 코드
+	*/
 
 foreach($_POST['serialNumber'] as $key => $value) {
 	$goodreceipt = DB::queryFirstField("SELECT ivGoodReceipt FROM tmInventoryIn WHERE inSerialNumber=%s ORDER BY ivKey ASC", $value); //string

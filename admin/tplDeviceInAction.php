@@ -23,8 +23,8 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 
 	/*데이터베이스 내 검증하는 부분*/
 	foreach($_POST['serialNumber'] as $key => $val) {	/*입고가 출고보다 많다면...*/
-		$check_out = DB::queryFirstField("SELECT count(*) FROM tmInventoryOut WHERE inSerialNumber=%s", $val);
 		$check_in = DB::queryFirstField("SELECT count(*) FROM tmInventoryIn WHERE inSerialNumber=%s", $val);
+		$check_out = DB::queryFirstField("SELECT count(*) FROM tmInventoryOut WHERE inSerialNumber=%s", $val);
 
 		if($check_in > $check_out) {	/*기기가 있다면(더많다면..) 값을 담고 */
 			$err_val .= $val.' ';
@@ -43,16 +43,35 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		if($err === true) {
 			throw new Exception($err_val."\\n위는 이미 입고처리 된 SerialKey 입니다", 3);
 		}
-		/*정보테이블(tmInventoryInfo) 에서 중복기입을 막기 위함*/
-		if($check_in > 0)
-			$exist = true;
 	}
+
+	/*
+	배열의 원소의 갯수를 체크하고
+	그걸 돌려서 2개라면
+	에러 출력
+	*/
+	$countVal = array_count_values($_POST['serialNumber']);
+	foreach ($countVal as $key => $value) {
+		if($value > 1) {
+			$dot .= $key;
+			$err_chk = true;
+		}
+	}
+
+	if($err_chk == true) 
+		throw new Exception($dot."\\n일련번호는 중복될 수 없습니다 !", 3);
+
+	/*정보테이블(tmInventoryInfo) 에서 중복기입을 막기 위함*/
 	/*Ahull 테이블에서 입고처가 정의되어 있다면 에러 출력*/
 	$chk_carrier = DB::queryOneField('ahCarrier', "SELECT * FROM tmInventoryAhull WHERE ahGoodReceipt=%s", $_POST['goodReceipt']);
 	if(count($chk_carrier) != 0) {
 		if(strcasecmp($_POST['carrier'], $chk_carrier) != 0) {
 			throw new Exception($_POST['goodReceipt']."은\\n".$chk_carrier."로 설정되어 있습니다", 3);
 		}
+	}
+	/* 해당 일련번호가 이미 들어와있다면.. info 에 값을 넣지 않을 것. */
+	if($check_in > 0) {
+		$exist = true;
 	}
 
 	/*검증 종료*/
