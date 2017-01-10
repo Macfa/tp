@@ -9,13 +9,13 @@ $model = $_GET['model'];
 $color = $_GET['color'];
 
 /*$_GET 의 carrier 값이 skt kt lg 에 포함된다면... true / 그 외는 재고, 정보 테이블을 활용하여 해당 컬러, 제조사, 모델명에 맞는 시리얼번호를 받음 */
+//입고되어 있는 일련번호의 목록을 불러옴
 if(isExist($_GET['searchVal'])) {
 	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryIn WHERE inSerialNumber = %s GROUP BY inSerialNumber", $_GET['searchVal']);
 	$carrier = "해당";
 	$model = "검색결과";
 }else if(in_array($_GET['carrier'], array('skt', 'kt', 'lg'))) {
-	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo WHERE inModelCode=%s and inCarrier=%s and inColor=%s GROUP BY inSerialNumber", $_GET['model'], $_GET['carrier'
-		], $_GET['color']);
+	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo WHERE inModelCode=%s and inCarrier=%s and inColor=%s GROUP BY inSerialNumber", $_GET['model'], $_GET['carrier'], $_GET['color']);
 }else if(in_array($_GET['carrier'], array('etc'))) {
 	$serial = DB::queryOneColumn('inSerialNumber', "SELECT * FROM tmInventoryInfo as f LEFT JOIN tmDevice as d ON f.inModelCode = d.dvModelCode WHERE f.inModelCode=%s AND f.inColor=%s AND (d.dvManuf=%s OR d.dvManuf=%s) GROUP BY f.inSerialNumber", $_GET['model'], $_GET['color'], $_GET['carrier'], '');
 }else {
@@ -35,13 +35,11 @@ foreach($serial as $ex => $value) {
 		foreach($rows as $row) {
 
 			if($type === 'out'){
-				$tmpKey = 'out';
 				$tmpDate = 'ouOutDate';
 				$tmpTerm = 'ouOutTerm';
 				$tmpGood = 'ouDelivery';
 			}
 			if($type === 'in'){
-				$tmpKey = 'in';
 				$tmpDate = 'ivInDate';
 				$tmpTerm = 'ivInTerm';
 				$tmpGood = 'ivGoodReceipt';
@@ -93,8 +91,8 @@ $returnName = (isExist($_POST['returnName']))?" / ".$_POST['returnName']:"";
 		<table style="border: 1px skyblue solid">
 			<tr>
 				<th style="width:60">구분</th>
-				<th style="width:220">일련번호</th>
-				<th style="width:200">날짜</th>
+				<th style="width:240">일련번호</th>
+				<th style="width:220">날짜</th>
 				<th style="width:60">비고</th>
 			</tr>
 			<?php foreach($result as $row) :?>
@@ -107,6 +105,19 @@ $returnName = (isExist($_POST['returnName']))?" / ".$_POST['returnName']:"";
 			<?php endforeach?>
 		</table>
 	</div>
+</div>
+
+<div>
+<table style="border: 1px black solid">
+	<tr>
+		<th>일련번호</th>
+	</tr>
+	<?php foreach($serial as $val) :?>
+		<tr>
+			<td><?php echo $val ?></td>
+		</tr>
+	<?php endforeach?>
+</table>
 </div>
 
 <?php 

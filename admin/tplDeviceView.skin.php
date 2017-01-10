@@ -20,26 +20,31 @@
 		<input type="text" class="search_serialnumberVal" name="searchVal">
 		<input type="submit" value="Search" class="search_serialnumber">
 	</form>
-	<?php foreach($arr as $carrier => $value_manuf) :?>
-		<b><h1><?php echo strtoupper($carrier) ?></h1><br/></b>
-		<?php foreach($value_manuf as $manuf => $value_none) :?>
-			<h2><?php echo strtoupper($manuf) ?></h2><br/>
-			<!-- 데이터 정렬 부분 -->
-			<table style="border: solid 1px black">
-				<tr>
-					<th style="width:130">기종</th>
-					<th style="width:60">색상</th>
-					<th style="width:40">수량</th>
-				</tr>
-				<?php foreach($value_none as $key => $value_info) :?> <!-- 4  -->
-					<tr>
-					<?php foreach($value_info as $keys => $value) :?>
- 						<td><?php echo "<a href=tplDeviceViewDetail.php?model=".$value_info['dvModelCode']."&color=".$value_info['stColor']."&carrier=".$carrier.">".$value."</a>" ?></td>
-					<?php endforeach ?>
-					</tr>
-				<?php endforeach ?>
-			</table>
-		<?php endforeach ?>
+	<?php foreach($lists as $list_carrier) :?>
+	<input type="checkbox" class="checkbox_carrier" name=<?php echo $list_carrier ?> value=<?php echo $list_carrier ?>><?php echo strtoupper($list_carrier) ?>
 	<?php endforeach ?>
+	<?php foreach($arr as $carrier => $value_manuf) :?>
+		<div class="js-carrier" name=<?php echo $carrier;echo ($list_carrier!='skt' || $list_carrier !='미래대리점')? " style='display:none'":""; ?>>
+			<b><h1><?php echo strtoupper($carrier) ?></h1><br/></b>
+			<?php foreach($value_manuf as $manuf => $value_none) :?>
+				<h2><?php echo strtoupper($manuf) ?></h2><br/>
+				<!-- 데이터 정렬 부분 -->
+				<table style="border: solid 1px black">
+					<tr>
+						<th style="width:130">기종</th>
+						<th style="width:60">색상</th>
+						<th style="width:40">수량</th>
+					</tr>
+					<?php foreach($value_none as $key => $value_info) :?> <!-- 4  -->
+						<tr>
+						<?php foreach($value_info as $keys => $value) :?>
+	 						<td><?php echo "<a href=tplDeviceViewDetail.php?model=".$value_info['dvModelCode']."&color=".$value_info['stColor']."&carrier=".$carrier.">".$value."</a>" ?></td>
+						<?php endforeach ?>
+						</tr>
+					<?php endforeach ?>
+				</table>
+			<?php endforeach ?>
+			</div>
+		<?php endforeach ?>
 	</div>
 </div>

@@ -17,16 +17,18 @@ $dvCategory = $category + $category1;
 if($_GET['view'] == 'model') {
 	$table = 'tmInventoryStock';
 	$separatorField = 'stCarrier';
+	$lists = array('skt', 'kt', 'lg');
 }else if($_GET['view'] == 'receipt') {
 	$table = 'tmInventoryWare';
 	$separatorField = 'stGoodReceipt';
+	$lists = array('미래대리점', 'PSN마케팅', 'Ktis', '엔트솔', "KT\(본사\)");
 }
 
-foreach ($carrier_ex as $one => $carrier) {	/*숫자인덱스 | 통신사*/
-	foreach($carrier as $two => $goodreceipt) {	/*숫자인덱스 | 대리점*/
+foreach ($carrier_ex as $carrier => $arrGoodreceipt) {	/*숫자인덱스 | 통신사*/
+	foreach($arrGoodreceipt as $goodreceipt) {	/*숫자인덱스 | 대리점*/
 		
 		if($_GET['view'] == 'model') {
-			$separator = $one;
+			$separator = $carrier;
 		}else if($_GET['view'] == 'receipt') {
 			$separator = $goodreceipt;
 		}
