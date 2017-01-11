@@ -26,22 +26,18 @@
 						<option value="PSN마케팅">PSN마케팅</option>
 						<option value="Ktis">Ktis</option>
 						<option value="엔트솔">엔트솔</option>
-						<option value="KT(본사)">KT(본사)</option>
+						<option value="KT본사">KT본사</option>
 				</select><button type="button" class="js-goodReceipt-btn">추가</button>
 				<input type="checkbox" name="checkbox_return" class="checkbox_return" style="height: 15px, width: 15px">반품자</li>
 	
 
-				<li>기기종류 / 용량<select name="modelCode" id="">	<!-- tmInventory 에서 값을 가져옴 (모델명)-->
-					<?php foreach($modelList as $key => $value) :?>
-					<option><?php echo $value?></option>
+				<li>기기종류 / 용량<select name="modelCode" id="modelCode">	<!-- tmInventory 에서 값을 가져옴 (모델명)-->
+					<?php foreach($modelList as $value) :?>
+					<option class="modelCodeList"><?php echo $value?></option>
 				<?php endforeach ?>
 				</select></li>
 
-				<li>색상<select name="color" id="">
-						<option value="black">Black</option>
-						<option value="white">White</option>
-						<option value="blue">Blue</option>
-						<option value="red">Red</option>
+				<li>색상<select name="color" id="color">
 				</select></li>
 
 				<li>
@@ -58,4 +54,3 @@
 		</form>
 	</div>
 </div>
-

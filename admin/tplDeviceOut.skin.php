@@ -29,10 +29,9 @@
 				</select></li>
 
 				<li>색상<select name="color" id="">
-						<option value="black">Black</option>
-						<option value="white">White</option>
-						<option value="blue">Blue</option>
-						<option value="red">Red</option>
+					<?php foreach($modelColor as $color) :?>
+						<option><?php echo $color ?></option>
+					<?php endforeach ?>
 				</select></li>
 
 				<li>

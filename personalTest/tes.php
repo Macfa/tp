@@ -6,7 +6,7 @@ $import->addJS('tplDevice.js');
 $carrier_val = array('skt', 'kt', 'lg');
 $carrier_ex = array(
 	'skt' => array('미래대리점', 'PSN마케팅'),
-	 'kt' => array("KT(본사)", 'Ktis'),
+	 'kt' => array("KT본사", 'Ktis'),
 	 'lg' => array('엔트솔')
 );
 

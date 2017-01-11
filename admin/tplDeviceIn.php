@@ -16,6 +16,9 @@ foreach($parent as $one => $key){	// parent is dvKey value
 
 $modelList = array_filter($modelList);
 
+$modelColor = DB::queryOneColumn('dcColor', "SELECT * FROM tmDeviceColor");
+$modelColor = array_unique($modelColor);
+
 require_once("tplDeviceIn.skin.php");
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 

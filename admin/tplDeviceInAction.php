@@ -22,9 +22,11 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		throw new Exception("일련번호를 재기입해주세요", 3);
 
 	/*데이터베이스 내 검증하는 부분*/
+
 	foreach($_POST['serialNumber'] as $key => $val) {	/*입고가 출고보다 많다면...*/
 		$check_in = DB::queryFirstField("SELECT count(*) FROM tmInventoryIn WHERE inSerialNumber=%s", $val);
 		$check_out = DB::queryFirstField("SELECT count(*) FROM tmInventoryOut WHERE inSerialNumber=%s", $val);
+		$check_key = DB::queryFirstField("SELECT dvKey FROM tmDevice WHERE dvModelCode=%s", $_POST['modelCode']);
 
 		if($check_in > $check_out) {	/*기기가 있다면(더많다면..) 값을 담고 */
 			$err_val .= $val.' ';
@@ -69,15 +71,28 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 			throw new Exception($_POST['goodReceipt']."은\\n".$chk_carrier."로 설정되어 있습니다", 3);
 		}
 	}
+
+	$check_color = DB::queryOneColumn('dcColor', "SELECT * FROM tmDeviceColor WHERE dvKey=%s", $check_key);	/* 디비키에 설정되어 있는 색상리스트*/
+	if(isExist($check_color) == true) {	/* 값이 tmDeviceColor 에 있다면... */
+		if(in_array($_POST['color'], $check_color) == false) {	/* 배열안에 컬러값이 없다면..*/
+			foreach($check_color as $color) {	/* 색상리스트를 불러와 하나씩 넣는다 */
+				$colors .= $color.", ";
+			}
+				throw new Exception($_POST['modelCode']."을 지원하는 색상리스트\\n".$colors, 3);	/* 에러내용에 사용 가능한 색상 리스트 출력 */
+		}	/* 어떻게 막을 지 생각해볼것.*/
+	} else {
+		throw new Exception($_POST['modelCode']." 기기는 색상등록이 필요합니다 !", 3);
+	}
+
 	/* 해당 일련번호가 이미 들어와있다면.. info 에 값을 넣지 않을 것. */
 	if($check_in > 0) {
 		$exist = true;
 	}
-
 	/*검증 종료*/
 } catch (Exception $e) {
     alert($e->getMessage());
 }
+
 	/*반품자가 체크되어있으면 입고처대신 반품자이름으로 대입*/
 if(isExist($_POST['returnName']) === true)
 	$goodReceipt = $_POST['returnName'];

@@ -12,9 +12,6 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 	if(isNullVal($_POST['modelCode']))
 		throw new Exception("모델명을 선택해주세요", 3);
 
-	if(isNullVal($_POST['color']))
-		throw new Exception("색상을 선택해주세요", 3);
-
 	if(isNullVal($_POST['serialNumber']))
 		throw new Exception("일련번호를 재기입해주세요", 3);
 
@@ -45,7 +42,7 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		}
 	}
 
-	$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
+	$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s", $_POST['modelCode'], $_POST['carrier']);
 	if($each != null) {	/* 해당 기기의 수량을 가져왔다면.. */
 		if ($each == 0) {
 			throw new Exception("모델이 갯수가 '0'개 입니다", 3);	/* 수량이 0 이라면.. */
@@ -86,8 +83,8 @@ foreach($_POST['serialNumber'] as $key => $value) {
 }
 
 $serialCount = count($_POST['serialNumber']); /*일련번호 ( 즉 댓수가 몇개나 들어왔는지 ? )*/
-$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s and stColor=%s", $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
-$each_ware = DB::queryOneField('stEach', "SELECT * FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s and stColor=%s", $_POST['modelCode'], $goodreceipt, $_POST['color']);
+$each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s", $_POST['modelCode'], $_POST['carrier']);
+$each_ware = DB::queryOneField('stEach', "SELECT * FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s", $_POST['modelCode'], $goodreceipt);
 
 /*출고란에 인설트 하는 부분*/
 foreach($_POST['serialNumber'] as $key => $value) {
