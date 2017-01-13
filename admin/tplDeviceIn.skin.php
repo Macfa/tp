@@ -1,8 +1,8 @@
 <div class="wrap">
 	<h1>티플 단말기 현황 - 입고등록</h1>
 
-	<button type="button"><a href=""><h2>입고등록</h2></a></button>
-	<button type="button"><a href=""><h2>출고등록</h2></a></button>
+	<a href="tplDeviceIn.php" class="btn-filled-primary-dense"><h2>입고등록</h2></a>
+	<a href="tplDeviceOut.php" class="btn-filled-primary-dense"><h2>출고등록</h2></a>
 
 	<div class="wrap_list_input">
 		<form action="tplDeviceInAction.php" method="post">
@@ -10,9 +10,9 @@
 				<li>입고일<input type="text" name="inDate"></li>
 
 				<li>통신사		<!-- tplDeviceView 에서 대분류로 구분 짓기 위함 -->
-				<input type="radio" class="js-radio" name="carrier" value="skt">SKT
-				<input type="radio" class="js-radio" name="carrier" value="kt">KT
-				<input type="radio" class="js-radio" name="carrier" value="lg">LGU+
+				<input type="radio" class="js-radio js-category" name="carrier" value="skt">SKT
+				<input type="radio" class="js-radio js-category" name="carrier" value="kt">KT
+				<input type="radio" class="js-radio js-category" name="carrier" value="lg">LGU+
 				</li>
 
 <!-- 				<li class="js-">제조사<select name="manuf" id="js-manuf-add">
@@ -27,8 +27,12 @@
 						<option value="Ktis">Ktis</option>
 						<option value="엔트솔">엔트솔</option>
 						<option value="KT본사">KT본사</option>
-				</select><button type="button" class="js-goodReceipt-btn">추가</button>
-				<input type="checkbox" name="checkbox_return" class="checkbox_return" style="height: 15px, width: 15px">반품자</li>
+				</select>
+				<label class="inp-chk-dense">
+					<input type="checkbox" class="js-category checkbox_return" value="media" name="checkbox_return">
+					<div class="inp-chk-box"></div>
+					반품자
+				</label>
 	
 
 				<li>기기종류 / 용량<select name="modelCode" id="modelCode">	<!-- tmInventory 에서 값을 가져옴 (모델명)-->
@@ -46,13 +50,17 @@
 					<table class="buttonList">
 						<tr>일련번호</tr>
 						<td class=buttonList_td><input type="text" class="js-SerialNumber-buttonList" name="serialNumber[]">
-						<input type="checkbox" class="js-SerialNumber-box" name="checkbox">
+						<label class="inp-chk-dense">
+							<input type="checkbox" class="js-category js-SerialNumber-box" name="checkbox">
+							<div class="inp-chk-box"></div>
+						</label>
 						<input type="text" class="test" disabled></td>
 					</table>
-					<button type="button" class="js-SerialNumber">추가</button>
+					<br>
+					<button type="button" class="js-SerialNumber btn-filled-primary-dense">추가</button>
 				</li>
 			</ul>
-			<input type="submit" value="입고등록">
+			<input type="submit" value="입고등록" class="btn-filled-primary-dense">
 		</form>
 	</div>
 </div>

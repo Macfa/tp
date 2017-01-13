@@ -21,7 +21,7 @@
 			
 				선택된 행을
 				<select name="changeProcess" class="js-stateSelect">
-					<? foreach ($changeState as $key => $val) : ?>				
+					<? foreach ($changeState as $key => $val) : ?>
 						<option value="<?echo $key?>"><?echo $val?></option>
 					<?endforeach?>
 				</select>

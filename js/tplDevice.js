@@ -88,14 +88,14 @@ $(document).on('keyup', '.js-SerialNumber-buttonList', function() {
 		data:{serial : $serial},	/* 데이터 형식은 serial 이름으로 $serial 을 넘긴다 */
 		success:function(data) {	/* 보내는게 성공하고 해당 url 에서 에러 없이 값이 처리되었다면 success 가 실행 */
 			var $searchResult = $.parseJSON(data);	/* php -> JSON -> Javascript 로 변환 하기 위한 과정 */
-			var $par = $current.siblings('.js-SerialNumber-box');	/* 버튼 리스트의 부모로 간다음 자식인 checkbox를 저장 */
+			var $par = $current.siblings('.inp-chk-dense').find('.js-SerialNumber-box');	/* 버튼 리스트의 부모로 간다음 자식인 checkbox를 저장 */
 
 			if($searchResult) {	/* php 에서 처리된 값이 true 라면 */
 				$par.prop('checked', true);	/* checkbox 에 체크하고 그 우측에 있는 출고처기입란의 dsiable 해제 */
-				$par.siblings('.test').removeAttr("disabled");	
+				$par.parent('.inp-chk-dense').siblings('.test').removeAttr("disabled");	
 			} else {	/* 트루가 아니면 .. */
 				$par.prop('checked', false);	/* 체크를 해제하고 우측 출고처기입란의 disable 설정 */
-				$par.siblings('.test').attr("disabled", true);
+				$par.parent('.inp-chk-dense').siblings('.test').attr("disabled", true);
 			}
 		}
 	});

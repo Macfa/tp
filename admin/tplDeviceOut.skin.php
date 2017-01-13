@@ -1,8 +1,8 @@
 <div class="wrap">
 	<h1>티플 단말기 현황 - 출고등록</h1>
 
-	<button type="button"><a href=""><h2>입고등록</h2></a></button>
-	<button type="button"><a href=""><h2>출고등록</h2></a></button>
+	<a href="tplDeviceIn.php" class="btn-filled-primary-dense"><h2>입고등록</h2></a>
+	<a href="tplDeviceOut.php" class="btn-filled-primary-dense"><h2>출고등록</h2></a>
 
 	<div class="wrap_list_input">
 		<form action="tplDeviceOutAction.php" method="post">
@@ -41,13 +41,17 @@
 						<tr>일련번호</tr>
 						<td class=buttonList_td>
 							<input type="text" class="js-SerialNumber-buttonList" name="serialNumber[]">
-							<input type="checkbox" class="js-SerialNumber-box" name="checkbox">
+							<label class="inp-chk-dense">
+								<input type="checkbox" class="js-category js-SerialNumber-box" name="checkbox">
+								<div class="inp-chk-box"></div>
+							</label>
 							<input type="text" class="test" name="delivery[]" disabled></td> <!-- 클래스 네임 변경 요망  -->
 					</table>
-					<button type="button" class="js-SerialNumber">추가</button>
+					<br>
+					<button type="button" class="js-SerialNumber btn-filled-primary-dense">추가</button>
 				</li>
 			</ul>
-			<input type="submit" value="출고등록">
+			<input type="submit" value="출고등록" class="btn-filled-primary-dense">
 		</form>
 	</div>
 </div>

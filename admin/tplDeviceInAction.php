@@ -22,10 +22,6 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		throw new Exception("일련번호를 재기입해주세요", 3);
 
 	/*데이터베이스 내 검증하는 부분*/
-	if(isExist($_POST['serialNumber'])) {
-		throw new Exception("일련번호 값을 입력해주세요", 3);
-	}
-
 	foreach($_POST['serialNumber'] as $key => $val) {	/*입고가 출고보다 많다면...*/
 		$check_in = DB::queryFirstField("SELECT count(*) FROM tmInventoryIn WHERE inSerialNumber=%s", $val);
 		$check_out = DB::queryFirstField("SELECT count(*) FROM tmInventoryOut WHERE inSerialNumber=%s", $val);

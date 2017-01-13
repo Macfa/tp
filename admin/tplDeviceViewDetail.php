@@ -74,50 +74,50 @@ $returnName = (isExist($_POST['returnName']))?" / ".$_POST['returnName']:"";
 	<h1>티플 단말기 현황</h1>
 	<div class="wrap_option_button" style="display: inline;">
 		<ul>
-			<li><button><a href="tplDeviceIn.php">입고등록</a></button></li> <!-- inline, background-color, position -->
-			<li><button><a href="tplDeviceOut.php">출고등록</a></button></li>
+			<li><a href="tplDeviceIn.php" class="btn-filled-primary-dense">입고등록</a></li><br> <!-- inline, background-color, position -->
+			<li><a href="tplDeviceOut.php" class="btn-filled-primary-dense">출고등록</a></li>
 		</ul>
 	</div>
 
 	<div>
 		<ul>
-			<a href="http://chydev.tplanit.co.kr/admin/tplDeviceView.php?view=model"><li>기종별</li></a>
-			<a href="http://chydev.tplanit.co.kr/admin/tplDeviceView.php?view=receipt"><li>입고처별</li></a>
+		<a href="http://chydev.tplanit.co.kr/admin/tplDeviceView.php?view=model&carrier=skt" class="btn-filled-sub-dense"><li>기종별</li></a>
+		<a href="http://chydev.tplanit.co.kr/admin/tplDeviceView.php?view=receipt&carrier=미래대리점" class="btn-filled-sub-dense"><li>입고처별</li></a>
 		</ul>
 	</div>
 	<div>
 		<h1><?php echo strtoupper($carrier)." ".$model." ".strtoupper($color). " 입출고기록" ?></h1>
 
-		<table style="border: 1px skyblue solid">
+		<table class="table">
 			<tr>
-				<th style="width:60">구분</th>
-				<th style="width:240">일련번호</th>
-				<th style="width:220">날짜</th>
-				<th style="width:60">비고</th>
+				<th class="table-item-str">구분</th>
+				<th class="table-item-str">일련번호</th>
+				<th class="table-item-str">날짜</th>
+				<th class="table-item-str">비고</th>
 			</tr>
 			<?php foreach($result as $row) :?>
 				<tr>
-					<td><?php echo $row['type'] ?></td>
-					<td><?php echo $row['inSerialNumber'] ?></td>
-					<td><?php echo $row['date'] ?></td>
-					<td><?php echo $row['good'] ?></td>
+					<td class="table-item-str"><?php echo $row['type'] ?></td>
+					<td class="table-item-str"><?php echo $row['inSerialNumber'] ?></td>
+					<td class="table-item-str"><?php echo $row['date'] ?></td>
+					<td class="table-item-str"><?php echo $row['good'] ?></td>
+				</tr>
+			<?php endforeach?>
+		</table>
+		<br>
+		<h1>모든 일련번호</h1>
+		<br>
+		<table class="table">
+			<tr>
+				<th class="table-item-str">일련번호</th>
+			</tr>
+			<?php foreach($serial as $val) :?>
+				<tr>
+					<td class="table-item-str"><?php echo $val ?></td>
 				</tr>
 			<?php endforeach?>
 		</table>
 	</div>
-</div>
-
-<div>
-<table style="border: 1px black solid">
-	<tr>
-		<th>일련번호</th>
-	</tr>
-	<?php foreach($serial as $val) :?>
-		<tr>
-			<td><?php echo $val ?></td>
-		</tr>
-	<?php endforeach?>
-</table>
 </div>
 
 <?php 
