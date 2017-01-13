@@ -106,6 +106,6 @@ DB::update('tmInventoryWare', array(
 	'stEach' => $each_ware-$serialCount
 ), 'stModelCode=%s and stGoodReceipt=%s and stColor=%s', $_POST['modelCode'], $goodreceipt, $_POST['color']);	/* tmInventoryWare 갯수 수정 */
 
-alert('업데이트 되었습니다', 'tplDeviceView.php?view=model');
+alert('업데이트 되었습니다', 'tplDeviceView.php?view=model&carrier=skt');
 
  ?>

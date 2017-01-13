@@ -22,6 +22,9 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		throw new Exception("일련번호를 재기입해주세요", 3);
 
 	/*데이터베이스 내 검증하는 부분*/
+	if(isExist($_POST['serialNumber'])) {
+		throw new Exception("일련번호 값을 입력해주세요", 3);
+	}
 
 	foreach($_POST['serialNumber'] as $key => $val) {	/*입고가 출고보다 많다면...*/
 		$check_in = DB::queryFirstField("SELECT count(*) FROM tmInventoryIn WHERE inSerialNumber=%s", $val);
@@ -166,5 +169,5 @@ if($model_ware == 0) {
 		),	'stModelCode=%s and stColor=%s and stGoodReceipt=%s', $_POST['modelCode'], $_POST['color'], $_POST['goodReceipt']);
 }
 
-alert('인설트 되었습니다', 'tplDeviceView.php?view=model');
+alert('인설트 되었습니다', 'tplDeviceView.php?view=model&carrier=skt');
  ?>

@@ -33,9 +33,11 @@
 
 				<li>기기종류 / 용량<select name="modelCode" id="modelCode">	<!-- tmInventory 에서 값을 가져옴 (모델명)-->
 					<?php foreach($modelList as $value) :?>
-					<option class="modelCodeList"><?php echo $value?></option>
+					<option data-name=<?php echo strtolower($value) ?>><?php echo $value?></option>
 				<?php endforeach ?>
-				</select></li>
+				<input type="text" id="searchContent">
+				</select>
+				</li>
 
 				<li>색상<select name="color" id="color">
 				</select></li>

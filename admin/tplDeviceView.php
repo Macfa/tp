@@ -3,12 +3,6 @@
 require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
 require_once($cfg['path']."/adminhead.php");			// 헤더 부분 (스킨포함)
 $import->addJS('tplDevice.js');
-$carrier_val = array('skt', 'kt', 'lg');
-$carrier_ex = array(
-	'skt' => array('미래대리점', 'PSN마케팅'),
-	 'kt' => array("KT본사", 'Ktis'),
-	 'lg' => array('엔트솔')
-);
 
 $category['manuf'] = array('samsung', 'apple', 'lg', 'etc');
 $category1['category'] = array('phone', 'kids', 'pocketfi', 'watch');
