@@ -1,0 +1,165 @@
+/* CSS Document */
+
+@import 'common.scss';
+@import '_banner.scss';
+@import '_list.scss';
+@import '_vacance.scss';
+
+.rasiel-slide {} 
+.traumguard-tit,.stellaglass-tit {z-index:100;}
+
+.traumguard-device,.traumguard-tit,
+.stellaglass-device,.stellaglass-tit{position:absolute;width:100%;}
+
+
+.header-buy-btn{display:none !important;}
+
+.main-event-wrap{
+	@extend .clear-both;
+	margin:0;padding:0;list-style:none;
+	margin:2.5px auto;
+	text-align:center;
+	transition:all 0.3s;
+}
+
+.main-small-banner-tit{font-size:1.7em}
+.main-small-banner-sub{font-size:1.3em}
+
+
+.main-event-item-wrap{
+	@extend .inline-block;
+	width:50%;
+	height:200px;
+	vertical-align:top;
+	margin:0;padding:0;list-style:none;
+	padding:2.5px;
+}
+.main-event-item{
+	width:100%;
+	height:100%;
+	text-decoration:none;
+	border:1px solid #ddd;
+}
+
+.note7-counter{
+	margin:0 auto;
+	margin-top:20px;
+	color:white;
+}
+.note7-label{
+	font-size:.85em;
+}
+.note7-number{
+	font-size:3.2em;
+}
+/*****************************************
+SUB BANNER - BACK
+******************************************/
+.main-small-banner-galaxys7{
+	@extend .main-event-item;
+	background:url('../img/main-small-banner-galaxys7.jpg') no-repeat center center;
+	color:inherit;
+}
+.main-small-banner-pocketfi{
+	@extend .main-event-item;
+	background:url('../img/main-small-banner-pocketfi.jpg') no-repeat center center;
+	color:inherit;
+}
+.main-small-banner-membership{
+	@extend .main-event-item;
+	background:white url('../img/main-small-banner-membership.jpg') no-repeat center center;
+	color:white;
+}
+.main-small-banner-traumguard{
+	@extend .main-event-item;
+	background:url('../img/main-small-banner-traumguard.jpg') no-repeat center center;
+	color:white;
+}
+.main-small-banner-pointmall{
+	@extend .main-event-item;
+	background:white url('../img/main-small-banner-pointmall.jpg') no-repeat center center;
+	color:white;
+	.color { color:#febf33;}
+	.bold {font-weight:bold;}
+	.mobile_img {display:none;}
+	.pc_tit {display:block;}
+	img {width:100%;}
+}
+.main-small-banner-note7program {
+	@extend .main-event-item;
+	background:url('../img/main-small-banner-note7program.jpg') no-repeat center center;
+	color:white;
+}
+.main-small-banner-iphone7{
+	@extend .main-event-item;
+	background:black url('../img/main-small-banner-iphone7.jpg') no-repeat center center;
+	color:white;
+	.mobile_img {display:none;}
+	.pc_tit {display:block;}
+	img {width:100%;}
+}
+.main-small-banner-s7bluecoral {
+	@extend .main-event-item;
+	background:url('../img/main-small-banner-s7bluecoral.jpg') no-repeat center center;
+	color:white;
+}
+.main-small-banner-wifi{
+	@extend .main-event-item;
+	background: url('../img/side_wifi_plusmoney-mobile.jpg') no-repeat center center;
+}
+
+@media 
+all and (min-width:640px){
+	$gift-col-height : 175px;
+	.list-col{
+		height:$gift-col-height;
+		&-4,
+		&-6{	height:calc(#{$gift-col-height}*2);}
+		&-row-2,
+		&-row{height:170px}
+	}
+	.main-small-banner-pointmall{
+		.mobile_img {display:block;}
+		.pc_tit {display:none;}
+	}
+}
+ 
+@media all and (min-width:900px){
+	$gift-col-height : 200px;
+	.list-col{
+		height:$gift-col-height;
+		&-4,
+		&-6{	height:calc(#{$gift-col-height}*2);}
+		&-row-2,
+		&-row{height:195px}
+	}
+	.main-event-wrap{height:200px;}	
+	.main-event-item-wrap{width:25%;height:100%;}
+}
+
+@media all and (min-width:1200px){
+	$gift-col-height : 225px;
+	.list-col{
+		height:$gift-col-height;
+		&-4,
+		&-6{	height:calc(#{$gift-col-height}*2);}
+		&-row-2,
+		&-row{height:220px}
+	}
+	.main-small-banner-wifi{
+		background: url('../img/side_wifi_plusmoney.jpg') no-repeat center center;
+	}
+}
+
+@media all and (min-width:1450px){
+	$gift-col-height : 250px;
+	.list-col{
+		height:$gift-col-height;
+		&-4, 
+		&-6{	height:calc(#{$gift-col-height}*2);}
+		&-row-2,
+		&-row{height:245px}
+	}
+}
+
+

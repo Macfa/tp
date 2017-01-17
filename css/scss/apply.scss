@@ -1,0 +1,120 @@
+@import 'common.scss';
+@import '_banner.scss';
+@import '_list.scss';
+@import '_giftDetail.scss';
+@import '_userInfo.scss';
+@import '_calculator.scss';
+@import 'detail.scss';
+
+html .gift-btn-select{display:block;}
+html .gift-btn-cart,
+html .btn-cart-list {display:none;}
+
+.parsley-errors-apply{
+	padding:0;margin:0;list-style:none;
+	display:block;
+	li{
+		padding:0;margin:0;list-style:none;
+		display:inline-block;
+		text-align:center;
+		background:red;
+		padding:10px 15px;
+		margin:0 auto;
+		font-size:15px;
+		color:white;
+		border-radius:5px;
+		margin-top:-32px;
+		transition:opacity .2s;
+	}
+}
+.tit-small{
+	font-size:1.2em;
+	margin:10px 0;
+	margin-top:20px;
+	&:first-child{	margin-top:0;}
+}
+
+.apply-total{
+	white-space: nowrap;
+	width:300px;
+	margin:0 auto;
+	font-size:2.5em;
+	text-align:right;
+	color:rgba(0,0,0,0.5);
+}
+.apply-submit{	margin-top:40px;}
+
+.apply-cart-list{
+	@extend .section-no-padding;
+	.table{display:none;}
+	&.active{
+		.table{display:table}
+		.apply-cart-empty{display:none}
+	}
+}
+
+.apply-cart-empty{
+	padding:15px 25px;
+	height:200px;
+	color:rgba(0,0,0,0.5);
+}
+
+.js-isNotLoggedWrap, 
+.js-normalSignupWrap, 
+.js-signupWrap{
+	display:none;
+	opacity:0;
+	&.active{
+		display:block;
+		@include anmation(fadeIn, .2s);
+	}
+}
+
+.grid-item-wrap:hover .select-btn-tit{display:block}
+
+.select-btn-tit {
+	display:block;
+	position:absolute;
+	right:20px; 
+	top:20px;
+	width:30px;
+	height:30px;
+	z-index:4;
+	.gift-view-ico{
+	background-position:-300px,0;
+	top:0;
+	left:0;
+	}
+}
+
+.inlinelist li .label {padding:20px;}
+
+
+
+@media all and (min-width:400px){
+}
+
+@media all and (min-width:640px){
+	.apply-wrap{
+		width:685px;
+	}
+	
+	.select-btn-tit {
+	display:none;
+	}
+	.container{
+		padding-top:0px;
+	}
+}
+
+@media all and (min-width:900px){
+	.editWrap {width:940px;}
+}
+
+@media all and (min-width:1200px){
+}
+
+@media all and (min-width:1450px){
+}
+
+

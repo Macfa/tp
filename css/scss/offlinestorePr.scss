@@ -1,0 +1,346 @@
+@import 'common.scss';
+@import '_list.scss';
+
+$tp-color:#ffce33;
+
+$intro-tit-pb:220px;
+
+$hourbox-w:95%;
+$bn-w:180px;
+$bn-mt:10px;
+$shopimg-w:300px;
+$shopimg-h:200px;
+$hour-sub:50px;
+
+$footer-pb:50px;
+* {
+	text-align: center;
+}
+body {
+	background: #f6f6f6;
+}
+ul,li {
+	list-style: none;
+}
+footer {
+	margin-top:0px;
+}
+a{
+	text-decoration: none;
+}
+
+
+/***********************************
+		      TEXT
+***********************************/
+.tit {
+	font-size: 6em;
+	font-weight: bold;
+	letter-spacing: .18em;
+	margin: 0 auto;
+	padding-bottom: $intro-tit-pb;
+}
+.tit-w {
+	font-size: 5.8em;
+	font-weight: bold;
+	letter-spacing: .18em;
+	margin: 0 auto;
+	padding-top: 0px;
+}
+.sub {
+	font-size: 2em;
+	font-weight: bold;
+	margin: 0 auto;
+}
+.txt {
+	font-size: 1.2em;
+	margin: 0 auto;
+}
+.add {
+	font-size:.8em;
+}
+.call-bn {
+	width:$bn-w;
+	padding: 5px 20px;
+	background: $tp-color;
+	color: black;
+	border-radius: 5px;
+	margin: 0 auto;
+	margin-top: $bn-mt;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+
+.w {
+	color: white;
+}
+.y {
+	color:$tp-color;
+}
+
+.open-intro .sub {
+	padding-top:60px;
+}
+.storephoto .txt {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.hour .sub {
+	padding-top: $hour-sub;
+	padding-bottom: 20px;
+}
+
+
+/***********************************
+		      BOX
+***********************************/
+.open-intro {
+	background: $tp-color;
+}
+.hour {
+	padding-bottom: $footer-pb;
+	background: $tp-color;
+}
+
+
+.store-img {
+	padding-top: 10px;
+	padding-bottom: 50px;
+}
+
+.hour-box {
+	margin: auto;
+	width:$hourbox-w;
+	background: rgba(255,255,255,.8);
+	padding: 20px 5px 30px 5px; 
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+/***********************************
+		      LIST
+***********************************/
+.present-ul {
+	padding-left: 0px;
+	margin-top: 0px;
+	padding-bottom: 70px;
+	margin: 0 auto;
+}
+.present-ul li {
+	display: block;
+}
+.present-1 .txt {
+	font-weight: bold;
+}
+.present-2 .txt {
+	font-weight: bold;
+}
+.hour ul {
+	padding-left: 0px;
+	margin: 0 auto;
+}
+.hour-ul {
+	padding-top:10px;
+}
+.hour-ul li {
+	display: block;
+}
+.list-in {
+	font-size: 1.6em;
+	padding: 0;
+}
+.list-in-t {
+	font-size: 1.6em;
+	padding: 0;
+	width: 100%;
+}
+.list-in-s {
+	font-size: 1.1em;
+	padding: 0;
+	line-height: 1.2em;
+	margin-top: 2px;
+	width: 100%;
+}
+.line {
+	width: 70%;
+	height: 1px;
+	background: #b3b3b3;
+	margin:0 auto;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.jump {
+	margin-top: 10px;
+}
+
+/***********************************
+		       MAP
+***********************************/
+.map {
+	text-align: center;
+	margin-left: 0px;
+	width:80%;
+	height: 30%;
+}
+.root_daum_roughmap{
+	margin: 0 auto !important;
+}
+
+
+/***********************************
+		      IMG
+***********************************/
+.storephoto img {
+	max-width:100%;
+	height:auto;
+	margin:0 auto; 
+	padding: 5px;
+
+}
+.open-intro .tit {
+	background: url('../img/offline-intro-mobile.jpg')no-repeat center bottom;
+}
+.openevent {
+	background: url('../img/hour-back.png') center center;
+}
+
+.present-1 .txt {
+	padding-top: 300px;
+	background: url('../img/tumblr.png')no-repeat center top;
+
+}
+.present-2 .txt {
+	padding-top: 300px;
+	background: url('../img/blanket.png')no-repeat center top;
+}
+
+
+
+
+
+
+@media all and (min-width:640px){
+$intro-tit-pb:400px;
+$hour-sub:30px;
+$bn-mt:20px;
+
+	.tit {
+	padding-bottom: $intro-tit-pb;
+	}
+	.tit-w {
+		padding-top: 30px;
+	}
+	.sub {
+		font-size: 2.7em;
+	}
+	.txt {
+		font-size: 1.5em;
+		line-height: 1.3em;
+	}
+	.call-bn {
+		margin-top: $bn-mt;
+		font-size: 1.2em;
+	}
+	.hour .add {
+		font-size:1.2em;
+	}
+	.hour .sub {
+		padding-top: $hour-sub;
+		padding-bottom: 10px;
+	}
+	.present-ul {
+		margin-top: 10px;
+		padding-bottom: 10px;
+	}
+	.present-ul li {
+		display: inline-block;
+	}
+	.present-2 .txt {
+		padding-bottom:40px;
+		margin:30px;
+	}
+	.present-1 .txt {
+		margin:30px;
+	}
+	.storephoto .txt {
+		padding-top: 20px;
+		padding-bottom: 10px;
+	}
+	.hour-box {
+		padding: 20px 5px 50px 5px; 
+	}
+	.hour-ul {
+		padding-top:30px;
+	}
+	.list-in {
+	font-size: 1.5em;
+	}
+	.list-in-t {
+		font-size: 2.2em;
+	}
+	.list-in-s {
+		font-size: 1.2em;
+		margin-top: 10px;
+	}
+	.line {
+		width: 600px;
+		height: 1px;
+		background: #b3b3b3;
+		margin:0 auto;
+		margin-bottom: 10px;
+		margin-top: 10px;
+	}
+	.open-intro .tit {
+		background: url('../img/offline-intro-landscape.jpg')no-repeat center bottom;
+	}
+}
+@media all and (min-width:900px){
+$intro-tit-pb:450px;
+$bn-mt:70px;
+	.tit {
+	padding-bottom: $intro-tit-pb;
+	}
+	.open-intro .tit {
+		background: url('../img/offline-intro-tablet.jpg')no-repeat center bottom;
+	}
+	.hour-box {
+		padding: 20px 5px 50px 5px; 
+	}
+	.hour-ul {
+		padding-top:30px;
+	}
+	.hour .sub {
+		padding-top: $hour-sub;
+		padding-bottom: 30px;
+	}
+	.present-2 .txt {
+		margin:30px;
+	}
+	.present-1 .txt {
+		margin:30px;
+	}
+}
+@media all and (min-width:1200px){
+	.present-2 .txt {
+		margin:50px;
+	}
+	.present-1 .txt {
+		margin:50px;
+	}
+	.open-intro .tit {
+		background: url('../img/offline-intro-pc.jpg')no-repeat center bottom;
+	}
+}
+@media all and (min-width:1450px){
+	
+	.open-intro .tit {
+		background: url('../img/offline-intro-wide.jpg')no-repeat center bottom;
+	}
+}

@@ -1,0 +1,215 @@
+@import 'deviceList.scss';
+
+.container{
+	padding-top:50px;
+	background:white;
+}
+.note7 .tit {margin-bottom:15px; margin-top:0px;line-height: 1.1em;}
+.note7 .btn {background:#1428a0; color:#fff; letter-spacing:3px; border:0;}
+.note7 .btn.white {background:#fff; color:#1428a0; margin-bottom:25px}
+.note7 .color {color:getPrimaryColor(8);}
+.list-gift-main {
+@extend .list-banner;
+	background:white url('../img/note7gift-main-mobile.jpg') no-repeat center center;
+	h1, h2, h3 {color:#fff;}
+	
+}
+.note7-counter{
+	margin:0 auto;
+	margin-top:20px;
+	color:white;
+}
+.note7-label{
+	font-size:.85em;
+}
+.note7-number{
+	font-size:3.2em;
+}
+.re {width:100%; height:auto; background:#1428a0; color:#fff; }
+.re .tit { margin:0; padding:5px 0;}
+.re.footer .tit { margin:0; padding:25px 0;}
+
+.re7 {width:100%; height:auto; background:#060a0d; color:#fff; }
+.tit-re7 { margin:0; padding:5px 0;}
+.blue {color:lighten(#1428a0,25); }
+.re7 .sub{margin-bottom:0;  font-size:1.5em;}
+
+.list-gift-beam{
+	@extend .list-banner;
+	color:white;
+	background:white url('../img/note7gift-beam-mobile.jpg') no-repeat center center;
+}
+.list-gift-pocket{
+	@extend .list-banner;
+	color:white;
+	background:white url('../img/note7gift-pocket-mobile.jpg') no-repeat center center;
+}
+.list-gift-level{
+	@extend .list-banner;
+	color:white;
+	background:white url('../img/note7gift-level-mobile.jpg') no-repeat center center;
+}
+
+.list-gift-nomal {
+	padding:30px 0;
+	background:#f3f3f3;
+}
+.list-txt {
+padding:40px 0;
+}
+
+.gift_txt {
+	width:100%;
+	text-shadow:#000 0px 0px 15px;
+	padding-top:150px;
+}
+.gift_txt.right {
+	float:right;
+	color:$mainBlack;
+	text-shadow:none;
+}
+
+.list-txt{
+	@extend .list-banner;
+	background: white;
+	color:$mainBlack;
+	height:auto;
+
+}
+.list-txt.choice{
+ margin:15px 0;
+
+}
+.grid-item-note7{
+	@extend .grid-item;
+	cursor:default;
+}
+.grid-item-wrap-note7{	
+	@extend .grid-item-wrap;
+	width:50%;
+}
+.pc-view{
+	display:none;
+}
+.mobile-view{
+	display:block;
+}
+
+.note7-reservation{
+	margin-top:50px;
+}
+
+.process{
+	height:374px;
+	background:url('../img/howto_note7_mobile.jpg') no-repeat center center;
+}
+@media all and (min-width:400px){
+	.process{
+		background:url('../img/howto_note7_landscape.jpg') no-repeat center center;
+	}
+}
+
+@include responsiveLandscape{//640	
+
+
+	.gift_txt {width:50%; padding-top:20px;}
+	.list-gift-main{
+		background:white url('../img/note7gift-main-landscape.jpg') no-repeat center center;
+	}	
+
+	.list-gift-beam{
+		background:white url('../img/note7gift-beam-landscape.jpg') no-repeat center center;
+	}	
+	.list-gift-pocket{
+		background:white url('../img/note7gift-pocket-landscape.jpg') no-repeat center center;
+	}
+	.list-gift-level{
+		background:white url('../img/note7gift-level-landscape.jpg') no-repeat center center;
+	}
+	.list-txt.choice{
+		 margin:55px 0;
+	}
+	.list-gift-nomal {
+	padding:80px 0;
+	}
+	.list-txt {
+	padding:80px 0;
+	}
+	.note7-reservation{
+	margin-top:25px;
+}
+
+
+}
+
+@include responsiveTablet{//900	
+	.list-gift-main{
+		background:white url('../img/note7gift-main-tablet.jpg') no-repeat center center;
+	}
+	.list-banner-inner-note7_re{
+		padding-left:25%;
+	}
+	.gift_txt {
+		padding:20px 0;
+	}
+	.list-gift-beam{
+		background:white url('../img/note7gift-beam-tablet.jpg') no-repeat center center;
+	}
+	.list-gift-pocket{
+		background:white url('../img/note7gift-pocket-tablet.jpg') no-repeat center center;
+	}
+	.list-gift-level{
+		background:white url('../img/note7gift-level-tablet.jpg') no-repeat center center;
+	}
+	.pc-view{
+	display:block;
+	}
+	.mobile-view{
+	display:none;
+	}
+	.grid-item-wrap-note7{	
+
+	width:100%;
+}
+
+}
+
+@include responsivePC{//1200
+	.process{
+		height:374px;
+		background:url('../img/howto_note7.jpg') no-repeat center center;
+	}
+
+	.gift_txt {padding-top:50px;}
+
+	.list-gift-main{
+		background:white url('../img/note7gift-main-pc.jpg') no-repeat center center;
+	}
+	.list-gift-beam{
+		background:white url('../img/note7gift-beam-pc.jpg') no-repeat center center;
+	}
+	.list-gift-pocket{
+		background:white url('../img/note7gift-pocket-pc.jpg') no-repeat center center;
+	}
+	.list-gift-level{
+		background:white url('../img/note7gift-level-pc.jpg') no-repeat center center;
+	}
+}
+
+@include responsiveWide{//1450
+	.list-gift-main {	
+	background:white url('../img/note7gift-main-wide.jpg') no-repeat center center;	
+	}
+	.list-gift-beam{
+		background:white url('../img/note7gift-beam-wide.jpg') no-repeat center center;
+	}
+	.list-gift-pocket{
+		background:white url('../img/note7gift-pocket-wide.jpg') no-repeat center center;
+	}
+	.list-gift-level{
+		background:white url('../img/note7gift-level-wide.jpg') no-repeat center center;
+	}
+}
+
+
+

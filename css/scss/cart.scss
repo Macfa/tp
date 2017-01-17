@@ -1,0 +1,124 @@
+@import 'common.scss';
+@import '_banner.scss';
+@import '_list.scss';
+@import '_giftDetail.scss';
+@import '_userInfo.scss';
+
+
+.cart-wrap{
+	text-align:center;
+}	
+
+.table-separator{
+	width:30px;
+	padding-left:0 !important;
+	padding-right:0 !important;
+}
+
+.cart-additial-wrap{
+	height:60px;
+	margin-top:15px;
+	background:white;
+	border:solid 1px #eee;
+}
+
+.cart-total-tit{
+	font-size:1.1em;
+	color:#888;
+}
+
+.cart-total{
+	white-space: nowrap;
+	width:300px;
+	margin:0 auto;
+	font-size:2.5em;
+	text-align:right;
+	color:rgba(0,0,0,0.5);
+	margin-bottom:15px;
+	text-align: center;
+}
+
+.parsley-errors-cart{
+	padding:0;margin:0;list-style:none;
+	display:block;
+	li{
+		padding:0;margin:0;list-style:none;
+		display:inline-block;
+		text-align:center;
+		background:red;
+		padding:10px 15px;
+		margin:0 auto;
+		font-size:15px;
+		color:white;
+		border-radius:5px;
+		margin-top:-32px;
+		transition:opacity .2s;
+	}
+}
+
+
+.cash{
+
+	.inp-group {
+		margin-top:0;
+		border-bottom: 0;
+	}
+
+}
+
+.totalPoint {
+	@extend .inp-wrap;
+	width:auto;
+	vertical-align:top;
+	margin-top:20px;
+}
+.totalPoint-txt {
+	@extend .cart-total;
+	padding: 10px;
+	margin: 0;
+	border-bottom: 0;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.totalPoint-label{
+	@extend .inp-label;
+	font-size: 0.8em;
+}
+
+.kcpPlugin-info{
+	font-size: 0.85em;
+}
+
+
+@media all and (min-width:640px){
+	.order-wrap{
+		width:700px;
+	}
+	.address-action{
+		position:absolute;
+		right:0;
+		top:0;
+		padding-right:25px;
+		padding-top:15px;
+	}
+
+	.cash{
+		.half {		
+			width: 40%;
+			}
+	}
+}
+
+ 
+@media all and (min-width:900px){
+	.cart-wrap{
+		width:850px;
+	}	
+	
+}
+
+@media all and (min-width:1200px){
+}
+
+@media all and (min-width:1450px){
+}

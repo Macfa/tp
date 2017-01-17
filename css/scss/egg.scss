@@ -1,0 +1,42 @@
+@import 'common.scss';
+@import 'deviceList.scss';
+@import 'detail.scss';
+
+.egg-tit{
+@extend .tit;
+padding-top:125px;
+}
+.list-banner-egg{
+@extend .list-banner-kt;
+margin-top:-180px;
+}
+
+
+
+@include responsiveLandscape{//640	
+
+.egg-tit{
+padding-top:100px;
+}
+
+
+
+
+
+}
+
+@include responsiveTablet{//900	
+	
+}
+
+@include responsivePC{//1200
+
+
+}
+
+@include responsiveWide{//1450
+	
+}
+
+
+

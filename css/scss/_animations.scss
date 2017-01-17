@@ -1,0 +1,45 @@
+@mixin anmation($animation, $duration:.3s){
+	animation-duration: $duration;
+	-webkit-animation-name:$animation;
+	animation-name: $animation;
+	 -webkit-animation-fill-mode: both;
+	 animation-fill-mode: both;
+	 @if $animation == 'fadeIn' {
+		html.lte-ie9 & {
+			opacity:1;
+			display:block;
+		}
+	 }
+}
+
+@mixin animate-fadeIn-to-out(){
+	opacity:0;
+	html.lte-ie9 & {
+		display:none;
+	}
+	&.active{
+		@include anmation(fadeIn, .5s);
+	}
+}
+
+.fadeIn{
+	animation-duration: .3s;
+	animation-name: fadeIn;
+}
+
+@include keyframe(fadeIn) {
+	0% {
+		display: none;
+		opacity: 0;
+	}
+
+	1% {
+		display: block !important;
+		opacity: 0;
+	}
+
+	100% {
+		display: block !important;
+		opacity: 1;
+	}
+}

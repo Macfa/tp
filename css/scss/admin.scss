@@ -1,0 +1,321 @@
+@import 'common.scss';
+@import '_list.scss';
+@import '_row.scss';
+//@import 'jquery-ui.min.css';
+//@import 'jquery-ui.theme.min.css';
+
+//메인기기 기기정렬 css
+.sortable-grid { list-style-type: none; margin: 0; padding: 0; width: 900px;}
+.sortable-grid li {@include inlineBlock; padding: 1px;width: 18%; height: 150px; font-size: 1.5em; text-align: center; vertical-align:top;}
+.sortable-main li:not(.ui-sortable-placeholder){
+	@include nthChildSelector(1, 10){
+		background: lighten($mainYellow, 30);
+	}
+	&:nth-child(10){
+		margin-bottom:100px;
+	}
+}
+#sortable {
+	width: 1200px;
+	margin:0;
+	padding:0;
+	list-style:none;
+	li{
+		@include inlineBlock;
+		width:100px;
+		height:100px;
+		vertical-align:top;
+		padding-top:30px;
+		text-align:center;
+	}
+}
+//==========메인기기 기기정렬 css==========
+
+.contact-pc-wrap {display:none;}
+.contact-ico {
+	background:url('../img/ico-contact-btn.png') no-repeat center center;
+	position:absolute;
+	width:20px;
+	height:19px;
+	left:20px;
+	top:50%;
+	margin-top:-10px;
+	}
+.contact-ico-consult{
+	@extend .contact-ico;
+}
+.contact-ico-tel{
+	@extend .contact-ico;
+}
+.contact-ico-kakao{
+	@extend .contact-ico;
+}
+
+.contact-mobile-wrap {position:fixed; bottom:25px; right:5px;}
+.contact-mobile-inner {
+	width:60px;
+	height:60px;
+	position:relative;
+}
+.contact-mobile-btn {
+	display:block;
+	width:140px;
+	height:60px;
+	position:absolute;
+	bottom:0px; opacity:0;
+}
+.contact-consult-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:195px; opacity:1; transition:bottom .03s;}
+}
+.contact-tel-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:130px; opacity:1; transition:bottom .05s;}
+}
+.contact-kakao-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:65px; opacity:1; transition:bottom .07s;}
+}
+
+.mobile-contact-tit {
+	width:80px;
+	height:60px;
+	float:left;
+	line-height:60px;
+	text-align:center;
+	font-size:1em;
+	text-decoration:none;
+	color:$mainBlack;
+	text-shadow:1px 1px 30px #797979;
+}
+
+.mobile-ico {
+	width:60px;
+	height:60px;
+	display:block;
+	position:relative;
+	border-radius:50%;
+	float:left;
+	@include shadow(#aaa);
+}
+.mobile-ico-kakao{
+	@extend .mobile-ico;
+}
+.mobile-ico-consult{
+	@extend .mobile-ico;
+}
+.mobile-ico-tel{
+	@extend .mobile-ico;
+}
+.mobile-ico {
+	background: $mainYellow;
+	color:$mainBlack;
+	border:0;
+	&.active  {background:white; color:$mainYellow;}
+}
+.mobile-ico-kakao {
+	background:$kakaoColor;
+}
+.mobile-ico-consult,.mobile-ico-tel{
+	background:$mainBlack;
+}
+
+.contact-mobile-ico {
+	background: url('../img/ico-contact-btn.png') no-repeat center center;
+	position:absolute;
+	width:20px;
+	height:19px;
+	left:20px;
+	top:50%;
+	margin-top:-10px;
+}
+
+.contact-mobile-ico-kakao {
+	@extend .contact-mobile-ico;
+	background-position:0 0;
+}
+.contact-mobile-ico-consult {
+	@extend .contact-mobile-ico;
+	background-position:-60px 0;
+}
+.contact-mobile-ico-tel {
+	@extend .contact-mobile-ico;
+	background-position:-40px 0;
+}
+
+
+.btn-contact{
+	display:none;
+}
+.btn-contact-kakao{
+	@extend .btn-contact;	
+}
+.btn-contact-tel{
+	@extend .btn-contact;
+}
+.btn-contact-ico-kakao{
+	@extend .btn-contact-ico;
+}
+.btn-contact-ico-tel{
+	@extend .btn-contact-ico;
+}
+.btn-contact-ico-consult{
+	@extend .btn-contact-ico;
+}
+
+.admin-wrap{
+	width:225px;
+	height: 100%;
+	margin:0;
+	padding:0;
+	position: fixed;
+	left:0;
+	background:$mainBlack;
+	color: $mainYellow;
+	z-index:10;
+	font-size: 1.2em;
+}
+.admin-list-group {
+	width:100%;
+	margin:0;
+	padding:0;
+}
+.admin-list-wrap {
+	list-style: none;	
+	padding-top:15px;
+	padding-left:15px;
+	@include shadow-level(2);
+}
+.container {
+	margin: 0;
+	margin-left: 245px;
+	padding-top:5px;
+}
+
+.applyList-wrap {
+	width: 98%;
+}
+
+.admin-list-sub-group {	
+	padding-left:0;
+	margin: 0;
+	list-style: none;
+	
+}
+.admin-list-sub {
+	display: block;
+	height:40px;
+	text-decoration: none;
+	line-height: 40px;
+	font-size:0.77em;
+	color: #fff;
+	&:hover{
+		color: $mainYellow;
+	}
+}
+
+.giftList {
+	font-size: 14px;
+	.gfThumb img {width:60px;}
+	.gfKey a{color:$mainBlack;}
+	tr td {text-align: center; padding:15px 35px;}	
+}
+
+.giftListModify{
+	.inp-group {
+		margin-top: 0;
+		border-bottom: 0;
+	}
+	.gfThumb img {width:250px;}
+	tr td {text-align: center; padding:15px 35px;}	
+}
+// 사은품 수정 상세페이지 css 
+.detailImageArea {
+	.sortable-main li:not(.ui-sortable-placeholder){		
+		&:nth-child(10){
+			margin-bottom:0px;
+		}
+	}
+
+	width:100%;
+	background: #fff;
+	.sortable-grid{
+		width: 100%;
+	}
+	.sortable-grid li{
+		text-align: left;
+		width:100%;
+		height:auto;
+		//width:18%;
+		//height:400px;
+		margin-bottom: 5px;
+		padding-bottom:30px;
+		border:2px solid #2e333a;
+		position: relative;
+		font-size: 1em;
+		img {
+			max-height:400px;
+			//width:250px;
+			//height: 100%;
+		}
+	}
+	.sortable-main li:not(.ui-sortable-placeholder){
+		background: none;
+	}
+	.img-delete {
+		position: absolute;
+		right: 5px;
+		width:45px;
+		height:40px;
+		font-size: 15px;
+		text-align: center;
+		line-height: 40px;
+		display: block;
+		background: $mainYellow;
+		color:$mainBlack;
+		cursor: pointer;
+		z-index: 5;
+	}	
+}
+
+.deviceList{	
+	font-size: 14px;
+	.dvThumb img {max-height: 70px;}
+	.dvTit a {color:$mainBlack;}
+	tr td {text-align: center; padding: 10px 25px;}
+}
+.deviceListModify{	
+	
+	.dvThumb img {max-height:120px;}
+	.dvDetailThumb img {max-height:200px;}
+	tr td {text-align: center;}
+	.inp-group{
+		margin-top: 0;
+		border: 0;
+	}
+}
+.newsListModify {
+	tr td {text-align: left;}
+	.center{text-align: center;}
+}
+.listThumb img {width:100px}
+.thumbModify img {max-width: 250px;}
+.listTitLink a {color:$mainBlack;}
+.border-none {border-bottom: 0;}
+
+.dailyhit {
+	@extend .newsListModify;	
+	width:50%;
+	margin:0 auto;
+}
+
+.adminApplyList {font-size: 11px;}
+
+@media all and (min-width:640px){
+	.admin-wrap{
+		width:245px;
+	}
+	.admin-list-sub-group{
+		padding-left:25px;
+	}	
+}

@@ -1,0 +1,454 @@
+@import 'common.scss';
+@import '_list.scss';
+a { text-decoration:none; }
+ul {list-style:none; padding:0; }
+i {width:40px;height:45px; display:inline-block;
+	background:url('../img/iphoneevent-a.png') no-repeat center bottom;}
+.yellow {color:#FCB514; font-weight:bold;}
+.hot { color:#ff0054; font-weight:bold;}
+.grey {color:#D3D3D3;}
+.nope {text-decoration:line-through;}
+
+.tit-bb {
+	font-size:4em;
+	font-weight:bold;
+	text-align:center;
+	letter-spacing:-0.07em;
+	line-height:1.25em;
+	
+	margin:0;
+	padding-top:80px;
+}
+
+.tit-b {
+	font-size:2.8em;
+	font-weight:bold;
+	text-align:center;
+	letter-spacing:-0.07em;
+	line-height:1.25em;
+	
+	margin:0;
+	padding-bottom:50px;
+}
+.tit {
+	font-size:2em;
+	font-weight:bold;
+	text-align:center;
+	letter-spacing:-0.03em;
+
+	margin:0;
+}
+.tit-2 {
+	font-size:2.5em;
+	font-weight:bold;
+	text-align:center;
+	letter-spacing:-0.03em;
+
+	margin:0;
+	padding-top:18px;
+	padding-bottom:10px;
+}
+.sub {
+	font-size:1.4em;
+	text-align:center;
+	letter-spacing:-0.03em;
+
+	margin:0;
+}
+.sub-2 {
+	font-size:3.5em;
+	text-align:center;
+	letter-spacing:-0.03em;
+	line-height:1.2em;
+
+	margin:0;
+	padding-top:120px;
+}
+.add {
+	font-size:1.2em;
+	text-align:center;
+	letter-spacing:-0.03em;
+
+	margin:0;
+}
+.link {
+	text-align:center;
+	color:white;
+	font-size:1.8em;
+	text-decoration:underline;
+}
+.link:hover {
+	color:#FCB514;
+	font-weight:bold;
+}
+
+
+.bn-delivery {
+	width:280px;
+	padding:10px 25px;
+	margin:0 auto;
+	margin-top:20px;
+	font-size:1.3em;
+
+	border:1px solid black;
+	border-radius:25px;
+	text-align:center;
+	color:white;
+	
+	font-weight:bold;
+	background:#ff0054;
+	font-weight:nomal;
+}
+.bn-delivery:hover {
+	font-weight:bold;
+	background:black;
+	color:white;
+}
+.bn-egg {
+	width:250px;
+	padding:10px 25px;
+	margin:0 auto;
+	margin-top:20px;
+	margin-bottom:50px;
+	font-size:1.3em;
+
+	border:1px solid white;
+	border-radius:25px;
+	text-align:center;
+	color:#FCB514;
+}
+.bn-egg:hover {
+	font-weight:bold;
+	color:black;
+	border:black;
+	background:#FCB514;
+}
+
+
+.container {
+	padding:0;
+}
+
+
+
+.delivery {
+}
+.box-intro {
+	height:500px;
+
+	background:white url('../img/box-mobile.jpg') no-repeat center bottom;
+}
+.delivery-inner {
+	height:650px;
+
+	background:white url('../img/inner-mobile.jpg') no-repeat center bottom;
+}
+.delivery .tit-b {
+	padding-top:110px;
+}
+.delivery-inner .sub {
+	padding-top:100px;
+	font-weight:bold;
+}
+
+
+.present {
+	background:#545454 url('../img/pattern-2.png');
+	margin:0 auto;
+}
+.tablet {
+	height:450px;
+	background:url('../img/tablet-mobile.png') no-repeat 80px bottom;
+}
+.earphone {
+	height:450px;
+	background:url('../img/earphone-mobile.png') no-repeat 0px bottom;
+}
+.left-txt {
+	font-size:1.9em;
+	font-weight:bold;
+	text-align:center;
+	letter-spacing:-0.03em;
+	color:white;
+
+	margin:0;
+	padding:15px 20px;
+	padding-top:200px;
+}
+.right-txt {
+	font-size:1.9em;
+	font-weight:bold;
+	text-align:center;
+	letter-spacing:-0.03em;
+	color:white;
+
+	margin:0;
+	padding:15px 20px;
+	padding-top:150px;
+
+}
+
+.egg {
+	background:#1f1f1f url('../img/pattern.png');
+	color:white;
+}
+.sale {
+	
+}
+.sale .tit-b {
+	padding-top:80px;
+}
+.sub-tit {
+	font-size:1.5em;
+	text-align:center;
+	letter-spacing:-0.03em;
+
+	padding-top:40px;
+}
+.sub-in {
+	font-size:1.5em;
+	text-align:center;
+	letter-spacing:-0.03em;
+
+	margin:0;
+}
+.sub-bad {
+	margin:0 auto;
+	text-align:center;
+}
+
+.sub-good {
+	margin:0 auto;
+	margin-top:50px;
+	padding-top:640px;
+	padding-bottom:30px;
+	background:#1f1f1f url('../img/sale-mobile.png') no-repeat center 15px;
+	
+	text-align:center;
+}
+.sub-good .sub {
+	font-size:1.8em;
+}
+.data {
+	padding:30px 10px;
+
+	display:inline-block;
+}
+.egg-price {
+	padding:30px 10px;
+	border-top:1px solid white;
+	border-bottom:1px solid white;
+
+	display:inline-block;
+}
+.plus .tit {
+	padding-top:10px;
+}
+.plus {
+	height:500px;
+	padding-top:40px;
+	background:#1f1f1f url('../img/plus-mobile.png') no-repeat center bottom;
+	color:white;
+}
+
+@media all and (min-width:640px){
+.box-intro {
+	height:620px;
+	background:white url('../img/box-landscape.jpg') no-repeat center bottom;
+}
+.tit-bb {
+	font-size:5em;
+}
+.tit-b {
+	font-size:3.8em;
+	padding-bottom:30px;
+}
+.sub {
+	font-size:2em;
+}
+.add {
+	font-size:1.2em;
+}
+.delivery .add {
+	padding-top:30px;
+}
+.delivery .tit-b {
+	padding-top:130px;
+}
+.sale .tit-b {
+	padding-top:120px;
+	margin-bottom:50px;
+}
+.delivery-inner {
+	height:650px;
+	background:white url('../img/inner-lanscape.jpg') no-repeat center bottom;
+}
+.sub-good {
+	padding-top:660px;
+}
+.plus {
+	height:500px;
+	background:#1f1f1f url('../img/plus-landscape.png') no-repeat center bottom;
+}
+
+}
+
+
+
+
+@media all and (min-width:900px){
+.box-intro {height:640px;}
+.tit-bb {
+	font-size:5em;
+}
+.tit-b {
+	font-size:3.6em;
+	padding-bottom:30px;
+}
+.sub {
+	font-size:1.5em;
+}
+.add {
+	font-size:1.2em;
+}
+.delivery-inner {
+	height:700px;
+	background:white url('../img/inner-tablet.jpg') no-repeat center bottom;
+}
+.sub-good {
+	padding-top:800px;
+	background:#1f1f1f url('../img/sale-tablet.png') no-repeat center 50px;
+}
+.plus {
+	height:500px;
+	background:#1f1f1f url('../img/plus-tablet.png') no-repeat center bottom;
+}
+.sub-good li {display:inline-block; margin-top:90px;padding-bottom:50px;} 
+.data {
+	padding:20px 50px;
+	width:310px;
+	height:150px;
+	vertical-align:middle;
+	display:inline-block;
+}
+.egg-price {
+	padding:5px 50px;
+	width:310px;
+	height:150px;
+	border-top:0px solid white;
+	border-bottom:0px solid white;
+	
+	border-right:1px solid white;
+	border-left:1px solid white;
+	vertical-align:middle;
+	display:inline-block;
+}
+.link-pad {
+	padding:15px 30px;
+width:310px;
+	vertical-align:middle;
+	height:150px;
+	display:inline-block;
+}
+.link {
+	margin:10px;
+	
+}
+.plus .sub {
+	margin-top:50px;
+}
+.tablet {
+	height:500px;
+	background:url('../img/tablet-mobile.png') no-repeat 70% bottom;
+}
+.earphone {
+	height:580px;
+	background:url('../img/earphone-pc.png') no-repeat 20% bottom;
+}
+.left-txt {
+	text-align:left;
+	font-size:2.5em;
+
+	padding-top:200px;
+	padding-left:15%;
+}
+.right-txt {
+	text-align:right;
+	font-size:2.5em;
+	
+	padding-top:200px;
+	padding-right:15%;
+}
+
+}
+
+
+
+
+@media all and (min-width:1200px){
+
+.delivery-inner {
+	height:650px;
+	background:white url('../img/inner-pc.jpg') no-repeat center bottom;
+}
+.plus {
+	height:500px;
+	background:#1f1f1f url('../img/plus-pc.png') no-repeat center bottom;
+}
+.sub {
+	font-size:1.6em;
+}
+.sale .sub {
+	font-size:2em;
+}
+.sale .tit-b {
+	margin-bottom:100px;
+}
+.data {
+	padding:20px 20px;
+	width:350px;
+	height:180px;
+}
+.egg-price {
+	padding:5px 20px;
+	width:350px;
+	height:180px;
+}
+.link-pad {
+	padding:15px 20px;
+width:350px;
+	height:180px;
+}
+
+.plus .sub {
+	margin-top:10px;
+}
+.add {
+	font-size:1.5em;
+}
+}
+
+
+
+
+@media all and (min-width:1450px){
+.delivery-inner {
+	height:650px;
+	background:white url('../img/inner-wide.jpg') no-repeat center bottom;
+}
+.plus {
+	height:500px;
+	background:#1f1f1f url('../img/plus-wide.png') no-repeat center bottom;
+}
+.left-txt {
+	text-align:left;
+
+	padding-left:20%;
+}
+.right-txt {
+	text-align:right;
+	
+	padding-top:150px;
+	padding-right:20%;
+}
+}

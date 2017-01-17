@@ -1,0 +1,164 @@
+.gift-view-ico{
+	position:absolute;
+	display:block;
+	width:30px;
+	height:30px;
+	left:10px;
+	top:10px;
+	background:url('../img/gift-view-ico.png') no-repeat;
+	text-decoration:none;
+}
+
+.gift-btn{
+	position:relative;
+	text-decoration:none;
+	border:none;
+	text-align:left;
+	background:none;
+	padding:15px 20px;
+	padding-left:50px;
+	line-height:21px;
+	color:$mainYellow;
+	transition:background .1s;
+	&:hover{
+		background:rgba($mainYellow,0.15);
+	}
+	&:active{
+		background:rgba($mainYellow,0.35);
+	}
+}
+
+.gift-btn-cart{
+	display:block;
+	width:100%;
+	transition:width .5s;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:0 0;
+	}
+	&.active {
+		.btn-success{
+			opacity:1;
+			transition:opacity .15s;
+		}
+	}
+}
+
+.gift-btn-select{
+	display:none;
+	width:100%;
+	transition:width .5s;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:0 0;
+	}
+	&.active {
+		.btn-success{
+			opacity:1;
+			transition:opacity .15s;
+		}
+	}
+}
+
+.btn-success{
+	opacity:0;
+	position:absolute;
+	width:100%;
+	height:100%;
+	line-height:52px;
+	text-align:center;
+	font-weight:bold;
+	transition:opacity .5s;
+	top:0;
+	left:0;
+	background:$mainYellow;
+	color:white;
+	.gift-view-ico{
+		background-position:-270px 0;
+		position:absolute;
+		left:10px;
+		top:7px;
+	}
+}
+
+.gift-category-it{
+	@include inlineBlock;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:-150px 0;
+	}
+}
+.gift-category-living{
+	@include inlineBlock;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:-180px 0;
+	}
+}
+
+.gift-category-sound{
+	@include inlineBlock;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:-210px 0;
+	}
+}
+.gift-category-home{
+	@include inlineBlock;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:-180px 0;
+	}
+}
+.gift-category-media{
+	@include inlineBlock;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:-240px 0;
+	}
+}
+
+.gift-category-health{
+	@include inlineBlock;
+	@extend .gift-btn;
+	.gift-view-ico{
+		background-position:-120px 0;
+	}
+}
+
+
+
+
+.gift-close-btn{
+	z-index:9999;
+	position:fixed;
+	top:5px;
+	right:5px;
+	width:70px;
+	height:70px;
+	outline:0;
+	border:0;
+	background:none;
+	color:white;
+	font-size:3em;
+}
+
+.gift-number {
+	@extend .inp-num-dense;
+	color:#fff;
+	
+}
+
+@media all and (min-width:640px){
+	.gift-close-btn{
+		font-size:4em;
+		right:90px;
+	}
+}
+
+@media all and (min-width:900px){
+}
+@media all and (min-width:1200px){
+}
+@media all and (min-width:1450px){
+}

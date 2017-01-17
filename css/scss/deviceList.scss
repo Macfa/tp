@@ -1,0 +1,333 @@
+@import 'common.scss';
+@import '_banner.scss';
+@import '_list.scss';
+$navHeight : 50px;
+$navDeviceHeight : 90px;
+$bannerHeight : 350px;
+
+.samsung-container,
+.apple-container,
+.lg-container,
+.pocketfi-container,
+.watch-container,
+.kids-container,
+.sk-container,
+.kt-container{
+	@extend .container;
+}
+.sk-container{
+	padding-top:$navHeight * 2 + $navDeviceHeight;
+}
+.samsung-container,
+.apple-container,
+.lg-container,
+.pocketfi-container,
+.watch-container,
+.kids-container{
+	padding-top:$navHeight + $navDeviceHeight;	
+}
+.kt-container{
+	padding-top:$navHeight;
+}
+.list-banner {
+	height:$bannerHeight;
+	font-size:1.1em;
+	text-align:center;
+}
+.list-banner-tit{margin:0;margin-bottom:20px;}
+.list-banner-sub{font-size:.8em}
+.list-banner-sk{
+	@extend .list-banner;
+	background:white url('../img/banner-v10-mobile.jpg') no-repeat center center;
+}
+.list-banner-manuf-lg{
+	@extend .list-banner;
+	background:white url('../img/banner-g5-mobile.jpg') no-repeat center 10px;
+}
+.list-banner-samsung{
+	@extend .list-banner;
+	background:white url('../img/banner-s7-mobile.jpg') no-repeat center 10px;
+}
+.list-banner-apple{
+	@extend .list-banner;
+	background:white url('../img/main_iphone_se_mobile.jpg') no-repeat center -50px;
+	height:450px;
+}
+
+.list-banner-pocketfi{
+	@extend .list-banner;
+	height:250px;
+	//background:#edeae5 url('../img/sub_wifi_prpointmore-mobile.jpg') no-repeat center ;	
+
+}
+
+.subEvent-egg{	
+	background: url('../img/sub_wifi_plusmoney_1-mobile.jpg') no-repeat center center;
+}
+.subEvent-pocket{
+	background: url('../img/sub_wifi_plusmoney2_1-mobile.jpg') no-repeat center center;
+}
+
+
+
+.list-banner-gear{
+	@extend .list-banner;
+	color:white;
+	height:250px;
+	background:url('../img/sub_gear3_plusmoney2-mobile.jpg') no-repeat center center;
+	.list-banner-tit{@include text-shadow(#000,0,10);}
+}
+.list-banner-kizphone{
+	@extend .list-banner;
+	height: 250px;
+	background:white url('../img/sub_kiz_mecard-mobile.jpg') no-repeat center bottom;
+}
+.list-banner-kt{
+	@extend .list-banner;
+	color:white;
+	background:white url('../img/banner-kt-mobile.jpg') no-repeat center center;
+}
+.list-banner-lg{
+	@extend .list-banner;
+	color:white;
+	background:white url('../img/banner-lg-mobile.jpg') no-repeat center center;
+}
+.list-banner-inner-kizphone,
+.list-banner-inner-sk{padding-top:20px;}
+.list-banner-inner-kt,
+.list-banner-inner-apple{padding-top:100px;}
+.list-banner-inner-gear{padding-top:50px}
+.list-banner-inner-pocketfi,
+.list-banner-inner-manuf-lg,
+.list-banner-inner-samsung{padding-top:130px}
+.list-banner-inner-lg{padding-top:140px;}
+
+
+.newsList {
+	.grid-item-wrap {
+		width:50%;
+		height:280px;
+	}
+	.grid-item-tit{
+		background:rgba(255, 255, 255, 1);
+		font-size: 1.2em;
+		height:90px;
+	}
+	img {
+		width:auto;
+		height:100%;
+	}
+}
+
+@include responsiveLandscape{//640	
+
+	.list-banner-sk{
+		background-image:url('../img/banner-v10-landscape.jpg');
+		button{margin-top:150px;}
+	}
+	.list-banner-samsung{
+		background:white url('../img/banner-s7.jpg') no-repeat -100px center;
+	}
+	.list-banner-apple{
+		background:white url('../img/main_iphone_se.jpg') no-repeat 3% center;
+		height:475px;
+		.banner-iphone6 {
+		background-position-y:-120px;
+		}
+		.banner-iphone6-wrap{
+		padding-top:5px;
+		}
+
+	}
+
+	.list-banner-gear{
+		height: 350px;
+		background-image:url('../img/sub_gear3_plusmoney2-landscape.jpg');
+	}
+	.list-banner-manuf-lg{
+		background:white url('../img/banner-g5.jpg') no-repeat 10% center;
+	}
+	.list-banner-pocketfi{
+		height: 350px;
+		//background:#edeae5 url('../img/sub_wifi_prpointmore-landscape.jpg')no-repeat center center;
+
+	}
+	.list-banner-kizphone{
+		height: 350px;
+		background-image:url('../img/sub_kiz_mecard-landscape.jpg');
+	}
+	.subEvent-egg{
+		background: url('../img/sub_wifi_plusmoney_1-landscape.jpg') no-repeat center center;
+	}
+	.subEvent-pocket{
+		background: url('../img/sub_wifi_plusmoney2_1-landscape.jpg') no-repeat center center;
+	}
+
+	.list-banner-kt{
+		background:white url('../img/banner-kt-landscape.jpg') no-repeat center center;
+	}
+	.list-banner-lg{
+		background:white url('../img/banner-lg-landscape.jpg') no-repeat center center;
+	}
+	.list-banner-inner-sk,
+	.list-banner-inner-kizphone{padding-top:30px;}
+	.list-banner-inner-apple,
+	.list-banner-inner-manuf-lg{padding-left:40%;padding-top:50px;}
+	.list-banner-inner-kt{padding-top:100px}
+	.list-banner-inner-samsung,
+	.list-banner-inner-pocketfi,
+	.list-banner-inner-gear{padding-top:60px}
+	.list-banner-inner-samsung,
+	.list-banner-inner-pocketfi{padding-left:30%;}
+	
+
+}
+
+@include responsiveTablet{//900	
+	$navHeight : 60px;
+	$navDeviceHeight : 95px;
+	$bannerHeight : 450px;
+	.sk-container{
+		padding-top:$navHeight * 2 + $navDeviceHeight;
+	}
+	.samsung-container,
+	.apple-container,
+	.lg-container,
+	.pocketfi-container,
+	.watch-container,
+	.kids-container{
+		padding-top:$navHeight + $navDeviceHeight;	
+	}
+	.kt-container{
+		padding-top:$navHeight;
+	}
+	/*.list-banner-tit{margin-bottom:120px;}*/
+	.list-banner {
+		height:$bannerHeight;
+	}
+	.list-banner-sk{
+		background-image:url('../img/banner-v10-tablet.jpg');
+	}
+	.list-banner-samsung{
+		background-position: 10% center;
+	}
+	.list-banner-apple{
+		background:white url('../img/main_iphone_se.jpg') no-repeat 5% center;
+	}
+
+	.list-banner-pocketfi{
+		//background:#edeae5 url('../img/sub_wifi_prpointmore-tablet.jpg') no-repeat center center;
+	}
+	.subEvent-egg{
+		background: url('../img/sub_wifi_plusmoney_1-tablet.jpg') no-repeat center center;
+	}
+	.subEvent-pocket{
+		background: url('../img/sub_wifi_plusmoney2_1-tablet.jpg') no-repeat center center;
+	}
+
+	.list-banner-gear{
+		background-image:url('../img/sub_gear3_plusmoney2-tablet.jpg');
+	}
+	.list-banner-kizphone{
+		height: 450px;
+		background-image:url('../img/sub_kiz_mecard-tablet.jpg');
+	}
+	.list-banner-manuf-lg{
+		background-position:20% center;
+	}
+	.list-banner-kt{
+		background:white url('../img/banner-kt-tablet.jpg') no-repeat center center;
+	}
+	.list-banner-lg{
+		background:white url('../img/banner-lg-tablet.jpg') no-repeat center center;
+	}
+	.list-banner-inner-apple,
+	.list-banner-inner-manuf-lg{padding-left:25%;}
+	.list-banner-inner-samsung,
+	.list-banner-inner-pocketfi{padding-left:25%;}
+	.list-banner-tit{font-size:1.7em}
+	.list-banner-sub{font-size:1.2em}
+	.list-banner-inner-lg{padding-top:200px;}
+	.newsList {
+		.grid-item-wrap {
+			width:25%;
+		}		
+
+	}
+}
+
+@include responsivePC{//1200
+	.list-banner-samsung{
+		background-position: 15% center;
+	}
+	.list-banner-sk{
+		background-image:url('../img/banner-v10-pc.jpg');
+	}
+	.list-banner-apple{
+		background-position: 25% center;
+	}
+	.list-banner-gear{
+		background-image:url('../img/sub_gear3_plusmoney2-pc.jpg');
+	}
+	.list-banner-manuf-lg{
+		background-position: 25% center;
+	}
+	.list-banner-pocketfi{
+		//background:#edeae5 url('../img/sub_wifi_prpointmore-pc.jpg')no-repeat center center;
+	}
+	.subEvent-egg{
+		background: url('../img/sub_wifi_plusmoney_1-pc.jpg') no-repeat center center;
+	}
+	.subEvent-pocket{
+		background: url('../img/sub_wifi_plusmoney2_1-pc.jpg') no-repeat center center;
+	}
+
+	.list-banner-kt{
+		background:white url('../img/banner-kt-pc.jpg') no-repeat center center;
+	}
+	.list-banner-lg{
+		background:white url('../img/banner-lg-pc.jpg') no-repeat center center;
+	}
+	.list-banner-inner-samsung,
+	.list-banner-inner-pocketfi{padding-left:20%;}
+	.list-banner-kizphone{
+		background-image:url('../img/sub_kiz_mecard-pc.jpg');
+	}
+}
+
+@include responsiveWide{//1450
+	.list-banner-samsung{
+		background-position:30% center;
+	}
+	.list-banner-sk{
+		background-image:url('../img/banner-v10-wide.jpg');
+	}
+	.list-banner-apple{
+		background-position: 35% center;
+	}
+	.list-banner-gear{
+		background-image:url('../img/sub_gear3_plusmoney2-wide.jpg');
+	}
+	.list-banner-manuf-lg{
+		background-position: 35% center;
+	}
+	.list-banner-pocketfi{
+		//background: #edeae5 url('../img/sub_wifi_prpointmore-wide.jpg')no-repeat center center;
+	}
+	.subEvent-egg{
+		background: url('../img/sub_wifi_plusmoney_1-wide.jpg') no-repeat center center;
+	}
+	.subEvent-pocket{
+		background: url('../img/sub_wifi_plusmoney2_1-wide.jpg') no-repeat center center;
+	}
+
+	.list-banner-kt{
+		background:white url('../img/banner-kt-wide.jpg') no-repeat center center;
+	}
+	.list-banner-lg{
+		background:white url('../img/banner-lg-wide.jpg') no-repeat center center;
+	}
+	.list-banner-kizphone{
+		background-image:url('../img/sub_kiz_mecard-wide.jpg');
+	}
+}

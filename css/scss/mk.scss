@@ -1,0 +1,176 @@
+@import 'common.scss';
+@import '_list.scss';
+@import '_row.scss';
+@import 'jquery-ui.min.css';
+@import 'jquery-ui.theme.min.css';
+
+.sortable-grid { list-style-type: none; margin: 0; padding: 0; width: 900px;}
+.sortable-grid li {@include inlineBlock; padding: 1px;width: 18%; height: 150px; font-size: 1.5em; text-align: center; vertical-align:top;}
+.sortable-main li:not(.ui-sortable-placeholder){
+	@include nthChildSelector(1, 10){
+		background: lighten($mainYellow, 30);
+	}
+	&:nth-child(10){
+		margin-bottom:100px;
+	}
+}
+#sortable {
+	width: 1200px;
+	margin:0;
+	padding:0;
+	list-style:none;
+	li{
+		@include inlineBlock;
+		width:100px;
+		height:100px;
+		vertical-align:top;
+		padding-top:30px;
+		text-align:center;
+	}
+}
+
+.contact-pc-wrap {display:none;}
+.contact-ico {
+	background:url('../img/ico-contact-btn.png') no-repeat center center;
+	position:absolute;
+	width:20px;
+	height:19px;
+	left:20px;
+	top:50%;
+	margin-top:-10px;
+	}
+.contact-ico-consult{
+	@extend .contact-ico;
+}
+.contact-ico-tel{
+	@extend .contact-ico;
+}
+.contact-ico-kakao{
+	@extend .contact-ico;
+}
+
+.contact-mobile-wrap {position:fixed; bottom:25px; right:5px;}
+.contact-mobile-inner {
+	width:60px;
+	height:60px;
+	position:relative;
+}
+.contact-mobile-btn {
+	display:block;
+	width:140px;
+	height:60px;
+	position:absolute;
+	bottom:0px; 
+	opacity:0;
+	right:5px;
+	transition:all .3s;
+	&.active {opacity:1; }
+}
+.contact-consult-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:195px;}
+}
+.contact-tel-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:130px;}
+}
+.contact-kakao-mobile{
+	@extend .contact-mobile-btn;
+	&.active {bottom:65px;}
+}
+
+.mobile-contact-tit {
+	width:80px;
+	height:60px;
+	float:left;
+	line-height:60px;
+	text-align:center;
+	font-size:1em;
+	text-decoration:none;
+	color:$mainBlack;
+	text-shadow:1px 1px 30px #797979;
+}
+
+.contact-toggle-btn{
+	width:70px;
+	height:70px;
+	display:block;
+	position:relative;
+	border-radius:50%;
+	@include shadow(#aaa);
+	background: $mainYellow;
+	color:$mainBlack;
+	border:0;
+	right:10px;
+	&.active  {background:white; color:$mainYellow;}
+}
+.mobile-ico {
+	width:60px;
+	height:60px;
+	display:block;
+	position:relative;
+	border-radius:50%;
+	float:left;
+	@include shadow(#aaa);
+	background: $mainYellow;
+	color:$mainBlack;
+	border:0;
+}
+.mobile-ico-kakao{
+	@extend .mobile-ico;
+	background:$kakaoColor;
+}
+.mobile-ico-consult, .mobile-ico-tel{
+	@extend .mobile-ico;
+	background:$mainBlack;
+}
+
+
+.contact-mobile-ico {
+	background: url('../img/ico-contact-btn.png') no-repeat center center;
+	position:absolute;
+	width:20px;
+	height:19px;
+	left:20px;
+	top:50%;
+	margin-top:-10px;
+}
+
+.contact-mobile-ico-kakao {
+	@extend .contact-mobile-ico;
+	background-position:0 0;
+}
+.contact-mobile-ico-consult {
+	@extend .contact-mobile-ico;
+	background-position:-60px 0;
+}
+.contact-mobile-ico-tel {
+	@extend .contact-mobile-ico;
+	background-position:-40px 0;
+}
+
+
+.btn-contact{
+	display:none;
+}
+.btn-contact-kakao{
+	@extend .btn-contact;	
+}
+.btn-contact-tel{
+	@extend .btn-contact;
+}
+.btn-contact-ico-kakao{
+	@extend .btn-contact-ico;
+}
+.btn-contact-ico-tel{
+	@extend .btn-contact-ico;
+}
+.btn-contact-ico-consult{
+	@extend .btn-contact-ico;
+}
+.preOrderAdmin {width:100%;}
+
+@include responsiveLandscape{//640	
+.preOrderAdmin {width:640px;}
+
+}

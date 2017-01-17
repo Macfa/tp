@@ -1,0 +1,450 @@
+@import 'common.scss';
+@import '_list.scss';
+@import '_calculator.scss';
+
+h1 {
+	font-size:1.2em;
+	text-align:center;
+	letter-spacing:-0.05em;
+}
+h2 {
+	font-size:1.7em;
+	text-align:center;
+	margin-top:5px;
+	letter-spacing:-0.05em;
+}
+h3 {
+	font-size:1.1em;
+	font-weight:lighter;
+	text-align:center;
+	letter-spacing:-.02em;
+}
+ul, li {
+	list-style:none;
+	display:inline-block;
+	font-size:1em;
+}
+menu, ol, ul {
+    padding: 0 0 0 0px;
+}
+
+.tit {
+	margin:0 auto;
+	
+}
+.preorder-wrap{text-align:center; margin:0 auto;}
+
+.btn-filled-primary{color:#333;}
+.tit-mini {
+	margin-top:20px;
+	margin-bottom:10px;
+	
+}
+.sub {
+	margin-top:20px;
+	margin-bottom:10px;
+}
+.ad{
+	height:400px;
+	color:black;
+	background:url('../img/v20-ab-mobile.png') center center;
+}
+.bn {
+	position:relative;
+	margin:0 auto;
+	margin-top:15px;
+
+	width:180px;
+	height:40px;
+	border-radius:5px;
+	padding:5px 10px;
+	
+	font-weight:lighter;
+	vertical-align:middle;
+	text-align:center;
+	background:#eee;
+	color:black;
+	text-decoration:none;
+}
+.bn-b {
+	position:relative;
+	margin:0 auto;
+	margin-top:15px;
+
+	width:180px;
+	height:40px;
+	border-radius:10px;
+	padding:5px 20px;
+	
+	font-weight:lighter;
+	vertical-align:middle;
+	text-align:center;
+	background:black;
+	color:white;
+	text-decoration:none;
+}
+.bn-d-b {
+	letter-spacing:-.05em;
+	color:black;
+	text-decoration:none;
+	text-align:center;
+}
+.bn-d-w {
+	letter-spacing:-.05em;
+	font-size:1.8em;
+	color:white;
+	text-decoration:none;
+	text-align:center;
+}
+.list-line {
+	height:35px;
+	width:1px;
+	background:black;
+	vertical-align:center;
+	margin:0px 25px;
+}
+.txt-color-b {
+	color:#0054a6;
+}
+.txt-color-y {
+	color:#d6a349;
+}
+.wrap-left-w {
+	padding-top:25px;
+	text-align:center;
+	position:absolute;
+	bottom:0;
+
+	height:50%;
+	width:100%;
+	background:rgba(255, 255, 255, 0.7);
+	float:left;
+}
+.wrap-left-b{
+	padding-top:25px;
+	text-align:center;
+	position:absolute;
+	bottom:0;
+
+	height:50%;
+	width:100%;
+	background:rgba(5, 5, 5, 0.7);
+	float:left;
+}
+
+
+
+.order {
+	background:black url('../img/v20-order2-mobile.png') no-repeat center center;
+	padding:80px 0;
+	text-align:center;
+}
+.order .tit {
+	margin-top:0;
+	color:white;
+}
+.order .sub {
+	margin-top:10px;
+	color:white;
+	padding-bottom:100px;
+}
+.order .sub-in {
+	margin-top:5px;
+	color:white;
+	padding-top:700px;
+	font-weight:lighter;
+}
+.order .bn {
+	
+}
+
+
+.spec {
+	padding:40px 0;
+	height:800px;
+	margin-bottom:100px;
+	text-align:center;
+	background:white url('../img/v20-spec-tablet.png') no-repeat top center;
+}
+.spec .point-display {
+	margin:0 auto;
+}
+.spec .point-spec {
+	margin-top:510px;
+	margin-bottom:30px;
+}
+.list-in {
+}
+
+.present-lot {
+	color:white;
+	background:white;
+}
+.present-lot .txt {
+	padding-top:80px;
+	background:black;
+	color:white;
+}
+.present-lot .tit {
+	padding-bottom:50px;
+}
+.present-lot .txt .sub {
+	color:white;
+	margin:0 auto;
+	padding-bottom:50px;
+}
+.present-lot .headset {
+	position:relative;
+	bottom:0;
+	color:white;
+	text-align:left;
+	height:500px;
+	background:black url('../img/v20-headphone-mobile.png') no-repeat center center;
+}
+.present-lot .headset .tit-mini {
+	color:white;
+}
+.present-lot .soundbar {
+	text-align:center;
+	position:relative;
+	color:black;
+	height:500px;
+	background:white url('../img/v20-soundbar-mobile.png') no-repeat center center;
+	
+}
+.present-lot .bt {
+	text-align:center;
+	position:relative;
+	color:black;
+	height:500px;
+	background:white url('../img/v20-ab-mobile.png') no-repeat center center;
+}
+
+
+.present-lg {
+	color:white;
+	background:white;
+}
+.present-lg .txt {
+	padding-top:30px;
+	background:black;
+	color:white;
+}
+.present-lg .tit {
+	padding-bottom:120px;
+}
+.present-lg .txt .sub {
+	color:white;
+	margin:0 auto;
+	padding-bottom:50px;
+}
+.present-lg .hbs900 {
+	position:relative;
+	bottom:0;
+	color:white;
+	text-align:left;
+	height:500px;
+	background:black url('../img/v20-hbs900-mobile.png') no-repeat center center;
+}
+.present-lg .hbs900 .tit-mini {
+	color:white;
+}
+.present-lg .speaker {
+	position:relative;
+	bottom:0;
+	text-align:center;
+	color:white;
+	height:500px;
+	background:white url('../img/v20-speaker-mobile.png') no-repeat center center;
+	
+}
+.present-lg .bt {
+	position:relative;
+	bottom:0;
+	text-align:center;
+	color:black;
+	height:500px;
+	background:white url('../img/v20-battery-mobile.png') no-repeat center center;
+}
+
+.present-basic {
+	background:#000105;
+	padding-top:40px;
+	background:black url('../img/v20-device-mobile.png') no-repeat center 0;
+}
+.plus-big {
+	position:relative;
+	top:50px;
+	z-index:999;
+}
+.present-basic .txt {
+	padding-bottom:20px;
+	color:white;
+}
+.number-c {
+	position:relative;
+	bottom:0;
+	text-align:center;
+	background:black url('../img/v20-number-mobile.png') no-repeat center center;
+	height:500px;
+	padding-top:20px;
+	color:black;
+}
+.progress {
+	padding-top:20px;
+	padding-bottom:70px;
+}
+.progress ul {
+	width:100%;
+	text-align:center;
+}
+.progress .list-in{
+	width:120px;
+	height:120px;
+	color:white;
+	background:#777;
+	border-radius:60px;
+	vertical-align:middle;
+	text-align:center;
+	padding:20px;
+}
+.progress .list-bl {
+	margin:0 5px;
+}
+.end {
+	background:black url('../img/v20-end.png') no-repeat center 50px;
+	height:480px;
+	padding-top:50px;
+	color:white;
+}
+.end .tit-mini {
+	margin:0 auto;
+}
+.end .sub {
+	margin:0 auto;
+	margin-bottom:20px;
+}
+
+.bn-d-b a,
+.bn-d-w a {
+	color:inherit;
+	text-decoration:none;
+}
+.bn-d-w {
+	margin-top:80px;
+}
+@media all and (min-width:400px){
+}
+@media all and (min-width:640px){
+	.preorder-wrap{width:600px;}
+.present-lot .headset {background:black url('../img/v20-headphone-landscape.png') no-repeat center center;}
+.present-lot .soundbar {background:white url('../img/v20-soundbar-landscape.png') no-repeat right center;}
+.present-lot .bt {background:white url('../img/v20-ab-landscape.png') no-repeat center center;}
+.present-lg .bt {background:white url('../img/v20-battery-landscape.png') no-repeat center center;}
+.number-c {background:black url('../img/v20-number-landscape.png') no-repeat center center;}
+.present-lg .speaker {	background:white url('../img/v20-speaker-landscape.png') no-repeat center center;}
+.present-lg .hbs900 {	background:white url('../img/v20-hbs900-landscape.png') no-repeat center center;}
+.ad{	background:url('../img/v20-ab-landscape.png') center center;}
+.present-basic {background:black url('../img/v20-device-landscape.png') no-repeat center 0;}
+
+.spec .point-spec {
+	margin-top:500px;
+	margin-bottom:30px;
+}
+}
+@media all and (min-width:900px){
+.present-lot .headset {background:black url('../img/v20-headphone-tablet.png') no-repeat center center;}
+.present-lot .soundbar {background:white url('../img/v20-soundbar-tablet.png') no-repeat right center;}
+.present-lot .bt {background:white url('../img/v20-ab-tablet.png') no-repeat center center;}
+.present-lg .bt {background:white url('../img/v20-battery-tablet.png') no-repeat center center;}
+.number-c {background:black url('../img/v20-number-tablet.png') no-repeat center center;}
+.present-lg .speaker {	background:white url('../img/v20-speaker-tablet.png') no-repeat center center;}
+.present-lg .hbs900 {	background:white url('../img/v20-hbs900-tablet.png') no-repeat center center;}
+.ad{	background:url('../img/v20-ab-tablet.png') center center;}
+.order {background:black url('../img/v20-order2-tablet.png') no-repeat center center;}
+.present-basic {background:black url('../img/v20-device-tablet.png') no-repeat center 0;}
+
+.wrap-left-w {
+	padding-top:100px;
+
+	height:100%;
+	width:50%;
+	background:rgba(255, 255, 255, 0.7);
+	float:left;
+}
+.wrap-left-b{
+	padding-top:100px;
+	text-align:center;
+
+	height:100%;
+	width:50%;
+	background:rgba(5, 5, 5, 0.7);
+	float:left;	
+}
+.spec .point-spec {
+	margin-top:470px;
+	margin-bottom:30px;
+}
+}
+@media all and (min-width:1200px){
+.present-lot .soundbar {background:white url('../img/v20-soundbar-pc.png') no-repeat center center;}
+.present-lot .bt {background:white url('../img/v20-ab-pc.png') no-repeat center center;}
+.present-lg .speaker {	background:white url('../img/v20-speaker-pc.png') no-repeat center center;}
+.present-lg .hbs900 {	background:white url('../img/v20-hbs900-pc.png') no-repeat center center;}
+.present-lg .bt {background:white url('../img/v20-battery-pc.png') no-repeat center center;}
+.number-c {background:black url('../img/v20-number-pc.png') no-repeat center center;}
+.spec {	background:white url('../img/v20-spec-wide.png') no-repeat top center;}
+.ad{	background:url('../img/v20-ab-pc.png') center center;}
+.order {background:black url('../img/v20-order2-pc.png') no-repeat center center;}
+.present-basic {background:black url('../img/v20-device-pc.png') no-repeat center 0;}
+
+.wrap-left-w {
+	padding-top:100px;
+
+	height:100%;
+	width:50%;
+	background:rgba(255, 255, 255, 0.7);
+	float:left;
+}
+.wrap-left-b{
+	padding-top:100px;
+	text-align:center;
+
+	height:100%;
+	width:50%;
+	background:rgba(5, 5, 5, 0.7);
+	float:left;
+}
+
+}
+@media all and (min-width:1450px){
+.present-lot .headset {background:black url('../img/v20-headphone-wide.png') no-repeat center center;}
+.present-lot .soundbar {background:white url('../img/v20-soundbar-wide.png') no-repeat center center;}
+.present-lot .bt {background:white url('../img/v20-ab-wide.png') no-repeat center center;}
+.present-lg .hbs900 {	background:white url('../img/v20-hbs900-wide.png') no-repeat center center;}
+.present-lg .bt {background:white url('../img/v20-battery-wide.png') no-repeat center center;}
+.number-c {background:black url('../img/v20-number-wide.png') no-repeat center center;}
+.spec {	background:white url('../img/v20-spec-wide.png') no-repeat top center;}
+.ad{	background:url('../img/v20-ab-wide.png') center center;}
+.order {background:black url('../img/v20-order2-wide.png') no-repeat center center;}
+.present-basic {background:black url('../img/v20-device-wide.png') no-repeat center 0;}
+
+.wrap-left-w {
+	padding-top:100px;
+
+	height:100%;
+	width:50%;
+	background:rgba(255, 255, 255, 0.7);
+	float:left;
+}
+.wrap-left-b{
+	padding-top:100px;
+	text-align:center;
+
+	height:100%;
+	width:50%;
+	background:rgba(5, 5, 5, 0.7);
+	float:left;
+}
+}
+
