@@ -1,5 +1,6 @@
 <div class="wrap">
-	<h1 class="center tit">기기목록</h1>	
+	<h1 class="center tit">정보글리스트</h1>	
+	<!--
 	<form method="get" class="center">
 		<select name="display" data-default="<?echo $_GET['display']?>">
 			<option value="">핸드폰</option>
@@ -10,54 +11,51 @@
 			<input type="submit" value="검색" >
 	</form>
 	<Br/><Br/>	
+	-->
 	<form method="post">
-		<input type="submit" class="btn-filled-primary-dense" data-action="deviceListDisplay.php" value="진열함"/>
-		<input type="submit" class="btn-filled-primary-dense" data-action="deviceListHidden.php" value="진열안함"/>	
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDisplay.php" value="진열함"/>
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListHidden.php" value="진열안함"/>	
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDelete.php" value="삭제"/>	
 		<br/><br/>
 		<table class="table deviceList">	
 			<thead>
 				<tr class="tit-sub">	
 					<td class="chk-wrap">
 						<label class="inp-chk">
-							<input type="checkbox" class="js-tableAllChk" value="<?php echo $val['dvKey']?>"/>
+							<input type="checkbox" class="js-tableAllChk" value="<?php echo $val['neKey']?>"/>
 							<div class="inp-chk-box">
 							</div>
 						</label>
 					</td>	
 					<td></td>	
 					<td>썸네일</td>
-					<td>기기명</td>
-					<td>dvID</td>					
-					<td>모델코드</td>					
-					<td>제조사</td>					
-					<td>진열상태</td>					
+					<td>타이틀</td>									
+					<td>진열상태</td>	
+					<td>조회수</td>					
 				</tr>
 			</thead>
 			<tbody>	
-				<?php foreach ($result as $key => $val) :?>	
-					<?php if ($val['dvKey'] >= 636) :?>				
+				<?php foreach ($result as $val) :?>								
 						<tr>
 							<td class="chk-wrap">
 								<label class="inp-chk">
-									<input type="checkbox" class="js-tableChk" value="<?php echo $val['dvKey']?>" name="chk[]" ?>
+									<input type="checkbox" class="js-tableChk" value="<?php echo $val['neKey']?>" name="chk[]" ?>
 									<div class="inp-chk-box"></div>
 								</label>
 							</td>
-							<td ><?php echo $val['dvKey'] ?></td>
-							<td class="dvThumb"><img src="<?php echo $dvThumb[$val['dvKey']]?>"/></td>			
-							<td class="dvTit"><a href="deviceListModify.php?dvKey=<?php echo $val['dvKey']?>"><?php echo $val['dvTit']?></a></td>
-							<td ><?php echo $val['dvId']?></td>																					
-							<td ><?php echo $val['dvModelCode']?></td>	
-							<td ><?php echo $val['dvManuf']?></td>	
-							<td ><?php echo $display[$val['dvDisplay']]?></td>	
-						</tr>
-					<?php endif?>
+							<td ><?php echo $val['neKey'] ?></td>
+							<td class="listThumb"><img src="<?php echo $neThumb[$val['neKey']]?>"/></td>			
+							<td class="listTitLink"><a href="addNewsListModify.php?neKey=<?php echo $val['neKey']?>"><?php echo $val['neTit']?></a></td>						
+							<td ><?php echo $display[$val['neDisplay']]?></td>	
+							<td ><?php echo $val['neHit']?></td>
+						</tr>					
 				<?php endforeach?>
 			</tbody>	
 		</table>
 		<br/><br/>
-		<input type="submit" class="btn-filled-primary-dense" data-action="deviceListDisplay.php" value="진열함"/>
-		<input type="submit" class="btn-filled-primary-dense" data-action="deviceListHidden.php" value="진열안함"/>
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDisplay.php" value="진열함"/>
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListHidden.php" value="진열안함"/>
+		<input type="submit" class="btn-filled-primary-dense" data-action="addNewsListDelete.php" value="삭제"/>
 	</form>	
 </div>
 <script>

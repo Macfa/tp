@@ -19,6 +19,8 @@ $modelList = array_filter($modelList);
 $modelColor = DB::queryOneColumn('dcColor', "SELECT * FROM tmDeviceColor");
 $modelColor = array_unique($modelColor);
 
+$chName = DB::query("SELECT chName, chCarrier FROM tmChannel");
+
 require_once("tplDeviceIn.skin.php");
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 

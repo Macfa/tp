@@ -17,9 +17,9 @@
 		<td class="table-item-str gift-tit"><a href="" class="btn-flat-primary-dense js-giftViewToggle" data-key="<?php echo $val['gfKey']?>"><?php echo $val['gfTit']?></a></td>
 		<td class="no-padding"><?php echo $val['oiQuantity']?>개</td>
 		<td class="table-separator">x</td>
-		<td><?php echo number_format($val['oiPoint']/$val['oiQuantity'])?></td>
+		<td><?php echo number_format($val['oiPoint'])?></td>
 		<td class="table-separator">=</td>
-		<td class="table-value" ><?php echo number_format($val['oiPoint'])?></td>	
+		<td class="table-value" ><?php echo number_format($val['oiPoint']*$val['oiQuantity'])?></td>	
 	</tr>
 	<?php endforeach?>
 	</tbody>

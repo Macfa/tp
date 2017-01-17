@@ -14,7 +14,8 @@
 			</ul>			
 		</li><li class="admin-list-wrap">사전예약관리
 			<ul class="admin-list-sub-group">
-				<li><a href="preorderApplyList.php" class="admin-list-sub">V20 사전예약</a></li>
+				<li><a href="productOrderList.php" class="admin-list-sub">일반신청리스트</a></li>
+				<!--<li><a href="preorderApplyList.php" class="admin-list-sub">V20 사전예약</a></li>-->
 				<li><a href="preorder.php" class="admin-list-sub">사전예약리스트</a></li>				
 				<li><a href="exchangeRefundNote7List.php" class="admin-list-sub">노트7환불/교환</a></li>
 				<li><a href="programNote7List.php" class="admin-list-sub">노트7 프로그램 신청</a></li>
@@ -26,7 +27,13 @@
 				<li><a href="givePointList.php" class="admin-list-sub">포인트지급리스트</a></li>
 				<li><a href="memberList.php" class="admin-list-sub">회원리스트검색</a></li>
 			</ul>			
-		</li>
+		</li><li class="admin-list-wrap">정보글관리
+            <ul class="admin-list-sub-group">
+                <li><a href="addNews.php" class="admin-list-sub">정보글업로드</a></li>
+                <li><a href="addNewsList.php" class="admin-list-sub">정보글리스트</a></li>                
+            </ul>            
+        </li>
+
 	</ul>
 	<div class="clear"></div>
 </div>

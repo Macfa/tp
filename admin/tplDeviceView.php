@@ -39,30 +39,5 @@ foreach($dvCategory as $list => $category) {	/*카테고리종류인덱스 | 각
 require_once("tplDeviceView.skin.php");
 require_once($cfg['path']."/foot.inc.php");			// foot 부분 (스킨포함)
 
-// foreach ($carrier_ex as $carrier => $arrGoodreceipt) {	/*숫자인덱스 | 통신사*/
-// 	foreach($arrGoodreceipt as $goodreceipt) {	/*숫자인덱스 | 대리점*/
-		
-// 		if($_GET['view'] == 'model') {
-// 			$separator = $carrier;
-// 		}else if($_GET['view'] == 'receipt') {
-// 			$separator = $goodreceipt;
-// 		}
-		
-// 		foreach($dvCategory as $thr => $category) {	/*카테고리종류인덱스 | 각 제조사 및 카테고리*/
-// 			if($thr == 'manuf')
-// 				$searchField = 'dvManuf';
-// 			else
-// 				$searchField = 'dvCate';
-// 			foreach($category as $key => $value) {	/*각 제조사 및 카테고리의 값*/
-// 				if($value == 'etc') {
-// 					$arr[$separator][$value] = DB::query("SELECT dvModelCode, stColor, stEach FROM ".$table." as i LEFT JOIN tmDevice as d ON i.stModelCode = d.dvModelCode WHERE d.dvCate=%s AND (d.dvManuf=%s OR d.dvManuf=%s) AND i.".$separatorField."=%s AND i.stKey is not null", 'phone', '', $value, $separator);
-// 				} elseif($value !== 'phone') {
-// 					$arr[$separator][$value] = DB::query("SELECT dvModelCode, stColor, stEach FROM ".$table." as i LEFT JOIN tmDevice as d ON i.stModelCode = d.dvModelCode WHERE d.".$searchField."=%s AND i.".$separatorField."=%s AND i.stKey is not null", $value, $separator);
-// 				}
-
-// 			}
-// 		}
-// 	}
-// }
 
 ?>
