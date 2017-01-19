@@ -155,6 +155,7 @@ if($model == 0) {	/*모델의 수량이 없다면 ( 처음 인설트 하는 거�
 		'stEach' => $each+$serial
 	), 'stModelCode=%s and stCarrier=%s and stColor=%s', $_POST['modelCode'], $_POST['carrier'], $_POST['color']);
 }
+
 /*tmInventoryWare 용*/
 if($model_ware == 0) {
 	$insert_ware = array(

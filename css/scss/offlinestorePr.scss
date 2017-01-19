@@ -33,6 +33,9 @@ a{
 /***********************************
 		      TEXT
 ***********************************/
+.bold{
+	font-weight: bold;
+}
 .tit {
 	font-size: 6em;
 	font-weight: bold;
@@ -53,7 +56,7 @@ a{
 	margin: 0 auto;
 }
 .txt {
-	font-size: 1.2em;
+	font-size: 1.4em;
 	margin: 0 auto;
 }
 .add {
@@ -91,6 +94,74 @@ a{
 	padding-bottom: 20px;
 }
 
+.offline {
+	font-size: 1.8em;
+	margin-top: 0px;
+}
+
+.special-gift {
+	width:100%;
+	padding:1.1em 0;	
+	display: block;
+}
+
+.special-tit{	
+	font-size: 1.1em;	
+}
+.checkNum {
+	display: inline-block;
+    color:#fff;
+}
+
+.checkNum-one{
+	@extend .checkNum;
+	background: #b5c39f;
+
+}
+.checkNum-two{
+	@extend .checkNum;
+	background: #9bb7b9;
+
+}
+.checkNum-three{
+	@extend .checkNum;
+	background: #c1a4a4;
+
+}
+.checkNum-four{
+	@extend .checkNum;
+	background: #f98255;
+
+}
+
+.joke {
+	font-size:0.7em;
+}
+.joke-strike {
+	text-decoration:line-through; 
+}
+
+.txt-wrap {
+	width: 90%;	
+	margin: 0 auto;
+}
+
+.special-txt {
+	display: inline-block;
+	padding-top: 20px;
+	font-size: 0.7em;
+}
+
+.img-wrap {
+	width:200px;
+	margin: 0 auto;	
+}
+
+.pc-view {
+	display: none;
+}
+
+
 
 /***********************************
 		      BOX
@@ -101,6 +172,7 @@ a{
 .hour {
 	padding-bottom: $footer-pb;
 	background: $tp-color;
+	font-size: 1.5em;
 }
 
 
@@ -222,8 +294,17 @@ a{
 }
 
 
+.main-intro{
+	height: 435px;
+	background: url('../img/main_tipleoffline_2_mobile_page.jpg') no-repeat center center;
+}
 
-
+.main-bottom{
+	height: 0px;
+}
+.offline-tit {
+	font-size: 1.5em;
+}
 
 
 @media all and (min-width:640px){
@@ -241,7 +322,7 @@ $bn-mt:20px;
 		font-size: 2.7em;
 	}
 	.txt {
-		font-size: 1.5em;
+		font-size: 1.8em;
 		line-height: 1.3em;
 	}
 	.call-bn {
@@ -300,6 +381,28 @@ $bn-mt:20px;
 	.open-intro .tit {
 		background: url('../img/offline-intro-landscape.jpg')no-repeat center bottom;
 	}
+	.main-intro{
+		height: 600px;
+		background: url('../img/main_tipleoffline_2_landscape.jpg') no-repeat center center;
+	}
+
+	.main-bottom{
+		height: 110px;
+		background: url('../img/main_tipleoffline_2_landscape_02.jpg') no-repeat center top;
+	}
+	.img-wrap {
+		width:300px;
+	}
+	.special-tit{	
+		font-size: 1.5em;	
+	}
+	.pc-view {
+		display: block
+	}
+	.offline-tit {
+		font-size: 2em;
+	}
+
 }
 @media all and (min-width:900px){
 $intro-tit-pb:450px;
@@ -326,6 +429,20 @@ $bn-mt:70px;
 	.present-1 .txt {
 		margin:30px;
 	}
+	.main-intro{
+		background: url('../img/main_tipleoffline_2_tablet.jpg') no-repeat center center;
+	}
+	.main-bottom{
+		height: 125px;
+		background: url('../img/main_tipleoffline_2_tablet_02.jpg') no-repeat center top;
+	}
+
+	.txt-wrap {
+		width:600px;	
+	}
+	.offline {		
+		margin-top: -130px;
+	}
 }
 @media all and (min-width:1200px){
 	.present-2 .txt {
@@ -337,10 +454,25 @@ $bn-mt:70px;
 	.open-intro .tit {
 		background: url('../img/offline-intro-pc.jpg')no-repeat center bottom;
 	}
+	.main-intro{
+		background: url('../img/main_tipleoffline_2_pc.jpg') no-repeat center center;
+	}
+
+	.main-bottom{
+		height: 250px;
+		background: url('../img/main_tipleoffline_2_pc_02.jpg') no-repeat center top;
+	}
 }
 @media all and (min-width:1450px){
 	
 	.open-intro .tit {
 		background: url('../img/offline-intro-wide.jpg')no-repeat center bottom;
+	}
+	.main-intro{
+		background: url('../img/main_tipleoffline_2_wide.jpg') no-repeat center center;
+	}
+
+	.main-bottom{	
+		background: url('../img/main_tipleoffline_2_wide_02.jpg') no-repeat center top;
 	}
 }

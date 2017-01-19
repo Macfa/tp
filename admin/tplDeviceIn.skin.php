@@ -10,7 +10,7 @@
 				<li>입고일 : <input type="text" name="inDate" value="<?php echo $cfg['time_ymd']?>"><span><i class="ico-caution-small"></i>기입방법) xxxx-xx-xx</span></li>
 
 				<li>통신사 : 		<!-- tplDeviceView 에서 대분류로 구분 짓기 위함 -->
-				<input type="radio" class="js-radio js-category" name="carrier" value="skt" checked>SKT
+				<input type="radio" class="js-radio js-category" name="carrier" value="sk" checked>SKT
 				<input type="radio" class="js-radio js-category" name="carrier" value="kt">KT
 				<input type="radio" class="js-radio js-category" name="carrier" value="lg">LGU+
 				</li>

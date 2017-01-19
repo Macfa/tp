@@ -73,6 +73,10 @@ $detailHeadHeight : 60px;
 	margin-bottom:15px;
 	border:solid 1px rgba(0,0,0,0.05);
 }
+.detail-banner-openmarket {	
+	margin:0 auto;
+	margin-bottom:15px;
+}
 .detail-banner-egg{
 	@extend .detail-banner;	
 	background:url('../img/line_wifi_plusmoney-mobile.jpg') no-repeat center center
@@ -88,9 +92,13 @@ $detailHeadHeight : 60px;
 	@extend .detail-banner;	
 	background:url('../img/line_gear3_plusmoney2-mobile.jpg') no-repeat center center
 }
-.detail-banner-kiz{
-	@extend .detail-banner;	
-	background:url('../img/line_kiz_mecard-mobile.jpg') no-repeat center center
+.detail-banner-kiz-pc{
+	@extend .detail-banner-openmarket;
+	display: none;
+}
+.detail-banner-kiz-mobile{
+	@extend .detail-banner-openmarket;
+	display: block;
 }
 .detail-banner-link{
 	display: block;
@@ -627,6 +635,12 @@ h3.sub {
 	.detail-check-list	{
 		padding:5px 25px 5px 45px;
 	}	
+	.detail-banner-kiz-pc{	
+		display: block;
+	}
+	.detail-banner-kiz-mobile{		
+		display: none;
+	}
 	
 }
 

@@ -99,21 +99,12 @@ DB::update('tmInventoryInfo', array(
 	일련번호로 대리점검색 후 아래 배열의 값에 포함되어 있지않다면 기존에 넣어놓은 대리점을 다시 입력
 	이는 반품상황시 입고처란에 반품자명이 쓰이는 경우를 위한 코드
 	*/
-
-
-
-
 $serialCount = count($_POST['serialNumber']); /*일련번호 ( 즉 댓수가 몇개나 들어왔는지 ? )*/
 $each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s", $model, $carrier);
 $each_ware = DB::queryOneField('stEach', "SELECT * FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s", $model, $goodreceipt);
 
 
 /*재고 란에 값 수정*/
-
-echo "<pre>";
-var_dump($temp);
-echo "</pre>";
-
 foreach($temp as $type => $arrType) {
 	// $carrierReceipt : 타입에 따라 carrier 나 goodreceipt 전환됨 ()
 	foreach($arrType as $carrierReceipt => $arrModel) {
@@ -126,11 +117,14 @@ foreach($temp as $type => $arrType) {
 
 				if($type === 'carrier')
 					$subClause->add('stCarrier=%s', $carrierReceipt);
-				else if($type === 'goodreceipt')
+				else if($type === 'goodreceipt') 
 					$subClause->add('stGoodReceipt=%s', $carrierReceipt);
-
+				
 				$subClause->add('stModelCode=%s', $model);
 				$subClause->add('stColor=%s', $color);
+				$chkCarrier = $carrierReceipt;
+				$chkModel = $model;
+				$chkColor = $color;
 			}
 		}
 	}
@@ -151,9 +145,7 @@ foreach($where['goodreceipt'] as $count => $val) {
 	// echo "</pre>";
 }
 
-alert('업데이트 되었습니다', 'tplDeviceView.php?view=model&carrier=skt');
-
-
+alert('인설트 되었습니다', 'tplDeviceView.php?view=model&carrier=skt');
 
 
  ?>
