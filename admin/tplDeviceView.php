@@ -11,11 +11,14 @@ $dvCategory = $category + $category1;
 if($_GET['view'] == 'model') {
 	$table = 'tmInventoryStock';
 	$separatorField = 'stCarrier';
-	$lists = array('skt', 'kt', 'lg');
+	$lists = array('sk' => 'sk', 'kt' => 'kt', 'lg' => 'lg');
 }else if($_GET['view'] == 'receipt') {
 	$table = 'tmInventoryWare';
 	$separatorField = 'stGoodReceipt';
-	$lists = array('미래대리점', 'PSN마케팅', 'Ktis', '엔트솔', "KT본사");
+	$channelList =  DB::query("SELECT * FROM tmChannel");
+	foreach($channelList as $key => $val) {
+		$lists[$val['chKey']] = $val['chName'] .'('. $val['chCarrier'] .')';
+	}
 }
 
 $carrier = $_GET['carrier'];
