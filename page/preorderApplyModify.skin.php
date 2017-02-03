@@ -1,54 +1,4 @@
-<?
 
-require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
-include_once(PATH_LIB."/lib.snoopy.inc.php");
-include_once(PATH_LIB."/lib.parsing.inc.php");
-//include_once(PATH_LIB."/lib.calculator.inc.php");
-
-$preorderTitle = DB::queryFirstRow("SELECT poKey, poDeviceName FROM tmPreorder WHERE poDeviceName=%s",$_GET['device']);
-
-
-
-
-//$calculator = new calculator('v20');
-//$calculator->setCarrierSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
-
-
-$add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/preOrderNote7.css" type="text/css">';
-$js_file = '<script type="text/javascript" src="'.PATH_JS.'/preorderNote7.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/calculator.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/input.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/validate.js"></script>';
-$cfg['title'] = $preorderTitle['poDeviceName'].' 구매안내';
-
-$validEmail = '';
-$validPhone = '';
-if (isEmail($mb['mbEmail']) === true && $isLogged === TRUE)
-	$validEmail = $mb['mbEmail'];
-
-if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $isLogged === TRUE){
-	$validPhone = $mb['mbPhone'];
-}
-
-
-/*
-$phone = new deviceInfo();
-$arrPlan = $phone->setCarrier('sk')->setMode('phone')->getArrPlan();
-foreach($arrPlan as $plan){
-	$select .= '<option value="'.$plan.'" class="option-sk">'.$phone->getPlanName($plan).' | '.$phone->getPlanInfo($plan).'</option>';
-}
-$arrPlan = $phone->setCarrier('kt')->setMode('phone')->getArrPlan();
-foreach($arrPlan as $plan){
-	$select .= '<option value="'.$plan.'" class="option-kt">'.$phone->getPlanName($plan).' | '.$phone->getPlanInfo($plan).'</option>';
-}
-*/
-
-require_once($cfg['path']."/head.inc.php");	
-?>
-<section style="background:white">
-	<img src="../img/iphone7.jpg">
-</section>
-<br/>
 <div class="preorder-wrap">
 	<?php if($isLogged == false) :?>
 	<section class="section">
@@ -60,14 +10,11 @@ require_once($cfg['path']."/head.inc.php");
 		<input type="hidden" name="poKey" value="<?php echo $preorderTitle['poKey']?>">
 		<input type="hidden" name="paKey" value="<?php echo $preorder['paKey']?>">
 		<section class="section txt-left">
-			<h2 class="tit-sub"><?echo $preorderTitle['poDeviceName']." 신청하기"?></h2>
-			<i class="ico-person-small"></i>예약자명 <Br/> <span><?php echo $mb['mbName']?></span><br/><br/>
-			<label class="inp-wrap">
-				<i class="ico-email-small"></i>
-				<input type="text" class="inp-txt" name="paEmail" value="<?php echo ($validEmail)?$validEmail:''; ?>" />
-				<div class="inp-label">이메일</div>
-			</label>
-			<br>
+			<h2 class="tit-sub">아이폰7 / 아이폰7플러스 수정페이지</h2>
+			<i class="ico-person-small"></i>예약자명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $arrMemberModifyList['paName']?></span><br/><br/>
+			진행상황&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $state[$arrMemberModifyList['paProcess']]?></span><br/><br/>
+			이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $arrMemberModifyList['paEmail']?></span><br/><br/>
+			전화번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $arrMemberModifyList['paPhone']?></span><br/><br/>
 			<label class="inp-wrap">
 				<i class="ico-tel-small"></i>
 				<input type="text" class="inp-txt" name="paPhone" value="<?php echo ($validPhone)?$validPhone:''; ?>" />
@@ -91,6 +38,95 @@ require_once($cfg['path']."/head.inc.php");
 					<input type="radio" name="paSexType" value="1"/>
 					<div class="inp-chk-box"></div>
 					여자
+				</label>
+			</fieldset>
+			<fieldset class="inp-group">
+				모델명 <br/>
+				<label class="inp-chk">
+					<input type="radio" name="paDevice" value="iphone7"/>
+					<div class="inp-chk-box"></div>
+					아이폰7
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paDevice" value="iphone7plus"/>
+					<div class="inp-chk-box"></div>
+					아이폰7 플러스
+				</label>				
+			</fieldset>
+			<fieldset class="inp-group">
+				<i class="ico-color-small"></i> 색상 <br/>
+				<label class="inp-chk">
+					<input type="radio" name="paColorType" value="jetBlack"/>
+					<div class="inp-chk-box"></div>
+					제트블랙
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paColorType" value="black"/>
+					<div class="inp-chk-box"></div>
+					블랙
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paColorType" value="silver"/>
+					<div class="inp-chk-box"></div>
+					실버
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paColorType" value="gold"/>
+					<div class="inp-chk-box"></div>
+					골드
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paColorType" value="roseGold"/>
+					<div class="inp-chk-box"></div>
+					로즈골드
+				</label>
+				<Br/>
+				<i class="ico-caution-small"></i> 블랙과 제트블랙은 수요과잉으로 <span class="txt-highlight">기기수령이 늦어질 수 있습니다.</span>
+			</fieldset>
+			<fieldset class="inp-group js-secondColor">
+				<i class="ico-color-small"></i> 2지망 색상 <span class="txt-advice">(색상이 없을시 대신 받을 색상)</span><br/>
+				<label class="inp-chk">
+					<input type="radio" name="pa2ndColor" value="jetBlack"/>
+					<div class="inp-chk-box"></div>
+					제트블랙
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="pa2ndColor" value="black"/>
+					<div class="inp-chk-box"></div>
+					블랙
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="pa2ndColor" value="silver"/>
+					<div class="inp-chk-box"></div>
+					실버
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="pa2ndColor" value="gold"/>
+					<div class="inp-chk-box"></div>
+					골드
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="pa2ndColor" value="roseGold"/>
+					<div class="inp-chk-box"></div>
+					로즈골드
+				</label>
+			</fieldset>
+			<fieldset class="inp-group">
+				용량 <br/>
+				<label class="inp-chk">
+					<input type="radio" name="paDeviceRam" value="32G"/>
+					<div class="inp-chk-box"></div>
+					32G
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paDeviceRam" value="128G"/>
+					<div class="inp-chk-box"></div>
+					128G
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="paDeviceRam" value="256G"/>
+					<div class="inp-chk-box"></div>
+					256G
 				</label>
 			</fieldset>
 			<fieldset class="inp-group">
@@ -143,34 +179,23 @@ require_once($cfg['path']."/head.inc.php");
 					KT olleh
 				</label>
 			</fieldset>
-
-			<fieldset class="inp-group">
-				<i class="ico-color-small"></i> 색상 <br/>
+			<fieldset class="inp-group js-giftWrap">
+				<i class="ico-gift-small"></i> 사은품 <span class="js-selectCount txt-highlight"></span><br/> 
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="jetBlack"/>
+					<input type="checkbox" name="paGift[]" class="js-gift" value="tablet"/>
 					<div class="inp-chk-box"></div>
-					제트블랙
+					엠피지오 태블릿 레전드 GT
 				</label>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="black"/>
+					<input type="checkbox" name="paGift[]" class="js-gift" value="externalHard"/>
 					<div class="inp-chk-box"></div>
-					블랙
+					LG 외장 SSD 128G
 				</label>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="silver"/>
+					<input type="checkbox" name="paGift[]" class="js-gift" value="skMirroring"/>
 					<div class="inp-chk-box"></div>
-					실버
-				</label>
-				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="gold"/>
-					<div class="inp-chk-box"></div>
-					골드
-				</label>
-				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="roseGold"/>
-					<div class="inp-chk-box"></div>
-					로즈골드
-				</label>
+					SK 미러링
+				</label>			
 			</fieldset>
 			
 			<div class="inp-tit"><i class="ico-plan-small"></i> 요금제선택 </div>
@@ -197,18 +222,33 @@ require_once($cfg['path']."/head.inc.php");
 </div>
 
 <script>
-$("input:checkbox[name=paColorType]:checked").each(function(i,elements){
-    //해당 index(순서)값을 가져옵니다.
-    index = $(elements).index("input:checkbox[name=paColorType]");              
+var $old = undefined;
+var $new = '';
 
-    //해당 index에 해당하는 체크박스의 값을 가져옵니다.        
-    alert($("input:checkbox[name=paColorType]").eq(index),val());
+$(document).on('change', '.js-gift[type=checkbox]', function(){
+	if($(this).prop('checked') == true){
+		if($old != undefined) {
+			$('.js-gift[value='+$old+']').prop('checked', false);
+		}
+		if($old != $new) {
+			$old = $new;
+			$new = $(this).val();
+		}
+	} else if($(this).prop('checked') == false){
+		$old = undefined;
+		$new = $('.js-gift:checked').val();
+	}
+
+	console.log($old);
+	console.log($new);
+	console.log('-----------');
 });
 
 
 
 $(function(){
 	syncCurrentAndTargetCarrier();
+	$('[name=paColorType]').trigger('change');
 });
 
 $('[name=paChangeCarrier]').change(function(){
@@ -224,22 +264,46 @@ $('.js-planselect').change(function(){
 	}
 });
 
-$('[name=pacurrentCarrier]').change(function(){
+$('[name=paCurrentCarrier]').change(function(){
 	syncCurrentAndTargetCarrier();
 });
 
+
 $('[name=paApplyType]').change(function(){
 	syncCurrentAndTargetCarrier();
+});
 
+
+$('[name=paColorType]').change(function(){
+	var $value = $('[name=paColorType]:checked').val();
+	//$('[name=pa2ndColor][value='+$value+']').prop('checked', false).parents('.inp-chk').hide().siblings().show();
 });
 
 function updatePlan(){
 	var $carrier = $('[name=paChangeCarrier]:checked').val();
 	$('.option-kt').remove();
 	$('.option-sk').remove();
+	$('.js-giftWrap').show();
 	if($carrier == 'sk') {
+		if($('[name=paApplyType]:checked').val() == '06') {
+			$('.js-giftWrap').hide();
+			$('.js-gift').prop('checked', false);
+		}else if($('[name=paApplyType]:checked').val() == '02') {
+			$('.js-gift').attr('type', 'radio');
+			$('.js-gift').prop('checked', false);
+			$('.js-selectCount').text('1개 선택해주세요');
+		}
 		$('.js-planLabel').after('<option value="0" class="option-sk" >T시그니쳐 Master | 데이터 35G+무제한/통화문자무한</option><option value="1" class="option-sk" >T시그니쳐 Classic | 데이터 20G+무제한/통화문자무한</option><option value="2" class="option-sk" >band 데이터 퍼펙트S | 데이터 16G+무제한/통화문자무한</option><option value="3" class="option-sk" >band 데이터 퍼펙트 | 데이터 11G+무제한/통화문자무한</option><option value="4" class="option-sk" >band 데이터 6.5G | 데이터 6.5G/통화문자무한</option><option value="5" class="option-sk" >band 데이터 3.5G | 데이터 3.5G/통화문자무한</option><option value="6" class="option-sk" >band 데이터 2.2G | 데이터 2.2G/통화문자무한</option><option value="7" class="option-sk" >band 데이터 1.2G | 데이터 1.2G/통화문자무한</option><option value="8" class="option-sk" >band 데이터 세이브 | 데이터 300M/통화문자무한</option>');
 	}else if ($carrier == 'kt'){
+		if($('[name=paApplyType]:checked').val() == '06') {
+			$('.js-gift').attr('type', 'radio');
+			$('.js-gift').prop('checked', false);
+			$('.js-selectCount').text('1개 선택해주세요');
+		}else if($('[name=paApplyType]:checked').val() == '02') {
+			$('.js-gift').prop('checked', false);
+			$('.js-gift').attr('type', 'checkbox');
+			$('.js-selectCount').text('2개 선택해주세요');
+		}
 		$('.js-planLabel').after('<option value="15" class="option-kt" >LTE 데이터 선택 109 | 데이터 30GB+무제한/음성 무제한/영상&amp;부가200분 추가제공</option><option value="16" class="option-kt" >LTE 데이터 선택 76.8 | 데이터 15GB+무제한/음성 무제한/영상&amp;부가200분 추가제공</option><option value="17" class="option-kt" >LTE 데이터 선택 65.8 | 데이터 10GB+무제한/음성 무제한/영상&amp;부가200분 추가제공</option><option value="18" class="option-kt" >LTE 데이터 선택 54.8 | 데이터 6GB/음성 무제한/영상&amp;부가30분 추가제공</option><option value="19" class="option-kt" >LTE 데이터 선택 49.3 | 데이터 3GB/음성 무제한/영상&amp;부가30분 추가제공</option><option value="20" class="option-kt" >LTE 데이터 선택 43.8 | 데이터 2GB/음성 무제한/영상&amp;부가30분 추가제공</option><option value="23" class="option-kt" >LTE 데이터 선택 38.3 | 데이터 1GB/음성 무제한/영상&amp;부가30분 추가제공</option><option value="24" class="option-kt" >LTE 데이터 선택 32.8 | 데이터 300MB/음성 무제한/영상&amp;부가30분 추가제공</option>');
 	}else{
 		return true;

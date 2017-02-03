@@ -10,6 +10,7 @@ if(isExist($_GET['mbEmail'])){
 	$mb['mbEmail'] = $_GET['mbEmail'];
 	list($mb['mbKey'],$mb['mbPhone']) = DB::queryFirstList("SELECT mbKey, mbPhone FROM tmMember WHERE mbEmail = %s", $_GET['mbEmail']);
 }
+
 //--------------------------------------------------------------------------------------------------------
 
 $dvKey = $_GET['dvKey'];
@@ -54,9 +55,10 @@ try{
 }
 $deviceInfo = new deviceInfo();
 
+
 $getPlanInfo = getPlanInfo(
 			array(
-				'capacity' => $_GET['capacity'],
+				'capacity' => $_GET['capacity'],				
 				'plan' => $_GET['plan'],
 				'carrier' => $_GET['carrier'],
 				'applyType' => (int)$_GET['applyType'],
@@ -86,6 +88,7 @@ if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $
 	$validPhone = $mb['mbPhone'];
 
 }
+
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -128,6 +131,11 @@ if($_GET[v] === 'edit'){
 	}
 	$editClass = "editWrap";
 
+	$benefit = 'point';
+	if($modifyApply['apBenefits'] !== '포인트'){
+		 $benefit = 'gifts';
+	}
+
 }
 
 $countApply = DB::queryFirstField('SELECT COUNT(*) FROM tmApplyTmp WHERE mbEmail = %s', $mb['mbEmail']);
@@ -141,6 +149,11 @@ if($isExistApply !== true || ($countApply <= 1 && $isEdit === TRUE)) {
 
 $arrReferrerChannel = array('네이버 파워링크', '네이버 블로그', '네이버 카페', '페이스북(인스타그램)', '커뮤니티(클리앙,뽐뿌 등)', '지인소개', '기타 검색');
 //----------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 require_once($cfg['path']."/headSimple.inc.php");		// 헤더 부분 (스킨포함)
 require_once("apply.skin.php");	

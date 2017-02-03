@@ -7,6 +7,8 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 require_once(PATH_LIB."/lib.calculator.inc.php");
 header("X-Frame-Options: DENY");
 
+if($_GET['id'] === 'v20')
+	goURL('/page/v20Promotion.php');
 
 $import->addJS('calculator.js')->addJS('excanvas.js', 'lib')->addJS('gifts.js')->addJS('detail.js')->addCSS('detail.css');
 

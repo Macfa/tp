@@ -1,52 +1,6 @@
-<?
 
-require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이는 php로직)
-include_once(PATH_LIB."/lib.snoopy.inc.php");
-include_once(PATH_LIB."/lib.parsing.inc.php");
-//include_once(PATH_LIB."/lib.calculator.inc.php");
-
-$preorderTitle = DB::queryFirstRow("SELECT poKey, poDeviceName FROM tmPreorder WHERE poDeviceName=%s",$_GET['device']);
-
-
-
-
-//$calculator = new calculator('v20');
-//$calculator->setCarrierSelect()->setDeviceTypeSelect()->setCapacitySelect()->setApplyTypeSelect()->setDiscountTypeSelect()->setVatContainSelect()->setPlanSelect();
-
-
-$add_css = '<link rel="stylesheet" href="'.PATH_CSS.'/preOrderNote7.css" type="text/css">';
-$js_file = '<script type="text/javascript" src="'.PATH_JS.'/preorderNote7.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/calculator.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/input.js"></script>';
-$js_file .= '<script type="text/javascript" src="'.PATH_JS.'/validate.js"></script>';
-$cfg['title'] = $preorderTitle['poDeviceName'].' 구매안내';
-
-$validEmail = '';
-$validPhone = '';
-if (isEmail($mb['mbEmail']) === true && $isLogged === TRUE)
-	$validEmail = $mb['mbEmail'];
-
-if  (isPhoneNum($mb['mbPhone']) == true || isTelNum($mb['mbPhone']) == true && $isLogged === TRUE){
-	$validPhone = $mb['mbPhone'];
-}
-
-
-/*
-$phone = new deviceInfo();
-$arrPlan = $phone->setCarrier('sk')->setMode('phone')->getArrPlan();
-foreach($arrPlan as $plan){
-	$select .= '<option value="'.$plan.'" class="option-sk">'.$phone->getPlanName($plan).' | '.$phone->getPlanInfo($plan).'</option>';
-}
-$arrPlan = $phone->setCarrier('kt')->setMode('phone')->getArrPlan();
-foreach($arrPlan as $plan){
-	$select .= '<option value="'.$plan.'" class="option-kt">'.$phone->getPlanName($plan).' | '.$phone->getPlanInfo($plan).'</option>';
-}
-*/
-
-require_once($cfg['path']."/head.inc.php");	
-?>
 <section style="background:white">
-	<img src="../img/iphone7.jpg">
+	<img src="../img/device-detail-galaxys7.png">
 </section>
 <br/>
 <div class="preorder-wrap">
@@ -56,62 +10,75 @@ require_once($cfg['path']."/head.inc.php");
 		<a href="<?php echo $cfg['login_url']?>" class="btn-filled-sub">로그인/회원가입</a>
 	</section>
 	<?php endif?>
-	<form action="preorderApplyAction.php" method="post">
-		<input type="hidden" name="poKey" value="<?php echo $preorderTitle['poKey']?>">
-		<input type="hidden" name="paKey" value="<?php echo $preorder['paKey']?>">
+	<form action="galaxys7ApplyAction.php" method="post">
+		<input type="hidden" name="taKey" value="<?php echo $applyMember['taKey']?>">
+		<input type="hidden" name="isEditKey" value="<?php echo $_GET['v'] ?>">
 		<section class="section txt-left">
-			<h2 class="tit-sub"><?echo $preorderTitle['poDeviceName']." 신청하기"?></h2>
+			<h2 class="tit-sub">갤럭시S7 / S7엣지 신청하기</h2>
 			<i class="ico-person-small"></i>예약자명 <Br/> <span><?php echo $mb['mbName']?></span><br/><br/>
 			<label class="inp-wrap">
 				<i class="ico-email-small"></i>
-				<input type="text" class="inp-txt" name="paEmail" value="<?php echo ($validEmail)?$validEmail:''; ?>" />
+				<input type="text" class="inp-txt" name="mbEmail" value="<?php echo ($validEmail)?$validEmail:''; ?>" />
 				<div class="inp-label">이메일</div>
 			</label>
 			<br>
 			<label class="inp-wrap">
 				<i class="ico-tel-small"></i>
-				<input type="text" class="inp-txt" name="paPhone" value="<?php echo ($validPhone)?$validPhone:''; ?>" />
+				<input type="text" class="inp-txt" name="mbPhone" value="<?php echo ($validPhone)?$validPhone:''; ?>" />
 				<div class="inp-label">전화번호</div>
 			</label>
 			<br>
 			<label class="inp-wrap">
 				<i class="ico-calendar-small"></i> 
-				<input type="text" class="inp-txt" name="paBirth" value="<?php echo str_replace('-','',$preorder['paBirth']); ?>" />
+				<input type="text" class="inp-txt" name="taBirth" value="<?php echo str_replace('-','',$preorder['paBirth']); ?>" />
 				<div class="inp-label">생년월일</div>
 				<span class="inp-hint">19701015 형식으로 입력</span>
 			</label>
 			<fieldset class="inp-group">
 				성별 <br/>
 				<label class="inp-chk">
-					<input type="radio" name="paSexType" value="0"/>
+					<input type="radio" name="taSexType" value="0"/>
 					<div class="inp-chk-box"></div>
 					남자
 				</label>
 				<label class="inp-chk">
-					<input type="radio" name="paSexType" value="1"/>
+					<input type="radio" name="taSexType" value="1"/>
 					<div class="inp-chk-box"></div>
 					여자
 				</label>
 			</fieldset>
 			<fieldset class="inp-group">
+				 갤럭시 노트7을 구매하셨나요? <br/>
+				<label class="inp-chk">
+					<input type="radio" name="isBuyNote7" value="1"/>
+					<div class="inp-chk-box"></div>
+					네
+				</label>
+				<label class="inp-chk">
+					<input type="radio" name="isBuyNote7" value="0"/>
+					<div class="inp-chk-box"></div>
+					아니오
+				</label>
+			</fieldset>
+			<fieldset class="inp-group">
 				<i class="ico-carrier-small"></i> 현재 이용중인 통신사 <br/>
 				<label class="inp-chk">
-					<input type="radio" name="paCurrentCarrier" value="sk"/>
+					<input type="radio" name="taCurrentCarrier" value="sk"/>
 					<div class="inp-chk-box"></div>
 					SKT
 				</label>
 				<label class="inp-chk">
-					<input type="radio" name="paCurrentCarrier" value="kt"/>
+					<input type="radio" name="taCurrentCarrier" value="kt"/>
 					<div class="inp-chk-box"></div>
 					KT olleh
 				</label>
 				<label class="inp-chk">
-					<input type="radio" name="paCurrentCarrier" value="lg"/>
+					<input type="radio" name="taCurrentCarrier" value="lg"/>
 					<div class="inp-chk-box"></div>
 					LG U+
 				</label>
 				<label class="inp-chk">
-					<input type="radio" name="paCurrentCarrier" value="etc"/>
+					<input type="radio" name="taCurrentCarrier" value="etc"/>
 					<div class="inp-chk-box"></div>
 					알뜰폰
 				</label>
@@ -119,63 +86,89 @@ require_once($cfg['path']."/head.inc.php");
 			<fieldset class="inp-group">
 				<i class="ico-apply-type-small"></i> 가입유형 <br/>
 				<label class="inp-chk">
-					<input type="radio" name="paApplyType" value="02"/>
+					<input type="radio" name="taApplyType" value="02"/>
 					<div class="inp-chk-box"></div>
 					번호이동
 				</label>
 				<label class="inp-chk">
-					<input type="radio" name="paApplyType" value="06"/>
+					<input type="radio" name="taApplyType" value="06"/>
 					<div class="inp-chk-box"></div>
 					기기변경
 				</label>
 			</fieldset>
-
 			<fieldset class="inp-group">
 				<i class="ico-carrier-small"></i> 변경 통신사 <br/>
 				<label class="inp-chk">
-					<input type="radio" name="paChangeCarrier" value="sk"/>
+					<input type="radio" name="taChangeCarrier" value="sk" />
 					<div class="inp-chk-box"></div>
 					SKT
 				</label>
 				<label class="inp-chk">
-					<input type="radio" name="paChangeCarrier" value="kt"/>
+					<input type="radio" name="taChangeCarrier" value="kt" />
 					<div class="inp-chk-box"></div>
 					KT olleh
 				</label>
 			</fieldset>
-
 			<fieldset class="inp-group">
-				<i class="ico-color-small"></i> 색상 <br/>
+				모델명 <br/>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="jetBlack"/>
+					<input type="radio" name="taDevice" value="galaxys7"/>
 					<div class="inp-chk-box"></div>
-					제트블랙
+					갤럭시 S7
 				</label>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="black"/>
+					<input type="radio" name="taDevice" value="galaxys7edge"/>
+					<div class="inp-chk-box"></div>
+					갤럭시 S7 엣지
+				</label>				
+			</fieldset>
+				<fieldset class="inp-group js-capacityWrap">
+					용량 <br/>
+					<label class="inp-chk js-capacity32">
+						<input type="radio" name="taDeviceCapacity" value="32G"/>
+						<div class="inp-chk-box"></div>
+						32G
+					</label>
+					<!--
+					<label class="inp-chk js-capacity64">
+						<input type="radio" name="taDeviceCapacity" value="64G"/>
+						<div class="inp-chk-box"></div>
+						64G
+					</label>
+					-->
+				</fieldset>
+				<fieldset class="inp-group">
+				<i class="ico-color-small"></i> 색상 <br/>
+				<label class="inp-chk">
+					<input type="radio" name="taColor" value="black"/>
 					<div class="inp-chk-box"></div>
 					블랙
 				</label>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="silver"/>
+					<input type="radio" name="taColor" value="silver"/>
 					<div class="inp-chk-box"></div>
 					실버
 				</label>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="gold"/>
+					<input type="radio" name="taColor" value="gold"/>
 					<div class="inp-chk-box"></div>
 					골드
 				</label>
 				<label class="inp-chk">
-					<input type="checkbox" name="paColorType" value="roseGold"/>
+					<input type="radio" name="taColor" value="white"/>
 					<div class="inp-chk-box"></div>
-					로즈골드
+					화이트
+				</label>
+				<label class="inp-chk" style="display:none">
+					<input type="radio" name="taColor" value="blue"/>
+					<div class="inp-chk-box"></div>
+					블루코랄
 				</label>
 			</fieldset>
 			
 			<div class="inp-tit"><i class="ico-plan-small"></i> 요금제선택 </div>
 			<br/>
-			<select class="js-planselect inp-select" style="height:60px;border:solid 1px rgba(0,0,0,0.15)"  name="paPlan">
+			<select class="js-planselect inp-select" style="height:60px;border:solid 1px rgba(0,0,0,0.15)"  name="taPlan">
 				<option value="" class="js-planLabel">--통신사를 선택해주세요--</option>
 				<option value="etc">기타 요금제</option>
 			</select>
@@ -186,7 +179,7 @@ require_once($cfg['path']."/head.inc.php");
 			<Br/>
 			<!--label class="inp-wrap">
 				<i class="ico-talk-small"></i>
-				<textarea name="paEtc" class="inp-txtarea" ></textarea>
+				<textarea name="taEtc" class="inp-txtarea" ></textarea>
 				<div class="inp-label">기타사항 & 요구사항</div>
 			</label-->
 		</section>
@@ -197,21 +190,12 @@ require_once($cfg['path']."/head.inc.php");
 </div>
 
 <script>
-$("input:checkbox[name=paColorType]:checked").each(function(i,elements){
-    //해당 index(순서)값을 가져옵니다.
-    index = $(elements).index("input:checkbox[name=paColorType]");              
-
-    //해당 index에 해당하는 체크박스의 값을 가져옵니다.        
-    alert($("input:checkbox[name=paColorType]").eq(index),val());
-});
-
-
 
 $(function(){
 	syncCurrentAndTargetCarrier();
 });
 
-$('[name=paChangeCarrier]').change(function(){
+$('[name=taChangeCarrier]').change(function(){
 	syncCurrentAndTargetCarrier();
 });
 
@@ -224,17 +208,17 @@ $('.js-planselect').change(function(){
 	}
 });
 
-$('[name=pacurrentCarrier]').change(function(){
+$('[name=taCurrentCarrier]').change(function(){
 	syncCurrentAndTargetCarrier();
 });
 
-$('[name=paApplyType]').change(function(){
+$('[name=taApplyType]').change(function(){
 	syncCurrentAndTargetCarrier();
 
 });
 
 function updatePlan(){
-	var $carrier = $('[name=paChangeCarrier]:checked').val();
+	var $carrier = $('[name=taChangeCarrier]:checked').val();
 	$('.option-kt').remove();
 	$('.option-sk').remove();
 	if($carrier == 'sk') {
@@ -249,35 +233,70 @@ function updatePlan(){
 }
 
 function syncCurrentAndTargetCarrier() {
-	var $paApplyType = $('[name=paApplyType]:checked').val();
-	var $paCurrentCarrier = $('[name=paCurrentCarrier]:checked').val();
-	var $targetCarrier = $('[name=paChangeCarrier]:checked').val();
+	var $taApplyType = $('[name=taApplyType]:checked').val();
+	var $taCurrentCarrier = $('[name=taCurrentCarrier]:checked').val();
+	var $targetCarrier = $('[name=taChangeCarrier]:checked').val();
 
-	if(!$paCurrentCarrier)
+	if(!$taCurrentCarrier)
 		return true;
 
-	if($('[name=paChangeCarrier][value='+$paCurrentCarrier+']').length < 1) {
-		if($paApplyType == '06') {
-			$('[name=paApplyType]').prop('checked',false);
-			$('[name=paApplyType][value=02]').prop('checked',true);
-			$paApplyType = '02';
+	if($('[name=taChangeCarrier][value='+$taCurrentCarrier+']').length < 1) {
+		if($taApplyType == '06') {
+			$('[name=taApplyType]').prop('checked',false);
+			$('[name=taApplyType][value=02]').prop('checked',true);
+			$taApplyType = '02';
 		}
-		$('[name=paApplyType][value=06]').parent('.inp-chk').hide();
+		$('[name=taApplyType][value=06]').parent('.inp-chk').hide();
 	}else{
-		$('[name=paApplyType]').parent('.inp-chk').show();
+		$('[name=taApplyType]').parent('.inp-chk').show();
 	}
 
-	if($paApplyType == '06') {
-		$('[name=paChangeCarrier][value='+$paCurrentCarrier+']').prop('checked',true);
-		$('[name=paChangeCarrier]').parent('.inp-chk').hide();
-		$('[name=paChangeCarrier][value='+$paCurrentCarrier+']').parent('.inp-chk').show();
-	} else if($paApplyType == '02') {
-		if($paCurrentCarrier == $targetCarrier)	$('[name=paChangeCarrier]').prop('checked',false);
-		$('[name=paChangeCarrier]').parent('.inp-chk').show();
-		$('[name=paChangeCarrier][value='+$paCurrentCarrier+']').parent('.inp-chk').hide();		
+	if($taApplyType == '06') {
+		$('[name=taChangeCarrier][value='+$taCurrentCarrier+']').prop('checked',true);
+		$('[name=taChangeCarrier]').parent('.inp-chk').hide();
+		$('[name=taChangeCarrier][value='+$taCurrentCarrier+']').parent('.inp-chk').show();
+
+	} else if($taApplyType == '02') {
+		if($taCurrentCarrier == $targetCarrier)	$('[name=taChangeCarrier]').prop('checked',false);
+		$('[name=taChangeCarrier]').parent('.inp-chk').show();
+		$('[name=taChangeCarrier][value='+$taCurrentCarrier+']').parent('.inp-chk').hide();	
 	}
+
 
 	updatePlan();
 }
+
+$('[name=taDevice]').change(function(){
+	var $taDevice = $('[name=taDevice]:checked').val();
+	var $carrier = $('[name=taChangeCarrier]:checked').val();
+
+	$('[name=taColor][value=black]').parent('.inp-chk').show();
+	$('[name=taColor][value=silver]').parent('.inp-chk').show();
+	$('[name=taColor][value=white]').parent('.inp-chk').show();
+
+	if($carrier == 'sk'){
+		$('[name=taColor][value=black]').parent('.inp-chk').hide();
+		$('[name=taColor][value=silver]').parent('.inp-chk').hide();
+		$('[name=taColor][value=white]').parent('.inp-chk').hide();
+
+		if($taDevice == 'galaxys7edge'){
+			$('[name=taDeviceCapacity][value=64G]').parent('.inp-chk').hide();
+			$('[name=taColor][value=blue]').parent('.inp-chk').show();
+		}else{ 
+			$('[name=taDeviceCapacity][value=64G]').parent('.inp-chk').show();
+			$('[name=taColor][value=blue]').parent('.inp-chk').hide();
+		}
+
+	}else if($carrier == 'kt'){
+		if($taDevice == 'galaxys7edge'){
+			$('[name=taDeviceCapacity][value=64G]').parent('.inp-chk').hide();
+			$('[name=taColor][value=blue]').parent('.inp-chk').show();
+		}else{ 
+			$('[name=taDeviceCapacity][value=64G]').parent('.inp-chk').show();
+			$('[name=taColor][value=blue]').parent('.inp-chk').hide();
+		}
+	}
+
+});
 
 </script>

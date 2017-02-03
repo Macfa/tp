@@ -13,6 +13,8 @@
 		
 		<input type="hidden" name="applyTitle" value="<?php echo $applyTitle?>">			
 		<? if($_GET['v'] === 'edit') :?>
+			<h2 class="title">요금제 계산기&신청하기</h2>
+			<div class="tit-eyebrow">아래 계산기에서 <span class="txt-highlight">원하는 항목을 선택후 신청</span>하기를 눌러주세요.</div>
 			<input type="hidden" name="modifyEmail" value="<?php echo $_GET['mbEmail']?>">		
 			<input type="hidden" name="v" value="edit">
 			<?php echo $planCalculator->create();?>				
@@ -74,10 +76,10 @@
 				<input type="text" class="inp-txt" name="apColor" value="<?php echo $modifyApply['apColor'] ?>" />
 				<div class="inp-label">색상 <span class="inp-required">필수</span></div>
 			</label>
-
 			<!-- 	V20 Event 	 -->
-			<?php if($_GET['dvId'] == 'v20'): ?>
-			<fieldset class="inp-group" data-default="<?echo $modifyApply['apCurrentCarrier']?>">
+			
+			<?php if($_GET['dvId'] == 'v20' || ($modifyApply['dvId'] == 'v20' && $_GET['v'])): ?>
+			<fieldset class="inp-group" data-default="<?echo $benefit ?>">
 				<i class="ico-carrier-small"></i> 혜택 선택 <span class="inp-required">필수</span><br/>
 				<label class="inp-chk">
 					<input type="radio" name="apBenefits" value="gifts"/>
@@ -91,20 +93,20 @@
 				</label>
 			</fieldset>
 
-			<fieldset class="inp-group" data-default="<?echo $modifyApply['apCurrentCarrier']?>">
+			<fieldset class="inp-group" data-default="<?echo $modifyApply['apBuyway']?>">
 				<i class="ico-carrier-small"></i> 구매 방법 <span class="inp-required">필수 / 내방 시 추가 사은품 증정</span><br/>
 				<label class="inp-chk">
 					<input type="radio" name="apBuyway" value="delivery"/>
 					<div class="inp-chk-box"></div>
-					내방
+					택배
 				</label>
 				<label class="inp-chk">
 					<input type="radio" name="apBuyway" value="guest"/>
 					<div class="inp-chk-box"></div>
-					택배
+					내방
 				</label>
 			</fieldset>
-		<?php endif ?>
+			<?php endif ?>			
 			<!-- 	V20 Event 	 -->
 
 			<?php if($isNeedReferrerChannel === true) :?>
@@ -195,7 +197,7 @@
 			<?php
 			include('./detailCaution.skin.php');
 			?>
-		</section>
+		</section>		
 	</form>
 	<br/><br/>
 </div>

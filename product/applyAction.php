@@ -3,6 +3,8 @@ require_once("./_common.inc.php");	// 공용부분 (모든 페이지에 쓰이�
 include_once(PATH_LIB."/lib.snoopy.inc.php");
 include_once(PATH_LIB."/lib.parsing.inc.php");
 include_once(PATH_LIB."/lib.phone.inc.php");
+require_once($cfg['path']."/headBlank.inc.php");
+
 
 // 어드민에서 직접 신청서를 수정하는 경우
 if(isExist($_POST['modifyEmail'])){
@@ -10,9 +12,6 @@ if(isExist($_POST['modifyEmail'])){
 	list($mb['mbKey'],$mb['mbPhone']) = DB::queryFirstList("SELECT mbKey, mbPhone FROM tmMember WHERE mbEmail = %s", $_POST['modifyEmail']);
 }
 
-// 실가입 URL code를 가져오고 url 구조로 만드는 코드
-$getCarrier = 'dvChannel'.strtoupper($_POST['carrier']);
-$chKey = DB::queryFirstField("SELECT ".$getCarrier." FROM tmDevice WHERE dvId=%i", $_POST['dvId']);
 //--------------------------------------------------------------------------------------------------------
 
 //작성된 신청서 확인
@@ -25,6 +24,12 @@ $countApplyForReferrerChannel = (int)$countApplyForReferrerChannel;
 
 if($_POST['v'] === 'edit') 
 	$isEdit = true;
+
+$carrier = strtoupper($_POST['carrier']);
+$dvChannel = 'dvChannel'.$carrier;
+
+list($isExistDevice, $chKey) = DB::queryFirstList("SELECT COUNT(*), $dvChannel FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s", $_POST['dvKey']);
+
 //--------------------------------------------------------------------------------------------------------
 
 try
@@ -67,8 +72,9 @@ try
 		throw new Exception('유입경로를 선택해주세요! ', 3);
 	}
 
+
 	// V20 이벤트로 인해 추가된 코드
-	if($_GET['applyTitle'] == 'V20') {
+	if($_POST['dvId'] == 'v20') {
 		if(isNullVal($_POST['apBenefits']))
 			throw new Exception("혜택을 선택해주세요", 3);
 
@@ -77,10 +83,10 @@ try
 	}
 	// V20 이벤트로 인해 추가된 코드
 
+
 	if(isNullVal($_POST['apCurrentCarrier']))
 		throw new Exception('현재통신사를 선택해주세요 ', 3);
-
-	$isExistDevice= DB::queryFirstList("SELECT COUNT(*) FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s", $_POST['dvKey']);
+	
 	
 	if(isExist($isExistDevice) === FALSE)
 		throw new Exception('존재하지 않는 기기입니다.', 3);
@@ -231,7 +237,6 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 			'phDate' => $cfg['time_ymdhis']
 		));
 		*/
-
 	}
 }
 
@@ -241,19 +246,8 @@ if($apBirthLen == '6')
 $date = date("y-m-d", strtotime("00".$apBirth));
 
 
-///////////////// 신청서 DB insert
-if(isExist($_POST['apBenefits']) === true) {
-	if($_POST['apBenefits'] == 'gifts') {
-		$gift = $getPlanInfo['gift'];
-	} else {
-		$gift = '';
-	}
-} else {
-	$gift = '';
-}
 
-if($_POST['apBenefits'] == 'gifts')
-	$rewardPoint = '';
+///////////////// 신청서 DB insert
 
 $arrApplyInfo = array(
     'mbEmail' => $mb['mbEmail'],
@@ -265,21 +259,29 @@ $arrApplyInfo = array(
     'apBirth' => $date,
     'apPlan' => $_POST['plan'],
     'apApplyType' => $_POST['applyType'],
-    'apBenefits' => $gift,
-    'apBuyway' => $_POST['apBuyway'],
     'apDatetime' => $cfg['time_ymdhis'],
     'apDiscountType' => $_POST['discountType'],
+    'apBuyway' => $_POST['apBuyway'],
     'apPoint' => $rewardPoint,
     'apParentPoint' =>$parentPoint,
     'apGrandPoint' =>$grandPoint
 );
+
+
+// V20 이벤트로 인해 추가된 코드
+if($_POST['apBenefits'] == 'gifts') {
+	$arrApplyInfo['apBenefits'] = $getPlanInfo['gift'];
+} else {
+	$arrApplyInfo['apBenefits'] = '포인트';
+}
+// V20 이벤트로 인해 추가된 코드
+
 
 if($isNeedReferrerChannel === true) {
 	$arrApplyInfo['apReferrerChannel'] = $_POST['apReferrerChannel'];
 } else {
 	$arrApplyInfo['apReferrerChannel'] = $apReferrerChannelInitial;
 }
-
 
 if(isExist($_POST['v']) === true){ // 고객이 직접 수정 & 어드민 수정 둘다 해당
 
@@ -328,9 +330,21 @@ if(isExist($_POST['v']) === true AND isExist($_POST['modifyEmail']) === false){ 
 	$sendCont = "[티플] ".$_POST['applyTitle']." 가입신청 완료.\n마이페이지나 화면 안내에 따라 실가입을 진행해주세요";
 	$SMS->sendMode('SMS')->sendMemberPhone($_POST['apPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
 
-	//consoleLog($cdCode);
-	// goURL($getPlanInfo['applyUrl']);
-
 }
 
 ?>
+<!-- // submit페이지로 이동해서 실가입 url로 이동 -->
+<form action="submit.php" method="post" class="goApplyUrl">
+	<input type="hidden" name="capacity" value="<?echo $_POST['capacity']?>">
+	<input type="hidden" name="plan" value="<?echo $_POST['plan']?>">
+	<input type="hidden" name="carrier" value="<?echo $_POST['carrier']?>">
+	<input type="hidden" name="applyType" value="<?echo $_POST['applyType']?>">
+	<input type="hidden" name="discountType" value="<?echo $_POST['discountType']?>">
+	<input type="hidden" name="dvId" value="<?echo $_POST['dvId']?>">
+</form>
+<script>
+	$(window).load(function(){
+	    $('.goApplyUrl').submit();
+	});
+	
+</script>
