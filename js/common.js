@@ -49,11 +49,13 @@ $(document).ready(function() {
 		ajax_paging($(".js-scroll-paging-next"));
 	}
 
+/*
 	$(window).scroll(function(){
 		if ($isMobileTablet === true){
 			$('.contact-consult-mobile, .contact-tel-mobile, .contact-kakao-mobile, .contact-toggle-btn').removeClass('active');
 		}
 	});
+*/
 
 	function ajax_paging($this) {
 		var $current = $this.attr('scroll-page');
@@ -112,8 +114,23 @@ $(document).ready(function() {
 		$('.contact-tel-mobile').toggleClass('active');
 		$('.contact-kakao-mobile').toggleClass('active');
 		$('.contact-toggle-btn').toggleClass('active');
+		$('.mobile-background').toggleClass('active');
+		$('body').toggleClass('disabled');			
 		return false;
 	});
+
+	$('.mobile-background, .mobile-contact-link').on('click',function(){
+		$('.mobile-background').removeClass('active');
+		$('.contact-consult-mobile').removeClass('active');
+		$('.contact-tel-mobile').removeClass('active');
+		$('.contact-kakao-mobile').removeClass('active');
+		$('.contact-toggle-btn').removeClass('active');
+		$('body').removeClass('disabled');
+
+	});
+
+
+	
 
 	$('body').on('click', function(){
 		$('.contact-consult-mobile, .contact-tel-mobile, .contact-kakao-mobile, .contact-toggle-btn').removeClass('active');
@@ -161,7 +178,7 @@ $(document).ready(function() {
 	});
 
 	$(document).on("touchmove", 'body', function(event) {
-		if($isMobileTablet == true && $('body').hasClass('disabled') && $('.js-layerView').hasClass('active')) {
+		if($isMobileTablet == true && $('body').hasClass('disabled') && $('.js-layerView').hasClass('active') && $('.contact-toggle-btn').hasClass('active')) {
 			event.preventDefault();
 			event.stopPropagation();
 		}

@@ -53,17 +53,39 @@ function getFileName($val){
     return tmpStr;
 }
 
-$(function() {
-	$('[data-default]').each(function(){		
-		//console.log($(this).attr('data-default'));		
+// $(function() {
+// 	$('[data-default]').each(function(){		
+// 		//console.log($(this).attr('data-default'));		
+// 		if($(this).find('input[type=radio]').size() > 0 || $(this).find('input[type=checkbox]').size() > 0){
+// 			var $mutipleValue = $(this).attr('data-default').split(',');
+// 			var $target = $(this);
+// 			$.each($mutipleValue, function(index, value){
+// 				console.log();
+// 				$target.find('[value='+value+']').prop('checked', true);				
+// 			});
+// 		} else 
+// 			$(this).val($(this).attr('data-default'));		
+// 	});	
+// });
+
+$('[data-default]').ready(function() {
+	// var $chk = $(this).find('[data-default]').attr('data-default');
+	// console.log($chk);
+	// var $val = $('[data-default]');
+	// console.log($val);
+	// $('[data-default]').each(function(){
 		if($(this).find('input[type=radio]').size() > 0 || $(this).find('input[type=checkbox]').size() > 0){
-			var $mutipleValue = $(this).attr('data-default').split(',');
-			var $target = $(this);
+			var $target = $(this).find('input[type=radio], input[type=checkbox]');
+			var $mutipleValue = $(this).find('input[type=radio], input[type=checkbox]').attr('data-default');
+			console.log($mutipleValue);
+			console.log($target);
+			console.log($(this).find('input[type=radio], input[type=checkbox]').val());
+			console.log(keys($mutipleValue));
 			$.each($mutipleValue, function(index, value){
 				console.log();
 				$target.find('[value='+value+']').prop('checked', true);				
 			});
 		} else 
 			$(this).val($(this).attr('data-default'));		
-	});	
+	// });	
 });

@@ -3,6 +3,7 @@
 
 	<a href="tplDeviceIn.php" class="btn-filled-primary-dense">입고등록</a>
 	<a href="tplDeviceOut.php" class="btn-filled-primary-dense">출고등록</a>
+	<input type="hidden" class="js-getserial-value" value="<?php echo (isExist($_GET['serial']))? $_GET['serial']:"" ?>">
 	<br/><br/>
 	<div class="wrap_list_input">
 		<form class="js-erpForm" action="tplDeviceOutAction.php" method="post">
@@ -30,7 +31,7 @@
 </div>
 <script id="js-serialWrapTemplate" type="text/x-template">
 	<div class="js-serialWrap">
-		<input type="text" class="js-SerialNumber-buttonList" name="serialNumber[]" style="height:40px;width:300px" placeholder="일련번호" value=<?php echo (isExist($_GET['serial']))? $_GET['serial']:"" ?>>		<!-- serial이 GET 형식으로 온다면 값 출력 -->
+		<input type="text" class="js-SerialNumber-buttonList" name="serialNumber[]" style="height:40px;width:300px" placeholder="일련번호" ?>>		<!-- serial이 GET 형식으로 온다면 값 출력 -->
 		<input type="text" class="test js-to" tabindex="-1" name="delivery[]" disabled placeholder="출고처"><span>
 		<button type="button" tabindex="-1" class="btn-delete js-deleteSerialInput" style="vertical-align: middle;"><i></i></button>
 

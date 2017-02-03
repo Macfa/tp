@@ -11,6 +11,7 @@
 				<li><a href="orderModify.php" class="admin-list-sub">기기/사은품 정렬수정</a></li>
 				<li><a href="insertDeviceCode.php" class="admin-list-sub">실가입 URL 입력/수정</a></li>
 				<li><a href="tplDeviceView.php?view=model&carrier=sk" class="admin-list-sub">단말기 현황</a></li>
+				<li><a href="crm.php" class="admin-list-sub">CRM</a></li>
 			</ul>			
 		</li><li class="admin-list-wrap">사전예약관리
 			<ul class="admin-list-sub-group">

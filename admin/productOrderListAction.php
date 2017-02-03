@@ -19,18 +19,26 @@ try{
 
 
 	
-} catch (Exception $e) {	
-
+} catch (Exception $e) {
 	alert($e->getMessage());
 }
 
 
 foreach($checked as $checkedList){
-	DB::update('tmApplyTmp', 
+	if($changeProcess == 5) {
+		DB::update('tmApplyTmp', 
+			array(
+				'apProcess' => $changeProcess,
+				'apDonetime' => $cfg['time_ymd']
+			), "apKey=%i", $checkedList
+		);
+	} else {
+		DB::update('tmApplyTmp', 
 			array(
 				'apProcess' => $changeProcess
 			), "apKey=%i", $checkedList
 		);
+	}
 
 	$productOrderMember = DB::queryFirstRow("SELECT * FROM  tmApplyTmp WHERE apKey=%s", $checkedList);	
 

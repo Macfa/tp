@@ -107,15 +107,6 @@ $returnName = (isExist($_POST['returnName']))?" / ".$_POST['returnName']:"";
 						<td class="table-item-str"><?php echo $row['type'] ?></td>
 						<td class="table-item-str">
 							<a class="btn-flat-primary-dense" href="tplDeviceViewDetail.php?searchVal=<?php echo $row['inSerialNumber'] ?>"><?php echo $row['inSerialNumber'] ?></a>
-							<?php if($row['type'] == "입고"): ?>
-								<?php if($row['checkbox'] == true): ?>	<!--    -->
-									<label class="inp-chk">
-										<input type="checkbox" class="js-serial-chk-box">
-											<div class="inp-chk-box">
-											</div>
-									</label>
-								<?php endif ?>
-							<?php endif ?>
 						</td>
 						<td class="table-item-str"><?php echo $row['date'] ?></td>
 						<td class="table-item-str"><?php echo $row['good'] ?><?php echo (isExist($row['IsReturned']))? "(".$row['IsReturned'].")":"" ?></td>
@@ -132,7 +123,11 @@ $returnName = (isExist($_POST['returnName']))?" / ".$_POST['returnName']:"";
 				</tr>
 				<?php foreach($existSerial as $val) :?>
 					<tr>
-						<td class="table-item-str"><?php echo $val ?></td>
+						<td class="table-item-str">
+							<a class="btn-flat-primary-dense" href="tplDeviceViewDetail.php?searchVal=<?php echo $val ?>"><?php echo $val ?></a>
+							<a class="btn-filled-sub-dense" href="tplDeviceOut.php?serial=<?php echo $val ?>">출고</a>
+						</td>
+						
 					</tr>
 				<?php endforeach?>
 			</table>

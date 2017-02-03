@@ -104,7 +104,7 @@ $('.js-calcPad input[type=radio], .js-calcPad select').change(function(){
 			async:false,
 			data:$data,
 			success:function(data){
-				console.log(data);
+				//console.log(data);
 				$data = $.parseJSON(data);
 				$arrPlanData[$key] = $data;
 			}
