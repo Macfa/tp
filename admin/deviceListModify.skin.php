@@ -56,6 +56,34 @@
 						</td>
 					<?endif?>
 					<td></td>															
+				</tr>
+				<tr>
+					<td>SK특수채널</td>		
+					<td colspan="3">
+						<fieldset class="inp-group" data-default="<?echo $deviceInfo['dvChannelSK']?>">
+							<?foreach ($SKtmChannel as $value) :?>
+								<label class="inp-chk">
+									<input type="radio" name="sktmChannel" class="sktmChannel" value="<?php echo $value['chKey']?>" />
+									<div class="inp-chk-box"></div>
+									<?php echo $value['chName'];?>
+								</label>
+							<?endforeach?>
+						</fieldset>
+					</td>								
+				</tr>
+				<tr>
+					<td>KT특수채널</td>		
+					<td colspan="3">
+						<fieldset class="inp-group" data-default="<?echo $deviceInfo['dvChannelKT']?>">
+							<?foreach ($KTtmChannel as $value) :?>
+								<label class="inp-chk">
+									<input type="radio" name="kttmChannel" class="kttmChannel" value="<?php echo $value['chKey']?>" />
+									<div class="inp-chk-box"></div>
+									<?php echo $value['chName'];?>
+								</label>
+							<?endforeach?>
+						</fieldset>
+					</td>								
 				</tr>					
 			</tbody>
 		</table>

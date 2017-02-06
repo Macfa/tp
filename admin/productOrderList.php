@@ -39,7 +39,7 @@ if(isExist($search) === false AND $_GET['chked'] === 'canceled') { // 초기 리
 		$sql .= "t.apCancel = 1";
 }
 
-if($_GET['deviceFilter'] != '신청기기' && isExist($_GET['deviceFilter']))
+if($_GET['deviceFilter'] != '신청기기' && isExist($_GET['deviceFilter'])) 
 	if(isExist($_GET['search']))
 		$sql .= " d.dvModelCode='".$_GET[deviceFilter]."' AND ";
 	else
@@ -73,6 +73,14 @@ if(isExist($search) === true){
 }
 
 $existList = DB::query($sql.' ORDER BY apDatetime DESC', $array);
+
+foreach ($existList as $key => $row) {
+	if($row['apBuyway'] == 'delivery')
+		$existList[$key]['buyway'] = '택배';
+	elseif($row['apBuyway'] == 'guest')
+		$existList[$key]['buyway'] = '내방';
+
+}
 
 foreach ($existList as $key => $arr) {
 	$existList[$key]['chName'] = DB::queryFirstField("SELECT chName FROM tmChannel WHERE chKey=%i", $arr['chKey']);

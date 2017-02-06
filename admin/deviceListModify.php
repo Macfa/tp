@@ -111,6 +111,9 @@ $display = array(
 	1 => "진열"
 );
 
+$SKtmChannel = DB::query("SELECT * FROM tmChannel WHERE chCarrier = %s", 'sk');
+$KTtmChannel = DB::query("SELECT * FROM tmChannel WHERE chCarrier = %s", 'kt');
+$LGmChannel = DB::query("SELECT * FROM tmChannel WHERE chCarrier = %s", 'lg');
 
 require_once("deviceListModify.skin.php");		
 

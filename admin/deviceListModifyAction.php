@@ -101,7 +101,9 @@ DB::update('tmDevice', array(
   'dvThumb' => $thumbFileName,
   'dvDetailThumb' => $detailThumbFileName,
   'dvDisplay' => $_POST['dvDisplayModify'],
-  'dvDetail' => $dvDetailModify
+  'dvDetail' => $dvDetailModify,
+  'dvChannelSK' => $_POST['sktmChannel'],
+  'dvChannelKT' => $_POST['kttmChannel'],
 
   ), "dvKey=%i", $_POST['dvKey']);
 

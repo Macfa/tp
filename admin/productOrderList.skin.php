@@ -31,7 +31,7 @@
 	</div>
 	<br/>
 	<form method="post">
-		<div class="center">			
+		<div class="center">
 			선택된 행을
 			<select name="changeProcess" class="js-stateSelect">
 				<? foreach ($changeState as $key => $val) : ?>				
@@ -78,6 +78,8 @@
 					<td class="table-item-str">요금제</td>
 					<td class="table-item-str">색 상</td>
 					<td class="table-item-str">지급포인트</td>
+					<td class="table-item-str">지급사은품</td>
+					<td class="table-item-str">구입방법</td>
 					<td class="table-item-str">유입경로</td>
 				</tr>
 			</thead>
@@ -106,7 +108,9 @@
 						<td class="table-item-str"><?php echo $deviceInfo->getPlanName($row['apPlan']) ?></td>
 
 						<td class="table-item-str"><?php echo $row['apColor'] ?></td>
-						<td class="table-item-str"><?php echo number_format($row['apPoint']) ?></td>
+						<td class="table-item-str"><?php echo (isExist($row['apBenefits']))?'':number_format($row['apPoint']) ?></td>
+						<td class="table-item-str"><?php echo $row['apBenefits'] ?></td>
+						<td class="table-item-str"><?php echo $row['buyway'] ?></td>
 						<td class="table-item-str"><?php echo $row['apReferrerChannel'] ?></td>
 					</tr>
 				<?php endforeach?>
