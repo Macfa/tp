@@ -85,7 +85,7 @@ foreach($_POST['serialNumber'] as $key => $value) {
 	$model = DB::queryFirstField("SELECT inModelCode FROM tmInventoryInfo WHERE inSerialNumber=%s", $value);	// String ModelName
 	$color = DB::queryFirstField("SELECT inColor FROM tmInventoryInfo WHERE inSerialNumber=%s", $value);	// String etc) Red
 	$carrier = DB::queryFirstField("SELECT inCarrier FROM tmInventoryInfo WHERE inSerialNumber=%s", $value);	// String etc) skt
-	$goodreceipt = $goodreceipt = DB::queryFirstField("SELECT ivGoodReceipt FROM tmInventoryIn WHERE inSerialNumber=%s ORDER BY ivKey ASC", $value);
+	$goodreceipt = DB::queryFirstField("SELECT chKey FROM tmInventoryInfo WHERE inSerialNumber=%s", $value);
 	$temp['carrier'][$carrier][$model][$color] += 1;
 	$temp['goodreceipt'][$goodreceipt][$model][$color] += 1;
 
@@ -120,7 +120,6 @@ $serialCount = count($_POST['serialNumber']); /*일련번호 ( 즉 댓수가 몇
 $each = DB::queryOneField('stEach', "SELECT * FROM tmInventoryStock WHERE stModelCode=%s and stCarrier=%s", $model, $carrier);
 $each_ware = DB::queryOneField('stEach', "SELECT * FROM tmInventoryWare WHERE stModelCode=%s and stGoodReceipt=%s", $model, $goodreceipt);
 
-
 /*재고 란에 값 수정*/
 foreach($temp as $type => $arrType) {
 	// $carrierReceipt : 타입에 따라 carrier 나 goodreceipt 전환됨 ()
@@ -146,21 +145,12 @@ foreach($temp as $type => $arrType) {
 
 foreach($where['carrier'] as $count => $val) {
 	DB::query('UPDATE tmInventoryStock SET stEach = stEach-'.$count.' WHERE %l', $val);	/* tmInventoryStock 갯수 수정 */
-	// echo "<pre>";
-	// var_dump($result);
-	// echo "</pre>";
 }
 
 foreach($where['goodreceipt'] as $count => $val) {
 	DB::query('UPDATE tmInventoryWare SET stEach = stEach-'.$count.' WHERE %l', $val);	/* tmInventoryStock 갯수 수정 */
-	// echo "<pre>";
-	// var_dump($result);
-	// echo "</pre>";
 }
 
 alert('업데이트 되었습니다', 'tplDeviceView.php?view=model&carrier=sk');
-
-
-
 
  ?>

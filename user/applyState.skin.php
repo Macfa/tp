@@ -47,13 +47,13 @@
 			</li><li>
 				<span class="label"><i class="ico-color-small"></i> 색상</span><span class="cont">
 				<?php echo $arrApplyList['apColor'] ?></span>	
-			</li><?if($applyDevice === 'V20') :?><li>
+			</li><?if(($applyDevice === 'V20' && $arrApplyList['apBenefits'] != '포인트') || ($applyDevice === '아이폰7' && $arrApplyList['apBenefits'] != '포인트') || ($applyDevice === '아이폰7플러스' && $arrApplyList['apBenefits'] != '포인트') || ($applyDevice === '갤럭시 S7 엣지' && $arrApplyList['apBenefits'] != '포인트')) :?><li>
 				<span class="label"><i class="ico-color-small"></i> 혜택</span><span class="cont">
 				<?php echo $arrApplyList['apBenefits'] ?></span>	
-			</li><li>
+			</li><?endif?><li>
 				<span class="label"><i class="ico-color-small"></i> 구매방법</span><span class="cont">
 				<?php echo $way[$arrApplyList['apBuyway']] ?></span>	
-			</li><?endif?><?if(isExist($arrApplyList['apPoint']) && $applyDevice != 'V20') :?><li>
+			</li><?if(isExist($arrApplyList['apPoint']) && $arrApplyList['apBenefits'] == '포인트') :?><li>
 				<span class="label"><i class="ico-plan-small"></i> 지급포인트</span><span class="cont">
 				<?php echo $apPoint ?></span>
 			</li><?endif?>
@@ -61,17 +61,16 @@
 	</section>
 	<?php if ($arrApplyList['apProcess'] != 4 and $arrApplyList['apProcess'] != 5  and $arrApplyList['apCancel'] != '1' ) :?>
 		
-		<form method="post" action="applyStateDelete.php" style="display: inline-block;"><input type="hidden" value="<? echo $arrApplyList['dvKey']?>" name="dvKey"><span><input type="submit" value="취소하기" class="btn-filled-sub-dense"></span></form> &nbsp;<span><a href="<?echo $applyEditURL?>" class="btn-filled-sub-dense">수정하기</a></span> &nbsp;<span class="btn-filled-primary-dense js-applyBtn">실가입신청</span>
+		<form method="post" action="applyStateDelete.php" style="display: inline-block;"><input type="hidden" value="<? echo $arrApplyList['dvKey']?>" name="dvKey"><span><input type="submit" value="취소하기" class="btn-filled-sub-dense"></span></form> &nbsp;<span><a href="<?echo $applyEditURL?>" class="btn-filled-sub-dense">수정하기</a></span> &nbsp;<?if($applyDevice !== 'V20' || $applyDevice !== '아이폰7' || $applyDevice !== '아이폰7플러스' || $applyDevice !== '갤럭시 S7 엣지') :?><span class="btn-filled-primary-dense js-applyBtn">실가입신청</span><?endif?>
 
 	<?php elseif ($arrApplyList['apCancel'] === '1' ):?>
 		<span class="cont">신청이 취소되었습니다</span>
-	<?endif?>
-	<!--
-	<?if($applyDevice === 'V20' && $arrApplyList['apCancel'] === '0' ) :?>	
+	<?endif?>	
+	<?if( ($applyDevice === 'V20'&& $arrApplyList['apCancel'] === '0') || ($applyDevice === '아이폰7'&& $arrApplyList['apCancel'] === '0') || ($applyDevice === '아이폰7플러스'&& $arrApplyList['apCancel'] === '0') || ($applyDevice === '갤럭시 S7 엣지'&& $arrApplyList['apCancel'] === '0') ) :?>	
 		<Br><Br>
-		<span class="cont">실가입은 1월 24일 화요일 중에 별도로 안내드립니다.</span>
+		<span class="cont">곧 해피콜을 드리겠습니다. 꼭 전화를 받아주세요</span>
 	<?endif?>
-	-->
+	
 	<Br><Br><Br>
 	<?require_once("./preorderStateInfo.php");?>
 	
