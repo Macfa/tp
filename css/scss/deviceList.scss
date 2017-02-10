@@ -15,6 +15,7 @@ $bannerHeight : 350px;
 .kt-container{
 	@extend .container;
 }
+.kt-container,
 .sk-container{
 	padding-top:$navHeight * 2 + $navDeviceHeight;
 }
@@ -26,9 +27,7 @@ $bannerHeight : 350px;
 .kids-container{
 	padding-top:$navHeight + $navDeviceHeight;	
 }
-.kt-container{
-	padding-top:$navHeight;
-}
+
 .list-banner {
 	height:$bannerHeight;
 	font-size:1.1em;
@@ -42,7 +41,8 @@ $bannerHeight : 350px;
 }
 .list-banner-manuf-lg{
 	@extend .list-banner;
-	background:white url('../img/banner-g5-mobile.jpg') no-repeat center 10px;
+	height:250px;
+	background:url('../img/sub_device_v20_mobile.jpg') no-repeat center center;
 }
 .list-banner-samsung{
 	@extend .list-banner;
@@ -62,10 +62,10 @@ $bannerHeight : 350px;
 }
 
 .subEvent-egg{	
-	background: url('../img/sub_wifi_plusmoney_1-mobile.jpg') no-repeat center center;
+	background: url('../img/sub_category/pocketfi/sub_egg_giftTablet-mobile.jpg') no-repeat center center;
 }
 .subEvent-pocket{
-	background: url('../img/sub_wifi_plusmoney2_1-mobile.jpg') no-repeat center center;
+	background: url('../img/sub_category/pocketfi/sub_pocketfi_giftTablet-mobile.jpg') no-repeat center center;
 }
 
 
@@ -145,7 +145,8 @@ $bannerHeight : 350px;
 		background-image:url('../img/sub_gear3_plusmoney2-landscape.jpg');
 	}
 	.list-banner-manuf-lg{
-		background:white url('../img/banner-g5.jpg') no-repeat 10% center;
+		height:350px;
+		background:url('../img/sub_device_v20_landscape.jpg') no-repeat center center;
 	}
 	.list-banner-pocketfi{
 		height: 350px;
@@ -157,10 +158,10 @@ $bannerHeight : 350px;
 		background-image:url('../img/sub_kiz_mecard-landscape.jpg');
 	}
 	.subEvent-egg{
-		background: url('../img/sub_wifi_plusmoney_1-landscape.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_egg_giftTablet-landscape.jpg') no-repeat center center;
 	}
 	.subEvent-pocket{
-		background: url('../img/sub_wifi_plusmoney2_1-landscape.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_pocketfi_giftTablet-landscape.jpg') no-repeat center center;
 	}
 
 	.list-banner-kt{
@@ -187,6 +188,7 @@ $bannerHeight : 350px;
 	$navHeight : 60px;
 	$navDeviceHeight : 95px;
 	$bannerHeight : 450px;
+	.kt-container,
 	.sk-container{
 		padding-top:$navHeight * 2 + $navDeviceHeight;
 	}
@@ -197,9 +199,6 @@ $bannerHeight : 350px;
 	.watch-container,
 	.kids-container{
 		padding-top:$navHeight + $navDeviceHeight;	
-	}
-	.kt-container{
-		padding-top:$navHeight;
 	}
 	/*.list-banner-tit{margin-bottom:120px;}*/
 	.list-banner {
@@ -219,10 +218,10 @@ $bannerHeight : 350px;
 		//background:#edeae5 url('../img/sub_wifi_prpointmore-tablet.jpg') no-repeat center center;
 	}
 	.subEvent-egg{
-		background: url('../img/sub_wifi_plusmoney_1-tablet.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_egg_giftTablet-tablet.jpg') no-repeat center center;
 	}
 	.subEvent-pocket{
-		background: url('../img/sub_wifi_plusmoney2_1-tablet.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_pocketfi_giftTablet-tablet.jpg') no-repeat center center;
 	}
 
 	.list-banner-gear{
@@ -233,7 +232,8 @@ $bannerHeight : 350px;
 		background-image:url('../img/sub_kiz_mecard-tablet.jpg');
 	}
 	.list-banner-manuf-lg{
-		background-position:20% center;
+		height: 450px;
+		background:url('../img/sub_device_v20_tablet.jpg') no-repeat center center;
 	}
 	.list-banner-kt{
 		background:white url('../img/banner-kt-tablet.jpg') no-repeat center center;
@@ -270,16 +270,16 @@ $bannerHeight : 350px;
 		background-image:url('../img/sub_gear3_plusmoney2-pc.jpg');
 	}
 	.list-banner-manuf-lg{
-		background-position: 25% center;
+		background:url('../img/sub_device_v20_pc.jpg') no-repeat center center;
 	}
 	.list-banner-pocketfi{
 		//background:#edeae5 url('../img/sub_wifi_prpointmore-pc.jpg')no-repeat center center;
 	}
 	.subEvent-egg{
-		background: url('../img/sub_wifi_plusmoney_1-pc.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_egg_giftTablet-pc.jpg') no-repeat center center;
 	}
 	.subEvent-pocket{
-		background: url('../img/sub_wifi_plusmoney2_1-pc.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_pocketfi_giftTablet-pc.jpg') no-repeat center center;
 	}
 
 	.list-banner-kt{
@@ -309,16 +309,16 @@ $bannerHeight : 350px;
 		background-image:url('../img/sub_gear3_plusmoney2-wide.jpg');
 	}
 	.list-banner-manuf-lg{
-		background-position: 35% center;
+		background:url('../img/sub_device_v20_wide.jpg') no-repeat center center;
 	}
 	.list-banner-pocketfi{
 		//background: #edeae5 url('../img/sub_wifi_prpointmore-wide.jpg')no-repeat center center;
 	}
 	.subEvent-egg{
-		background: url('../img/sub_wifi_plusmoney_1-wide.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_egg_giftTablet-wide.jpg') no-repeat center center;
 	}
 	.subEvent-pocket{
-		background: url('../img/sub_wifi_plusmoney2_1-wide.jpg') no-repeat center center;
+		background: url('../img/sub_category/pocketfi/sub_pocketfi_giftTablet-wide.jpg') no-repeat center center;
 	}
 
 	.list-banner-kt{

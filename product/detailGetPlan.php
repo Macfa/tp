@@ -157,17 +157,79 @@ if($startEventTime < $cfg['time_ymdhis'] and $cfg['time_ymdhis'] < $endEventTime
 // KT 번이 = ASUS E502SA-XX015
 // KT 기변, SK번이 = 엠피지오 듀오 + 키보드
 // SK 기변 = 엠피지오 태블릿 10.1인치.
-if($_POST['carrier'] == 'kt' && $_POST['applyType'] == '2') {
-    $calcResult['gift'] = 'ASUS E502SA-XX015';
-} elseif(($_POST['carrier'] == 'kt' && $_POST['applyType'] == '6') || ($_POST['carrier'] == 'sk' && $_POST['applyType'] == '2')) {
-    $calcResult['gift'] = '엠피지오 듀오+케이스키보드';
-} elseif($_POST['carrier'] == 'sk' && $_POST['applyType'] == '6') {
-    $calcResult['gift'] = '레전드 와이드 태블릿치';
+if($device['dvId'] == 'v20') {
+	if($_POST['carrier'] == 'kt' && $_POST['applyType'] == '2') {
+	    $calcResult['gift'] = 'ASUS E502SA-XX015';
+	} elseif(($_POST['carrier'] == 'kt' && $_POST['applyType'] == '6') || ($_POST['carrier'] == 'sk' && $_POST['applyType'] == '2')) {
+	    $calcResult['gift'] = '엠피지오 듀오+케이스키보드';
+	} elseif($_POST['carrier'] == 'sk' && $_POST['applyType'] == '6') {
+	    $calcResult['gift'] = '레전드 와이드 태블릿치';
+	}
+} elseif(isContain('galaxys7edge', $device['dvId'])) {
+	if(($_POST['carrier'] == 'sk' && $_POST['applyType'] == '2') || ($_POST['carrier'] == 'kt' && $_POST['applyType'] == '2') || ($_POST['carrier'] == 'kt' && $_POST['applyType'] == '6')) {
+	    $calcResult['gift'] = '듀얼OS태블릿';
+	} elseif($_POST['carrier'] == 'sk' && $_POST['applyType'] == '6') {
+	    $calcResult['gift'] = '엠피지오 아테나7';
+	}
+} elseif(isContain('iphone7', $device['dvId']) || isContain('iphone7plus', $device['dvId'])) {
+	if(($_POST['carrier'] == 'sk' && $_POST['applyType'] == '2') || ($_POST['carrier'] == 'kt' && $_POST['applyType'] == '6')) {
+	    $calcResult['gift'] = '10.1인치 태블릿';
+	} elseif($_POST['carrier'] == 'kt' && $_POST['applyType'] == '2') {
+	    $calcResult['gift'] = '듀얼OS 태블릿';
+	}
+}
+
+if ($_POST['discountType'] == 'selectPlan') {
+	$addSupport = 0;
+} else {
+	$addSupport = $calcResult['spAddSupport'];
+}
+
+$carrier = strtoupper($_POST['carrier']);
+$dvChannel = 'dvChannel'.$carrier;
+
+$chKey = DB::queryFirstField("SELECT $dvChannel FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s", $device['dvKey']);
+
+if($_POST['carrier'] == 'sk' && $device['dvModelCode'] == 'LG-F800')
+	$chKey = 4;
+elseif ($_POST['carrier'] == 'kt' && $device['dvModelCode'] == 'LG-F800')
+	$chKey = 3;
+
+switch($device['dvModelCode']) {
+	case 'IML450':
+		$calcResult['applyUrl'] = 'http://online.olleh.com/index.jsp?prdcID=2A0A5330-92FA-4445-871A-6C451E6D076F';
+		$chKey = 5;
+		$rpPoint = 72000;
+		break;
+	case 'IML460':
+		$calcResult['applyUrl'] = 'http://online.olleh.com/index.jsp?prdcID=B1954DAC-C18F-4E21-8D8E-65682B91A210';
+		$chKey = 5;
+		$rpPoint = 72000;
+		break;
+	case 'KMR200':
+		$calcResult['applyUrl'] = 'http://online.olleh.com/index.jsp?prdcID=AF4A9623-50A7-4D60-AF93-FA5EAAC4E7C4';
+		$chKey = 5;
+		$rpPoint = 72000;
+		break;
+	case 'UROAD-SMR100':
+		$calcResult['applyUrl'] = 'https://tgate.sktelecom.com/applform/main.do?prod_seq=000000010191012&scrb_cl=01&mall_code=00188';
+		$chKey = 4;
+		$rpPoint = 72000;
+		break;
+	case 'SR-L200T':
+		$calcResult['applyUrl'] = 'https://tgate.sktelecom.com/applform/main.do?prod_seq=000000010191075&scrb_cl=01&mall_code=00188';
+		$chKey = 4;
+		$rpPoint = 72000;
+		break;
+	default:
+		break;
 }
 
 
 $calcResult['dvKey'] = $device['dvKey'];
 $calcResult['rewardPoint'] = (isExist($rpPoint))?(int)$rpPoint:'미정';
+$calcResult['chKey'] = $chKey;
+$calcResult['mode'] = $device['dvCate'];
 
 //-------------------------------------
 

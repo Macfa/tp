@@ -1,3 +1,5 @@
+$ico70xPath : '../img/ico-common-70x.png';
+
 .ico-common {
 	background-image:url('../img/ico-common.png');
 	background-repeat:no-repeat;
@@ -8,7 +10,7 @@
 	width:70px;
 	height:70px;
 	vertical-align:middle;
-	background-image:url('../img/ico-common-70x.png');
+	background-image:url($ico70xPath);
 	background-repeat:no-repeat;
 	&:active{@include opacity(1);}
 }
@@ -22,6 +24,16 @@
 	background-repeat:no-repeat;
 	&:active{@include opacity(1);}
 }
+.ico-18x{
+	@include inlineBlock;
+	@include opacity(0.6);
+	width:18px;
+	height:18px;
+	vertical-align:middle;
+	background-image:url('../img/inp-ico.png');
+	background-repeat:no-repeat;
+	&:active{@include opacity(1);}
+}
 .ico-calculate {
 	@include inlineBlock;
 	width:14px;
@@ -30,6 +42,29 @@
 	background-repeat:no-repeat;
 	vertical-align:middle;
 }
+.ico-cancle-18x{
+	@extend .ico-18x;
+	background-position:-18px 0;
+	&-light{
+		@extend .ico-18x;
+		background-position:-126px 0;
+	}
+	&-primary {
+		@extend .ico-18x;
+		background-position:-144px 0;
+	}
+}
+
+.ico-more-18x{
+	@extend .ico-18x;
+	background-position:-180px 0;
+	&-primary {
+		@extend .ico-18x;
+		@include opacity(1);
+		background-position:-162px 0;
+	}
+}
+
 .ico-calculate-minus-positive{
 	@extend .ico-calculate;
 	background-position:-28px -14px;
@@ -133,6 +168,11 @@
 	background-position:-600px 0;
 }
 
+.ico-logo-30x{
+	@extend .ico-small;
+	background-position:-660px 0;
+}
+
 .ico-apply-70x{
 	@extend .ico-70x;
 	background-position:0 0;
@@ -140,4 +180,20 @@
 .ico-phone-70x{
 	@extend .ico-70x;
 	background-position:-70px 0;
+}
+.ico-logo-70x{
+	@extend .ico-70x;
+	background-position:-140px 0;
+}
+.ico-carrier-70x{
+	@extend .ico-70x;
+	background-position:-210px 0;
+}
+.ico-tel-70x{
+	@extend .ico-70x;
+	background-position:-280px 0;
+}
+.ico-truck-70x{
+	@extend .ico-70x;
+	background-position:-350px 0;
 }

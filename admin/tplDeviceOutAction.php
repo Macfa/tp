@@ -66,7 +66,7 @@ try {		/* 입고 출고의 form 값이 view 로 떨어지는데 그때 값을 �
 		if($check_in <= $check_out) {
 			$err_val .= $val.' ';
 			$err = true;
-		}	
+		}
 	}
 	if($err === true) {
 		throw new Exception($err_val."\\n위는 이미 출고 된 SerialKey 입니다", 3);

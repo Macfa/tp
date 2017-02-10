@@ -1,87 +1,141 @@
-<?php
+<?php 
+include_once(PATH_LIB.'/lib.meekrodb.inc.php');
+
 class Upload {
+	
+	protected $maxsize = null;
+	protected $extension = null;
+	public $arrfile = '';
+	public $randomString ='';
+	public $fsId = '';
+	public $directory ='';
 
-    private $upload_dest = array();
-    private $check_size = 0;
-    private $file_name = '';
-    private $check_mime = array(
-        'txt' => 'text/plain',
-        'htm' => 'text/html',
-        'html' => 'text/html',
-        'php' => 'text/html',
-        'css' => 'text/css',
-        'png' => 'image/png',
-        'jpe' => 'image/jpeg',
-        'jpeg' => 'image/jpeg',
-        'jpg' => 'image/jpeg',
-        'gif' => 'image/gif',
-        'mp3' => 'audio/mpeg'
-    );
 
-    public function addFILE($file) {
-        // echo "<pre>file";
-        // var_dump($file);
-        // echo "</pre>";
-        $this->upload_dest[] = $file;   // 업로드 파일들을 배열 형식에 담는다
-        // echo "<pre>thisuploaddest";
-        // var_dump($this->upload_dest);
-        // echo "</pre>";
-        $this->file_name[] = basename($upload_dest);
-        return $this;
-    }   // end stament addFILE
+	static function setFile($destination) {
+		return new Upload($destination);
+	}	
 
-    public function checkFILE() {
+	public function __construct($destination){
+		$this->arrfile = $destination;
 
-        $checkfile = $this->upload_dest;
-        echo "<pre>checkfile";
-        var_dump($checkfile);
-        echo "</pre>";
+		$this->checkError();
 
-        foreach ($checkfile as $key => $value) {
-            echo "<pre>foreachvalue";
-            var_dump($value);
-            echo "</pre>";
-            $finfo = new finfo();
-            $basefile_type = $finfo->file($finfo_open(FILEINFO_MIME_TYPE), $value);
-            echo "<pre>basefile";
-            var_dump($basefile_type);
-            echo "</pre>";
-            if(strcasecmp($check_mime, $basefile_type) === 0 ) {
-                echo $basefile.' has match !';
-            } else {
-                return false;
-            }// end stament if
-        }   // end stament foreach
-    }   // end stament checkFILE
+		return $this;
+	}
+	public function checkError(){
+		if($this->arrfile['error'] > 0){
 
-    public function setSIZE($size = 102400) {
-        $this->check_size = $size;
-        return $this;
-    }   // end stament setSIZE
+			try{
+				switch ($this->arrfile['error']) {					
+					case '1': throw new Exception('업로드한 파일크기가 설정된 값보다 큽니다. 티플에 문의해주세요. ', 1);
+						break;
+					case '2': throw new Exception('업로드한 파일크기가 HTML 폼에 명시한 값보다 큽니다. 티플에 문의해주세요 ', 2);
+						break;
+					case '3': throw new Exception('파일의 일부분만 업로드 되었습니다. 티플에 문의해주세요 ', 3);
+						break;
+					case '4': throw new Exception('파일이 업로드되지 않았습니다. 티플에 문의해주세요', 4);
+						break;
+					case '6': throw new Exception('임시 디렉터리가 지정되지 않았습니다. 티플에 문의해주세요', 5);
+						break;
+					case '7': throw new Exception('디스크에 파일을 쓰지 못했습니다. 티플에 문의해주세요 ', 6);
+						break;
+				}
 
-    public function checkSIZE() {
-        $file_size = filesize($this->upload_dest) / 1024;
-        $basefile_size = $this->check_size;
-        if ($file_size < $basefile_size) {
-            echo $filesize.'has set !';
-        } else {
-            return false;
-        }   // end stament if
-    }   // end stament checkSIZE
+			}catch (Exception $e) {
 
-    public function valiate() {
-        if($this->checkFILE() === false) echo "FILE Checked"; return false;
-        if($this->checkSIZE() === false) echo "SIZE Checked"; return false;
-    }   // end stament valiate
+				alert($e->getMessage()."errorCode : ".$e->getCode());			
+			}
+		}
+	}
 
-    public function upload() {
-        if($this->valiate() === false ) return false;
-        foreach($this->file_name as $value)
-        if (move_uploaded_file($value, '/Users/chy/tmp')) {
-            echo $value." file upload complete !";
-        } else {
-            echo "upload failed Check dump".var_dump($this->upload());
-        }   // end stament if
-    }   // end stament upload
-}   // end stament class
- ?>
+	public function setMaxsize($maxsize) {
+		if ( $maxsize >= 0 && $maxsize <= 1024000) {
+			$this->maxsize = $maxsize / 1024;	
+		} else {
+			return false;		
+		}
+		return $this;
+	} 	
+
+	public function checkMaxsize() {
+
+		$checkFilesize = $this->arrfile['size'] / 1024;
+		if ( $checkFilesize <= $this->maxsize ) {
+			$this->arrfile['size'] = $checkFilesize;			
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	
+	public function setAllowedExtension($extension) {		
+		$this->extension = $extension;
+		return $this;
+	}
+
+	public function checkAllowedExtension(){
+		
+		return isValidExt($this->arrfile,$this->extension);	
+	
+	}
+
+	public function setDirectory($dir) {		
+		$this->directory = $dir;
+		return $this;
+	}
+
+	public function upload (){	
+
+		if($this->validate() === false){
+
+			return false;
+
+		}else{
+			$this->randomString = encrypt(getRandomString(30).time());
+
+			$temp = explode('.', $this->arrfile['name']);
+			$ext = $temp[count($temp)-1];
+
+			$this->fsId = getRandomString(15).".".$ext;	
+			$checkFsId = DB::queryFirstField("SELECT fsId FROM tmFileStorage WHERE fsId=%s", $this->fsId); 
+			if(isExist($checkFsId)){
+				$this->fsId = getRandomString(15).".".$ext;	
+			}		
+
+			if (move_uploaded_file($this->arrfile['tmp_name'], $this->directory.$this->randomString)) {		
+
+				$this->insertData();
+			
+			}
+
+			
+		}
+		return $this;
+	}
+
+	public function insertData(){
+		
+		global $cfg;
+
+		$originalFileName = $this->arrfile['name'];			
+
+		DB::insert('tmFileStorage', 
+			array(
+				'fsId' => $this->fsId,
+				'fsFileName' => $this->randomString,
+				'fsOriginalName' => $originalFileName, 
+				'fsDatetime' => $cfg['time_ymdhis']
+			)
+		);
+		return $this;
+	}
+
+	private function validate(){
+		if(isExist($this->arrfile) === false) return false;
+		if(isExist($this->maxsize) === true && $this->checkMaxsize() === false) return false;
+		if(isExist($this->extension) === true && $this->checkAllowedExtension() === false) return false;
+	}
+
+}
+
+?>

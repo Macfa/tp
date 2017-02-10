@@ -1,54 +1,49 @@
-<?php
+<?php 
 
-class import
-{
-    private $importcss = '<link rel="stylesheet" type="text/css" href="{csspath}">';
-    private $importjs = '<script type="text/javascript" src="{jspath}"></script>';
-    private $css = array();
-    private $js = array();
+class import {
+	private $templateJS = '<script type="text/javascript" src="{js}"></script>';
+	private $templateCSS = '<link rel="stylesheet" type="text/css" href="{csspath}"/>';
 
-    public function addCSS($csspath) {
-        $this->css[] = $csspath;
-        return $this;
-    }   // end stament addCSS
+	private $css = array();
+	private $js = array();
 
-    public function addJS($jspath) {
-        $this->js[] = $jspath;
-        return $this;
-    }   // end stament addJS
+	public function addCSS($css) {
+		$this->css[] = $css;
+		return $this;
+	}
 
-    public function importCSS() {
-        foreach ($this->css as $key => $value) {
-            $path_ext = pathinfo($value);
+	public function addJS($js, $flag='basic') {
+		$this->js[] = array (
+						'flag' => $flag,
+						'file' => $js
+					);
 
-            if (strcmp($path_ext['extension'], 'css') === 0) {
-                $data['csspath'] = $value.'?v='.filemtime($value);
-                $result = str_replace('{csspath}', $data['csspath'], $this->importcss);
-                echo $result;
-            } else {
-                echo "확장자명을 확인하여 다시 시도해주세요.";
-                echo "Detail Error : ".var_dump($path_ext['extension']);
-                break;
-            }   // end stament if
-        }   // end stament foreach
-    }   // end stament importCSS
+		return $this;
+	}
 
-    public function importJS() {
-        foreach ($this->js as $key => $value) {
-            $path_ext = pathinfo($value);   // 확장자를 구해 변수에 대입 인덱스(extension)
+	public function importCSS() {
+		foreach($this->css as $value) {
+			$value_css = PATH_CSS."/".$value;
+			$data['csspath'] = $value_css.'?v='.filemtime(PATH_ROOT."/".$value_css);
+			echo getResultTemplate($data, $this->templateCSS);
+		}
+	}
 
-            if (strcmp($path_ext['extension'], 'js') === 0) {   // js 와 동일하다면 0을 리턴
-                $data['jspath'] = $value.'?v='.filemtime($value);   //변수에 파일명에 수정시간을 붙힌 값을 대입
-                $result = str_replace('{jspath}', $data['jspath'], $this->importjs);    //변수에 1번째 인자를 2번째 인자로 넘겼
-                echo $result;
-            } else {
-                echo "확장자명을 확인하여 다시 시도해주세요.";
-                echo "Detail Error : ".var_dump($path_ext['extension']);
-                break;
-            }   // end stament if
-        }   // end stament foreach
-    }   // end stament importJS
+	public function importJS() {
+		foreach($this->js as $value) {
+			if($value['flag'] === 'lib')
+				$path = PATH_JS_LIB;
+			else
+				$path = PATH_JS;
 
-}   // end stament class
+			$value_js = $path."/".$value['file'];
+			$data['js'] = $value_js.'?v='.filemtime(PATH_ROOT."/".$value_js);
+			echo getResultTemplate($data, $this->templateJS);
+		}
+	}
 
- ?>
+	public function debug(){
+		var_dump($this->js);
+	}
+
+}

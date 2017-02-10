@@ -172,7 +172,7 @@
 }
 
 .btn-flat{
-	@extend .btn-default;
+	@extend .btn-flat-default;
 	color:$mainBlack;
 	outline:0;
 	transition:background .1s;

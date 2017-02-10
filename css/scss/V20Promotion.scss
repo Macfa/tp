@@ -1,0 +1,372 @@
+@import 'common.scss';
+@import '_list.scss';
+@import '_calculator.scss';
+
+.ico-spec {
+	@include inlineBlock;
+	width:50px;
+	height:50px;
+	vertical-align:middle;
+	background-image:url('../img/icon/ico-spec-50x.png');
+	background-repeat:no-repeat;
+	&:active{@include opacity(1);}
+}
+.ico-spec-cpu{
+	@extend .ico-spec;
+	background-position:-50px 0;
+}
+.ico-spec-ram{
+	@extend .ico-spec;
+	background-position:-150px 0;
+}
+
+.ico-spec-storage{
+	@extend .ico-spec;
+	background-position:0 0;
+}
+.ico-spec-windows{
+	@extend .ico-spec;
+	background-position:-200px 0;
+}
+.ico-spec-ips{
+	@extend .ico-spec;
+	background-position:-250px 0;
+}
+.ico-spec-sound{
+	@extend .ico-spec;
+	background-position:-140px 0;
+}
+.ico-spec-displaysize{
+	@extend .ico-spec;
+	background-position:-300px 0;
+}
+.ico-spec-keyboard{
+	@extend .ico-spec;
+	background-position:-350px 0;
+}
+.ico-spec-dualos{
+	@extend .ico-spec;
+	background-position:-400px 0;
+}
+.ico-spec-camera{
+	@extend .ico-spec;
+	background-position:-450px 0;
+}
+
+
+.list-spec{
+	@include initList();
+	margin-bottom:50px;
+	text-align:left;
+	li {
+		@include initList();
+		@include inlineBlock;
+		width:50%;
+		padding:0 1%;
+		vertical-align:top;
+		text-align:center;
+		i {
+			display:block;
+			margin:0 auto;
+		}
+	}
+	.sub{
+		font-size:.9em;
+	}
+}
+
+.tit-sub{
+	word-break:keep-all;		
+}
+.section-base{
+	position:relative;
+	padding:10% 1.5%;
+	padding-bottom:7%;
+	background:initial;
+	text-align:center;
+}
+.detail-section{
+	position:relative;
+	padding:6% 1.5%;
+	background:initial;
+	text-align:center;
+}
+
+.img-mobile-small {max-width:75%}
+.feature-why-tplanit{
+	width:100px;
+}
+
+p{
+	word-break:keep-all;
+	font-size:1.1em;
+}
+main {
+	position:relative;
+	height:650px;
+	background:#161718;
+	color:white;
+	padding-bottom:0;
+	overflow:hidden;
+	text-align:center;
+}
+
+.main-copy{
+	padding:12% 0;
+}
+.carrier-mark{
+	@include inlineBlock;
+	width:45px;
+	height:45px;
+	vertical-align: middle;
+	background:url('../img/promotion/v20/20170120/ico-carrier-logos-for-promotion.png') no-repeat center center;
+}
+.carrier-kt{
+	@extend .carrier-mark;
+	background-position:0 0;
+}
+.carrier-sk{
+	@extend .carrier-mark;
+	background-position:-45px 0;
+}
+.carrier-lg{
+	@extend .carrier-mark;
+	background-position:-90px 0;
+}
+
+.intro-v20{
+	position:relative;
+	width:163px;
+	height:225px;
+	background:url('../img/promotion/v20/20170120/intro-v20-mobile.png') no-repeat center center;
+	margin:0 auto;
+	z-index:2;
+}
+.intro-laptop{
+	position:relative;
+	width:375px;
+	height:300px;
+	margin:0 auto;
+	left:50%;
+	margin-left:-197px;
+	.keyboard{
+		position:absolute;
+		width:115px;
+		height:236px;
+		bottom:5px;
+		right:0px;
+		background:url('../img/promotion/v20/20170120/intro-laptop-keyboard-mobile.png') no-repeat center center;
+		z-index:1;
+	}
+	.display{
+		position:absolute;
+		width:314px;
+		height:278px;
+		bottom:0;
+		background:url('../img/promotion/v20/20170120/intro-laptop-display-mobile.png') no-repeat center center;
+		z-index:3;
+	}
+}
+
+.section-detail{
+	@extend .section-base;
+	margin-top:50px;
+}
+.section-detail-wrap{
+	position:relative;
+	z-index:1;
+	display:none;
+	background:white;
+	height:0;
+	overflow:hidden;
+}
+
+.section-fan{
+	@extend .section-base;
+	// background:url('../img/promotion/v20/20170120/fan-bg-640.jpg') no-repeat center center;
+	
+}
+
+.section-asus{
+	@extend .section-base;
+	color:white;
+	background:#161718 url('../img/promotion/v20/20170120/gift-asus-bg-mobile.jpg') no-repeat center center;
+}
+.section-tplanit{
+	position:relative;
+	padding:6% 1.5%;
+	background:white;
+	text-align:center;
+}
+.section-point-giftcard{
+	position:relative;
+	padding:6% 1.5%;
+	background:white;
+	text-align:center;
+	border-top:solid 1px #161718;
+}
+.tit-tplanit{
+	font-size:2em;
+	word-break: keep-all;
+	font-weight:bold;
+	margin:0;
+	margin-bottom:20px;
+	color:getPrimaryColor(9);
+}
+.feature-list{
+	@extend .list;
+	@include inlineBlock;
+	li{text-align:left;}
+}
+
+.section-duo{
+	@extend .section-base;
+	color:white;
+	background:#1f1f1f;
+}
+
+.section-legendwide{
+	@extend .section-base;
+	color:white;
+	background:#1f1f1f;
+}
+
+.section-v20{
+	@extend .section-base;
+	background:#161718;
+	color:white;
+}
+
+.process-apply{
+	@include initList();
+	margin:3% 0;
+	li {
+		@include initList();
+		display:inline-block;
+		width:20%;
+		padding:0 1%;
+		text-align:center;
+		vertical-align: top;
+		word-break:keep-all;
+		& i.mobile{
+			display:block;
+			margin:0 auto;
+		}
+		& i.pc{
+			margin:0 auto;
+			background-image:none;
+			display:none;
+		}
+	}
+	
+}
+
+
+.btn-detail-view{
+	@extend .btn-flat-primary;
+	position:absolute !important;
+	bottom:3.5%;
+	left:50%;
+	z-index:2;
+	margin-left:-65px !important;
+	cursor:pointer;
+	cursor:hand;
+	.active-txt{display:none;}
+	i {
+		@extend .ico-more-18x-primary;
+		vertical-align: bottom;
+	}
+	&.active{
+		.active-txt{display:inline;}
+		.inactive-txt{display:none;}
+		margin-left:-45px;
+		@extend .btn-filled-sub;
+		i{
+			@extend .ico-cancle-18x-light;
+
+		}
+	}
+}
+
+.btn-detail-view-fan{
+	@extend .btn-flat;
+	position:absolute !important;
+	bottom:3.5%;
+	left:50%;
+	z-index:2;
+	margin-left:-65px !important;
+	cursor:pointer;
+	cursor:hand;
+	.active-txt{display:none;}
+	i {
+		@extend .ico-more-18x;
+		vertical-align: bottom;
+	}
+	&.active{
+		.active-txt{display:inline;}
+		.inactive-txt{display:none;}
+		margin-left:-45px;
+		@extend .btn-filled-sub;
+		i{
+			@extend .ico-cancle-18x-light;
+
+		}
+	}
+}
+@media all and (min-width:640px){
+	main{height:1150px;}
+	.intro-v20{
+		width:275px;
+		height:387px;
+		background-image:url('../img/promotion/v20/20170120/intro-v20-640.png');
+	}
+	.intro-laptop{
+		width:845px;
+		height:635px;
+		margin-left:-422px;
+		.keyboard{
+			width:261px;
+			height:537px;
+			bottom:20px;
+			background-image:url('../img/promotion/v20/20170120/intro-laptop-keyboard-640.jpg');
+		}
+		.display{
+			width:716px;
+			height:635px;
+			background-image:url('../img/promotion/v20/20170120/intro-laptop-display-640.png');
+		}
+	}
+
+	.process-apply li i.mobile{
+		background-image:none;
+		display:none;
+	}
+	.process-apply li i.pc{
+		display:block;
+		background-image:url($ico70xPath);
+	}
+	.list-spec{
+		text-align:center;
+		li{width:auto;}
+	}
+	.feature-why-tplanit{
+		width:auto;
+	}
+}
+
+@media all and (min-width:900px){
+	.section-fan{
+		// background-image:url('../img/promotion/v20/20170120/fan-bg-1450.jpg');
+		padding:7% .5%;
+		text-align:center;
+	}
+	.list-spec {margin-bottom:0}
+}
+
+@media all and (min-width:1200px){
+	.main-copy{padding:5% 0;}
+}
+
+@media all and (min-width:1450px){
+
+}

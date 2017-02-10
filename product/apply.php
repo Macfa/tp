@@ -14,11 +14,15 @@ if(isExist($_GET['mbEmail'])){
 //--------------------------------------------------------------------------------------------------------
 
 $dvKey = $_GET['dvKey'];
+$dcColor = DB::queryFirstColumn("SELECT dcColor FROM tmDeviceColor WHERE dvKey=%i", $dvKey);
+
+
 
 if(isExist($_GET['v']) === true){
 	//수정할 신청서 정보
 	$modifyApply = DB::queryFirstRow("SELECT * FROM tmApplyTmp AS apply LEFT JOIN tmDevice AS device ON apply.dvKey = device.dvKey WHERE apply.apKey=%i AND apply.apCancel=0", $_GET['apKey']);
 	$dvKey = $modifyApply['dvKey'];
+	$dcColor = DB::queryFirstRow("SELECT dcColor FROM tmDeviceColor WHERE dvKey=%i", $dvKey);
 }
 
 
@@ -39,7 +43,7 @@ try{
 			|| isNotExist($_GET['discountType']) === true 
 			|| isNotExist($_GET['dvKey']) === true 
 			|| isNotExist($_GET['plan']) === true)
-			throw new Exception('기본정보입력 후 가능합니다.', 1);	
+			throw new Exception('계산기에서 먼저 기본정보를 선택해주세요!', 1);	
 
 		if(isExist($device) === FALSE)
 			throw new Exception('존재하지 않는 기기입니다.', 3);
@@ -131,10 +135,17 @@ if($_GET[v] === 'edit'){
 	}
 	$editClass = "editWrap";
 
-	$benefit = 'point';
-	if($modifyApply['apBenefits'] !== '포인트'){
-		 $benefit = 'gifts';
-	}
+	switch ($modifyApply['apBenefits']) {
+		case '포인트':
+			$benefit = 'point';
+			break;
+		case '백화점상품권':
+			$benefit = 'giftCard';
+			break;
+		default:
+			$benefit = 'gifts';
+			break;
+	}	
 
 }
 

@@ -5,7 +5,6 @@ include_once(PATH_LIB."/lib.parsing.inc.php");
 include_once(PATH_LIB."/lib.phone.inc.php");
 require_once($cfg['path']."/headBlank.inc.php");
 
-
 // 어드민에서 직접 신청서를 수정하는 경우
 if(isExist($_POST['modifyEmail'])){
 	$mb['mbEmail'] = $_POST['modifyEmail'];
@@ -25,16 +24,14 @@ $countApplyForReferrerChannel = (int)$countApplyForReferrerChannel;
 if($_POST['v'] === 'edit') 
 	$isEdit = true;
 
-$carrier = strtoupper($_POST['carrier']);
-$dvChannel = 'dvChannel'.$carrier;
 
-list($isExistDevice, $chKey) = DB::queryFirstList("SELECT COUNT(*), $dvChannel FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s", $_POST['dvKey']);
+$isExistDevice = DB::queryFirstField("SELECT COUNT(*) FROM tmDevice WHERE dvDisplay = 1 and dvKey = %s", $_POST['dvKey']);
 
 //--------------------------------------------------------------------------------------------------------
 
 try
 {
-	
+
 	if($isLogged == false)
 		throw new Exception('별 포인트 적립을 위해 로그인 해주세요!', 3);
 
@@ -74,7 +71,7 @@ try
 
 
 	// V20 이벤트로 인해 추가된 코드
-	if($_POST['dvId'] == 'v20') {
+	if($_POST['dvId'] == 'v20' || $_POST['dvId'] == 'galaxys7edge' || $_POST['dvId'] == 'iphone7' || $_POST['dvId'] == 'iphone7plus') {
 		if(isNullVal($_POST['apBenefits']))
 			throw new Exception("혜택을 선택해주세요", 3);
 
@@ -140,7 +137,7 @@ catch(Exception $e){
 		
     	alert($e->getMessage(), $URL);
 	}else 
-		alert($e->getMessage());	
+		alert($e->getMessage());
 
 }
 
@@ -157,13 +154,10 @@ $getPlanInfo = getPlanInfo(
 			)
 		);
 
-$rewardPoint = $getPlanInfo['rewardPoint']; 
-
+$rewardPoint = $getPlanInfo['rewardPoint'];
+$chKey = $getPlanInfo['chKey'];
 $parentPoint = 0;
 $grandPoint = 0;
-
-
-
 
 //////////////////추천포인트 지급
 
@@ -237,6 +231,7 @@ if(isExist($_POST['recommedID'])){//추천포인트 지급
 			'phDate' => $cfg['time_ymdhis']
 		));
 		*/
+
 	}
 }
 
@@ -271,8 +266,10 @@ $arrApplyInfo = array(
 // V20 이벤트로 인해 추가된 코드
 if($_POST['apBenefits'] == 'gifts') {
 	$arrApplyInfo['apBenefits'] = $getPlanInfo['gift'];
-} else {
+} else if($_POST['apBenefits'] == 'point') {
 	$arrApplyInfo['apBenefits'] = '포인트';
+} else if($_POST['apBenefits'] == 'giftCard') {
+	$arrApplyInfo['apBenefits'] = '백화점상품권';
 }
 // V20 이벤트로 인해 추가된 코드
 
@@ -326,9 +323,24 @@ if(isExist($_POST['v']) === true AND isExist($_POST['modifyEmail']) === false){ 
 }else{ // 새롭게 신청서 작성시 문자 설정 & 실가입 주소로 가게끔 설정
 
 	$SMS = new SMS();
+	$w = array("일", "월", "화", "수", "목", "금", "토");
+	$week = $w[date("w")];	
 
-	$sendCont = "[티플] ".$_POST['applyTitle']." 가입신청 완료.\n마이페이지나 화면 안내에 따라 실가입을 진행해주세요";
-	$SMS->sendMode('SMS')->sendMemberPhone($_POST['apPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();	
+	if($getPlanInfo['mode'] === 'phone' && ($week === '토' || $week === '일')) { // 'phone' 카테고리 주말일때 메세지
+		$alertMessage = $_POST['applyTitle'].' 신청완료. 월요일에 해피콜을 드리겠습니다. 꼭 전화를 받아주세요';
+		$sendCont = "[티플] ".$_POST['applyTitle']." 상담신청 완료.\n월요일에 해피콜을 드리겠습니다. 꼭 전화를 받아주세요.";
+	}else if($getPlanInfo['mode'] === 'phone' && ($week != '토' && $week != '일')){ // 'phone' 카테고리 평일일때 메세지
+		$alertMessage = $_POST['applyTitle'].' 신청완료. 곧 해피콜을 드리겠습니다. 꼭 전화를 받아주세요';
+		$sendCont = "[티플] ".$_POST['applyTitle']." 상담신청 완료.\n곧 해피콜을 드리겠습니다. 꼭 전화를 받아주세요.";
+	}else{ // 그외 카테고리		
+        $sendCont = "[티플] ".$_POST['applyTitle']." 가입신청 완료.\n마이페이지나 화면 안내에 따라 실가입을 진행해주세요";
+	}
+
+	$SMS->sendMode('SMS')->sendMemberPhone($_POST['apPhone'])->sendMemberName($mb['mbName'])->sendCont($sendCont)->send();
+
+	if(isExist($alertMessage) === true){
+		alert($alertMessage, $cfg['url']."/user/applyStateList.php");
+	}
 
 }
 
@@ -342,9 +354,11 @@ if(isExist($_POST['v']) === true AND isExist($_POST['modifyEmail']) === false){ 
 	<input type="hidden" name="discountType" value="<?echo $_POST['discountType']?>">
 	<input type="hidden" name="dvId" value="<?echo $_POST['dvId']?>">
 </form>
+
 <script>
 	$(window).load(function(){
 	    $('.goApplyUrl').submit();
 	});
 	
 </script>
+ 

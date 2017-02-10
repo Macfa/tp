@@ -120,6 +120,16 @@ img{display:block;max-width:100%;height:auto;margin:0 auto;text-align:center}
 	font-size:1.8em;margin-bottom:50px;margin-top:50px;
 	font-weight:normal;
 }
+.title{
+	word-break: keep-all;
+	font-size:2.2em;margin:0;margin-bottom:2%;
+	font-weight:normal;
+}
+.tit-eyebrow{
+	word-break: keep-all;
+	font-size:1.3em;
+	margin-bottom:5px;
+}
 .tit-huge{
 	font-size:2.6em;
 	text-align: center;
@@ -474,7 +484,7 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	position:relative;
 }
 .contact-mobile-btn {
-	display:block;
+	display:none;
 	width:140px;
 	height:60px;
 	position:absolute;
@@ -483,6 +493,8 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	right:5px;
 	transition:all .3s;
 	@include animate-fadeIn-to-out();
+	
+	&.active {display: block;}
 }
 .contact-consult-mobile{
 	@extend .contact-mobile-btn;
@@ -505,11 +517,12 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	text-align:center;
 	font-size:1em;
 	text-decoration:none;
-	color:$mainBlack;
-	text-shadow:1px 1px 30px #797979;
+	color:#fff;
+	
 }
 
 .contact-toggle-btn{
+	@include shadow-level(2);
 	width:70px;
 	height:70px;
 	display:block;
@@ -517,7 +530,6 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	font-size:1.2em;
 	font-weight:bold;
 	border-radius:50%;
-	@include shadow(#999);
 	background: $mainYellow;
 	color:$mainBlack;
 	border:0;
@@ -531,7 +543,6 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	position:relative;
 	border-radius:50%;
 	float:left;
-	@include shadow(#aaa);
 	background: $mainYellow;
 	color:$mainBlack;
 	border:0;
@@ -542,9 +553,13 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 }
 .mobile-ico-consult, .mobile-ico-tel{
 	@extend .mobile-ico;
-	background:$mainBlack;
+	background:#0b0c0e;
 }
-
+.mobile-contact-link{
+    width: 140px;
+    height: 60px;
+    display: block;
+}
 
 .contact-mobile-ico {
 	background: url('../img/ico-contact-btn.png') no-repeat center center;
@@ -621,7 +636,18 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	color:#777;
 	font-size:.8em;
 }
-
+.mobile-background{
+	width:100%;
+	height: 100%;
+	background: rgba(46, 51, 58, 0.9);
+	z-index: 999990;
+	position: fixed;
+	top:0;
+	display: none;	
+	&.active{
+		display:block;
+	}	
+}
 
 @media all and (min-width:640px){
 	$listRecommWrapHeight : 400px;
@@ -776,6 +802,8 @@ footer {margin-top:50px;min-height:150px;padding-top:50px;border-top:solid 1px #
 	.nav-mobile-func{display:block;}
 
 	.menuToggler{display:none;}
+	.tit-eyebrow{font-size:1.5em;}
+	.title,
 	.tit {font-size:3em;}
 	.trio-section{height:300px;}
 	.trio-item {

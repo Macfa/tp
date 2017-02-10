@@ -1,0 +1,93 @@
+body{
+	margin:0;
+}
+.applyUrl-view {
+	width: 900px;
+	height: 100%;
+	position: relative;		
+	margin:0 auto;
+}
+.applyUrlIframe{
+	width:896px;
+	height:3150px;
+	border:0;
+}
+.skt-head-wrap{
+	width: 890px;
+	height: 64px;
+	background: #fff;
+	position: absolute;
+	top:0;
+	left: 0;		
+}
+#header{
+	width: 857px;
+	height: 64px;
+	margin: 0 auto;
+	padding-left: 33px;
+	border-top:5px solid #ff6f0f;
+	border-bottom: 1px solid #e6e6e6;
+	p.logo {
+		float: left;
+		padding:11px 10px 0 0;
+		margin:0;
+	}
+	img {
+		display: block;
+		border: 0 none;
+	}	
+	h1{
+		float: left;
+		padding-top:27px;
+		margin:0;
+	}	
+}
+
+.store_info{
+	float: right;
+	max-width: 400px;
+	height: 64px;
+	margin-top:11px;
+	overflow: hidden;
+	color:#4c4c4c;
+	font-size:12px;
+	font-family: '돋움',dotum, sans-serif;
+	line-height: 1.5;
+	dl{
+		margin:0;
+	}
+	dt {
+		float: left;
+		padding:0 4px 0 8px;
+		background: url('http://lmjdev.tplanit.co.kr/css/img/bg_dot01.png') no-repeat left center;
+		font-weight: bold;
+		
+	}
+	.phone_num{
+		margin-left: 15px;
+	}
+	dd{
+		float: left;
+		margin:0;
+	}
+}
+.address_info{
+	clear:both;
+	max-width: 400px;
+	dt{
+		width:36px;
+	}
+	dd{
+		width:350px;
+	}
+}
+
+
+@media all and (min-width:896px){
+	.skt-head-wrap{
+		left: 50%;
+		margin-left:-445px;		
+
+	}	
+
+}

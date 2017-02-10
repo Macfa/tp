@@ -77,6 +77,12 @@
 	}
 }
 
+@mixin initList(){
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
 @mixin listInit(){
 	margin:0;
 	padding:0;
@@ -89,6 +95,32 @@
 		background:transparent;
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str(rgba($color,$alpha))},endColorstr=#{ie-hex-str(rgba($color,$alpha))}); 
 		zoom: 1;
+	}
+}
+
+
+
+@mixin mediaquery640{
+	@media all and (min-width:640px){
+		@content;
+	}
+}
+
+@mixin mediaquery900{
+	@media all and (min-width:900px){
+		@content;
+	}
+}
+
+@mixin mediaquery1200{
+	@media all and (min-width:1200px){
+		@content;
+	}
+}
+
+@mixin mediaquery1450{
+	@media all and (min-width:1450px){
+		@content;
 	}
 }
 

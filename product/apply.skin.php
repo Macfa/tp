@@ -1,5 +1,5 @@
 <div class="wrap apply-wrap center <?echo $editClass?>">
-	<h1 class="tit center"><?echo $applyTitle?> 신청서 작성</h1>
+	<h1 class="tit center"><?echo $applyTitle?> 상담신청서 작성</h1>
 
 	<?php if($isLogged == false) :?>
 	<section class="section txt-left js-loginSection">
@@ -71,14 +71,19 @@
 				<span class="inp-hint">19701015 형식으로 입력</span>			
 			</label>
 			<br>
-			<label class="inp-wrap">
-				<i class="ico-color-small"></i> 
-				<input type="text" class="inp-txt" name="apColor" value="<?php echo $modifyApply['apColor'] ?>" />
-				<div class="inp-label">색상 <span class="inp-required">필수</span></div>
-			</label>
-			<!-- 	V20 Event 	 -->
-			
-			<?php if($_GET['dvId'] == 'v20' || ($modifyApply['dvId'] == 'v20' && $_GET['v'])): ?>
+			<fieldset class="inp-group">
+				<i class="ico-carrier-small"></i> 색상 <span class="inp-required">필수</span><br/>
+				<?php foreach($dcColor as $val): ?>
+				<label class="inp-chk">
+					<input type="radio" name="apColor" value="<?php echo $val ?>"/>
+					<div class="inp-chk-box"></div>
+					<?php echo $val ?>
+				</label>
+				<?php endforeach ?>
+			</fieldset>
+
+			<!-- 	V20 Event, G935,  	 -->
+			<?php if(($_GET['dvId'] == 'v20' || ($modifyApply['dvId'] == 'v20' && $_GET['v'])) || ($_GET['dvId'] == 'galaxys7edge' || ($modifyApply['dvId'] == 'galaxys7edge' && $_GET['v'])) || ($_GET['dvId'] == 'iphone7' || ($modifyApply['dvId'] == 'iphone7' && $_GET['v'])) || ($_GET['dvId'] == 'iphone7plus' || ($modifyApply['dvId'] == 'iphone7plus' && $_GET['v']))): ?>
 			<fieldset class="inp-group" data-default="<?echo $benefit ?>">
 				<i class="ico-carrier-small"></i> 혜택 선택 <span class="inp-required">필수</span><br/>
 				<label class="inp-chk">
@@ -91,8 +96,14 @@
 					<div class="inp-chk-box"></div>
 					포인트
 				</label>
+				<label class="inp-chk">
+					<input type="radio" name="apBenefits" value="giftCard"/>
+					<div class="inp-chk-box"></div>
+					백화점상품권
+				</label>
 			</fieldset>
 
+			<!-- 	V20 Event 	 -->
 			<fieldset class="inp-group" data-default="<?echo $modifyApply['apBuyway']?>">
 				<i class="ico-carrier-small"></i> 구매 방법 <span class="inp-required">필수 / 내방 시 추가 사은품 증정</span><br/>
 				<label class="inp-chk">
@@ -144,7 +155,7 @@
 					<div class="inp-chk-box"></div>
 					알뜰폰
 				</label>
-			</fieldset>
+			</fieldset> 
 			<!--label class="inp-wrap">
 				<i class="ico-talk-small"></i>
 				<textarea name="pvEtc" class="inp-txtarea" ></textarea>
@@ -190,8 +201,13 @@
 		<?php if($_GET['v'] === 'edit') :?>
 			<input type="submit" class="btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="수정하기"/>
 		<?else :?>
-		<input type="submit" class="btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="가입 신청"/>
-		<?endif?>
+
+		<?php if($getPlanInfo['mode'] === "phone") :?>
+		<input type="submit" class="btn-filled-sub js-trackLink" target="_blank" id="link-detail-plan-callApply" value="상담신청"/>
+		<?php else :?>
+		<input type="submit" class="btn-filled js-trackLink" target="_blank" id="link-detail-plan-apply" value="통신사 가입신청"/>
+		<?php endif?>
+		<?php endif?>
 		<br/><Br/>
 		<section class="section-no-padding txt-left">
 			<?php

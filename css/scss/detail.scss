@@ -79,12 +79,12 @@ $detailHeadHeight : 60px;
 }
 .detail-banner-egg{
 	@extend .detail-banner;	
-	background:url('../img/line_wifi_plusmoney-mobile.jpg') no-repeat center center
+	background:url('../img/line/egg/line_egg_giftTablet-mobile.jpg') no-repeat center center
 }
 
 .detail-banner-tpocketfi{
 	@extend .detail-banner;	
-	background:url('../img/line_wifi_plusmoney2-mobile.jpg') no-repeat center center
+	background:url('../img/line/pocketfi/line_pocketfi_giftTablet-mobile.jpg') no-repeat center center
 }
 
 
@@ -726,11 +726,11 @@ h3.sub {
 	}
 	.detail-banner-egg{
 		width:900px;
-		background:url('../img/line_wifi_plusmoney-landscape.jpg') no-repeat center center
+		background:url('../img/line/egg/line_egg_giftTablet-landscape.jpg') no-repeat center center
 	}
 	.detail-banner-tpocketfi{
 		width:900px;
-		background:url('../img/line_wifi_plusmoney2-landscape.jpg') no-repeat center center
+		background:url('../img/line/pocketfi/line_pocketfi_giftTablet-landscape.jpg') no-repeat center center
 	}
 	.detail-banner-gear{
 		width:900px;

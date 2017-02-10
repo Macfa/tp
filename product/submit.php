@@ -16,6 +16,7 @@ $getPlanInfo = getPlanInfo(
 				'id' => $_POST['dvId']
 			)
 		);
+
 try
 {
 	if(isExist($getPlanInfo) === false) // 버튼눌러서 들어온게 아니라 그냥 페이지 링크연결시
@@ -27,8 +28,20 @@ catch(Exception $e)
     alert($e->getMessage());
 }
 
-require_once($cfg['path']."/headBlank.inc.php");
-require_once("submit.skin.php");  
-require_once($cfg['path']."/footBlank.inc.php"); 
 
+require_once($cfg['path']."/headBlank.inc.php");
+if($_POST['carrier'] === 'sk'){
+	require_once("submitSKT.skin.php");  
+}
+require_once($cfg['path']."/footBlank.inc.php"); 
 ?>
+
+
+<form method="post" action="submitKT.php" class="submitKT">
+	<input type=hidden name="applyUrl" value="<?php echo $getPlanInfo['applyUrl']?>">	
+</form>
+<script>
+	var carrier = "<?php echo $_POST['carrier'] ?>";
+	if(carrier === 'kt')
+		$('.submitKT').submit();	
+</script>
